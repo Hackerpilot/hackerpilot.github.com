@@ -1,0 +1,1218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html lang='en-US'>
+
+<!--
+	Copyright (c) 1999-2010 by Digital Mars
+	All Rights Reserved Written by Walter Bright
+	http://www.digitalmars.com
+  -->
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" >
+<title>std.d.lexer - D Programming Language - Digital Mars</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script src="/js/codemirror.js"></script>
+<script src="/js/d.js"></script>
+<script src="/js/run.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/css/codemirror.css" />
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+
+<script type="text/javascript">
+function listanchors()
+{
+    if (typeof inhibitQuickIndex !== 'undefined') return;
+    var a = document.getElementById("quickindex");
+    if (!a) return;
+    var newText = "";
+    var hash = new Array;
+    var n = 0;
+    var values = new Array;
+    // List all anchors.
+    for (var i = 0; i < document.anchors.length; i++)
+    {
+        var a = document.anchors[i];
+        var text = a.name;
+        // ignore anchors from DDOC_PSYMBOL
+        if (text[0] != '.') continue;
+        if (hash[text] > 0) continue;
+        hash[text] = 1;
+        values[n++] = a.name
+    }
+
+    // we won't display the qualifying names to save space, so sort by last name
+    var lastName = function(a){
+        var li = a.lastIndexOf('.');
+        return a.slice(li + 1);
+    }
+    values.sort(function(a,b){return lastName(a) > lastName(b)});
+
+    for(var i = 0; i < values.length; i++) {
+        var a = values[i];
+        var text = lastName(a);
+        newText += ' \x3Ca href="\x23' + a +
+            '"\x3E\x3Cspan class="d_psymbol"\x3E' + text + '\x3C/span\x3E\x3C/a\x3E';
+    }
+    if (newText != "") newText = "\x3Cp\x3E\x3Cb\x3EJump to:\x3C/b\x3E" + newText + "\x3C/p\x3E";
+    var a = document.getElementById("quickindex");
+    a.innerHTML = newText;
+}
+</script>
+
+<script src="/js/hyphenate.js" type="text/javascript"></script>
+
+</head>
+
+<body onload="listanchors()" class='hyphenate'>
+
+<div id="top">
+	<div id="search-box">
+		<form method="get" action="http://google.com/search">
+			<img src="/images/search-left.gif" width="11" height="22" alt=""><input id="q" name="q"><input type="image" id="search-submit" name="submit" src="/images/search-button.gif">
+			<input type="hidden" id="domains" name="domains" value="dlang.org">
+			<input type="hidden" id="sourceid" name="sourceid" value="google-search">
+			<div id="search-dropdown">
+				<select id="sitesearch" name="sitesearch" size="1">
+					<option value="dlang.org">Entire D  Site</option>
+					<option value="dlang.org/phobos">Library Reference</option>
+					<option value="www.digitalmars.com/d/archives">Newsgroup Archives</option>
+				</select>
+			</div>
+		</form>
+	</div>
+	<div id="header">
+		<a href="/"><img id="logo" width="125" height="95" border="0" alt="D Logo" src="/images/dlogo.png"></a>
+		<a id="d-language" href="/">D Programming Language </a>
+	</div>
+</div>
+
+<div id="navigation">
+    
+<div class="navblock">
+<form method="get" action="http://www.google.com/search">
+<div id="searchbox">
+<input name="q" size="10" value="RTL Search" onFocus='if(this.value == "RTL Search"){this.value="";}'>
+<input type="hidden" name="domains" value="www.digitalmars.com">
+<input type="hidden" name="sitesearch" value="dlang.org/phobos">
+<input type="hidden" name="sourceid" value="google-search">
+<input type="submit" name="submit" value="Go">
+</div>
+</form>
+<div id="toctop">
+    <ul><li><a href="../index.html" title="D Programming Language">D</a></li>
+	<li><a href="../spec.html" title="D Language Specification">Language</a></li>
+	<li><a href="../phobos/index.html" title="D Runtime Library">Phobos</a></li>
+	<li><a href="../phobos-prerelease/index.html" title="D Runtime Library (prerelease)">Phobos (prerelease)</a></li>
+	<li><a href="../comparison.html" title="Language Comparisons">Comparisons</a></li>
+    </ul>
+</div>
+</div>
+    
+<div class="navblock">
+    <ul><li><a href="object.html" title="root of object hierarchy">object</a></li>
+    </ul>
+    <h2><a href="index.html#std" title="D standard modules">std</a></h2>
+    <ul><li><a href="std_algorithm.html" title="General-purpose algorithms">std.algorithm</a></li>
+	<li><a href="std_array.html" title="Array functions">std.array</a></li>
+	<li><a href="std_ascii.html" title="Functions which operate on ASCII characters">std.ascii</a></li>
+	<li><a href="std_base64.html" title="Encode/decode base64 format">std.base64</a></li>
+	<li><a href="std_bigint.html" title="Arbitrary-precision ('bignum') arithmetic">std.bigint</a></li>
+	<li><a href="std_bitmanip.html" title="Bit-level manipulation">std.bitmanip</a></li>
+	<li><a href="std_compiler.html" title="Information about the D compiler implementation">std.compiler</a></li>
+	<li><a href="std_complex.html" title="Complex numbers">std.complex</a></li>
+	<li><a href="std_concurrency.html" title="Message Passing">std.concurrency</a></li>
+	<li><a href="std_container.html" title="Containers">std.container</a></li>
+	<li><a href="std_conv.html" title="Conversion of strings to integers">std.conv</a></li>
+	<li><a href="std_csv.html" title="CSV file parser">std.csv</a></li>
+	<li><a href="std_datetime.html" title="Date and time-related types and functions">std.datetime</a></li>
+	<li><a href="std_encoding.html" title="Character and string encoding">std.encoding</a></li>
+	<li><a href="std_exception.html" title="Exceptions and error handling">std.exception</a></li>
+	<li><a href="std_file.html" title="Basic file operations">std.file</a></li>
+	<li><a href="std_format.html" title="Formatted conversions of values to strings">std.format</a></li>
+	<li><a href="std_functional.html" title="functional">std.functional</a></li>
+	<li><a href="std_getopt.html" title="Command line options">std.getopt</a></li>
+	<li><a href="std_json.html" title="JSON reader">std.json</a></li>
+	<li><a href="std_math.html" title="the usual math functions">std.math</a></li>
+	<li><a href="std_mathspecial.html" title="mathematical special functions">std.mathspecial</a></li>
+	<li><a href="std_metastrings.html" title="Metaprogramming with strings">std.metastrings</a></li>
+	<li><a href="std_mmfile.html" title="Memory mapped files">std.mmfile</a></li>
+	<li><a href="std_numeric.html" title="Numeric algorithms">std.numeric</a></li>
+	<li><a href="std_outbuffer.html" title="Assemble data into an array of bytes">std.outbuffer</a></li>
+	<li><a href="std_parallelism.html" title="High-level primitives for SMP parallelism">std.parallelism</a></li>
+	<li><a href="std_path.html" title="Manipulate file names, path names, etc.">std.path</a></li>
+	<li><a href="std_process.html" title="Create/destroy processes">std.process</a></li>
+	<li><a href="std_random.html" title="Random number generation">std.random</a></li>
+	<li><a href="std_range.html" title="Ranges">std.range</a></li>
+	<li><a href="std_regex.html" title="regular expressions">std.regex</a></li>
+	<li><a href="std_signals.html" title="Signals">std.signals</a></li>
+	<li><a href="std_socket.html" title="Sockets">std.socket</a></li>
+	<li><a href="std_socketstream.html" title="Stream for a blocking, connected Socket">std.socketstream</a></li>
+	<li><a href="std_stdio.html" title="Standard I/O">std.stdio</a></li>
+	<li><a href="std_cstream.html" title="Stream I/O">std.cstream</a></li>
+	<li><a href="std_stream.html" title="Stream I/O">std.stream</a></li>
+	<li><a href="std_string.html" title="Basic string operations">std.string</a></li>
+	<li><a href="std_system.html" title="Inquire about the CPU, operating system">std.system</a></li>
+	<li><a href="std_traits.html" title="Type traits">std.traits</a></li>
+	<li><a href="std_typecons.html" title="Type constructors">std.typecons</a></li>
+	<li><a href="std_typetuple.html" title="Type tuples">std.typetuple</a></li>
+	<li><a href="std_uni.html" title="Unicode classification">std.uni</a></li>
+	<li><a href="std_uri.html" title="Encode and decode Uniform Resource Identifiers (URIs)">std.uri</a></li>
+	<li><a href="std_utf.html" title="Encode and decode utf character encodings">std.utf</a></li>
+	<li><a href="std_uuid.html" title="Generate and use UUIDs">std.uuid</a></li>
+	<li><a href="std_variant.html" title="Stores all types in a uniform, dynamically-checked representation">std.variant</a></li>
+	<li><a href="std_xml.html" title="XML file processing">std.xml</a></li>
+	<li><a href="std_zip.html" title="Read/write zip archives">std.zip</a></li>
+	<li><a href="std_zlib.html" title="Compression / Decompression of data">std.zlib</a></li>
+	<li><a href="std_net_curl.html" title="High level curl wrapper">std.net.curl</a></li>
+	<li><a href="std_net_isemail.html" title="Validate e-mail addresses">std.net.isemail</a></li>
+	<li><a href="std_digest_crc.html" title="CRC digest functions">std.digest.crc</a></li>
+	<li><a href="std_digest_digest.html" title="API for digest functions">std.digest.digest</a></li>
+	<li><a href="std_digest_md.html" title="MD digest functions">std.digest.md</a></li>
+	<li><a href="std_digest_ripemd.html" title="RIPEMD digest functions">std.digest.ripemd</a></li>
+	<li><a href="std_digest_sha.html" title="SHA digest functions">std.digest.sha</a></li>
+	<li><a href="std_windows_charset.html" title="Conversion to/from Windows character sets">std.windows.charset</a></li>
+    </ul>
+    <h2><a href="index.html#etc" title="D etc modules">etc</a></h2>
+    <ul><li><a href="etc_c_curl.html" title="Interface to libcurl library">etc.c.curl</a></li>
+	<li><a href="etc_c_sqlite3.html" title="Interface to sqlite3 library">etc.c.sqlite3</a></li>
+	<li><a href="etc_c_zlib.html" title="Interface to zlib library">etc.c.zlib</a></li>
+    </ul>
+    <h2><a href="index.html#core" title="D core modules">core</a></h2>
+    <ul><li><a href="core_atomic.html" title="Atomic operations">core.atomic</a></li>
+	<li><a href="core_bitop.html" title="Bitwise operations">core.bitop</a></li>
+	<li><a href="core_cpuid.html" title="CPU identification">core.cpuid</a></li>
+	<li><a href="core_exception.html" title="Root of exception hierarchy">core.exception</a></li>
+	<li><a href="core_memory.html" title="Interface to memory management">core.memory</a></li>
+	<li><a href="core_runtime.html" title="Interface to D runtime library internals">core.runtime</a></li>
+	<li><a href="core_simd.html" title="Builtin SIMD intrinsics">core.simd</a></li>
+	<li><a href="core_thread.html" title="Thread management">core.thread</a></li>
+	<li><a href="core_time.html" title="Core time functionality">core.time</a></li>
+	<li><a href="core_vararg.html" title="Variable function arguments">core.vararg</a></li>
+	<li><a href="core_sync_barrier.html" title="Synchronizing progress of a group of threads">core.sync.barrier</a></li>
+	<li><a href="core_sync_condition.html" title="Synchronized condition checking">core.sync.condition</a></li>
+	<li><a href="core_sync_config.html" title="Stuff for core.sync">core.sync.config</a></li>
+	<li><a href="core_sync_exception.html" title="SyncException">core.sync.exception</a></li>
+	<li><a href="core_sync_mutex.html" title="Mutexes">core.sync.mutex</a></li>
+	<li><a href="core_sync_rwmutex.html" title="R/W mutually exclusive access">core.sync.rwmutex</a></li>
+	<li><a href="core_sync_semaphore.html" title="Semaphores">core.sync.semaphore</a></li>
+    </ul>
+</div>
+</div><!--/navigation-->
+<div id="content">
+    
+<div id="tools">
+	<!--span id="lastupdate">Last update Mon Jan 21 17:28:57 2013
+</span-->
+	<a href="https://github.com/D-Programming-Language/phobos/edit/master/lexer.d" class="tip button">
+		Improve this page
+		<span>
+			Quickly fork, edit online, and submit a pull request for this page.
+			Requires a signed-in GitHub account. This works well for small changes.
+			If you'd like to make larger changes you may want to consider using
+			local clone.
+		</span>
+	</a>
+	<a href="http://www.prowiki.org/wiki4d/wiki.cgi?DocComments/" class="tip button">
+		Page wiki
+		<span>
+	        View or edit the community-maintained wiki page associated with this page.
+		</span>
+	</a>
+</div>
+    <h1>std.d.lexer</h1>
+    <div id=quickindex class=quickindex></div>
+    <!-- Generated by Ddoc from lexer.d -->
+This module contains a range-based <a name="lexer"></a><span class="ddoc_psymbol">lexer</span> for the D programming language.
+<p></p>
+<b>License:</b><br><a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
+<p></p>
+<b>Authors:</b><br>Brian Schott
+<p></p>
+<b>Source:</b><br>
+<a href="https://github.com/D-Programming-Language/phobos/blob/master/std/d/lexer.d">std/d/lexer.d</a><p></p>
+
+<dl><dt class="d_decl"><a name=".Token"></a>struct <a name="Token"></a><span class="ddoc_psymbol">Token</span>;
+</dt>
+<dd>Represents a D token<p></p>
+
+<dl><dt class="d_decl"><a name=".Token.type"></a>TokenType <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd>The token <a name="type"></a><span class="ddoc_psymbol">type</span>.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".Token.value"></a>string <a name="value"></a><span class="ddoc_psymbol">value</span>;
+</dt>
+<dd>The representation of the token in the original source code.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".Token.lineNumber"></a>uint <a name="lineNumber"></a><span class="ddoc_psymbol">lineNumber</span>;
+</dt>
+<dd>The number of the line the token is on.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".Token.startIndex"></a>uint <a name="startIndex"></a><span class="ddoc_psymbol">startIndex</span>;
+</dt>
+<dd>The character index of the start of the token in the original text.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".Token.opEquals"></a>const bool <a name="opEquals"></a><span class="ddoc_psymbol">opEquals</span>(ref const(Token) <i>other</i>);
+</dt>
+<dd>Check to see if the token is of the same type and has the same string
+ representation as the given token.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".Token.opEquals"></a>const bool <a name="opEquals"></a><span class="ddoc_psymbol">opEquals</span>(string <i>value</i>);
+</dt>
+<dd>Checks to see if the token's string representation is equal to the given
+ string.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".Token.opEquals"></a>const bool <a name="opEquals"></a><span class="ddoc_psymbol">opEquals</span>(TokenType <i>type</i>);
+</dt>
+<dd>Checks to see if the token is of the given <i>type</i>.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".Token.opCmp"></a>const int <a name="opCmp"></a><span class="ddoc_psymbol">opCmp</span>(size_t <i>i</i>);
+</dt>
+<dd>Comparison operator orders tokens by start index.<p></p>
+
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".IterationStyle"></a>enum <a name="IterationStyle"></a><span class="ddoc_psymbol">IterationStyle</span>;
+</dt>
+<dd>Configure the behavior of the byToken() function<p></p>
+
+<dl><dt class="d_decl"><a name=".IterationStyle.CodeOnly"></a><a name="CodeOnly"></a><span class="ddoc_psymbol">CodeOnly</span></dt>
+<dd>Only include code, not whitespace or comments<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".IterationStyle.IncludeComments"></a><a name="IncludeComments"></a><span class="ddoc_psymbol">IncludeComments</span></dt>
+<dd>Includes comments<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".IterationStyle.IncludeWhitespace"></a><a name="IncludeWhitespace"></a><span class="ddoc_psymbol">IncludeWhitespace</span></dt>
+<dd>Includes whitespace<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".IterationStyle.Everything"></a><a name="Everything"></a><span class="ddoc_psymbol">Everything</span></dt>
+<dd>Include everything<p></p>
+
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StringStyle"></a>enum <a name="StringStyle"></a><span class="ddoc_psymbol">StringStyle</span>;
+</dt>
+<dd>Configuration of the string lexing style<p></p>
+
+<dl><dt class="d_decl"><a name=".StringStyle.Default"></a><a name="Default"></a><span class="ddoc_psymbol">Default</span></dt>
+<dd>Escape sequences will be replaced with their equivalent characters,
+ enclosing quote characters will not be included. Useful for creating a
+ compiler or interpreter.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".StringStyle.NotEscaped"></a><a name="NotEscaped"></a><span class="ddoc_psymbol">NotEscaped</span></dt>
+<dd>Escape sequences will not be processed. An escaped quote character will
+ not terminate string lexing, but it will not be replaced with the quote
+ character in the token.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".StringStyle.IncludeQuotes"></a><a name="IncludeQuotes"></a><span class="ddoc_psymbol">IncludeQuotes</span></dt>
+<dd>Strings will include their opening and closing quote characters as well
+ as any prefixes or suffixes (e.g.: <span class="d_string">"abcde"w</span> will
+ include the <span class="d_string">'w'</span> character as well as the opening and closing
+ quotes)<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".StringStyle.Source"></a><a name="Source"></a><span class="ddoc_psymbol">Source</span></dt>
+<dd>Strings will be read exactly as they appeared in the source, including
+ their opening and closing quote characters. Useful for syntax
+ highlighting.<p></p>
+
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".byToken"></a>TokenRange!(R) <a name="byToken"></a><span class="ddoc_psymbol">byToken</span>(R)(R <i>range</i>, const IterationStyle <i>iterationStyle</i> = IterationStyle.CodeOnly, const StringStyle <i>stringStyle</i> = StringStyle.Default);
+</dt>
+<dd>Iterate over the given range of characters by D tokens.
+<p></p>
+<b>Parameters:</b><table class=parms><tr><td valign=top>range</td>
+<td valign=top>the range of characters</td></tr>
+<tr><td valign=top>iterationStyle</td>
+<td valign=top>See IterationStyle</td></tr>
+<tr><td valign=top>stringStyle</td>
+<td valign=top>see StringStyle</td></tr>
+</table><p></p>
+<b>Returns:</b><br>an input range of tokens<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenRange"></a>class <a name="TokenRange"></a><span class="ddoc_psymbol">TokenRange</span>(R): InputRange!(Token);
+</dt>
+<dd>Range of tokens<p></p>
+
+<dl><dt class="d_decl"><a name=".empty"></a>const @property bool <a name="empty"></a><span class="ddoc_psymbol">empty</span>();
+</dt>
+<dd><b>Returns:</b><br><b>true</b> if the range is <a name="empty"></a><span class="ddoc_psymbol">empty</span><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".front"></a>const @property Token <a name="front"></a><span class="ddoc_psymbol">front</span>();
+</dt>
+<dd><b>Returns:</b><br>the current token<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".moveFront"></a>Token <a name="moveFront"></a><span class="ddoc_psymbol">moveFront</span>();
+</dt>
+<dd>Returns the current token and then removes it from the range<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".popFront"></a>void <a name="popFront"></a><span class="ddoc_psymbol">popFront</span>();
+</dt>
+<dd>Removes the current token from the range<p></p>
+
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TokenType"></a>enum <a name="TokenType"></a><span class="ddoc_psymbol">TokenType</span>;
+</dt>
+<dd>Listing of all the tokens in the D language.
+<p></p>
+Token types are arranged so that it is easy to group tokens while iterating
+ over them. For example:
+<pre class="d_code"> <span class="d_keyword">assert</span>(<span class="d_psymbol">TokenType</span>.Increment &lt; <span class="d_psymbol">TokenType</span>.OPERATORS_END);
+ <span class="d_keyword">assert</span>(<span class="d_psymbol">TokenType</span>.Increment &gt; <span class="d_psymbol">TokenType</span>.OPERATORS_BEGIN);
+</pre>
+ The non-token values are documented below:
+<p></p>
+
+ <table cellspacing=0 cellpadding=5 class=book><caption></caption>     <tr><th>Begin</th> <th>End</th> <th>Content</th> <th>Examples</th></tr>
+     <tr><td valign=top>OPERATORS_BEGIN</td> <td valign=top>OPERATORS_END</td> <td valign=top>operatiors</td> <td valign=top>+, -, &lt;&lt;=</td></tr>
+     <tr><td valign=top>TYPES_BEGIN</td> <td valign=top>TYPES_END</td> <td valign=top>types</td> <td valign=top>bool, char, double</td></tr>
+     <tr><td valign=top>KEYWORDS_BEGIN</td> <td valign=top>KEYWORDS</td> <td valign=top>keywords</td> <td valign=top>class, if, assert</td></tr>
+     <tr><td valign=top>ATTRIBUTES_BEGIN</td> <td valign=top>ATTRIBUTES_END</td> <td valign=top>attributes</td> <td valign=top>override synchronized, _gshared</td></tr>
+     <tr><td valign=top>ATTRIBUTES_BEGIN</td> <td valign=top>ATTRIBUTES_END</td> <td valign=top>protection</td> <td valign=top>public, protected</td></tr>
+     <tr><td valign=top>CONSTANTS_BEGIN</td> <td valign=top>CONSTANTS_END</td> <td valign=top>compile-time constants</td> <td valign=top>_FILE__, _TIME__</td></tr>
+     <tr><td valign=top>LITERALS_BEGIN</td> <td valign=top>LITERALS_END</td> <td valign=top>string and numeric literals</td> <td valign=top>"str", 123</td></tr>
+     <tr><td valign=top>NUMBERS_BEGIN</td> <td valign=top>NUMBERS_END</td> <td valign=top>numeric literals</td> <td valign=top>0x123p+9, 0b0110</td></tr>
+     <tr><td valign=top>STRINGS_BEGIN</td> <td valign=top>STRINGS_END</td> <td valign=top>string literals</td> <td valign=top>`123`c, q{tokens;}, "abcde"</td></tr>
+     <tr><td valign=top>MISC_BEGIN</td> <td valign=top>MISC_END</td> <td valign=top>anything else</td> <td valign=top>whitespace, comments, identifiers</td></tr>
+ </table>
+ Note that several of the above ranges overlap.<p></p>
+
+<dl><dt class="d_decl"><a name=".TokenType.OPERATORS_BEGIN"></a><a name="OPERATORS_BEGIN"></a><span class="ddoc_psymbol">OPERATORS_BEGIN</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.Assign"></a><a name="Assign"></a><span class="ddoc_psymbol">Assign</span></dt>
+<dd>=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.At"></a><a name="At"></a><span class="ddoc_psymbol">At</span></dt>
+<dd>@<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.BitAnd"></a><a name="BitAnd"></a><span class="ddoc_psymbol">BitAnd</span></dt>
+<dd>&amp;<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.BitAndEquals"></a><a name="BitAndEquals"></a><span class="ddoc_psymbol">BitAndEquals</span></dt>
+<dd>&amp;=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.BitOr"></a><a name="BitOr"></a><span class="ddoc_psymbol">BitOr</span></dt>
+<dd>|<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.BitOrEquals"></a><a name="BitOrEquals"></a><span class="ddoc_psymbol">BitOrEquals</span></dt>
+<dd>|=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.CatEquals"></a><a name="CatEquals"></a><span class="ddoc_psymbol">CatEquals</span></dt>
+<dd>~=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Colon"></a><a name="Colon"></a><span class="ddoc_psymbol">Colon</span></dt>
+<dd>:<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Comma"></a><a name="Comma"></a><span class="ddoc_psymbol">Comma</span></dt>
+<dd>,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Decrement"></a><a name="Decrement"></a><span class="ddoc_psymbol">Decrement</span></dt>
+<dd>--<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Div"></a><a name="Div"></a><span class="ddoc_psymbol">Div</span></dt>
+<dd>/<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.DivEquals"></a><a name="DivEquals"></a><span class="ddoc_psymbol">DivEquals</span></dt>
+<dd>/=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Dollar"></a><a name="Dollar"></a><span class="ddoc_psymbol">Dollar</span></dt>
+<dd>$<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Dot"></a><a name="Dot"></a><span class="ddoc_psymbol">Dot</span></dt>
+<dd>.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Equals"></a><a name="Equals"></a><span class="ddoc_psymbol">Equals</span></dt>
+<dd>==<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Greater"></a><a name="Greater"></a><span class="ddoc_psymbol">Greater</span></dt>
+<dd>&gt;<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.GreaterEqual"></a><a name="GreaterEqual"></a><span class="ddoc_psymbol">GreaterEqual</span></dt>
+<dd>&gt;=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Increment"></a><a name="Increment"></a><span class="ddoc_psymbol">Increment</span></dt>
+<dd>++<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.LBrace"></a><a name="LBrace"></a><span class="ddoc_psymbol">LBrace</span></dt>
+<dd>{<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.LBracket"></a><a name="LBracket"></a><span class="ddoc_psymbol">LBracket</span></dt>
+<dd>[<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Less"></a><a name="Less"></a><span class="ddoc_psymbol">Less</span></dt>
+<dd><<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.LessEqual"></a><a name="LessEqual"></a><span class="ddoc_psymbol">LessEqual</span></dt>
+<dd>&lt;=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.LessOrGreater"></a><a name="LessOrGreater"></a><span class="ddoc_psymbol">LessOrGreater</span></dt>
+<dd>&lt;&gt;<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.LogicAnd"></a><a name="LogicAnd"></a><span class="ddoc_psymbol">LogicAnd</span></dt>
+<dd>&amp;&amp;<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.LogicOr"></a><a name="LogicOr"></a><span class="ddoc_psymbol">LogicOr</span></dt>
+<dd>||<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.LParen"></a><a name="LParen"></a><span class="ddoc_psymbol">LParen</span></dt>
+<dd>(<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Minus"></a><a name="Minus"></a><span class="ddoc_psymbol">Minus</span></dt>
+<dd>-<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.MinusEquals"></a><a name="MinusEquals"></a><span class="ddoc_psymbol">MinusEquals</span></dt>
+<dd>-=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Mod"></a><a name="Mod"></a><span class="ddoc_psymbol">Mod</span></dt>
+<dd>%<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.ModEquals"></a><a name="ModEquals"></a><span class="ddoc_psymbol">ModEquals</span></dt>
+<dd>%=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.MulEquals"></a><a name="MulEquals"></a><span class="ddoc_psymbol">MulEquals</span></dt>
+<dd>*=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Not"></a><a name="Not"></a><span class="ddoc_psymbol">Not</span></dt>
+<dd>!<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.NotEquals"></a><a name="NotEquals"></a><span class="ddoc_psymbol">NotEquals</span></dt>
+<dd>!=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.NotGreater"></a><a name="NotGreater"></a><span class="ddoc_psymbol">NotGreater</span></dt>
+<dd>!&gt;<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.NotGreaterEqual"></a><a name="NotGreaterEqual"></a><span class="ddoc_psymbol">NotGreaterEqual</span></dt>
+<dd>!&gt;=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.NotLess"></a><a name="NotLess"></a><span class="ddoc_psymbol">NotLess</span></dt>
+<dd>!&lt;<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.NotLessEqual"></a><a name="NotLessEqual"></a><span class="ddoc_psymbol">NotLessEqual</span></dt>
+<dd>!&lt;=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.NotLessEqualGreater"></a><a name="NotLessEqualGreater"></a><span class="ddoc_psymbol">NotLessEqualGreater</span></dt>
+<dd>!&lt;&gt;<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Plus"></a><a name="Plus"></a><span class="ddoc_psymbol">Plus</span></dt>
+<dd>+<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.PlusEquals"></a><a name="PlusEquals"></a><span class="ddoc_psymbol">PlusEquals</span></dt>
+<dd>+=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Pow"></a><a name="Pow"></a><span class="ddoc_psymbol">Pow</span></dt>
+<dd>^^<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.PowEquals"></a><a name="PowEquals"></a><span class="ddoc_psymbol">PowEquals</span></dt>
+<dd>^^=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.RBrace"></a><a name="RBrace"></a><span class="ddoc_psymbol">RBrace</span></dt>
+<dd>}<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.RBracket"></a><a name="RBracket"></a><span class="ddoc_psymbol">RBracket</span></dt>
+<dd>]<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.RParen"></a><a name="RParen"></a><span class="ddoc_psymbol">RParen</span></dt>
+<dd>)<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Semicolon"></a><a name="Semicolon"></a><span class="ddoc_psymbol">Semicolon</span></dt>
+<dd>;<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.ShiftLeft"></a><a name="ShiftLeft"></a><span class="ddoc_psymbol">ShiftLeft</span></dt>
+<dd>&lt;&lt;<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.ShiftLeftEqual"></a><a name="ShiftLeftEqual"></a><span class="ddoc_psymbol">ShiftLeftEqual</span></dt>
+<dd>&lt;&lt;=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.ShiftRight"></a><a name="ShiftRight"></a><span class="ddoc_psymbol">ShiftRight</span></dt>
+<dd>&gt;&gt;<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.ShiftRightEqual"></a><a name="ShiftRightEqual"></a><span class="ddoc_psymbol">ShiftRightEqual</span></dt>
+<dd>&gt;&gt;=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Star"></a><a name="Star"></a><span class="ddoc_psymbol">Star</span></dt>
+<dd>*<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Ternary"></a><a name="Ternary"></a><span class="ddoc_psymbol">Ternary</span></dt>
+<dd>?<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Tilde"></a><a name="Tilde"></a><span class="ddoc_psymbol">Tilde</span></dt>
+<dd>~<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Unordered"></a><a name="Unordered"></a><span class="ddoc_psymbol">Unordered</span></dt>
+<dd>!&lt;&gt;=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.UnsignedShiftRight"></a><a name="UnsignedShiftRight"></a><span class="ddoc_psymbol">UnsignedShiftRight</span></dt>
+<dd>&gt;&gt;&gt;<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.UnsignedShiftRightEqual"></a><a name="UnsignedShiftRightEqual"></a><span class="ddoc_psymbol">UnsignedShiftRightEqual</span></dt>
+<dd>&gt;&gt;&gt;=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Vararg"></a><a name="Vararg"></a><span class="ddoc_psymbol">Vararg</span></dt>
+<dd>...<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Xor"></a><a name="Xor"></a><span class="ddoc_psymbol">Xor</span></dt>
+<dd>^<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.XorEquals"></a><a name="XorEquals"></a><span class="ddoc_psymbol">XorEquals</span></dt>
+<dd>^=<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.OPERATORS_END"></a><a name="OPERATORS_END"></a><span class="ddoc_psymbol">OPERATORS_END</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.TYPES_BEGIN"></a><a name="TYPES_BEGIN"></a><span class="ddoc_psymbol">TYPES_BEGIN</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.Bool"></a><a name="Bool"></a><span class="ddoc_psymbol">Bool</span></dt>
+<dd>bool,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Byte"></a><a name="Byte"></a><span class="ddoc_psymbol">Byte</span></dt>
+<dd>byte,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Cdouble"></a><a name="Cdouble"></a><span class="ddoc_psymbol">Cdouble</span></dt>
+<dd>cdouble,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Cent"></a><a name="Cent"></a><span class="ddoc_psymbol">Cent</span></dt>
+<dd>cent,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Cfloat"></a><a name="Cfloat"></a><span class="ddoc_psymbol">Cfloat</span></dt>
+<dd>cfloat,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Char"></a><a name="Char"></a><span class="ddoc_psymbol">Char</span></dt>
+<dd>char,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Creal"></a><a name="Creal"></a><span class="ddoc_psymbol">Creal</span></dt>
+<dd>creal,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Dchar"></a><a name="Dchar"></a><span class="ddoc_psymbol">Dchar</span></dt>
+<dd>dchar,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Double"></a><a name="Double"></a><span class="ddoc_psymbol">Double</span></dt>
+<dd>double,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.DString"></a><a name="DString"></a><span class="ddoc_psymbol">DString</span></dt>
+<dd>dstring<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Float"></a><a name="Float"></a><span class="ddoc_psymbol">Float</span></dt>
+<dd>float,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Function"></a><a name="Function"></a><span class="ddoc_psymbol">Function</span></dt>
+<dd>function,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Idouble"></a><a name="Idouble"></a><span class="ddoc_psymbol">Idouble</span></dt>
+<dd>idouble,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Ifloat"></a><a name="Ifloat"></a><span class="ddoc_psymbol">Ifloat</span></dt>
+<dd>ifloat,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Int"></a><a name="Int"></a><span class="ddoc_psymbol">Int</span></dt>
+<dd>int,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Ireal"></a><a name="Ireal"></a><span class="ddoc_psymbol">Ireal</span></dt>
+<dd>ireal,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Long"></a><a name="Long"></a><span class="ddoc_psymbol">Long</span></dt>
+<dd>long,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Real"></a><a name="Real"></a><span class="ddoc_psymbol">Real</span></dt>
+<dd>real,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Short"></a><a name="Short"></a><span class="ddoc_psymbol">Short</span></dt>
+<dd>short,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.String"></a><a name="String"></a><span class="ddoc_psymbol">String</span></dt>
+<dd>string<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Ubyte"></a><a name="Ubyte"></a><span class="ddoc_psymbol">Ubyte</span></dt>
+<dd>ubyte,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Ucent"></a><a name="Ucent"></a><span class="ddoc_psymbol">Ucent</span></dt>
+<dd>ucent,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Uint"></a><a name="Uint"></a><span class="ddoc_psymbol">Uint</span></dt>
+<dd>uint,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Ulong"></a><a name="Ulong"></a><span class="ddoc_psymbol">Ulong</span></dt>
+<dd>ulong,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Ushort"></a><a name="Ushort"></a><span class="ddoc_psymbol">Ushort</span></dt>
+<dd>ushort,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Void"></a><a name="Void"></a><span class="ddoc_psymbol">Void</span></dt>
+<dd>void,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Wchar"></a><a name="Wchar"></a><span class="ddoc_psymbol">Wchar</span></dt>
+<dd>wchar,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.WString"></a><a name="WString"></a><span class="ddoc_psymbol">WString</span></dt>
+<dd>wstring<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.TYPES_END"></a><a name="TYPES_END"></a><span class="ddoc_psymbol">TYPES_END</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.Template"></a><a name="Template"></a><span class="ddoc_psymbol">Template</span></dt>
+<dd>template,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.KEYWORDS_BEGIN"></a><a name="KEYWORDS_BEGIN"></a><span class="ddoc_psymbol">KEYWORDS_BEGIN</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.ATTRIBUTES_BEGIN"></a><a name="ATTRIBUTES_BEGIN"></a><span class="ddoc_psymbol">ATTRIBUTES_BEGIN</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.Align"></a><a name="Align"></a><span class="ddoc_psymbol">Align</span></dt>
+<dd>align,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Deprecated"></a><a name="Deprecated"></a><span class="ddoc_psymbol">Deprecated</span></dt>
+<dd>deprecated,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Extern"></a><a name="Extern"></a><span class="ddoc_psymbol">Extern</span></dt>
+<dd>extern,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Pragma"></a><a name="Pragma"></a><span class="ddoc_psymbol">Pragma</span></dt>
+<dd>pragma,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.PROTECTION_BEGIN"></a><a name="PROTECTION_BEGIN"></a><span class="ddoc_psymbol">PROTECTION_BEGIN</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.Export"></a><a name="Export"></a><span class="ddoc_psymbol">Export</span></dt>
+<dd>export,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Package"></a><a name="Package"></a><span class="ddoc_psymbol">Package</span></dt>
+<dd>package,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Private"></a><a name="Private"></a><span class="ddoc_psymbol">Private</span></dt>
+<dd>private,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Protected"></a><a name="Protected"></a><span class="ddoc_psymbol">Protected</span></dt>
+<dd>protected,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Public"></a><a name="Public"></a><span class="ddoc_psymbol">Public</span></dt>
+<dd>public,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.PROTECTION_END"></a><a name="PROTECTION_END"></a><span class="ddoc_psymbol">PROTECTION_END</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.Abstract"></a><a name="Abstract"></a><span class="ddoc_psymbol">Abstract</span></dt>
+<dd>abstract,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.AtDisable"></a><a name="AtDisable"></a><span class="ddoc_psymbol">AtDisable</span></dt>
+<dd>@disable<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Auto"></a><a name="Auto"></a><span class="ddoc_psymbol">Auto</span></dt>
+<dd>auto,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Const"></a><a name="Const"></a><span class="ddoc_psymbol">Const</span></dt>
+<dd>const,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Final"></a><a name="Final"></a><span class="ddoc_psymbol">Final</span></dt>
+<dd>final<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Gshared"></a><a name="Gshared"></a><span class="ddoc_psymbol">Gshared</span></dt>
+<dd>_gshared,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Scope"></a><a name="Scope"></a><span class="ddoc_psymbol">Scope</span></dt>
+<dd>scope,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Static"></a><a name="Static"></a><span class="ddoc_psymbol">Static</span></dt>
+<dd>static,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Synchronized"></a><a name="Synchronized"></a><span class="ddoc_psymbol">Synchronized</span></dt>
+<dd>synchronized,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.ATTRIBUTES_END"></a><a name="ATTRIBUTES_END"></a><span class="ddoc_psymbol">ATTRIBUTES_END</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.Alias"></a><a name="Alias"></a><span class="ddoc_psymbol">Alias</span></dt>
+<dd>alias,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Asm"></a><a name="Asm"></a><span class="ddoc_psymbol">Asm</span></dt>
+<dd>asm,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Assert"></a><a name="Assert"></a><span class="ddoc_psymbol">Assert</span></dt>
+<dd>assert,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Body"></a><a name="Body"></a><span class="ddoc_psymbol">Body</span></dt>
+<dd>body,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Break"></a><a name="Break"></a><span class="ddoc_psymbol">Break</span></dt>
+<dd>break,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Case"></a><a name="Case"></a><span class="ddoc_psymbol">Case</span></dt>
+<dd>case,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Cast"></a><a name="Cast"></a><span class="ddoc_psymbol">Cast</span></dt>
+<dd>cast,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Catch"></a><a name="Catch"></a><span class="ddoc_psymbol">Catch</span></dt>
+<dd>catch,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Class"></a><a name="Class"></a><span class="ddoc_psymbol">Class</span></dt>
+<dd>class,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Continue"></a><a name="Continue"></a><span class="ddoc_psymbol">Continue</span></dt>
+<dd>continue,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Debug"></a><a name="Debug"></a><span class="ddoc_psymbol">Debug</span></dt>
+<dd>debug,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Default"></a><a name="Default"></a><span class="ddoc_psymbol">Default</span></dt>
+<dd>default,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Delegate"></a><a name="Delegate"></a><span class="ddoc_psymbol">Delegate</span></dt>
+<dd>delegate,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Delete"></a><a name="Delete"></a><span class="ddoc_psymbol">Delete</span></dt>
+<dd>delete,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Do"></a><a name="Do"></a><span class="ddoc_psymbol">Do</span></dt>
+<dd>do,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Else"></a><a name="Else"></a><span class="ddoc_psymbol">Else</span></dt>
+<dd>else,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Enum"></a><a name="Enum"></a><span class="ddoc_psymbol">Enum</span></dt>
+<dd>enum,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.False"></a><a name="False"></a><span class="ddoc_psymbol">False</span></dt>
+<dd><b>false</b>,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Finally"></a><a name="Finally"></a><span class="ddoc_psymbol">Finally</span></dt>
+<dd>finally,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Foreach"></a><a name="Foreach"></a><span class="ddoc_psymbol">Foreach</span></dt>
+<dd>foreach,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Foreach_reverse"></a><a name="Foreach_reverse"></a><span class="ddoc_psymbol">Foreach_reverse</span></dt>
+<dd>foreach_reverse,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.For"></a><a name="For"></a><span class="ddoc_psymbol">For</span></dt>
+<dd>for,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Goto"></a><a name="Goto"></a><span class="ddoc_psymbol">Goto</span></dt>
+<dd>goto,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.If"></a><a name="If"></a><span class="ddoc_psymbol">If</span></dt>
+<dd>if ,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Import"></a><a name="Import"></a><span class="ddoc_psymbol">Import</span></dt>
+<dd>import,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.In"></a><a name="In"></a><span class="ddoc_psymbol">In</span></dt>
+<dd>in,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Interface"></a><a name="Interface"></a><span class="ddoc_psymbol">Interface</span></dt>
+<dd>interface,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Invariant"></a><a name="Invariant"></a><span class="ddoc_psymbol">Invariant</span></dt>
+<dd>invariant,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Is"></a><a name="Is"></a><span class="ddoc_psymbol">Is</span></dt>
+<dd>is,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Lazy"></a><a name="Lazy"></a><span class="ddoc_psymbol">Lazy</span></dt>
+<dd>lazy,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Macro"></a><a name="Macro"></a><span class="ddoc_psymbol">Macro</span></dt>
+<dd>macro,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Mixin"></a><a name="Mixin"></a><span class="ddoc_psymbol">Mixin</span></dt>
+<dd>mixin,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Module"></a><a name="Module"></a><span class="ddoc_psymbol">Module</span></dt>
+<dd>module,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.New"></a><a name="New"></a><span class="ddoc_psymbol">New</span></dt>
+<dd>new,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Nothrow"></a><a name="Nothrow"></a><span class="ddoc_psymbol">Nothrow</span></dt>
+<dd>nothrow,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Null"></a><a name="Null"></a><span class="ddoc_psymbol">Null</span></dt>
+<dd><b>null</b>,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Out"></a><a name="Out"></a><span class="ddoc_psymbol">Out</span></dt>
+<dd>out,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Override"></a><a name="Override"></a><span class="ddoc_psymbol">Override</span></dt>
+<dd>override,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Pure"></a><a name="Pure"></a><span class="ddoc_psymbol">Pure</span></dt>
+<dd>pure,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Ref"></a><a name="Ref"></a><span class="ddoc_psymbol">Ref</span></dt>
+<dd>ref,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Return"></a><a name="Return"></a><span class="ddoc_psymbol">Return</span></dt>
+<dd>return,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Struct"></a><a name="Struct"></a><span class="ddoc_psymbol">Struct</span></dt>
+<dd>struct,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Super"></a><a name="Super"></a><span class="ddoc_psymbol">Super</span></dt>
+<dd>super,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Switch"></a><a name="Switch"></a><span class="ddoc_psymbol">Switch</span></dt>
+<dd>switch ,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.This"></a><a name="This"></a><span class="ddoc_psymbol">This</span></dt>
+<dd>this,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Throw"></a><a name="Throw"></a><span class="ddoc_psymbol">Throw</span></dt>
+<dd>throw,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.True"></a><a name="True"></a><span class="ddoc_psymbol">True</span></dt>
+<dd><b>true</b>,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Try"></a><a name="Try"></a><span class="ddoc_psymbol">Try</span></dt>
+<dd>try,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Typedef"></a><a name="Typedef"></a><span class="ddoc_psymbol">Typedef</span></dt>
+<dd>typedef,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Typeid"></a><a name="Typeid"></a><span class="ddoc_psymbol">Typeid</span></dt>
+<dd>typeid,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Typeof"></a><a name="Typeof"></a><span class="ddoc_psymbol">Typeof</span></dt>
+<dd>typeof,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Union"></a><a name="Union"></a><span class="ddoc_psymbol">Union</span></dt>
+<dd>union,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Unittest"></a><a name="Unittest"></a><span class="ddoc_psymbol">Unittest</span></dt>
+<dd>unittest,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Version"></a><a name="Version"></a><span class="ddoc_psymbol">Version</span></dt>
+<dd>version,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Volatile"></a><a name="Volatile"></a><span class="ddoc_psymbol">Volatile</span></dt>
+<dd>volatile,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.While"></a><a name="While"></a><span class="ddoc_psymbol">While</span></dt>
+<dd>while ,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.With"></a><a name="With"></a><span class="ddoc_psymbol">With</span></dt>
+<dd>with,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.KEYWORDS_END"></a><a name="KEYWORDS_END"></a><span class="ddoc_psymbol">KEYWORDS_END</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.File"></a><a name="File"></a><span class="ddoc_psymbol">File</span></dt>
+<dd>_FILE__,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Line"></a><a name="Line"></a><span class="ddoc_psymbol">Line</span></dt>
+<dd>_LINE__,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Thread"></a><a name="Thread"></a><span class="ddoc_psymbol">Thread</span></dt>
+<dd>_thread,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Traits"></a><a name="Traits"></a><span class="ddoc_psymbol">Traits</span></dt>
+<dd>_traits,<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.CONSTANTS_END"></a><a name="CONSTANTS_END"></a><span class="ddoc_psymbol">CONSTANTS_END</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.MISC_BEGIN"></a><a name="MISC_BEGIN"></a><span class="ddoc_psymbol">MISC_BEGIN</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.Comment"></a><a name="Comment"></a><span class="ddoc_psymbol">Comment</span></dt>
+<dd>/** comment */ or // comment or ///comment<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Identifier"></a><a name="Identifier"></a><span class="ddoc_psymbol">Identifier</span></dt>
+<dd>anything else<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.Whitespace"></a><a name="Whitespace"></a><span class="ddoc_psymbol">Whitespace</span></dt>
+<dd>whitespace<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.MISC_END"></a><a name="MISC_END"></a><span class="ddoc_psymbol">MISC_END</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.LITERALS_BEGIN"></a><a name="LITERALS_BEGIN"></a><span class="ddoc_psymbol">LITERALS_BEGIN</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.NUMBERS_BEGIN"></a><a name="NUMBERS_BEGIN"></a><span class="ddoc_psymbol">NUMBERS_BEGIN</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.DoubleLiteral"></a><a name="DoubleLiteral"></a><span class="ddoc_psymbol">DoubleLiteral</span></dt>
+<dd>123.456<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.FloatLiteral"></a><a name="FloatLiteral"></a><span class="ddoc_psymbol">FloatLiteral</span></dt>
+<dd>123.456f or 0x123_45p-af<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.IDoubleLiteral"></a><a name="IDoubleLiteral"></a><span class="ddoc_psymbol">IDoubleLiteral</span></dt>
+<dd>123.456i<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.IFloatLiteral"></a><a name="IFloatLiteral"></a><span class="ddoc_psymbol">IFloatLiteral</span></dt>
+<dd>123.456fi<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.IntLiteral"></a><a name="IntLiteral"></a><span class="ddoc_psymbol">IntLiteral</span></dt>
+<dd>123 or 0b1101010101<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.LongLiteral"></a><a name="LongLiteral"></a><span class="ddoc_psymbol">LongLiteral</span></dt>
+<dd>123L<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.RealLiteral"></a><a name="RealLiteral"></a><span class="ddoc_psymbol">RealLiteral</span></dt>
+<dd>123.456L<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.IRealLiteral"></a><a name="IRealLiteral"></a><span class="ddoc_psymbol">IRealLiteral</span></dt>
+<dd>123.456Li<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.UnsignedIntLiteral"></a><a name="UnsignedIntLiteral"></a><span class="ddoc_psymbol">UnsignedIntLiteral</span></dt>
+<dd>123u<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.UnsignedLongLiteral"></a><a name="UnsignedLongLiteral"></a><span class="ddoc_psymbol">UnsignedLongLiteral</span></dt>
+<dd>123uL<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.NUMBERS_END"></a><a name="NUMBERS_END"></a><span class="ddoc_psymbol">NUMBERS_END</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.STRINGS_BEGIN"></a><a name="STRINGS_BEGIN"></a><span class="ddoc_psymbol">STRINGS_BEGIN</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.DStringLiteral"></a><a name="DStringLiteral"></a><span class="ddoc_psymbol">DStringLiteral</span></dt>
+<dd>"32-bit character string"d<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.StringLiteral"></a><a name="StringLiteral"></a><span class="ddoc_psymbol">StringLiteral</span></dt>
+<dd>"a string"<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.WStringLiteral"></a><a name="WStringLiteral"></a><span class="ddoc_psymbol">WStringLiteral</span></dt>
+<dd>"16-bit character string"w<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.STRINGS_END"></a><a name="STRINGS_END"></a><span class="ddoc_psymbol">STRINGS_END</span></dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TokenType.LITERALS_END"></a><a name="LITERALS_END"></a><span class="ddoc_psymbol">LITERALS_END</span></dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+    
+<br><br>
+<br><br>
+<!-- Google ad -->
+<script type="text/javascript"><!--
+/**/google_ad_client = "pub-5628673096434613";
+/**/google_ad_width = 728;
+/**/google_ad_height = 90;
+/**/google_ad_format = "728x90_as";
+/**/google_ad_channel ="6203743411";
+/**/google_page_url = document.location;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div><!--/content-->
+
+
+<div id="copyright">
+Brian Schott 2013
+ |
+Page generated by <a href="http://www.digitalmars.com/d/2.0/ddoc.html">Ddoc</a>.
+</div>
+
+</body>
+</html>
