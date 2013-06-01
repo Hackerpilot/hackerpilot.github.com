@@ -1,0 +1,4190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html lang='en-US'>
+
+<!--
+	Copyright (c) 1999-2010 by Digital Mars
+	All Rights Reserved Written by Walter Bright
+	http://www.digitalmars.com
+  -->
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" >
+<title>std.d.ast - D Programming Language - Digital Mars</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script src="/js/codemirror.js"></script>
+<script src="/js/d.js"></script>
+<script src="/js/run.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/css/codemirror.css" />
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+
+<script type="text/javascript">
+function listanchors()
+{
+    if (typeof inhibitQuickIndex !== 'undefined') return;
+    var a = document.getElementById("quickindex");
+    if (!a) return;
+    var newText = "";
+    var hash = new Array;
+    var n = 0;
+    var values = new Array;
+    // List all anchors.
+    for (var i = 0; i < document.anchors.length; i++)
+    {
+        var a = document.anchors[i];
+        var text = a.name;
+        // ignore anchors from DDOC_PSYMBOL
+        if (text[0] != '.') continue;
+        if (hash[text] > 0) continue;
+        hash[text] = 1;
+        values[n++] = a.name
+    }
+
+    // we won't display the qualifying names to save space, so sort by last name
+    var lastName = function(a){
+        var li = a.lastIndexOf('.');
+        return a.slice(li + 1);
+    }
+    values.sort(function(a,b){return lastName(a) > lastName(b)});
+
+    for(var i = 0; i < values.length; i++) {
+        var a = values[i];
+        var text = lastName(a);
+        newText += ' \x3Ca href="\x23' + a +
+            '"\x3E\x3Cspan class="d_psymbol"\x3E' + text + '\x3C/span\x3E\x3C/a\x3E';
+    }
+    if (newText != "") newText = "\x3Cp\x3E\x3Cb\x3EJump to:\x3C/b\x3E" + newText + "\x3C/p\x3E";
+    var a = document.getElementById("quickindex");
+    a.innerHTML = newText;
+}
+</script>
+
+<script src="/js/hyphenate.js" type="text/javascript"></script>
+
+</head>
+
+<body onload="listanchors()" class='hyphenate'>
+
+<div id="top">
+	<div id="search-box">
+		<form method="get" action="http://google.com/search">
+			<img src="/images/search-left.gif" width="11" height="22" alt=""><input id="q" name="q"><input type="image" id="search-submit" name="submit" src="/images/search-button.gif">
+			<input type="hidden" id="domains" name="domains" value="dlang.org">
+			<input type="hidden" id="sourceid" name="sourceid" value="google-search">
+			<div id="search-dropdown">
+				<select id="sitesearch" name="sitesearch" size="1">
+					<option value="dlang.org">Entire D  Site</option>
+					<option value="dlang.org/phobos">Library Reference</option>
+					<option value="www.digitalmars.com/d/archives">Newsgroup Archives</option>
+				</select>
+			</div>
+		</form>
+	</div>
+	<div id="header">
+		<a href="/"><img id="logo" width="125" height="95" border="0" alt="D Logo" src="/images/dlogo.png"></a>
+		<a id="d-language" href="/">D Programming Language </a>
+	</div>
+</div>
+
+<div id="navigation">
+    
+<div class="navblock">
+<form method="get" action="http://www.google.com/search">
+<div id="searchbox">
+<input name="q" size="10" value="RTL Search" onFocus='if(this.value == "RTL Search"){this.value="";}'>
+<input type="hidden" name="domains" value="www.digitalmars.com">
+<input type="hidden" name="sitesearch" value="dlang.org/phobos">
+<input type="hidden" name="sourceid" value="google-search">
+<input type="submit" name="submit" value="Go">
+</div>
+</form>
+<div id="toctop">
+    <ul><li><a href="../index.html" title="D Programming Language">D</a></li>
+	<li><a href="../spec.html" title="D Language Specification">Language</a></li>
+	<li><a href="../phobos/index.html" title="D Runtime Library">Phobos </a></li>
+	<li><a href="../phobos-prerelease/index.html" title="D Runtime Library (prerelease)">Phobos (prerelease)</a></li>
+	<li><a href="../comparison.html" title="Language Comparisons">Comparisons</a></li>
+    </ul>
+</div>
+</div>
+    
+<div class="navblock">
+    <ul><li><a href="object.html" title="root of object hierarchy">object</a></li>
+    </ul>
+    <h2><a href="index.html#std" title="D standard modules">std</a></h2>
+    <ul><li><a href="std_algorithm.html" title="General-purpose algorithms">std.algorithm</a></li>
+	<li><a href="std_array.html" title="Array functions">std.array</a></li>
+	<li><a href="std_ascii.html" title="Functions which operate on ASCII characters">std.ascii</a></li>
+	<li><a href="std_base64.html" title="Encode/decode base64 format">std.base64</a></li>
+	<li><a href="std_bigint.html" title="Arbitrary-precision ('bignum') arithmetic">std.bigint</a></li>
+	<li><a href="std_bitmanip.html" title="Bit-level manipulation">std.bitmanip</a></li>
+	<li><a href="std_compiler.html" title="Information about the D compiler implementation">std.compiler</a></li>
+	<li><a href="std_complex.html" title="Complex numbers">std.complex</a></li>
+	<li><a href="std_concurrency.html" title="Message Passing">std.concurrency</a></li>
+	<li><a href="std_container.html" title="Containers">std.container</a></li>
+	<li><a href="std_conv.html" title="Conversion of strings to integers">std.conv</a></li>
+	<li><a href="std_csv.html" title="CSV file parser">std.csv</a></li>
+	<li><a href="std_datetime.html" title="Date and time-related types and functions">std.datetime</a></li>
+	<li><a href="std_encoding.html" title="Character and string encoding">std.encoding</a></li>
+	<li><a href="std_exception.html" title="Exceptions and error handling">std.exception</a></li>
+	<li><a href="std_file.html" title="Basic file operations">std.file</a></li>
+	<li><a href="std_format.html" title="Formatted conversions of values to strings">std.format</a></li>
+	<li><a href="std_functional.html" title="functional">std.functional</a></li>
+	<li><a href="std_getopt.html" title="Command line options">std.getopt</a></li>
+	<li><a href="std_json.html" title="JSON reader">std.json</a></li>
+	<li><a href="std_math.html" title="the usual math functions">std.math</a></li>
+	<li><a href="std_mathspecial.html" title="mathematical special functions">std.mathspecial</a></li>
+	<li><a href="std_metastrings.html" title="Metaprogramming with strings">std.metastrings</a></li>
+	<li><a href="std_mmfile.html" title="Memory mapped files">std.mmfile</a></li>
+	<li><a href="std_numeric.html" title="Numeric algorithms">std.numeric</a></li>
+	<li><a href="std_outbuffer.html" title="Assemble data into an array of bytes">std.outbuffer</a></li>
+	<li><a href="std_parallelism.html" title="High-level primitives for SMP parallelism">std.parallelism</a></li>
+	<li><a href="std_path.html" title="Manipulate file names, path names, etc.">std.path</a></li>
+	<li><a href="std_process.html" title="Create/destroy processes">std.process</a></li>
+	<li><a href="std_random.html" title="Random number generation">std.random</a></li>
+	<li><a href="std_range.html" title="Ranges">std.range</a></li>
+	<li><a href="std_regex.html" title="regular expressions">std.regex</a></li>
+	<li><a href="std_signals.html" title="Signals">std.signals</a></li>
+	<li><a href="std_socket.html" title="Sockets">std.socket</a></li>
+	<li><a href="std_socketstream.html" title="Stream for a blocking, connected Socket">std.socketstream</a></li>
+	<li><a href="std_stdio.html" title="Standard I/O">std.stdio</a></li>
+	<li><a href="std_cstream.html" title="Stream I/O">std.cstream</a></li>
+	<li><a href="std_stream.html" title="Stream I/O">std.stream</a></li>
+	<li><a href="std_string.html" title="Basic string operations">std.string</a></li>
+	<li><a href="std_system.html" title="Inquire about the CPU, operating system">std.system</a></li>
+	<li><a href="std_traits.html" title="Type traits">std.traits</a></li>
+	<li><a href="std_typecons.html" title="Type constructors">std.typecons</a></li>
+	<li><a href="std_typetuple.html" title="Type tuples">std.typetuple</a></li>
+	<li><a href="std_uni.html" title="Unicode classification">std.uni</a></li>
+	<li><a href="std_uri.html" title="Encode and decode Uniform Resource Identifiers (URIs)">std.uri</a></li>
+	<li><a href="std_utf.html" title="Encode and decode utf character encodings">std.utf</a></li>
+	<li><a href="std_uuid.html" title="Generate and use UUIDs">std.uuid</a></li>
+	<li><a href="std_variant.html" title="Stores all types in a uniform, dynamically-checked representation">std.variant</a></li>
+	<li><a href="std_xml.html" title="XML file processing">std.xml</a></li>
+	<li><a href="std_zip.html" title="Read/write zip archives">std.zip</a></li>
+	<li><a href="std_zlib.html" title="Compression / Decompression of data">std.zlib</a></li>
+	<li><a href="std_net_curl.html" title="High level curl wrapper">std.net.curl</a></li>
+	<li><a href="std_net_isemail.html" title="Validate e-mail addresses">std.net.isemail</a></li>
+	<li><a href="std_digest_crc.html" title="CRC digest functions">std.digest.crc</a></li>
+	<li><a href="std_digest_digest.html" title="API for digest functions">std.digest.digest</a></li>
+	<li><a href="std_digest_md.html" title="MD digest functions">std.digest.md</a></li>
+	<li><a href="std_digest_ripemd.html" title="RIPEMD digest functions">std.digest.ripemd</a></li>
+	<li><a href="std_digest_sha.html" title="SHA digest functions">std.digest.sha</a></li>
+	<li><a href="std_windows_charset.html" title="Conversion to/from Windows character sets">std.windows.charset</a></li>
+    </ul>
+    <h2><a href="index.html#etc" title="D etc modules">etc</a></h2>
+    <ul><li><a href="etc_c_curl.html" title="Interface to libcurl library">etc.c.curl</a></li>
+	<li><a href="etc_c_sqlite3.html" title="Interface to sqlite3 library">etc.c.sqlite3</a></li>
+	<li><a href="etc_c_zlib.html" title="Interface to zlib library">etc.c.zlib</a></li>
+    </ul>
+    <h2><a href="index.html#core" title="D core modules">core</a></h2>
+    <ul><li><a href="core_atomic.html" title="Atomic operations">core.atomic</a></li>
+	<li><a href="core_bitop.html" title="Bitwise operations">core.bitop</a></li>
+	<li><a href="core_cpuid.html" title="CPU identification">core.cpuid</a></li>
+	<li><a href="core_exception.html" title="Root of exception hierarchy">core.exception</a></li>
+	<li><a href="core_memory.html" title="Interface to memory management">core.memory</a></li>
+	<li><a href="core_runtime.html" title="Interface to D runtime library internals">core.runtime</a></li>
+	<li><a href="core_simd.html" title="Builtin SIMD intrinsics">core.simd</a></li>
+	<li><a href="core_thread.html" title="Thread management">core.thread</a></li>
+	<li><a href="core_time.html" title="Core time functionality">core.time</a></li>
+	<li><a href="core_vararg.html" title="Variable function arguments">core.vararg</a></li>
+	<li><a href="core_sync_barrier.html" title="Synchronizing progress of a group of threads">core.sync.barrier</a></li>
+	<li><a href="core_sync_condition.html" title="Synchronized condition checking">core.sync.condition</a></li>
+	<li><a href="core_sync_config.html" title="Stuff for core.sync">core.sync.config</a></li>
+	<li><a href="core_sync_exception.html" title="SyncException">core.sync.exception</a></li>
+	<li><a href="core_sync_mutex.html" title="Mutexes">core.sync.mutex</a></li>
+	<li><a href="core_sync_rwmutex.html" title="R/W mutually exclusive access">core.sync.rwmutex</a></li>
+	<li><a href="core_sync_semaphore.html" title="Semaphores">core.sync.semaphore</a></li>
+    </ul>
+</div>
+</div><!--/navigation-->
+<div id="content">
+    
+<div id="tools">
+	<!--span id="lastupdate">Last update </span-->
+	<a href="https://github.com/D-Programming-Language/phobos/edit/master/ast.d" class="tip button">
+		Improve this page
+		<span>
+			Quickly fork, edit online, and submit a pull request for this page.
+			Requires a signed-in GitHub account. This works well for small changes.
+			If you'd like to make larger changes you may want to consider using
+			local clone.
+		</span>
+	</a>
+	<a href="http://www.prowiki.org/wiki4d/wiki.cgi?DocComments/" class="tip button">
+		Page wiki
+		<span>
+	        View or edit the community-maintained wiki page associated with this page.
+		</span>
+	</a>
+</div>
+    <h1>std.d.ast</h1>
+    <div id=quickindex class=quickindex></div>
+    <!-- Generated by Ddoc from ast.d -->
+This module defines an Abstract Syntax Tree for the D language
+<p></p>
+<b>Examples:</b><br><pre class="d_code"><span class="d_comment">// TODO
+</span></pre>
+
+<p></p>
+<b>License:</b><br><a href="http://www.boost.org/LICENSE_1_0.txt Boost">License 1.0</a>
+<p></p>
+<b>Authors:</b><br>Brian Schott
+<p></p>
+<b>Source:</b><br>
+<a href="https://github.com/D-Programming-Language/phobos/blob/master/std/d/ast.d">std/d/ast.d</a><p></p>
+
+<dl><dt class="d_decl"><a name=".ASTVisitor"></a>abstract class <a name="ASTVisitor"></a><span class="ddoc_psymbol">ASTVisitor</span>;
+</dt>
+<dd>Implements the <a href="http://en.wikipedia.org/wiki/Visitor_pattern">Visitor Pattern</a>
+ for the various AST ///
+classes<p></p>
+
+<dl><dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AddExpression <i>addExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AliasDeclaration <i>aliasDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AliasInitializer <i>aliasInitializer</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AliasThisDeclaration <i>aliasThisDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AlignAttribute <i>alignAttribute</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AndAndExpression <i>andAndExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AndExpression <i>andExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ArgumentList <i>argumentList</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Arguments <i>arguments</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ArrayInitializer <i>arrayInitializer</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ArrayLiteral <i>arrayLiteral</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ArrayMemberInitialization <i>arrayMemberInitialization</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ArrayMemberInitializations <i>arrayMemberInitializations</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmAddExp <i>asmAddExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmAndExp <i>asmAndExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmBrExp <i>asmBrExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmEqualExp <i>asmEqualExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmExp <i>asmExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmInstruction <i>asmInstruction</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmLogAndExp <i>asmLogAndExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmLogOrExp <i>asmLogOrExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmMulExp <i>asmMulExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmOrExp <i>asmOrExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmPrimaryExp <i>asmPrimaryExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmRelExp <i>asmRelExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmShiftExp <i>asmShiftExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmStatement <i>asmStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmTypePrefix <i>asmTypePrefix</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmUnaExp <i>asmUnaExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AsmXorExp <i>asmXorExp</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AssertExpression <i>assertExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AssertStatement <i>assertStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AssignExpression <i>assignExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AssignStatement <i>assignStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AssocArrayLiteral <i>assocArrayLiteral</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AtAttribute <i>atAttribute</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Attribute <i>attribute</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AttributedDeclaration <i>attributedDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AutoDeclaration <i>autoDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(BlockStatement <i>blockStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(BodyStatement <i>bodyStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(BreakStatement <i>breakStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(BasicType <i>builtinType</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(CaseRangeStatement <i>caseRangeStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(CaseStatement <i>caseStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(CastExpression <i>castExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(CastQualifier <i>castQualifier</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Catch <i>catch_</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Catches <i>catches</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ClassBody <i>classBody</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ClassDeclaration <i>classDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(CmpExpression <i>cmpExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(CompileCondition <i>compileCondition</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ConditionalDeclaration <i>conditionalDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ConditionalStatement <i>conditionalStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Constraint <i>constraint</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Constructor <i>constructor</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ContinueStatement <i>continueStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(DebugCondition <i>debugCondition</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(DebugSpecification <i>debugSpecification</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Declaration <i>declaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(DeclarationsAndStatements <i>declarationsAndStatements</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(DeclarationOrInvariant <i>declarationOrInvariant</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Declarator <i>declarator</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(DeclaratorSuffix <i>declaratorSuffix</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(DefaultStatement <i>defaultStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(DeleteExpression <i>deleteExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(DeleteStatement <i>deleteStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Deprecated <i>deprecated_</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Destructor <i>destructor</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(DoStatement <i>doStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(EnumBody <i>enumBody</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(EnumDeclaration <i>enumDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(EnumMember <i>enumMember</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(EqualExpression <i>equalExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Expression <i>expression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(FinalSwitchStatement <i>finalSwitchStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Finally <i>finally_</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ForStatement <i>forStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ForeachRangeStatement <i>foreachRangeStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ForeachStatement <i>foreachStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ForeachType <i>foreachType</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ForeachTypeList <i>foreachTypeList</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(FunctionAttribute <i>functionAttribute</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(FunctionBody <i>functionBody</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(FunctionCallExpression <i>functionCallExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(FunctionCallStatement <i>functionCallStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(FunctionDeclaration <i>functionDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(FunctionLiteralExpression <i>functionLiteralExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(GotoStatement <i>gotoStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(IdentifierChain <i>identifierChain</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(IdentifierList <i>identifierList</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(IdentifierOrTemplateChain <i>identifierOrTemplateChain</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(IdentifierOrTemplateInstance <i>identifierOrTemplateInstance</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(IdentityExpression <i>identityExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(IfStatement <i>ifStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ImportBind <i>importBind</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ImportBindings <i>importBindings</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ImportDeclaration <i>importDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ImportExpression <i>importExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ImportList <i>importList</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(IndexExpression <i>indexExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(InExpression <i>inExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(InStatement <i>inStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Initialize <i>initialize</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Initializer <i>initializer</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(InterfaceDeclaration <i>interfaceDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Invariant <i>invariant_</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(IsExpression <i>isExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(KeyValuePair <i>keyValuePair</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(KeyValuePairs <i>keyValuePairs</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(LabeledStatement <i>labeledStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(LambdaExpression <i>lambdaExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(LastCatch <i>lastCatch</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(LinkageAttribute <i>linkageAttribute</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(MemberFunctionAttribute <i>memberFunctionAttribute</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(MixinDeclaration <i>mixinDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(MixinExpression <i>mixinExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(MixinTemplateName <i>mixinTemplateName</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Module <i>module_</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ModuleDeclaration <i>moduleDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(MulExpression <i>mulExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(NewAnonClassExpression <i>newAnonClassExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(NewExpression <i>newExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(NonEmptyStatement <i>nonEmptyStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(NonEmptyStatementNoCaseNoDefault <i>nonEmptyStatementNoCaseNoDefault</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(NonVoidInitializer <i>nonVoidInitializer</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Opcode <i>opcode</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Operand <i>operand</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Operands <i>operands</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(OrExpression <i>orExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(OrOrExpression <i>orOrExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(OutStatement <i>outStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Parameter <i>parameter</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ParameterAttribute <i>parameterAttribute</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Parameters <i>parameters</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(PostIncDecExpression <i>postIncDecExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(PowExpression <i>powExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(PragmaDeclaration <i>pragmaDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(PragmaExpression <i>pragmaExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(PreIncDecExpression <i>preIncDecExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(PrimaryExpression <i>primaryExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ProtectionAttribute <i>protectionAttribute</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Register <i>register</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(RelExpression <i>relExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ReturnStatement <i>returnStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ScopeGuardStatement <i>scopeGuardStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(SharedStaticConstructor <i>sharedStaticConstructor</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(SharedStaticDestructor <i>sharedStaticDestructor</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ShiftExpression <i>shiftExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(SingleImport <i>singleImport</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(SliceExpression <i>sliceExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Statement <i>statement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StatementNoCaseNoDefault <i>statementNoCaseNoDefault</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StaticAssertDeclaration <i>staticAssertDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StaticAssertStatement <i>staticAssertStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StaticConstructor <i>staticConstructor</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StaticDestructor <i>staticDestructor</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StaticIfCondition <i>staticIfCondition</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StorageClass <i>storageClass</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StructBody <i>structBody</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StructDeclaration <i>structDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StructInitializer <i>structInitializer</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StructMemberInitializer <i>structMemberInitializer</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StructMemberInitializers <i>structMemberInitializers</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(SwitchBody <i>switchBody</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(SwitchStatement <i>switchStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Symbol <i>symbol</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(SynchronizedStatement <i>synchronizedStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateAliasParameter <i>templateAliasParameter</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateArgument <i>templateArgument</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateArgumentList <i>templateArgumentList</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateArguments <i>templateArguments</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateDeclaration <i>templateDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateInstance <i>templateInstance</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateMixinStatement <i>templateMixinStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateParameter <i>templateParameter</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateParameterList <i>templateParameterList</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateParameters <i>templateParameters</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateSingleArgument <i>templateSingleArgument</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateThisParameter <i>templateThisParameter</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateTupleParameter <i>templateTupleParameter</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateTypeParameter <i>templateTypeParameter</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateValueParameter <i>templateValueParameter</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TemplateValueParameterDefault <i>templateValueParameterDefault</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TernaryExpression <i>ternaryExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ThrowStatement <i>throwStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TraitsArgument <i>traitsArgument</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TraitsExpression <i>traitsExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TryStatement <i>tryStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Type <i>type</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Type2 <i>type2</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Type3 <i>type3</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TypeConstructor <i>typeConstructor</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TypeConstructors <i>typeConstructors</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TypeSpecialization <i>typeSpecialization</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TypeSuffix <i>typeSuffix</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TypeidExpression <i>typeidExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TypeofExpression <i>typeofExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(UnaryExpression <i>unaryExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(UnionDeclaration <i>unionDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Unittest <i>unittest_</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(VariableDeclaration <i>variableDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(VersionCondition <i>versionCondition</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(VersionSpecification <i>versionSpecification</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(WhileStatement <i>whileStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(WithStatement <i>withStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(XorExpression <i>xorExpression</i>);
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AddExpression"></a>class <a name="AddExpression"></a><span class="ddoc_psymbol">AddExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AddExpression.operator"></a>TokenType <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AddExpression.left"></a>AddExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AddExpression.right"></a>MulExpression <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AliasDeclaration"></a>class <a name="AliasDeclaration"></a><span class="ddoc_psymbol">AliasDeclaration</span>: std.d.ast.Declaration;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AliasDeclaration.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AliasDeclaration.declarator"></a>Declarator <a name="declarator"></a><span class="ddoc_psymbol">declarator</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AliasDeclaration.initializations"></a>AliasInitializer[] <a name="initializations"></a><span class="ddoc_psymbol">initializations</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AliasInitializer"></a>class <a name="AliasInitializer"></a><span class="ddoc_psymbol">AliasInitializer</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AliasInitializer.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AliasInitializer.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AliasThisDeclaration"></a>class <a name="AliasThisDeclaration"></a><span class="ddoc_psymbol">AliasThisDeclaration</span>: std.d.ast.Declaration;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AliasThisDeclaration.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AlignAttribute"></a>class <a name="AlignAttribute"></a><span class="ddoc_psymbol">AlignAttribute</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AlignAttribute.intLiteral"></a>Token <a name="intLiteral"></a><span class="ddoc_psymbol">intLiteral</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AndAndExpression"></a>class <a name="AndAndExpression"></a><span class="ddoc_psymbol">AndAndExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AndAndExpression.left"></a>AndAndExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AndAndExpression.right"></a>OrExpression <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AndExpression"></a>class <a name="AndExpression"></a><span class="ddoc_psymbol">AndExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AndExpression.andExpression"></a>AndExpression <a name="andExpression"></a><span class="ddoc_psymbol">andExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AndExpression.shiftExpression"></a>ShiftExpression <a name="shiftExpression"></a><span class="ddoc_psymbol">shiftExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ArgumentList"></a>class <a name="ArgumentList"></a><span class="ddoc_psymbol">ArgumentList</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ArgumentList.arguments"></a>AssignExpression[] <a name="arguments"></a><span class="ddoc_psymbol">arguments</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Arguments"></a>class <a name="Arguments"></a><span class="ddoc_psymbol">Arguments</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Arguments.argumentList"></a>ArgumentList <a name="argumentList"></a><span class="ddoc_psymbol">argumentList</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ArrayInitializer"></a>class <a name="ArrayInitializer"></a><span class="ddoc_psymbol">ArrayInitializer</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ArrayInitializer.arrayMemberInitializations"></a>ArrayMemberInitializations <a name="arrayMemberInitializations"></a><span class="ddoc_psymbol">arrayMemberInitializations</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ArrayLiteral"></a>class <a name="ArrayLiteral"></a><span class="ddoc_psymbol">ArrayLiteral</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ArrayLiteral.argumentList"></a>ArgumentList <a name="argumentList"></a><span class="ddoc_psymbol">argumentList</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ArrayMemberInitialization"></a>class <a name="ArrayMemberInitialization"></a><span class="ddoc_psymbol">ArrayMemberInitialization</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ArrayMemberInitialization.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ArrayMemberInitialization.nonVoidInitializer"></a>NonVoidInitializer <a name="nonVoidInitializer"></a><span class="ddoc_psymbol">nonVoidInitializer</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ArrayMemberInitializations"></a>class <a name="ArrayMemberInitializations"></a><span class="ddoc_psymbol">ArrayMemberInitializations</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ArrayMemberInitializations.arrayMemberInitializations"></a>ArrayMemberInitialization[] <a name="arrayMemberInitializations"></a><span class="ddoc_psymbol">arrayMemberInitializations</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmAddExp"></a>class <a name="AsmAddExp"></a><span class="ddoc_psymbol">AsmAddExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmAddExp.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmAddExp.left"></a>AsmMulExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmAddExp.right"></a>AsmMulExp <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmAndExp"></a>class <a name="AsmAndExp"></a><span class="ddoc_psymbol">AsmAndExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmAndExp.left"></a>AsmEqualExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmAndExp.right"></a>AsmEqualExp <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmBrExp"></a>class <a name="AsmBrExp"></a><span class="ddoc_psymbol">AsmBrExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmBrExp.asmBrExp"></a>AsmBrExp <a name="asmBrExp"></a><span class="ddoc_psymbol">asmBrExp</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmBrExp.asmEqualExp"></a>AsmEqualExp <a name="asmEqualExp"></a><span class="ddoc_psymbol">asmEqualExp</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmBrExp.asmUnaExp"></a>AsmUnaExp <a name="asmUnaExp"></a><span class="ddoc_psymbol">asmUnaExp</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmEqualExp"></a>class <a name="AsmEqualExp"></a><span class="ddoc_psymbol">AsmEqualExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmEqualExp.left"></a>AsmRelExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmEqualExp.right"></a>AsmRelExp <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmEqualExp.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmExp"></a>class <a name="AsmExp"></a><span class="ddoc_psymbol">AsmExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmExp.left"></a>AsmLogOrExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmExp.middle"></a>AsmExp <a name="middle"></a><span class="ddoc_psymbol">middle</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmExp.right"></a>AsmExp <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmInstruction"></a>class <a name="AsmInstruction"></a><span class="ddoc_psymbol">AsmInstruction</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmInstruction.identifierOrInteger"></a>Token <a name="identifierOrInteger"></a><span class="ddoc_psymbol">identifierOrInteger</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmInstruction.hasAlign"></a>bool <a name="hasAlign"></a><span class="ddoc_psymbol">hasAlign</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmInstruction.asmExp"></a>AsmExp <a name="asmExp"></a><span class="ddoc_psymbol">asmExp</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmInstruction.opcode"></a>Opcode <a name="opcode"></a><span class="ddoc_psymbol">opcode</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmInstruction.operands"></a>Operands <a name="operands"></a><span class="ddoc_psymbol">operands</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmLogAndExp"></a>class <a name="AsmLogAndExp"></a><span class="ddoc_psymbol">AsmLogAndExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmLogAndExp.left"></a>AsmOrExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmLogAndExp.right"></a>AsmOrExp <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmLogOrExp"></a>class <a name="AsmLogOrExp"></a><span class="ddoc_psymbol">AsmLogOrExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmLogOrExp.left"></a>AsmLogAndExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmLogOrExp.right"></a>AsmLogAndExp <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmMulExp"></a>class <a name="AsmMulExp"></a><span class="ddoc_psymbol">AsmMulExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmMulExp.left"></a>AsmBrExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmMulExp.right"></a>AsmBrExp <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmMulExp.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmOrExp"></a>class <a name="AsmOrExp"></a><span class="ddoc_psymbol">AsmOrExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmOrExp.left"></a>AsmXorExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmOrExp.right"></a>AsmXorExp <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmPrimaryExp"></a>class <a name="AsmPrimaryExp"></a><span class="ddoc_psymbol">AsmPrimaryExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmPrimaryExp.identifierChain"></a>IdentifierChain <a name="identifierChain"></a><span class="ddoc_psymbol">identifierChain</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmPrimaryExp.register"></a>Register <a name="register"></a><span class="ddoc_psymbol">register</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmPrimaryExp.token"></a>Token <a name="token"></a><span class="ddoc_psymbol">token</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmRelExp"></a>class <a name="AsmRelExp"></a><span class="ddoc_psymbol">AsmRelExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmRelExp.left"></a>AsmShiftExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmRelExp.right"></a>AsmShiftExp <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmRelExp.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmShiftExp"></a>class <a name="AsmShiftExp"></a><span class="ddoc_psymbol">AsmShiftExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmShiftExp.left"></a>AsmAddExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmShiftExp.right"></a>AsmAddExp <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmShiftExp.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmStatement"></a>class <a name="AsmStatement"></a><span class="ddoc_psymbol">AsmStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmStatement.asmInstructions"></a>AsmInstruction[] <a name="asmInstructions"></a><span class="ddoc_psymbol">asmInstructions</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmTypePrefix"></a>class <a name="AsmTypePrefix"></a><span class="ddoc_psymbol">AsmTypePrefix</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmTypePrefix.left"></a>Token <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmTypePrefix.right"></a>Token <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmUnaExp"></a>class <a name="AsmUnaExp"></a><span class="ddoc_psymbol">AsmUnaExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmUnaExp.asmTypePrefix"></a>AsmTypePrefix <a name="asmTypePrefix"></a><span class="ddoc_psymbol">asmTypePrefix</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmUnaExp.asmExp"></a>AsmExp <a name="asmExp"></a><span class="ddoc_psymbol">asmExp</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmUnaExp.prefix"></a>Token <a name="prefix"></a><span class="ddoc_psymbol">prefix</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmUnaExp.asmPrimaryExp"></a>AsmPrimaryExp <a name="asmPrimaryExp"></a><span class="ddoc_psymbol">asmPrimaryExp</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmUnaExp.asmUnaExp"></a>AsmUnaExp <a name="asmUnaExp"></a><span class="ddoc_psymbol">asmUnaExp</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AsmXorExp"></a>class <a name="AsmXorExp"></a><span class="ddoc_psymbol">AsmXorExp</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AsmXorExp.left"></a>AsmAndExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmXorExp.right"></a>AsmAndExp <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AssertExpression"></a>class <a name="AssertExpression"></a><span class="ddoc_psymbol">AssertExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AssertExpression.assertion"></a>AssignExpression <a name="assertion"></a><span class="ddoc_psymbol">assertion</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AssertExpression.message"></a>AssignExpression <a name="message"></a><span class="ddoc_psymbol">message</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AssertStatement"></a>class <a name="AssertStatement"></a><span class="ddoc_psymbol">AssertStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AssertStatement.assertExpression"></a>AssertExpression <a name="assertExpression"></a><span class="ddoc_psymbol">assertExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AssignExpression"></a>class <a name="AssignExpression"></a><span class="ddoc_psymbol">AssignExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AssignExpression.ternaryExpression"></a>TernaryExpression <a name="ternaryExpression"></a><span class="ddoc_psymbol">ternaryExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AssignExpression.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AssignExpression.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AssignStatement"></a>class <a name="AssignStatement"></a><span class="ddoc_psymbol">AssignStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AssignStatement.preIncDecExpression"></a>PreIncDecExpression <a name="preIncDecExpression"></a><span class="ddoc_psymbol">preIncDecExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AssignStatement.postIncDecExpression"></a>PostIncDecExpression <a name="postIncDecExpression"></a><span class="ddoc_psymbol">postIncDecExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AssignStatement.unaryExpressions"></a>UnaryExpression[] <a name="unaryExpressions"></a><span class="ddoc_psymbol">unaryExpressions</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AssignStatement.assignExpressions"></a>AssignExpression[] <a name="assignExpressions"></a><span class="ddoc_psymbol">assignExpressions</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AssignStatement.assignOperators"></a>Token[] <a name="assignOperators"></a><span class="ddoc_psymbol">assignOperators</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AssocArrayLiteral"></a>class <a name="AssocArrayLiteral"></a><span class="ddoc_psymbol">AssocArrayLiteral</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AssocArrayLiteral.keyValuePairs"></a>KeyValuePairs <a name="keyValuePairs"></a><span class="ddoc_psymbol">keyValuePairs</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AtAttribute"></a>class <a name="AtAttribute"></a><span class="ddoc_psymbol">AtAttribute</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AtAttribute.functionCallExpression"></a>FunctionCallExpression <a name="functionCallExpression"></a><span class="ddoc_psymbol">functionCallExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AtAttribute.argumentList"></a>ArgumentList <a name="argumentList"></a><span class="ddoc_psymbol">argumentList</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AtAttribute.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AttributedDeclaration"></a>class <a name="AttributedDeclaration"></a><span class="ddoc_psymbol">AttributedDeclaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AttributedDeclaration.attribute"></a>Attribute <a name="attribute"></a><span class="ddoc_psymbol">attribute</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AttributedDeclaration.declarations"></a>Declaration[] <a name="declarations"></a><span class="ddoc_psymbol">declarations</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Attribute"></a>class <a name="Attribute"></a><span class="ddoc_psymbol">Attribute</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Attribute.linkageAttribute"></a>LinkageAttribute <a name="linkageAttribute"></a><span class="ddoc_psymbol">linkageAttribute</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Attribute.alignAttribute"></a>AlignAttribute <a name="alignAttribute"></a><span class="ddoc_psymbol">alignAttribute</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Attribute.pragmaExpression"></a>PragmaExpression <a name="pragmaExpression"></a><span class="ddoc_psymbol">pragmaExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Attribute.deprecated_"></a>Deprecated <a name="deprecated_"></a><span class="ddoc_psymbol">deprecated_</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Attribute.protectionAttribute"></a>ProtectionAttribute <a name="protectionAttribute"></a><span class="ddoc_psymbol">protectionAttribute</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Attribute.atAttribute"></a>AtAttribute <a name="atAttribute"></a><span class="ddoc_psymbol">atAttribute</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Attribute.attribute"></a>Token <a name="attribute"></a><span class="ddoc_psymbol">attribute</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".AutoDeclaration"></a>class <a name="AutoDeclaration"></a><span class="ddoc_psymbol">AutoDeclaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".AutoDeclaration.storageClass"></a>StorageClass <a name="storageClass"></a><span class="ddoc_psymbol">storageClass</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AutoDeclaration.identifiers"></a>Token[] <a name="identifiers"></a><span class="ddoc_psymbol">identifiers</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AutoDeclaration.initializers"></a>Initializer[] <a name="initializers"></a><span class="ddoc_psymbol">initializers</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".BlockStatement"></a>class <a name="BlockStatement"></a><span class="ddoc_psymbol">BlockStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".BlockStatement.declarationsAndStatements"></a>DeclarationsAndStatements <a name="declarationsAndStatements"></a><span class="ddoc_psymbol">declarationsAndStatements</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".BodyStatement"></a>class <a name="BodyStatement"></a><span class="ddoc_psymbol">BodyStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".BodyStatement.blockStatement"></a>BlockStatement <a name="blockStatement"></a><span class="ddoc_psymbol">blockStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".BreakStatement"></a>class <a name="BreakStatement"></a><span class="ddoc_psymbol">BreakStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".BreakStatement.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".BreakStatement.hasIdentifier"></a>bool <a name="hasIdentifier"></a><span class="ddoc_psymbol">hasIdentifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".BasicType"></a>class <a name="BasicType"></a><span class="ddoc_psymbol">BasicType</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".BasicType.type"></a>TokenType <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".CaseRangeStatement"></a>class <a name="CaseRangeStatement"></a><span class="ddoc_psymbol">CaseRangeStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".CaseRangeStatement.low"></a>AssignExpression <a name="low"></a><span class="ddoc_psymbol">low</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".CaseRangeStatement.high"></a>AssignExpression <a name="high"></a><span class="ddoc_psymbol">high</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".CaseRangeStatement.declarationsAndStatements"></a>DeclarationsAndStatements <a name="declarationsAndStatements"></a><span class="ddoc_psymbol">declarationsAndStatements</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".CaseStatement"></a>class <a name="CaseStatement"></a><span class="ddoc_psymbol">CaseStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".CaseStatement.argumentList"></a>ArgumentList <a name="argumentList"></a><span class="ddoc_psymbol">argumentList</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".CaseStatement.declarationsAndStatements"></a>DeclarationsAndStatements <a name="declarationsAndStatements"></a><span class="ddoc_psymbol">declarationsAndStatements</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".CastExpression"></a>class <a name="CastExpression"></a><span class="ddoc_psymbol">CastExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".CastExpression.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".CastExpression.castQualifier"></a>CastQualifier <a name="castQualifier"></a><span class="ddoc_psymbol">castQualifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".CastExpression.unaryExpression"></a>UnaryExpression <a name="unaryExpression"></a><span class="ddoc_psymbol">unaryExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".CastQualifier"></a>class <a name="CastQualifier"></a><span class="ddoc_psymbol">CastQualifier</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".CastQualifier.first"></a>TokenType <a name="first"></a><span class="ddoc_psymbol">first</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".CastQualifier.second"></a>TokenType <a name="second"></a><span class="ddoc_psymbol">second</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".CastQualifier.hasSecond"></a>bool <a name="hasSecond"></a><span class="ddoc_psymbol">hasSecond</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Catches"></a>class <a name="Catches"></a><span class="ddoc_psymbol">Catches</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Catches.catches"></a>Catch[] <a name="catches"></a><span class="ddoc_psymbol">catches</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Catches.lastCatch"></a>LastCatch <a name="lastCatch"></a><span class="ddoc_psymbol">lastCatch</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Catch"></a>class <a name="Catch"></a><span class="ddoc_psymbol">Catch</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Catch.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Catch.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Catch.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ClassBody"></a>class <a name="ClassBody"></a><span class="ddoc_psymbol">ClassBody</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ClassBody.declarationOrInvariants"></a>DeclarationOrInvariant[] <a name="declarationOrInvariants"></a><span class="ddoc_psymbol">declarationOrInvariants</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ClassDeclaration"></a>class <a name="ClassDeclaration"></a><span class="ddoc_psymbol">ClassDeclaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ClassDeclaration.name"></a>Token <a name="name"></a><span class="ddoc_psymbol">name</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ClassDeclaration.templateParameters"></a>TemplateParameters <a name="templateParameters"></a><span class="ddoc_psymbol">templateParameters</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ClassDeclaration.constraint"></a>Constraint <a name="constraint"></a><span class="ddoc_psymbol">constraint</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ClassDeclaration.superClasses"></a>IdentifierList <a name="superClasses"></a><span class="ddoc_psymbol">superClasses</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ClassDeclaration.classBody"></a>ClassBody <a name="classBody"></a><span class="ddoc_psymbol">classBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".CmpExpression"></a>class <a name="CmpExpression"></a><span class="ddoc_psymbol">CmpExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".CmpExpression.shiftExpression"></a>ShiftExpression <a name="shiftExpression"></a><span class="ddoc_psymbol">shiftExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".CmpExpression.equalExpression"></a>EqualExpression <a name="equalExpression"></a><span class="ddoc_psymbol">equalExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".CmpExpression.identityExpression"></a>IdentityExpression <a name="identityExpression"></a><span class="ddoc_psymbol">identityExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".CmpExpression.relExpression"></a>RelExpression <a name="relExpression"></a><span class="ddoc_psymbol">relExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".CmpExpression.inExpression"></a>InExpression <a name="inExpression"></a><span class="ddoc_psymbol">inExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".CompileCondition"></a>class <a name="CompileCondition"></a><span class="ddoc_psymbol">CompileCondition</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".CompileCondition.versionCondition"></a>VersionCondition <a name="versionCondition"></a><span class="ddoc_psymbol">versionCondition</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".CompileCondition.debugCondition"></a>DebugCondition <a name="debugCondition"></a><span class="ddoc_psymbol">debugCondition</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".CompileCondition.staticIfCondition"></a>StaticIfCondition <a name="staticIfCondition"></a><span class="ddoc_psymbol">staticIfCondition</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ConditionalDeclaration"></a>class <a name="ConditionalDeclaration"></a><span class="ddoc_psymbol">ConditionalDeclaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ConditionalDeclaration.compileCondition"></a>CompileCondition <a name="compileCondition"></a><span class="ddoc_psymbol">compileCondition</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ConditionalDeclaration.trueDeclarations"></a>Declaration[] <a name="trueDeclarations"></a><span class="ddoc_psymbol">trueDeclarations</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ConditionalDeclaration.falseDeclarations"></a>Declaration[] <a name="falseDeclarations"></a><span class="ddoc_psymbol">falseDeclarations</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ConditionalStatement"></a>class <a name="ConditionalStatement"></a><span class="ddoc_psymbol">ConditionalStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ConditionalStatement.compileCondition"></a>CompileCondition <a name="compileCondition"></a><span class="ddoc_psymbol">compileCondition</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ConditionalStatement.trueStatement"></a>NonEmptyStatementNoCaseNoDefault <a name="trueStatement"></a><span class="ddoc_psymbol">trueStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ConditionalStatement.falseStatement"></a>NonEmptyStatementNoCaseNoDefault <a name="falseStatement"></a><span class="ddoc_psymbol">falseStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Constraint"></a>class <a name="Constraint"></a><span class="ddoc_psymbol">Constraint</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Constraint.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Constructor"></a>class <a name="Constructor"></a><span class="ddoc_psymbol">Constructor</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Constructor.parameters"></a>Parameters <a name="parameters"></a><span class="ddoc_psymbol">parameters</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Constructor.functionBody"></a>FunctionBody <a name="functionBody"></a><span class="ddoc_psymbol">functionBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ContinueStatement"></a>class <a name="ContinueStatement"></a><span class="ddoc_psymbol">ContinueStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ContinueStatement.hasIdentifier"></a>bool <a name="hasIdentifier"></a><span class="ddoc_psymbol">hasIdentifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ContinueStatement.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".DebugCondition"></a>class <a name="DebugCondition"></a><span class="ddoc_psymbol">DebugCondition</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".DebugCondition.identifierOrInteger"></a>Token <a name="identifierOrInteger"></a><span class="ddoc_psymbol">identifierOrInteger</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".DebugCondition.hasIdentifierOrInteger"></a>bool <a name="hasIdentifierOrInteger"></a><span class="ddoc_psymbol">hasIdentifierOrInteger</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".DebugSpecification"></a>class <a name="DebugSpecification"></a><span class="ddoc_psymbol">DebugSpecification</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".DebugSpecification.identifierOrInteger"></a>Token <a name="identifierOrInteger"></a><span class="ddoc_psymbol">identifierOrInteger</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Declaration"></a>class <a name="Declaration"></a><span class="ddoc_psymbol">Declaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Declaration.attributedDeclaration"></a>AttributedDeclaration <a name="attributedDeclaration"></a><span class="ddoc_psymbol">attributedDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.importDeclaration"></a>ImportDeclaration <a name="importDeclaration"></a><span class="ddoc_psymbol">importDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.functionDeclaration"></a>FunctionDeclaration <a name="functionDeclaration"></a><span class="ddoc_psymbol">functionDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.variableDeclaration"></a>VariableDeclaration <a name="variableDeclaration"></a><span class="ddoc_psymbol">variableDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.aliasThisDeclaration"></a>AliasThisDeclaration <a name="aliasThisDeclaration"></a><span class="ddoc_psymbol">aliasThisDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.structDeclaration"></a>StructDeclaration <a name="structDeclaration"></a><span class="ddoc_psymbol">structDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.classDeclaration"></a>ClassDeclaration <a name="classDeclaration"></a><span class="ddoc_psymbol">classDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.interfaceDeclaration"></a>InterfaceDeclaration <a name="interfaceDeclaration"></a><span class="ddoc_psymbol">interfaceDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.unionDeclaration"></a>UnionDeclaration <a name="unionDeclaration"></a><span class="ddoc_psymbol">unionDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.enumDeclaration"></a>EnumDeclaration <a name="enumDeclaration"></a><span class="ddoc_psymbol">enumDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.aliasDeclaration"></a>AliasDeclaration <a name="aliasDeclaration"></a><span class="ddoc_psymbol">aliasDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.mixinDeclaration"></a>MixinDeclaration <a name="mixinDeclaration"></a><span class="ddoc_psymbol">mixinDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.unittest_"></a>Unittest <a name="unittest_"></a><span class="ddoc_psymbol">unittest_</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.staticAssertDeclaration"></a>StaticAssertDeclaration <a name="staticAssertDeclaration"></a><span class="ddoc_psymbol">staticAssertDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.templateDeclaration"></a>TemplateDeclaration <a name="templateDeclaration"></a><span class="ddoc_psymbol">templateDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.constructor"></a>Constructor <a name="constructor"></a><span class="ddoc_psymbol">constructor</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.destructor"></a>Destructor <a name="destructor"></a><span class="ddoc_psymbol">destructor</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.staticConstructor"></a>StaticConstructor <a name="staticConstructor"></a><span class="ddoc_psymbol">staticConstructor</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.staticDestructor"></a>StaticDestructor <a name="staticDestructor"></a><span class="ddoc_psymbol">staticDestructor</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.sharedStaticDestructor"></a>SharedStaticDestructor <a name="sharedStaticDestructor"></a><span class="ddoc_psymbol">sharedStaticDestructor</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.sharedStaticConstructor"></a>SharedStaticConstructor <a name="sharedStaticConstructor"></a><span class="ddoc_psymbol">sharedStaticConstructor</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.conditionalDeclaration"></a>ConditionalDeclaration <a name="conditionalDeclaration"></a><span class="ddoc_psymbol">conditionalDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.pragmaDeclaration"></a>PragmaDeclaration <a name="pragmaDeclaration"></a><span class="ddoc_psymbol">pragmaDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".DeclarationsAndStatements"></a>class <a name="DeclarationsAndStatements"></a><span class="ddoc_psymbol">DeclarationsAndStatements</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".DeclarationsAndStatements.declarationsAndStatements"></a>ASTNode[] <a name="declarationsAndStatements"></a><span class="ddoc_psymbol">declarationsAndStatements</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".DeclarationOrInvariant"></a>class <a name="DeclarationOrInvariant"></a><span class="ddoc_psymbol">DeclarationOrInvariant</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declarator"></a>class <a name="Declarator"></a><span class="ddoc_psymbol">Declarator</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Declarator.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declarator.declaratorSuffix"></a>DeclaratorSuffix <a name="declaratorSuffix"></a><span class="ddoc_psymbol">declaratorSuffix</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declarator.initializer"></a>Initializer <a name="initializer"></a><span class="ddoc_psymbol">initializer</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".DeclaratorSuffix"></a>class <a name="DeclaratorSuffix"></a><span class="ddoc_psymbol">DeclaratorSuffix</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".DeclaratorSuffix.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".DeclaratorSuffix.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".DefaultStatement"></a>class <a name="DefaultStatement"></a><span class="ddoc_psymbol">DefaultStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".DefaultStatement.declarationsAndStatements"></a>DeclarationsAndStatements <a name="declarationsAndStatements"></a><span class="ddoc_psymbol">declarationsAndStatements</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".DeleteExpression"></a>class <a name="DeleteExpression"></a><span class="ddoc_psymbol">DeleteExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".DeleteExpression.unaryExpression"></a>UnaryExpression <a name="unaryExpression"></a><span class="ddoc_psymbol">unaryExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".DeleteStatement"></a>class <a name="DeleteStatement"></a><span class="ddoc_psymbol">DeleteStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".DeleteStatement.deleteExpression"></a>DeleteExpression <a name="deleteExpression"></a><span class="ddoc_psymbol">deleteExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Deprecated"></a>class <a name="Deprecated"></a><span class="ddoc_psymbol">Deprecated</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Deprecated.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Destructor"></a>class <a name="Destructor"></a><span class="ddoc_psymbol">Destructor</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Destructor.functionBody"></a>FunctionBody <a name="functionBody"></a><span class="ddoc_psymbol">functionBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".DoStatement"></a>class <a name="DoStatement"></a><span class="ddoc_psymbol">DoStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".DoStatement.blockStatement"></a>BlockStatement <a name="blockStatement"></a><span class="ddoc_psymbol">blockStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".DoStatement.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".EnumBody"></a>class <a name="EnumBody"></a><span class="ddoc_psymbol">EnumBody</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".EnumBody.enumMembers"></a>EnumMember[] <a name="enumMembers"></a><span class="ddoc_psymbol">enumMembers</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".EnumDeclaration"></a>class <a name="EnumDeclaration"></a><span class="ddoc_psymbol">EnumDeclaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".EnumDeclaration.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".EnumDeclaration.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".EnumDeclaration.enumBody"></a>EnumBody <a name="enumBody"></a><span class="ddoc_psymbol">enumBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".EnumMember"></a>class <a name="EnumMember"></a><span class="ddoc_psymbol">EnumMember</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".EnumMember.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".EnumMember.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".EnumMember.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".EqualExpression"></a>class <a name="EqualExpression"></a><span class="ddoc_psymbol">EqualExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Expression"></a>class <a name="Expression"></a><span class="ddoc_psymbol">Expression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Expression.assignExpressions"></a>AssignExpression[] <a name="assignExpressions"></a><span class="ddoc_psymbol">assignExpressions</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".FinalSwitchStatement"></a>class <a name="FinalSwitchStatement"></a><span class="ddoc_psymbol">FinalSwitchStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".FinalSwitchStatement.switchStatement"></a>SwitchStatement <a name="switchStatement"></a><span class="ddoc_psymbol">switchStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Finally"></a>class <a name="Finally"></a><span class="ddoc_psymbol">Finally</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Finally.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ForStatement"></a>class <a name="ForStatement"></a><span class="ddoc_psymbol">ForStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ForStatement.initializationDeclaration"></a>Declaration <a name="initializationDeclaration"></a><span class="ddoc_psymbol">initializationDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ForStatement.initializationStatement"></a>Statement <a name="initializationStatement"></a><span class="ddoc_psymbol">initializationStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ForStatement.test"></a>Expression <a name="test"></a><span class="ddoc_psymbol">test</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ForStatement.increment"></a>Expression <a name="increment"></a><span class="ddoc_psymbol">increment</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ForStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ForeachRangeStatement"></a>class <a name="ForeachRangeStatement"></a><span class="ddoc_psymbol">ForeachRangeStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ForeachRangeStatement.foreachType"></a>ForeachType <a name="foreachType"></a><span class="ddoc_psymbol">foreachType</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ForeachRangeStatement.lower"></a>Expression <a name="lower"></a><span class="ddoc_psymbol">lower</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ForeachRangeStatement.higher"></a>Expression <a name="higher"></a><span class="ddoc_psymbol">higher</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ForeachRangeStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ForeachStatement"></a>class <a name="ForeachStatement"></a><span class="ddoc_psymbol">ForeachStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ForeachStatement.foreachType"></a>Token <a name="foreachType"></a><span class="ddoc_psymbol">foreachType</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ForeachStatement.foreachTypeList"></a>ForeachTypeList <a name="foreachTypeList"></a><span class="ddoc_psymbol">foreachTypeList</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ForeachStatement.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ForeachStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ForeachType"></a>class <a name="ForeachType"></a><span class="ddoc_psymbol">ForeachType</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ForeachType.isRef"></a>bool <a name="isRef"></a><span class="ddoc_psymbol">isRef</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ForeachType.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ForeachType.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ForeachTypeList"></a>class <a name="ForeachTypeList"></a><span class="ddoc_psymbol">ForeachTypeList</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ForeachTypeList.foreachTypes"></a>ForeachType[] <a name="foreachTypes"></a><span class="ddoc_psymbol">foreachTypes</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".FunctionAttribute"></a>class <a name="FunctionAttribute"></a><span class="ddoc_psymbol">FunctionAttribute</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".FunctionAttribute.pureOrNothrow"></a>Token <a name="pureOrNothrow"></a><span class="ddoc_psymbol">pureOrNothrow</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionAttribute.atAttribute"></a>AtAttribute <a name="atAttribute"></a><span class="ddoc_psymbol">atAttribute</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".FunctionBody"></a>class <a name="FunctionBody"></a><span class="ddoc_psymbol">FunctionBody</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".FunctionBody.blockStatement"></a>BlockStatement <a name="blockStatement"></a><span class="ddoc_psymbol">blockStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionBody.bodyStatement"></a>BodyStatement <a name="bodyStatement"></a><span class="ddoc_psymbol">bodyStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionBody.outStatement"></a>OutStatement <a name="outStatement"></a><span class="ddoc_psymbol">outStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionBody.inStatement"></a>InStatement <a name="inStatement"></a><span class="ddoc_psymbol">inStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".FunctionCallExpression"></a>class <a name="FunctionCallExpression"></a><span class="ddoc_psymbol">FunctionCallExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".FunctionCallExpression.unaryExpression"></a>UnaryExpression <a name="unaryExpression"></a><span class="ddoc_psymbol">unaryExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionCallExpression.templateArguments"></a>TemplateArguments <a name="templateArguments"></a><span class="ddoc_psymbol">templateArguments</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionCallExpression.arguments"></a>Arguments <a name="arguments"></a><span class="ddoc_psymbol">arguments</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".FunctionCallStatement"></a>class <a name="FunctionCallStatement"></a><span class="ddoc_psymbol">FunctionCallStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".FunctionCallStatement.functionCallExpression"></a>FunctionCallExpression <a name="functionCallExpression"></a><span class="ddoc_psymbol">functionCallExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".FunctionDeclaration"></a>class <a name="FunctionDeclaration"></a><span class="ddoc_psymbol">FunctionDeclaration</span>: std.d.ast.Declaration;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".FunctionDeclaration.returnType"></a>Type <a name="returnType"></a><span class="ddoc_psymbol">returnType</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionDeclaration.name"></a>Token <a name="name"></a><span class="ddoc_psymbol">name</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionDeclaration.templateParameters"></a>TemplateParameters <a name="templateParameters"></a><span class="ddoc_psymbol">templateParameters</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionDeclaration.parameters"></a>Parameters <a name="parameters"></a><span class="ddoc_psymbol">parameters</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionDeclaration.constraint"></a>Constraint <a name="constraint"></a><span class="ddoc_psymbol">constraint</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionDeclaration.functionBody"></a>FunctionBody <a name="functionBody"></a><span class="ddoc_psymbol">functionBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".FunctionLiteralExpression"></a>class <a name="FunctionLiteralExpression"></a><span class="ddoc_psymbol">FunctionLiteralExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".FunctionLiteralExpression.functionOrDelegate"></a>Token <a name="functionOrDelegate"></a><span class="ddoc_psymbol">functionOrDelegate</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionLiteralExpression.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionLiteralExpression.parameters"></a>Parameters <a name="parameters"></a><span class="ddoc_psymbol">parameters</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionLiteralExpression.functionAttributes"></a>FunctionAttribute[] <a name="functionAttributes"></a><span class="ddoc_psymbol">functionAttributes</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionLiteralExpression.functionBody"></a>FunctionBody <a name="functionBody"></a><span class="ddoc_psymbol">functionBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".GotoStatement"></a>class <a name="GotoStatement"></a><span class="ddoc_psymbol">GotoStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".GotoStatement.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".GotoStatement.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".GotoStatement.isDefault"></a>bool <a name="isDefault"></a><span class="ddoc_psymbol">isDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".IdentifierChain"></a>class <a name="IdentifierChain"></a><span class="ddoc_psymbol">IdentifierChain</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".IdentifierChain.identifiers"></a>Token[] <a name="identifiers"></a><span class="ddoc_psymbol">identifiers</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".IdentifierList"></a>class <a name="IdentifierList"></a><span class="ddoc_psymbol">IdentifierList</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".IdentifierList.identifiers"></a>Token[] <a name="identifiers"></a><span class="ddoc_psymbol">identifiers</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".IdentifierOrTemplateChain"></a>class <a name="IdentifierOrTemplateChain"></a><span class="ddoc_psymbol">IdentifierOrTemplateChain</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".IdentifierOrTemplateChain.identifiers"></a>IdentifierOrTemplateInstance[] <a name="identifiers"></a><span class="ddoc_psymbol">identifiers</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".IdentifierOrTemplateInstance"></a>class <a name="IdentifierOrTemplateInstance"></a><span class="ddoc_psymbol">IdentifierOrTemplateInstance</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".IdentifierOrTemplateInstance.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".IdentifierOrTemplateInstance.templateInstance"></a>TemplateInstance <a name="templateInstance"></a><span class="ddoc_psymbol">templateInstance</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".IdentityExpression"></a>class <a name="IdentityExpression"></a><span class="ddoc_psymbol">IdentityExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".IfStatement"></a>class <a name="IfStatement"></a><span class="ddoc_psymbol">IfStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".IfStatement.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".IfStatement.thenStatement"></a>NonEmptyStatementNoCaseNoDefault <a name="thenStatement"></a><span class="ddoc_psymbol">thenStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".IfStatement.elseStatement"></a>NonEmptyStatementNoCaseNoDefault <a name="elseStatement"></a><span class="ddoc_psymbol">elseStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ImportBind"></a>class <a name="ImportBind"></a><span class="ddoc_psymbol">ImportBind</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ImportBind.left"></a>Token <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ImportBind.right"></a>Token <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ImportBindings"></a>class <a name="ImportBindings"></a><span class="ddoc_psymbol">ImportBindings</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ImportBindings.bind"></a>SingleImport <a name="bind"></a><span class="ddoc_psymbol">bind</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ImportBindings.ImportBinds"></a>ImportBind[] <a name="ImportBinds"></a><span class="ddoc_psymbol">ImportBinds</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ImportDeclaration"></a>class <a name="ImportDeclaration"></a><span class="ddoc_psymbol">ImportDeclaration</span>: std.d.ast.Declaration;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ImportDeclaration.isStatic"></a>bool <a name="isStatic"></a><span class="ddoc_psymbol">isStatic</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ImportDeclaration.importList"></a>ImportList <a name="importList"></a><span class="ddoc_psymbol">importList</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ImportExpression"></a>class <a name="ImportExpression"></a><span class="ddoc_psymbol">ImportExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ImportExpression.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ImportList"></a>class <a name="ImportList"></a><span class="ddoc_psymbol">ImportList</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ImportList.singleImport"></a>SingleImport <a name="singleImport"></a><span class="ddoc_psymbol">singleImport</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ImportList.next"></a>ImportList <a name="next"></a><span class="ddoc_psymbol">next</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ImportList.bindings"></a>ImportBindings <a name="bindings"></a><span class="ddoc_psymbol">bindings</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".IndexExpression"></a>class <a name="IndexExpression"></a><span class="ddoc_psymbol">IndexExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".IndexExpression.unaryExpression"></a>UnaryExpression <a name="unaryExpression"></a><span class="ddoc_psymbol">unaryExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".IndexExpression.argumentList"></a>ArgumentList <a name="argumentList"></a><span class="ddoc_psymbol">argumentList</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".InExpression"></a>class <a name="InExpression"></a><span class="ddoc_psymbol">InExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".InStatement"></a>class <a name="InStatement"></a><span class="ddoc_psymbol">InStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".InStatement.blockStatement"></a>BlockStatement <a name="blockStatement"></a><span class="ddoc_psymbol">blockStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Initialize"></a>class <a name="Initialize"></a><span class="ddoc_psymbol">Initialize</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Initialize.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Initializer"></a>class <a name="Initializer"></a><span class="ddoc_psymbol">Initializer</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Initializer.nonVoidInitializer"></a>NonVoidInitializer <a name="nonVoidInitializer"></a><span class="ddoc_psymbol">nonVoidInitializer</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".InterfaceDeclaration"></a>class <a name="InterfaceDeclaration"></a><span class="ddoc_psymbol">InterfaceDeclaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".InterfaceDeclaration.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".InterfaceDeclaration.templateParameters"></a>TemplateParameters <a name="templateParameters"></a><span class="ddoc_psymbol">templateParameters</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".InterfaceDeclaration.constraint"></a>Constraint <a name="constraint"></a><span class="ddoc_psymbol">constraint</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".InterfaceDeclaration.identifierList"></a>IdentifierList <a name="identifierList"></a><span class="ddoc_psymbol">identifierList</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".InterfaceDeclaration.structBody"></a>StructBody <a name="structBody"></a><span class="ddoc_psymbol">structBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Invariant"></a>class <a name="Invariant"></a><span class="ddoc_psymbol">Invariant</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Invariant.blockStatement"></a>BlockStatement <a name="blockStatement"></a><span class="ddoc_psymbol">blockStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".IsExpression"></a>class <a name="IsExpression"></a><span class="ddoc_psymbol">IsExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".IsExpression.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".IsExpression.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".IsExpression.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".IsExpression.typeSpecialization"></a>TypeSpecialization <a name="typeSpecialization"></a><span class="ddoc_psymbol">typeSpecialization</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".IsExpression.templateParameterList"></a>TemplateParameterList <a name="templateParameterList"></a><span class="ddoc_psymbol">templateParameterList</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".IsExpression.equalsOrColon"></a>Token <a name="equalsOrColon"></a><span class="ddoc_psymbol">equalsOrColon</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".KeyValuePair"></a>class <a name="KeyValuePair"></a><span class="ddoc_psymbol">KeyValuePair</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".KeyValuePair.keyValuePairs"></a>KeyValuePair[] <a name="keyValuePairs"></a><span class="ddoc_psymbol">keyValuePairs</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".KeyValuePairs"></a>class <a name="KeyValuePairs"></a><span class="ddoc_psymbol">KeyValuePairs</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".KeyValuePairs.key"></a>AssignExpression <a name="key"></a><span class="ddoc_psymbol">key</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".KeyValuePairs.value"></a>AssignExpression <a name="value"></a><span class="ddoc_psymbol">value</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".LabeledStatement"></a>class <a name="LabeledStatement"></a><span class="ddoc_psymbol">LabeledStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".LabeledStatement.statement"></a>Statement <a name="statement"></a><span class="ddoc_psymbol">statement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".LambdaExpression"></a>class <a name="LambdaExpression"></a><span class="ddoc_psymbol">LambdaExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".LambdaExpression.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".LambdaExpression.paramaters"></a>Parameters <a name="paramaters"></a><span class="ddoc_psymbol">paramaters</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".LambdaExpression.functionAttributes"></a>FunctionAttribute[] <a name="functionAttributes"></a><span class="ddoc_psymbol">functionAttributes</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".LambdaExpression.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".LastCatch"></a>class <a name="LastCatch"></a><span class="ddoc_psymbol">LastCatch</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".LastCatch.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".LinkageAttribute"></a>class <a name="LinkageAttribute"></a><span class="ddoc_psymbol">LinkageAttribute</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".LinkageAttribute.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".LinkageAttribute.hasPlusPlus"></a>bool <a name="hasPlusPlus"></a><span class="ddoc_psymbol">hasPlusPlus</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".MemberFunctionAttribute"></a>class <a name="MemberFunctionAttribute"></a><span class="ddoc_psymbol">MemberFunctionAttribute</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".MemberFunctionAttribute.token"></a>Token <a name="token"></a><span class="ddoc_psymbol">token</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".MemberFunctionAttribute.functionAttribute"></a>FunctionAttribute <a name="functionAttribute"></a><span class="ddoc_psymbol">functionAttribute</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".MixinDeclaration"></a>class <a name="MixinDeclaration"></a><span class="ddoc_psymbol">MixinDeclaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".MixinDeclaration.mixinExpression"></a>MixinExpression <a name="mixinExpression"></a><span class="ddoc_psymbol">mixinExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".MixinExpression"></a>class <a name="MixinExpression"></a><span class="ddoc_psymbol">MixinExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".MixinExpression.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".MixinTemplateName"></a>class <a name="MixinTemplateName"></a><span class="ddoc_psymbol">MixinTemplateName</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".MixinTemplateName.hasDot"></a>bool <a name="hasDot"></a><span class="ddoc_psymbol">hasDot</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".MixinTemplateName.identifierOrTemplateChain"></a>IdentifierOrTemplateChain <a name="identifierOrTemplateChain"></a><span class="ddoc_psymbol">identifierOrTemplateChain</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".MixinTemplateName.typeofExpression"></a>TypeofExpression <a name="typeofExpression"></a><span class="ddoc_psymbol">typeofExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Module"></a>class <a name="Module"></a><span class="ddoc_psymbol">Module</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Module.moduleDeclaration"></a>ModuleDeclaration <a name="moduleDeclaration"></a><span class="ddoc_psymbol">moduleDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Module.declarations"></a>Declaration[] <a name="declarations"></a><span class="ddoc_psymbol">declarations</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ModuleDeclaration"></a>class <a name="ModuleDeclaration"></a><span class="ddoc_psymbol">ModuleDeclaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ModuleDeclaration.moduleName"></a>IdentifierChain <a name="moduleName"></a><span class="ddoc_psymbol">moduleName</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".MulExpression"></a>class <a name="MulExpression"></a><span class="ddoc_psymbol">MulExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".MulExpression.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".MulExpression.left"></a>UnaryExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".MulExpression.right"></a>UnaryExpression <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".NewAnonClassExpression"></a>class <a name="NewAnonClassExpression"></a><span class="ddoc_psymbol">NewAnonClassExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".NewAnonClassExpression.allocatorArguments"></a>Arguments <a name="allocatorArguments"></a><span class="ddoc_psymbol">allocatorArguments</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NewAnonClassExpression.constructorArguments"></a>Arguments <a name="constructorArguments"></a><span class="ddoc_psymbol">constructorArguments</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NewAnonClassExpression.identifierList"></a>IdentifierList <a name="identifierList"></a><span class="ddoc_psymbol">identifierList</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NewAnonClassExpression.classBody"></a>ClassBody <a name="classBody"></a><span class="ddoc_psymbol">classBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".NewExpression"></a>class <a name="NewExpression"></a><span class="ddoc_psymbol">NewExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".NewExpression.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NewExpression.newAnonClassExpression"></a>NewAnonClassExpression <a name="newAnonClassExpression"></a><span class="ddoc_psymbol">newAnonClassExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NewExpression.arguments"></a>Arguments <a name="arguments"></a><span class="ddoc_psymbol">arguments</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NewExpression.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatement"></a>class <a name="NonEmptyStatement"></a><span class="ddoc_psymbol">NonEmptyStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".NonEmptyStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatement.caseStatement"></a>CaseStatement <a name="caseStatement"></a><span class="ddoc_psymbol">caseStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatement.caseRangeStatement"></a>CaseRangeStatement <a name="caseRangeStatement"></a><span class="ddoc_psymbol">caseRangeStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatement.defaultStatement"></a>DefaultStatement <a name="defaultStatement"></a><span class="ddoc_psymbol">defaultStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault"></a>class <a name="NonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">NonEmptyStatementNoCaseNoDefault</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.labeledStatement"></a>LabeledStatement <a name="labeledStatement"></a><span class="ddoc_psymbol">labeledStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.blockStatement"></a>BlockStatement <a name="blockStatement"></a><span class="ddoc_psymbol">blockStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.assignStatement"></a>AssignStatement <a name="assignStatement"></a><span class="ddoc_psymbol">assignStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.ifStatement"></a>IfStatement <a name="ifStatement"></a><span class="ddoc_psymbol">ifStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.whileStatement"></a>WhileStatement <a name="whileStatement"></a><span class="ddoc_psymbol">whileStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.doStatement"></a>DoStatement <a name="doStatement"></a><span class="ddoc_psymbol">doStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.forStatement"></a>ForStatement <a name="forStatement"></a><span class="ddoc_psymbol">forStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.foreachStatement"></a>ForeachStatement <a name="foreachStatement"></a><span class="ddoc_psymbol">foreachStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.switchStatement"></a>SwitchStatement <a name="switchStatement"></a><span class="ddoc_psymbol">switchStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.finalSwitchStatement"></a>FinalSwitchStatement <a name="finalSwitchStatement"></a><span class="ddoc_psymbol">finalSwitchStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.continueStatement"></a>ContinueStatement <a name="continueStatement"></a><span class="ddoc_psymbol">continueStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.breakStatement"></a>BreakStatement <a name="breakStatement"></a><span class="ddoc_psymbol">breakStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.returnStatement"></a>ReturnStatement <a name="returnStatement"></a><span class="ddoc_psymbol">returnStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.gotoStatement"></a>GotoStatement <a name="gotoStatement"></a><span class="ddoc_psymbol">gotoStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.withStatement"></a>WithStatement <a name="withStatement"></a><span class="ddoc_psymbol">withStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.synchronizedStatement"></a>SynchronizedStatement <a name="synchronizedStatement"></a><span class="ddoc_psymbol">synchronizedStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.tryStatement"></a>TryStatement <a name="tryStatement"></a><span class="ddoc_psymbol">tryStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.throwStatement"></a>ThrowStatement <a name="throwStatement"></a><span class="ddoc_psymbol">throwStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.scopeGuardStatement"></a>ScopeGuardStatement <a name="scopeGuardStatement"></a><span class="ddoc_psymbol">scopeGuardStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.asmStatement"></a>AsmStatement <a name="asmStatement"></a><span class="ddoc_psymbol">asmStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.foreachRangeStatement"></a>ForeachRangeStatement <a name="foreachRangeStatement"></a><span class="ddoc_psymbol">foreachRangeStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.conditionalStatement"></a>ConditionalStatement <a name="conditionalStatement"></a><span class="ddoc_psymbol">conditionalStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.staticAssertStatement"></a>StaticAssertStatement <a name="staticAssertStatement"></a><span class="ddoc_psymbol">staticAssertStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.assertStatement"></a>AssertStatement <a name="assertStatement"></a><span class="ddoc_psymbol">assertStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.templateMixinStatement"></a>TemplateMixinStatement <a name="templateMixinStatement"></a><span class="ddoc_psymbol">templateMixinStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.versionSpecification"></a>VersionSpecification <a name="versionSpecification"></a><span class="ddoc_psymbol">versionSpecification</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.debugSpecification"></a>DebugSpecification <a name="debugSpecification"></a><span class="ddoc_psymbol">debugSpecification</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.functionCallStatement"></a>FunctionCallStatement <a name="functionCallStatement"></a><span class="ddoc_psymbol">functionCallStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.deleteStatement"></a>DeleteStatement <a name="deleteStatement"></a><span class="ddoc_psymbol">deleteStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".NonVoidInitializer"></a>class <a name="NonVoidInitializer"></a><span class="ddoc_psymbol">NonVoidInitializer</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".NonVoidInitializer.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonVoidInitializer.arrayInitializer"></a>ArrayInitializer <a name="arrayInitializer"></a><span class="ddoc_psymbol">arrayInitializer</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".NonVoidInitializer.structInitializer"></a>StructInitializer <a name="structInitializer"></a><span class="ddoc_psymbol">structInitializer</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Opcode"></a>class <a name="Opcode"></a><span class="ddoc_psymbol">Opcode</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Opcode.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Operand"></a>class <a name="Operand"></a><span class="ddoc_psymbol">Operand</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Operand.asmExp"></a>AsmExp <a name="asmExp"></a><span class="ddoc_psymbol">asmExp</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Operands"></a>class <a name="Operands"></a><span class="ddoc_psymbol">Operands</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Operands.operands"></a>Operand[] <a name="operands"></a><span class="ddoc_psymbol">operands</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".OrExpression"></a>class <a name="OrExpression"></a><span class="ddoc_psymbol">OrExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".OrExpression.xorExpression"></a>XorExpression <a name="xorExpression"></a><span class="ddoc_psymbol">xorExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".OrExpression.orExpression"></a>OrExpression <a name="orExpression"></a><span class="ddoc_psymbol">orExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".OrOrExpression"></a>class <a name="OrOrExpression"></a><span class="ddoc_psymbol">OrOrExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".OrOrExpression.orOrExpression"></a>OrOrExpression <a name="orOrExpression"></a><span class="ddoc_psymbol">orOrExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".OrOrExpression.andAndExpression"></a>AndAndExpression <a name="andAndExpression"></a><span class="ddoc_psymbol">andAndExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".OutStatement"></a>class <a name="OutStatement"></a><span class="ddoc_psymbol">OutStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".OutStatement.parameter"></a>Token <a name="parameter"></a><span class="ddoc_psymbol">parameter</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".OutStatement.blockStatement"></a>BlockStatement <a name="blockStatement"></a><span class="ddoc_psymbol">blockStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Parameter"></a>class <a name="Parameter"></a><span class="ddoc_psymbol">Parameter</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Parameter.paramaterAttributes"></a>ParameterAttribute[] <a name="paramaterAttributes"></a><span class="ddoc_psymbol">paramaterAttributes</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Parameter.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Parameter.name"></a>Token <a name="name"></a><span class="ddoc_psymbol">name</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Parameter.vararg"></a>bool <a name="vararg"></a><span class="ddoc_psymbol">vararg</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ParameterAttribute"></a>class <a name="ParameterAttribute"></a><span class="ddoc_psymbol">ParameterAttribute</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ParameterAttribute.attribute"></a>Token <a name="attribute"></a><span class="ddoc_psymbol">attribute</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ParameterAttribute.typeConstructor"></a>TypeConstructor <a name="typeConstructor"></a><span class="ddoc_psymbol">typeConstructor</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Parameters"></a>class <a name="Parameters"></a><span class="ddoc_psymbol">Parameters</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Parameters.paramaters"></a>Parameter[] <a name="paramaters"></a><span class="ddoc_psymbol">paramaters</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Parameters.hasVarargs"></a>bool <a name="hasVarargs"></a><span class="ddoc_psymbol">hasVarargs</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".PostIncDecExpression"></a>class <a name="PostIncDecExpression"></a><span class="ddoc_psymbol">PostIncDecExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".PostIncDecExpression.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PostIncDecExpression.unaryExpression"></a>UnaryExpression <a name="unaryExpression"></a><span class="ddoc_psymbol">unaryExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".PowExpression"></a>class <a name="PowExpression"></a><span class="ddoc_psymbol">PowExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".PowExpression.unaryExpression"></a>UnaryExpression <a name="unaryExpression"></a><span class="ddoc_psymbol">unaryExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PowExpression.powExpression"></a>PowExpression <a name="powExpression"></a><span class="ddoc_psymbol">powExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".PragmaDeclaration"></a>class <a name="PragmaDeclaration"></a><span class="ddoc_psymbol">PragmaDeclaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".PragmaDeclaration.pragmaExpression"></a>PragmaExpression <a name="pragmaExpression"></a><span class="ddoc_psymbol">pragmaExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".PragmaExpression"></a>class <a name="PragmaExpression"></a><span class="ddoc_psymbol">PragmaExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".PragmaExpression.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PragmaExpression.argumentList"></a>ArgumentList <a name="argumentList"></a><span class="ddoc_psymbol">argumentList</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".PreIncDecExpression"></a>class <a name="PreIncDecExpression"></a><span class="ddoc_psymbol">PreIncDecExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".PreIncDecExpression.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PreIncDecExpression.unaryExpression"></a>UnaryExpression <a name="unaryExpression"></a><span class="ddoc_psymbol">unaryExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression"></a>class <a name="PrimaryExpression"></a><span class="ddoc_psymbol">PrimaryExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".PrimaryExpression.primary"></a>Token <a name="primary"></a><span class="ddoc_psymbol">primary</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.hasDot"></a>bool <a name="hasDot"></a><span class="ddoc_psymbol">hasDot</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ProtectionAttribute"></a>class <a name="ProtectionAttribute"></a><span class="ddoc_psymbol">ProtectionAttribute</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ProtectionAttribute.attribute"></a>Token <a name="attribute"></a><span class="ddoc_psymbol">attribute</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Register"></a>class <a name="Register"></a><span class="ddoc_psymbol">Register</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Register.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Register.integerLiteral"></a>Token <a name="integerLiteral"></a><span class="ddoc_psymbol">integerLiteral</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Register.hasIntegerLiteral"></a>bool <a name="hasIntegerLiteral"></a><span class="ddoc_psymbol">hasIntegerLiteral</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".RelExpression"></a>class <a name="RelExpression"></a><span class="ddoc_psymbol">RelExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ReturnStatement"></a>class <a name="ReturnStatement"></a><span class="ddoc_psymbol">ReturnStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ReturnStatement.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ScopeGuardStatement"></a>class <a name="ScopeGuardStatement"></a><span class="ddoc_psymbol">ScopeGuardStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ScopeGuardStatement.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ScopeGuardStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".SharedStaticConstructor"></a>class <a name="SharedStaticConstructor"></a><span class="ddoc_psymbol">SharedStaticConstructor</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".SharedStaticConstructor.functionBody"></a>FunctionBody <a name="functionBody"></a><span class="ddoc_psymbol">functionBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".SharedStaticDestructor"></a>class <a name="SharedStaticDestructor"></a><span class="ddoc_psymbol">SharedStaticDestructor</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".SharedStaticDestructor.functionBody"></a>FunctionBody <a name="functionBody"></a><span class="ddoc_psymbol">functionBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ShiftExpression"></a>class <a name="ShiftExpression"></a><span class="ddoc_psymbol">ShiftExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ShiftExpression.addExpression"></a>AddExpression <a name="addExpression"></a><span class="ddoc_psymbol">addExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ShiftExpression.shiftExpression"></a>ShiftExpression <a name="shiftExpression"></a><span class="ddoc_psymbol">shiftExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ShiftExpression.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".SingleImport"></a>class <a name="SingleImport"></a><span class="ddoc_psymbol">SingleImport</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".SingleImport.rename"></a>Token <a name="rename"></a><span class="ddoc_psymbol">rename</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".SingleImport.import_"></a>IdentifierChain <a name="import_"></a><span class="ddoc_psymbol">import_</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".SliceExpression"></a>class <a name="SliceExpression"></a><span class="ddoc_psymbol">SliceExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".SliceExpression.lower"></a>AssignExpression <a name="lower"></a><span class="ddoc_psymbol">lower</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".SliceExpression.upper"></a>AssignExpression <a name="upper"></a><span class="ddoc_psymbol">upper</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Statement"></a>class <a name="Statement"></a><span class="ddoc_psymbol">Statement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Statement.nonEmptyStatement"></a>NonEmptyStatement <a name="nonEmptyStatement"></a><span class="ddoc_psymbol">nonEmptyStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault"></a>class <a name="StatementNoCaseNoDefault"></a><span class="ddoc_psymbol">StatementNoCaseNoDefault</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".StatementNoCaseNoDefault.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StaticAssertDeclaration"></a>class <a name="StaticAssertDeclaration"></a><span class="ddoc_psymbol">StaticAssertDeclaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".StaticAssertDeclaration.staticAssertStatement"></a>StaticAssertStatement <a name="staticAssertStatement"></a><span class="ddoc_psymbol">staticAssertStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StaticAssertStatement"></a>class <a name="StaticAssertStatement"></a><span class="ddoc_psymbol">StaticAssertStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".StaticAssertStatement.assertStatement"></a>AssertStatement <a name="assertStatement"></a><span class="ddoc_psymbol">assertStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StaticConstructor"></a>class <a name="StaticConstructor"></a><span class="ddoc_psymbol">StaticConstructor</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".StaticConstructor.functionBody"></a>FunctionBody <a name="functionBody"></a><span class="ddoc_psymbol">functionBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StaticDestructor"></a>class <a name="StaticDestructor"></a><span class="ddoc_psymbol">StaticDestructor</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".StaticDestructor.functionBody"></a>FunctionBody <a name="functionBody"></a><span class="ddoc_psymbol">functionBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StaticIfCondition"></a>class <a name="StaticIfCondition"></a><span class="ddoc_psymbol">StaticIfCondition</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".StaticIfCondition.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StorageClass"></a>class <a name="StorageClass"></a><span class="ddoc_psymbol">StorageClass</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".StorageClass.atAttribute"></a>AtAttribute <a name="atAttribute"></a><span class="ddoc_psymbol">atAttribute</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".StorageClass.typeConstructor"></a>TypeConstructor <a name="typeConstructor"></a><span class="ddoc_psymbol">typeConstructor</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".StorageClass.storageClass"></a>Token <a name="storageClass"></a><span class="ddoc_psymbol">storageClass</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StructBody"></a>class <a name="StructBody"></a><span class="ddoc_psymbol">StructBody</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".StructBody.declarations"></a>Declaration[] <a name="declarations"></a><span class="ddoc_psymbol">declarations</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StructDeclaration"></a>class <a name="StructDeclaration"></a><span class="ddoc_psymbol">StructDeclaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".StructDeclaration.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".StructDeclaration.templateParameters"></a>TemplateParameters <a name="templateParameters"></a><span class="ddoc_psymbol">templateParameters</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".StructDeclaration.constraint"></a>Constraint <a name="constraint"></a><span class="ddoc_psymbol">constraint</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".StructDeclaration.structBody"></a>StructBody <a name="structBody"></a><span class="ddoc_psymbol">structBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StructInitializer"></a>class <a name="StructInitializer"></a><span class="ddoc_psymbol">StructInitializer</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".StructInitializer.structMemberInitializers"></a>StructMemberInitializers <a name="structMemberInitializers"></a><span class="ddoc_psymbol">structMemberInitializers</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StructMemberInitializer"></a>class <a name="StructMemberInitializer"></a><span class="ddoc_psymbol">StructMemberInitializer</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".StructMemberInitializer.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".StructMemberInitializer.hasIdentifier"></a>bool <a name="hasIdentifier"></a><span class="ddoc_psymbol">hasIdentifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".StructMemberInitializer.nonVoidInitializer"></a>NonVoidInitializer <a name="nonVoidInitializer"></a><span class="ddoc_psymbol">nonVoidInitializer</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StructMemberInitializers"></a>class <a name="StructMemberInitializers"></a><span class="ddoc_psymbol">StructMemberInitializers</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".StructMemberInitializers.structMemberInitializers"></a>StructMemberInitializer[] <a name="structMemberInitializers"></a><span class="ddoc_psymbol">structMemberInitializers</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".SwitchBody"></a>class <a name="SwitchBody"></a><span class="ddoc_psymbol">SwitchBody</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".SwitchBody.statements"></a>Statement[] <a name="statements"></a><span class="ddoc_psymbol">statements</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".SwitchStatement"></a>class <a name="SwitchStatement"></a><span class="ddoc_psymbol">SwitchStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".SwitchStatement.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".SwitchStatement.switchBody"></a>SwitchBody <a name="switchBody"></a><span class="ddoc_psymbol">switchBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Symbol"></a>class <a name="Symbol"></a><span class="ddoc_psymbol">Symbol</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Symbol.identifierOrTemplateChain"></a>IdentifierOrTemplateChain <a name="identifierOrTemplateChain"></a><span class="ddoc_psymbol">identifierOrTemplateChain</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Symbol.hasDot"></a>bool <a name="hasDot"></a><span class="ddoc_psymbol">hasDot</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".SynchronizedStatement"></a>class <a name="SynchronizedStatement"></a><span class="ddoc_psymbol">SynchronizedStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".SynchronizedStatement.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".SynchronizedStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateAliasParameter"></a>class <a name="TemplateAliasParameter"></a><span class="ddoc_psymbol">TemplateAliasParameter</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateAliasParameter.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateAliasParameter.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateAliasParameter.colonType"></a>Type <a name="colonType"></a><span class="ddoc_psymbol">colonType</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateAliasParameter.colonExpression"></a>Expression <a name="colonExpression"></a><span class="ddoc_psymbol">colonExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateAliasParameter.assignType"></a>Type <a name="assignType"></a><span class="ddoc_psymbol">assignType</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateAliasParameter.assignExpression"></a>Expression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateArgument"></a>class <a name="TemplateArgument"></a><span class="ddoc_psymbol">TemplateArgument</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateArgument.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateArgument.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateArgument.symbol"></a>Symbol <a name="symbol"></a><span class="ddoc_psymbol">symbol</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateArgumentList"></a>class <a name="TemplateArgumentList"></a><span class="ddoc_psymbol">TemplateArgumentList</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateArgumentList.templateArguments"></a>TemplateArgument[] <a name="templateArguments"></a><span class="ddoc_psymbol">templateArguments</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateArguments"></a>class <a name="TemplateArguments"></a><span class="ddoc_psymbol">TemplateArguments</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateArguments.templateArgumentList"></a>TemplateArgumentList <a name="templateArgumentList"></a><span class="ddoc_psymbol">templateArgumentList</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateArguments.templateSingleArgument"></a>TemplateSingleArgument <a name="templateSingleArgument"></a><span class="ddoc_psymbol">templateSingleArgument</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateDeclaration"></a>class <a name="TemplateDeclaration"></a><span class="ddoc_psymbol">TemplateDeclaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateDeclaration.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateDeclaration.templateParameters"></a>TemplateParameters <a name="templateParameters"></a><span class="ddoc_psymbol">templateParameters</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateDeclaration.constraint"></a>Constraint <a name="constraint"></a><span class="ddoc_psymbol">constraint</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateDeclaration.declarations"></a>Declaration[] <a name="declarations"></a><span class="ddoc_psymbol">declarations</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateInstance"></a>class <a name="TemplateInstance"></a><span class="ddoc_psymbol">TemplateInstance</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateInstance.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateInstance.templateArguments"></a>TemplateArguments <a name="templateArguments"></a><span class="ddoc_psymbol">templateArguments</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateMixinStatement"></a>class <a name="TemplateMixinStatement"></a><span class="ddoc_psymbol">TemplateMixinStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateMixinStatement.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateMixinStatement.templateArguments"></a>TemplateArguments <a name="templateArguments"></a><span class="ddoc_psymbol">templateArguments</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateMixinStatement.mixinTemplateName"></a>MixinTemplateName <a name="mixinTemplateName"></a><span class="ddoc_psymbol">mixinTemplateName</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateParameter"></a>class <a name="TemplateParameter"></a><span class="ddoc_psymbol">TemplateParameter</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateParameter.templateTypeParameter"></a>TemplateTypeParameter <a name="templateTypeParameter"></a><span class="ddoc_psymbol">templateTypeParameter</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateParameter.templateValueParameter"></a>TemplateValueParameter <a name="templateValueParameter"></a><span class="ddoc_psymbol">templateValueParameter</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateParameter.templateAliasParameter"></a>TemplateAliasParameter <a name="templateAliasParameter"></a><span class="ddoc_psymbol">templateAliasParameter</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateParameter.templateTupleParameter"></a>TemplateTupleParameter <a name="templateTupleParameter"></a><span class="ddoc_psymbol">templateTupleParameter</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateParameter.templateThisParameter"></a>TemplateThisParameter <a name="templateThisParameter"></a><span class="ddoc_psymbol">templateThisParameter</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateParameterList"></a>class <a name="TemplateParameterList"></a><span class="ddoc_psymbol">TemplateParameterList</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateParameterList.templateParameters"></a>TemplateParameter[] <a name="templateParameters"></a><span class="ddoc_psymbol">templateParameters</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateParameters"></a>class <a name="TemplateParameters"></a><span class="ddoc_psymbol">TemplateParameters</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateParameters.templateParameterList"></a>TemplateParameterList <a name="templateParameterList"></a><span class="ddoc_psymbol">templateParameterList</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateSingleArgument"></a>class <a name="TemplateSingleArgument"></a><span class="ddoc_psymbol">TemplateSingleArgument</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateSingleArgument.token"></a>Token <a name="token"></a><span class="ddoc_psymbol">token</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateSingleArgument.builtinType"></a>BasicType <a name="builtinType"></a><span class="ddoc_psymbol">builtinType</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateThisParameter"></a>class <a name="TemplateThisParameter"></a><span class="ddoc_psymbol">TemplateThisParameter</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateThisParameter.templateTypeParameter"></a>TemplateTypeParameter <a name="templateTypeParameter"></a><span class="ddoc_psymbol">templateTypeParameter</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateTupleParameter"></a>class <a name="TemplateTupleParameter"></a><span class="ddoc_psymbol">TemplateTupleParameter</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateTupleParameter.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateTypeParameter"></a>class <a name="TemplateTypeParameter"></a><span class="ddoc_psymbol">TemplateTypeParameter</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateTypeParameter.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateTypeParameter.colonType"></a>Type <a name="colonType"></a><span class="ddoc_psymbol">colonType</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateTypeParameter.assignType"></a>Type <a name="assignType"></a><span class="ddoc_psymbol">assignType</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateValueParameter"></a>class <a name="TemplateValueParameter"></a><span class="ddoc_psymbol">TemplateValueParameter</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateValueParameter.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateValueParameter.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateValueParameter.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateValueParameter.templateValueParameterDefault"></a>TemplateValueParameterDefault <a name="templateValueParameterDefault"></a><span class="ddoc_psymbol">templateValueParameterDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TemplateValueParameterDefault"></a>class <a name="TemplateValueParameterDefault"></a><span class="ddoc_psymbol">TemplateValueParameterDefault</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TemplateValueParameterDefault.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TemplateValueParameterDefault.token"></a>Token <a name="token"></a><span class="ddoc_psymbol">token</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TernaryExpression"></a>class <a name="TernaryExpression"></a><span class="ddoc_psymbol">TernaryExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TernaryExpression.orOrExpression"></a>OrOrExpression <a name="orOrExpression"></a><span class="ddoc_psymbol">orOrExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TernaryExpression.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TernaryExpression.ternaryExpression"></a>TernaryExpression <a name="ternaryExpression"></a><span class="ddoc_psymbol">ternaryExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ThrowStatement"></a>class <a name="ThrowStatement"></a><span class="ddoc_psymbol">ThrowStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ThrowStatement.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TraitsArgument"></a>class <a name="TraitsArgument"></a><span class="ddoc_psymbol">TraitsArgument</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TraitsArgument.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TraitsArgument.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TraitsExpression"></a>class <a name="TraitsExpression"></a><span class="ddoc_psymbol">TraitsExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TraitsExpression.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TraitsExpression.traitsArguments"></a>TraitsArgument[] <a name="traitsArguments"></a><span class="ddoc_psymbol">traitsArguments</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TryStatement"></a>class <a name="TryStatement"></a><span class="ddoc_psymbol">TryStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TryStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TryStatement.catches"></a>Catches <a name="catches"></a><span class="ddoc_psymbol">catches</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TryStatement.finally_"></a>Finally <a name="finally_"></a><span class="ddoc_psymbol">finally_</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Type"></a>class <a name="Type"></a><span class="ddoc_psymbol">Type</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Type.typeConstructors"></a>TypeConstructors <a name="typeConstructors"></a><span class="ddoc_psymbol">typeConstructors</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Type.type2"></a>Type2 <a name="type2"></a><span class="ddoc_psymbol">type2</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Type2"></a>class <a name="Type2"></a><span class="ddoc_psymbol">Type2</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Type2.type2"></a>Type2 <a name="type2"></a><span class="ddoc_psymbol">type2</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Type2.type3"></a>Type3 <a name="type3"></a><span class="ddoc_psymbol">type3</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Type2.typeSuffix"></a>TypeSuffix <a name="typeSuffix"></a><span class="ddoc_psymbol">typeSuffix</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Type3"></a>class <a name="Type3"></a><span class="ddoc_psymbol">Type3</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Type3.builtinType"></a>BasicType <a name="builtinType"></a><span class="ddoc_psymbol">builtinType</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Type3.symbol"></a>Symbol <a name="symbol"></a><span class="ddoc_psymbol">symbol</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Type3.typeofExpression"></a>TypeofExpression <a name="typeofExpression"></a><span class="ddoc_psymbol">typeofExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Type3.identifierOrTemplateChain"></a>IdentifierOrTemplateChain <a name="identifierOrTemplateChain"></a><span class="ddoc_psymbol">identifierOrTemplateChain</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Type3.typeConstructor"></a>TypeConstructor <a name="typeConstructor"></a><span class="ddoc_psymbol">typeConstructor</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Type3.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TypeConstructor"></a>class <a name="TypeConstructor"></a><span class="ddoc_psymbol">TypeConstructor</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TypeConstructor.typeConstructor"></a>Token <a name="typeConstructor"></a><span class="ddoc_psymbol">typeConstructor</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TypeConstructors"></a>class <a name="TypeConstructors"></a><span class="ddoc_psymbol">TypeConstructors</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TypeConstructors.typeConstructors"></a>TypeConstructor[] <a name="typeConstructors"></a><span class="ddoc_psymbol">typeConstructors</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TypeSpecialization"></a>class <a name="TypeSpecialization"></a><span class="ddoc_psymbol">TypeSpecialization</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TypeSpecialization.token"></a>Token <a name="token"></a><span class="ddoc_psymbol">token</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TypeSpecialization.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TypeSuffix"></a>class <a name="TypeSuffix"></a><span class="ddoc_psymbol">TypeSuffix</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TypeSuffix.delegateOrFunction"></a>Token <a name="delegateOrFunction"></a><span class="ddoc_psymbol">delegateOrFunction</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TypeSuffix.star"></a>bool <a name="star"></a><span class="ddoc_psymbol">star</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TypeSuffix.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TypeSuffix.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TypeSuffix.memberFunctionAttributes"></a>MemberFunctionAttribute[] <a name="memberFunctionAttributes"></a><span class="ddoc_psymbol">memberFunctionAttributes</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TypeidExpression"></a>class <a name="TypeidExpression"></a><span class="ddoc_psymbol">TypeidExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TypeidExpression.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TypeidExpression.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".TypeofExpression"></a>class <a name="TypeofExpression"></a><span class="ddoc_psymbol">TypeofExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".TypeofExpression.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TypeofExpression.return_"></a>Token <a name="return_"></a><span class="ddoc_psymbol">return_</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression"></a>class <a name="UnaryExpression"></a><span class="ddoc_psymbol">UnaryExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".UnaryExpression.primaryExpression"></a>PrimaryExpression <a name="primaryExpression"></a><span class="ddoc_psymbol">primaryExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.unaryExpression"></a>UnaryExpression <a name="unaryExpression"></a><span class="ddoc_psymbol">unaryExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.prefix"></a>Token <a name="prefix"></a><span class="ddoc_psymbol">prefix</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.preIncDecExpression"></a>PreIncDecExpression <a name="preIncDecExpression"></a><span class="ddoc_psymbol">preIncDecExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.postIncDecExpression"></a>PostIncDecExpression <a name="postIncDecExpression"></a><span class="ddoc_psymbol">postIncDecExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.newExpression"></a>NewExpression <a name="newExpression"></a><span class="ddoc_psymbol">newExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.deleteExpression"></a>DeleteExpression <a name="deleteExpression"></a><span class="ddoc_psymbol">deleteExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.castExpression"></a>CastExpression <a name="castExpression"></a><span class="ddoc_psymbol">castExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.functionCallExpression"></a>FunctionCallExpression <a name="functionCallExpression"></a><span class="ddoc_psymbol">functionCallExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.argumentList"></a>ArgumentList <a name="argumentList"></a><span class="ddoc_psymbol">argumentList</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.low"></a>AssignExpression <a name="low"></a><span class="ddoc_psymbol">low</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.high"></a>AssignExpression <a name="high"></a><span class="ddoc_psymbol">high</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.identifierOrTemplateInstance"></a>IdentifierOrTemplateInstance <a name="identifierOrTemplateInstance"></a><span class="ddoc_psymbol">identifierOrTemplateInstance</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.assertExpression"></a>AssertExpression <a name="assertExpression"></a><span class="ddoc_psymbol">assertExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".UnionDeclaration"></a>class <a name="UnionDeclaration"></a><span class="ddoc_psymbol">UnionDeclaration</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".UnionDeclaration.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnionDeclaration.templateParameters"></a>TemplateParameters <a name="templateParameters"></a><span class="ddoc_psymbol">templateParameters</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnionDeclaration.constraint"></a>Constraint <a name="constraint"></a><span class="ddoc_psymbol">constraint</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnionDeclaration.structBody"></a>StructBody <a name="structBody"></a><span class="ddoc_psymbol">structBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Unittest"></a>class <a name="Unittest"></a><span class="ddoc_psymbol">Unittest</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Unittest.blockStatement"></a>BlockStatement <a name="blockStatement"></a><span class="ddoc_psymbol">blockStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".VariableDeclaration"></a>class <a name="VariableDeclaration"></a><span class="ddoc_psymbol">VariableDeclaration</span>: std.d.ast.Declaration;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".VariableDeclaration.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".VariableDeclaration.declarators"></a>Declarator[] <a name="declarators"></a><span class="ddoc_psymbol">declarators</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".VariableDeclaration.storageClass"></a>StorageClass <a name="storageClass"></a><span class="ddoc_psymbol">storageClass</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".VariableDeclaration.autoDeclaration"></a>AutoDeclaration <a name="autoDeclaration"></a><span class="ddoc_psymbol">autoDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".VersionCondition"></a>class <a name="VersionCondition"></a><span class="ddoc_psymbol">VersionCondition</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".VersionCondition.token"></a>Token <a name="token"></a><span class="ddoc_psymbol">token</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".VersionSpecification"></a>class <a name="VersionSpecification"></a><span class="ddoc_psymbol">VersionSpecification</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".VersionSpecification.token"></a>Token <a name="token"></a><span class="ddoc_psymbol">token</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".WhileStatement"></a>class <a name="WhileStatement"></a><span class="ddoc_psymbol">WhileStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".WhileStatement.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".WhileStatement.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".WithStatement"></a>class <a name="WithStatement"></a><span class="ddoc_psymbol">WithStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".WithStatement.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".WithStatement.symbol"></a>Symbol <a name="symbol"></a><span class="ddoc_psymbol">symbol</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".WithStatement.templateInstance"></a>TemplateInstance <a name="templateInstance"></a><span class="ddoc_psymbol">templateInstance</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".XorExpression"></a>class <a name="XorExpression"></a><span class="ddoc_psymbol">XorExpression</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".XorExpression.left"></a>XorExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".XorExpression.right"></a>AndExpression <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+</dl>
+
+    
+<br><br>
+<br><br>
+<!-- Google ad -->
+<script type="text/javascript"><!--
+/**/google_ad_client = "pub-5628673096434613";
+/**/google_ad_width = 728;
+/**/google_ad_height = 90;
+/**/google_ad_format = "728x90_as";
+/**/google_ad_channel ="6203743411";
+/**/google_page_url = document.location;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div><!--/content-->
+
+
+<div id="copyright">
+Brian Schott 2013
+ |
+Page generated by <a href="http://www.digitalmars.com/d/2.0/ddoc.html">Ddoc</a>.
+</div>
+
+</body>
+</html>

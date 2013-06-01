@@ -101,7 +101,7 @@ function listanchors()
 <div id="toctop">
     <ul><li><a href="../index.html" title="D Programming Language">D</a></li>
 	<li><a href="../spec.html" title="D Language Specification">Language</a></li>
-	<li><a href="../phobos/index.html" title="D Runtime Library">Phobos</a></li>
+	<li><a href="../phobos/index.html" title="D Runtime Library">Phobos </a></li>
 	<li><a href="../phobos-prerelease/index.html" title="D Runtime Library (prerelease)">Phobos (prerelease)</a></li>
 	<li><a href="../comparison.html" title="Language Comparisons">Comparisons</a></li>
     </ul>
@@ -201,8 +201,7 @@ function listanchors()
 <div id="content">
     
 <div id="tools">
-	<!--span id="lastupdate">Last update Sat Feb  2 20:16:02 2013
-</span-->
+	<!--span id="lastupdate">Last update </span-->
 	<a href="https://github.com/D-Programming-Language/phobos/edit/master/lexer.d" class="tip button">
 		Improve this page
 		<span>
@@ -225,101 +224,101 @@ function listanchors()
 This module contains a range-based lexer for the D programming language.
 <p></p>
 For performance reasons the lexer contained in this module operates only on
- ASCII and UTF-8 encoded source code. If the use of other encodings is
+ ASCII or UTF-8 encoded source code. If the use of other encodings is
  desired, the source code must be converted to UTF-8 before passing it to this
  lexer.
 <p></p>
 
  To use the lexer, create a LexerConfig struct
-<pre class="d_code"> LexerConfig config;
- config.iterStyle = IterationStyle.everything;
- config.tokenStyle = IterationStyle.source;
- config.versionNumber = 2061;
- config.vendorString = <span class="d_string">"Lexer Example"</span>;
+<pre class="d_code">LexerConfig config;
+config.iterStyle = IterationStyle.everything;
+config.tokenStyle = TokenStyle.source;
+config.versionNumber = 2064;
+config.vendorString = <span class="d_string">"Lexer Example"</span>;
 </pre>
  Once you have configured the lexer, call byToken() on your
  source code, passing in the configuration.
-<pre class="d_code"> <span class="d_keyword">auto</span> source = <span class="d_string">"import std.stdio;"c</span>;
- <span class="d_keyword">auto</span> tokens = byToken(source, config);
+<pre class="d_code"><span class="d_keyword">auto</span> source = <span class="d_string">"import std.stdio;"c</span>;
+<span class="d_keyword">auto</span> tokens = byToken(source, config);
 </pre>
  The result of byToken() is a forward range of tokens that can
- be used easily with the algorithms from std.algorithm or iterated over with
+ be easily used with the algorithms from std.algorithm or iterated over with
  <span class="d_keyword">foreach</span>
-<pre class="d_code"> <span class="d_keyword">assert</span> (tokens.front.type == TokenType.import_);
- <span class="d_keyword">assert</span> (tokens.front.value == <span class="d_string">"import"</span>);
- <span class="d_keyword">assert</span> (tokens.front.line == 1);
- <span class="d_keyword">assert</span> (tokens.front.startIndex == 0);
+<pre class="d_code"><span class="d_keyword">assert</span> (tokens.front.type == TokenType.import_);
+<span class="d_keyword">assert</span> (tokens.front.value == <span class="d_string">"import"</span>);
+<span class="d_keyword">assert</span> (tokens.front.line == 1);
+<span class="d_keyword">assert</span> (tokens.front.startIndex == 0);
 </pre>
 
 <p></p>
 <b>Examples:</b><br>Generate HTML markup of D code.
-<pre class="d_code"> <span class="d_keyword">module</span> highlighter;
+<pre class="d_code"><span class="d_keyword">module</span> highlighter;
 
- <span class="d_keyword">import</span> std.stdio;
- <span class="d_keyword">import</span> std.array;
- <span class="d_keyword">import</span> std.d.<span class="d_psymbol">lexer</span>;
+<span class="d_keyword">import</span> std.stdio;
+<span class="d_keyword">import</span> std.array;
+<span class="d_keyword">import</span> std.d.<span class="d_psymbol">lexer</span>;
 
- <span class="d_keyword">void</span> writeSpan(string cssClass, string value)
- {
-     stdout.write(<span class="d_string">`&lt;span class="`</span>, cssClass, <span class="d_string">`"&gt;`</span>, value.replace(<span class="d_string">"&amp;"</span>, <span class="d_string">"&amp;amp;"</span>).replace(<span class="d_string">"&lt;"</span>, <span class="d_string">"&amp;lt;"</span>), <span class="d_string">`&lt;/span&gt;`</span>);
- }
+<span class="d_keyword">void</span> writeSpan(string cssClass, string value)
+{
+    stdout.write(<span class="d_string">`&lt;span class="`</span>, cssClass, <span class="d_string">`"&gt;`</span>, value.replace(<span class="d_string">"&amp;"</span>, <span class="d_string">"&amp;amp;"</span>).replace(<span class="d_string">"&lt;"</span>, <span class="d_string">"&amp;lt;"</span>), <span class="d_string">`&lt;/span&gt;`</span>);
+}
 
+<span class="d_comment">// http://ethanschoonover.com/solarized
+</span><span class="d_keyword">void</span> highlight(R)(R tokens)
+{
+    stdout.writeln(<span class="d_string">q"[&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"/&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;style type="text/css"&gt;
+html  { background-color: #fdf6e3; color: #002b36; }
+.kwrd { color: #b58900; font-weight: bold;  }
+.com  { color: #93a1a1; font-style: italic; }
+.num  { color: #dc322f; font-weigth: bold;  }
+.str  { color: #2aa198; font-style: italic; }
+.op   { color: #586e75; font-weight: bold;  }
+.type { color: #268bd2; font-weight: bold;  }
+.cons { color: #859900; font-weight: bold;  }
+&lt;/style&gt;
+&lt;pre&gt;]"</span>);
 
- <span class="d_comment">// http://ethanschoonover.com/solarized
-</span> <span class="d_keyword">void</span> highlight(R)(R tokens)
- {
-     stdout.writeln(<span class="d_string">q"[&lt;!DOCTYPE html&gt;
- &lt;html&gt;
- &lt;head&gt;
- &lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"/&gt;
- &lt;body&gt;
- &lt;style type="text/css"&gt;
- html  { background-color: #fdf6e3; color: #002b36; }
- .kwrd { color: #b58900; font-weight: bold;  }
- .com  { color: #93a1a1; font-style: italic; }
- .num  { color: #dc322f; font-weigth: bold;  }
- .str  { color: #2aa198; font-style: italic; }
- .op   { color: #586e75; font-weight: bold;  }
- .type { color: #268bd2; font-weight: bold;  }
- .cons { color: #859900; font-weight: bold;  }
- &lt;/style&gt;
- &lt;pre&gt;]"</span>);
+    <span class="d_keyword">foreach</span> (Token t; tokens)
+    {
+        <span class="d_keyword">if</span> (isBuiltType(t.type))
+            writeSpan(<span class="d_string">"type"</span>, t.value);
+        <span class="d_keyword">else</span> <span class="d_keyword">if</span> (isKeyword(t.type))
+            writeSpan(<span class="d_string">"kwrd"</span>, t.value);
+        <span class="d_keyword">else</span> <span class="d_keyword">if</span> (t.type == TokenType.comment)
+            writeSpan(<span class="d_string">"com"</span>, t.value);
+        <span class="d_keyword">else</span> <span class="d_keyword">if</span> (isStringLiteral(t.type))
+            writeSpan(<span class="d_string">"str"</span>, t.value);
+        <span class="d_keyword">else</span> <span class="d_keyword">if</span> (isNumberLiteral(t.type))
+            writeSpan(<span class="d_string">"num"</span>, t.value);
+        <span class="d_keyword">else</span> <span class="d_keyword">if</span> (isOperator(t.type))
+            writeSpan(<span class="d_string">"op"</span>, t.value);
+        <span class="d_keyword">else</span>
+            stdout.write(t.value.replace(<span class="d_string">"&lt;"</span>, <span class="d_string">"&amp;lt;"</span>));
+    }
+    stdout.writeln(<span class="d_string">"&lt;/pre&gt;\n&lt;/body&gt;&lt;/html&gt;"</span>);
+}
 
-     <span class="d_keyword">foreach</span> (Token t; tokens)
-     {
-         <span class="d_keyword">if</span> (isType(t.type))
-             writeSpan(<span class="d_string">"type"</span>, t.value);
-         <span class="d_keyword">else</span> <span class="d_keyword">if</span> (isKeyword(t.type))
-             writeSpan(<span class="d_string">"kwrd"</span>, t.value);
-         <span class="d_keyword">else</span> <span class="d_keyword">if</span> (t.type == TokenType.comment)
-             writeSpan(<span class="d_string">"com"</span>, t.value);
-         <span class="d_keyword">else</span> <span class="d_keyword">if</span> (isStringLiteral(t.type))
-             writeSpan(<span class="d_string">"str"</span>, t.value);
-         <span class="d_keyword">else</span> <span class="d_keyword">if</span> (isNumberLiteral(t.type))
-             writeSpan(<span class="d_string">"num"</span>, t.value);
-         <span class="d_keyword">else</span> <span class="d_keyword">if</span> (isOperator(t.type))
-             writeSpan(<span class="d_string">"op"</span>, t.value);
-         <span class="d_keyword">else</span>
-             stdout.write(t.value.replace(<span class="d_string">"&lt;"</span>, <span class="d_string">"&amp;lt;"</span>));
-     }
-     stdout.writeln(<span class="d_string">"&lt;/pre&gt;\n&lt;/body&gt;&lt;/html&gt;"</span>);
- }
-
- <span class="d_keyword">void</span> main(string[] args)
- {
-     LexerConfig config;
-     config.tokenStyle = TokenStyle.source;
-     config.iterStyle = IterationStyle.everything;
-     config.fileName = args[1];
-     <span class="d_keyword">auto</span> f = File(args[1]);
-     (<span class="d_keyword">cast</span>(<span class="d_keyword">ubyte</span>[]) f.byLine(KeepTerminator.yes).join()).byToken(config).highlight();
- }
+<span class="d_keyword">void</span> main(string[] args)
+{
+    LexerConfig config;
+    config.tokenStyle = TokenStyle.source;
+    config.iterStyle = IterationStyle.everything;
+    config.fileName = args[1];
+    <span class="d_keyword">auto</span> f = File(args[1]);
+    (<span class="d_keyword">cast</span>(<span class="d_keyword">ubyte</span>[]) f.byLine(KeepTerminator.yes).join()).byToken(config).highlight();
+}
 </pre>
 
 <p></p>
 <b>License:</b><br><a href="http://www.boost.org/LICENSE_1_0.txt Boost">License 1.0</a>
 <p></p>
-<b>Authors:</b><br>Brian Schott
+<b>Authors:</b><br>Brian Schott, Dmitry Olshansky
 <p></p>
 <b>Source:</b><br>
 <a href="https://github.com/D-Programming-Language/phobos/blob/master/std/d/lexer.d">std/d/lexer.d</a><p></p>
@@ -349,7 +348,7 @@ For performance reasons the lexer contained in this module operates only on
  (measured in ASCII characters or UTF-8 code units)<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".Token.startIndex"></a>uint <a name="startIndex"></a><span class="ddoc_psymbol">startIndex</span>;
+<dt class="d_decl"><a name=".Token.startIndex"></a>size_t <a name="startIndex"></a><span class="ddoc_psymbol">startIndex</span>;
 </dt>
 <dd>The index of the start of the token in the original source.
  (measured in ASCII characters or UTF-8 code units)<p></p>
@@ -372,7 +371,7 @@ For performance reasons the lexer contained in this module operates only on
 <dd>Checks to see if the token is of the given <i>type</i>.<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".Token.opCmp"></a>const int <a name="opCmp"></a><span class="ddoc_psymbol">opCmp</span>(size_t <i>i</i>);
+<dt class="d_decl"><a name=".Token.opCmp"></a>const int <a name="opCmp"></a><span class="ddoc_psymbol">opCmp</span>(ref const(Token) <i>other</i>);
 </dt>
 <dd>Comparison operator orders tokens by start index.<p></p>
 
@@ -401,11 +400,11 @@ For performance reasons the lexer contained in this module operates only on
 
 </dd>
 <dt class="d_decl"><a name=".IterationStyle.ignoreEOF"></a><a name="ignoreEOF"></a><span class="ddoc_psymbol">ignoreEOF</span></dt>
-<dd>Do not stop iteration on reaching the __EOF__ token<p></p>
+<dd>Do not stop iteration on reaching the <span class="d_keyword">__EOF__</span> token<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".IterationStyle.everything"></a><a name="everything"></a><span class="ddoc_psymbol">everything</span></dt>
-<dd>Include <a name="everything"></a><span class="ddoc_psymbol">everything</span><p></p>
+<dd>Include everything<p></p>
 
 </dd>
 </dl>
@@ -418,8 +417,8 @@ For performance reasons the lexer contained in this module operates only on
 <dl><dt class="d_decl"><a name=".TokenStyle.default_"></a><a name="default_"></a><span class="ddoc_psymbol">default_</span></dt>
 <dd>Escape sequences will be replaced with their equivalent characters,
  enclosing quote characters will not be included. Special tokens such as
- _VENDOR__ will be replaced with their equivalent strings. Useful for
- creating a compiler or interpreter.<p></p>
+ <span class="d_keyword">__VENDOR__</span> will be replaced with their equivalent strings.
+ Useful for creating a compiler or interpreter.<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".TokenStyle.notEscaped"></a><a name="notEscaped"></a><span class="ddoc_psymbol">notEscaped</span></dt>
@@ -436,8 +435,8 @@ For performance reasons the lexer contained in this module operates only on
 
 </dd>
 <dt class="d_decl"><a name=".TokenStyle.doNotReplaceSpecial"></a><a name="doNotReplaceSpecial"></a><span class="ddoc_psymbol">doNotReplaceSpecial</span></dt>
-<dd>Do not replace the value field of the special tokens such as __DATE__
- with their string equivalents.<p></p>
+<dd>Do not replace the value field of the special tokens such as
+ <span class="d_keyword">__DATE__</span> with their string equivalents.<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".TokenStyle.source"></a><a name="source"></a><span class="ddoc_psymbol">source</span></dt>
@@ -464,12 +463,12 @@ For performance reasons the lexer contained in this module operates only on
 </dd>
 <dt class="d_decl"><a name=".LexerConfig.versionNumber"></a>uint <a name="versionNumber"></a><span class="ddoc_psymbol">versionNumber</span>;
 </dt>
-<dd>Replacement for the __VERSION__ token. Defaults to 1.<p></p>
+<dd>Replacement for the <span class="d_keyword">__VERSION__</span> token. Defaults to 100.<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".LexerConfig.vendorString"></a>string <a name="vendorString"></a><span class="ddoc_psymbol">vendorString</span>;
 </dt>
-<dd>Replacement for the __VENDOR__ token. Defaults to <span class="d_string">"std.d.lexer"</span><p></p>
+<dd>Replacement for the <span class="d_keyword">__VENDOR__</span> token. Defaults to <span class="d_string">"std.d.lexer"</span><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".LexerConfig.fileName"></a>string <a name="fileName"></a><span class="ddoc_psymbol">fileName</span>;
@@ -480,22 +479,17 @@ For performance reasons the lexer contained in this module operates only on
  source. Defaults to the empty string.<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".LexerConfig.errorFunc"></a>void delegate(string, uint, uint, uint, string) <a name="errorFunc"></a><span class="ddoc_psymbol">errorFunc</span>;
+<dt class="d_decl"><a name=".LexerConfig.errorFunc"></a>void delegate(string, size_t, uint, uint, string) <a name="errorFunc"></a><span class="ddoc_psymbol">errorFunc</span>;
 </dt>
 <dd>This function is called when an error is encountered during lexing.
  Parameters are file name, code uint index, line number, column,
  and error messsage.<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".LexerConfig.bufferSize"></a>size_t <a name="bufferSize"></a><span class="ddoc_psymbol">bufferSize</span>;
-</dt>
-<dd>Initial size of the lexer's internal token buffer in bytes. The lexer
- will grow this buffer if necessary.<p></p>
-
-</dd>
 </dl>
 </dd>
-<dt class="d_decl"><a name=".byToken"></a>TokenRange!(R) <a name="byToken"></a><span class="ddoc_psymbol">byToken</span>(R)(R <i>range</i>, LexerConfig <i>config</i>);
+<dt class="d_decl"><a name=".byToken"></a>auto <a name="byToken"></a><span class="ddoc_psymbol">byToken</span>(R)(R <i>range</i>, LexerConfig <i>config</i>, size_t <i>bufferSize</i> = 4 * 1024);
+<br><a name=".byToken"></a>auto <a name="byToken"></a><span class="ddoc_psymbol">byToken</span>(R)(R <i>range</i>, LexerConfig <i>config</i>);
 </dt>
 <dd>Iterate over the given range of characters by D tokens.
 <p></p>
@@ -503,11 +497,13 @@ For performance reasons the lexer contained in this module operates only on
 <td valign=top>the range of characters</td></tr>
 <tr><td valign=top>config</td>
 <td valign=top>the lexer configuration</td></tr>
+<tr><td valign=top>bufferSize</td>
+<td valign=top>initial size of internal circular buffer</td></tr>
 </table><p></p>
 <b>Returns:</b><br>an input range of tokens<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenRange"></a>struct <a name="TokenRange"></a><span class="ddoc_psymbol">TokenRange</span>(R) if (isForwardRange!(R));
+<dt class="d_decl"><a name=".TokenRange"></a>struct <a name="TokenRange"></a><span class="ddoc_psymbol">TokenRange</span>(LexSrc);
 </dt>
 <dd>Range of tokens. Use byToken() to instantiate.<p></p>
 
@@ -516,7 +512,7 @@ For performance reasons the lexer contained in this module operates only on
 <dd><b>Returns:</b><br><b>true</b> if the range is <a name="empty"></a><span class="ddoc_psymbol">empty</span><p></p>
 
 </dd>
-<dt class="d_decl"><a name=".front"></a>const @property Token <a name="front"></a><span class="ddoc_psymbol">front</span>();
+<dt class="d_decl"><a name=".front"></a>const @property const(Token) <a name="front"></a><span class="ddoc_psymbol">front</span>();
 </dt>
 <dd><b>Returns:</b><br>the current token<p></p>
 
@@ -524,16 +520,6 @@ For performance reasons the lexer contained in this module operates only on
 <dt class="d_decl"><a name=".moveFront"></a>Token <a name="moveFront"></a><span class="ddoc_psymbol">moveFront</span>();
 </dt>
 <dd>Returns the current token and then removes it from the range<p></p>
-
-</dd>
-<dt class="d_decl"><a name=".opApply"></a>int <a name="opApply"></a><span class="ddoc_psymbol">opApply</span>(int delegate(Token) <i>dg</i>);
-</dt>
-<dd>Range operation<p></p>
-
-</dd>
-<dt class="d_decl"><a name=".opApply"></a>int <a name="opApply"></a><span class="ddoc_psymbol">opApply</span>(int delegate(size_t, Token) <i>dg</i>);
-</dt>
-<dd>Range operation<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".popFront"></a>void <a name="popFront"></a><span class="ddoc_psymbol">popFront</span>();
@@ -544,51 +530,61 @@ For performance reasons the lexer contained in this module operates only on
 </dl>
 </dd>
 <dt class="d_decl"><a name=".isOperator"></a>pure nothrow bool <a name="isOperator"></a><span class="ddoc_psymbol">isOperator</span>(const TokenType <i>t</i>);
+<br><a name=".isOperator"></a>pure nothrow bool <a name="isOperator"></a><span class="ddoc_psymbol">isOperator</span>(ref const Token <i>t</i>);
 </dt>
 <dd><b>Returns:</b><br><b>true</b> if the token is an operator<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".isKeyword"></a>pure nothrow bool <a name="isKeyword"></a><span class="ddoc_psymbol">isKeyword</span>(const TokenType <i>t</i>);
+<br><a name=".isKeyword"></a>pure nothrow bool <a name="isKeyword"></a><span class="ddoc_psymbol">isKeyword</span>(ref const Token <i>t</i>);
 </dt>
 <dd><b>Returns:</b><br><b>true</b> if the token is a keyword<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".isType"></a>pure nothrow bool <a name="isType"></a><span class="ddoc_psymbol">isType</span>(const TokenType <i>t</i>);
+<dt class="d_decl"><a name=".isBasicType"></a>pure nothrow bool <a name="isBasicType"></a><span class="ddoc_psymbol">isBasicType</span>(const TokenType <i>t</i>);
+<br><a name=".isBasicType"></a>pure nothrow bool <a name="isBasicType"></a><span class="ddoc_psymbol">isBasicType</span>(ref const Token <i>t</i>);
 </dt>
 <dd><b>Returns:</b><br><b>true</b> if the token is a built-in type<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".isAttribute"></a>pure nothrow bool <a name="isAttribute"></a><span class="ddoc_psymbol">isAttribute</span>(const TokenType <i>t</i>);
+<br><a name=".isAttribute"></a>pure nothrow bool <a name="isAttribute"></a><span class="ddoc_psymbol">isAttribute</span>(ref const Token <i>t</i>);
 </dt>
 <dd><b>Returns:</b><br><b>true</b> if the token is an attribute<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".isProtection"></a>pure nothrow bool <a name="isProtection"></a><span class="ddoc_psymbol">isProtection</span>(const TokenType <i>t</i>);
+<br><a name=".isProtection"></a>pure nothrow bool <a name="isProtection"></a><span class="ddoc_psymbol">isProtection</span>(ref const Token <i>t</i>);
 </dt>
 <dd><b>Returns:</b><br><b>true</b> if the token is a protection attribute<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".isConstant"></a>pure nothrow bool <a name="isConstant"></a><span class="ddoc_psymbol">isConstant</span>(const TokenType <i>t</i>);
+<br><a name=".isConstant"></a>pure nothrow bool <a name="isConstant"></a><span class="ddoc_psymbol">isConstant</span>(ref const Token <i>t</i>);
 </dt>
 <dd><b>Returns:</b><br><b>true</b> if the token is a compile-time constant such as __DATE__<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".isLiteral"></a>pure nothrow bool <a name="isLiteral"></a><span class="ddoc_psymbol">isLiteral</span>(const TokenType <i>t</i>);
+<br><a name=".isLiteral"></a>pure nothrow bool <a name="isLiteral"></a><span class="ddoc_psymbol">isLiteral</span>(ref const Token <i>t</i>);
 </dt>
 <dd><b>Returns:</b><br><b>true</b> if the token is a string or number literal<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".isNumberLiteral"></a>pure nothrow bool <a name="isNumberLiteral"></a><span class="ddoc_psymbol">isNumberLiteral</span>(const TokenType <i>t</i>);
+<br><a name=".isNumberLiteral"></a>pure nothrow bool <a name="isNumberLiteral"></a><span class="ddoc_psymbol">isNumberLiteral</span>(ref const Token <i>t</i>);
 </dt>
 <dd><b>Returns:</b><br><b>true</b> if the token is a number literal<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".isStringLiteral"></a>pure nothrow bool <a name="isStringLiteral"></a><span class="ddoc_psymbol">isStringLiteral</span>(const TokenType <i>t</i>);
+<br><a name=".isStringLiteral"></a>pure nothrow bool <a name="isStringLiteral"></a><span class="ddoc_psymbol">isStringLiteral</span>(ref const Token <i>t</i>);
 </dt>
 <dd><b>Returns:</b><br><b>true</b> if the token is a string literal<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".isMisc"></a>pure nothrow bool <a name="isMisc"></a><span class="ddoc_psymbol">isMisc</span>(const TokenType <i>t</i>);
+<br><a name=".isMisc"></a>pure nothrow bool <a name="isMisc"></a><span class="ddoc_psymbol">isMisc</span>(ref const Token <i>t</i>);
 </dt>
 <dd><b>Returns:</b><br><b>true</b> if the token is whitespace, a commemnt, a special token
      sequence, or an identifier<p></p>
@@ -610,7 +606,7 @@ For performance reasons the lexer contained in this module operates only on
 <dd>&amp;<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.bitAndEquals"></a><a name="bitAndEquals"></a><span class="ddoc_psymbol">bitAndEquals</span></dt>
+<dt class="d_decl"><a name=".TokenType.bitAndEqual"></a><a name="bitAndEqual"></a><span class="ddoc_psymbol">bitAndEqual</span></dt>
 <dd>&amp;=<p></p>
 
 </dd>
@@ -618,11 +614,11 @@ For performance reasons the lexer contained in this module operates only on
 <dd>|<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.bitOrEquals"></a><a name="bitOrEquals"></a><span class="ddoc_psymbol">bitOrEquals</span></dt>
+<dt class="d_decl"><a name=".TokenType.bitOrEqual"></a><a name="bitOrEqual"></a><span class="ddoc_psymbol">bitOrEqual</span></dt>
 <dd>|=<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.catEquals"></a><a name="catEquals"></a><span class="ddoc_psymbol">catEquals</span></dt>
+<dt class="d_decl"><a name=".TokenType.catEqual"></a><a name="catEqual"></a><span class="ddoc_psymbol">catEqual</span></dt>
 <dd>~=<p></p>
 
 </dd>
@@ -642,7 +638,7 @@ For performance reasons the lexer contained in this module operates only on
 <dd>/<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.divEquals"></a><a name="divEquals"></a><span class="ddoc_psymbol">divEquals</span></dt>
+<dt class="d_decl"><a name=".TokenType.divEqual"></a><a name="divEqual"></a><span class="ddoc_psymbol">divEqual</span></dt>
 <dd>/=<p></p>
 
 </dd>
@@ -654,7 +650,7 @@ For performance reasons the lexer contained in this module operates only on
 <dd>.<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.equals"></a><a name="equals"></a><span class="ddoc_psymbol">equals</span></dt>
+<dt class="d_decl"><a name=".TokenType.equal"></a><a name="equal"></a><span class="ddoc_psymbol">equal</span></dt>
 <dd>==<p></p>
 
 </dd>
@@ -718,7 +714,7 @@ For performance reasons the lexer contained in this module operates only on
 <dd>-<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.minusEquals"></a><a name="minusEquals"></a><span class="ddoc_psymbol">minusEquals</span></dt>
+<dt class="d_decl"><a name=".TokenType.minusEqual"></a><a name="minusEqual"></a><span class="ddoc_psymbol">minusEqual</span></dt>
 <dd>-=<p></p>
 
 </dd>
@@ -726,11 +722,11 @@ For performance reasons the lexer contained in this module operates only on
 <dd>%<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.modEquals"></a><a name="modEquals"></a><span class="ddoc_psymbol">modEquals</span></dt>
+<dt class="d_decl"><a name=".TokenType.modEqual"></a><a name="modEqual"></a><span class="ddoc_psymbol">modEqual</span></dt>
 <dd>%=<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.mulEquals"></a><a name="mulEquals"></a><span class="ddoc_psymbol">mulEquals</span></dt>
+<dt class="d_decl"><a name=".TokenType.mulEqual"></a><a name="mulEqual"></a><span class="ddoc_psymbol">mulEqual</span></dt>
 <dd>*=<p></p>
 
 </dd>
@@ -738,7 +734,7 @@ For performance reasons the lexer contained in this module operates only on
 <dd>!<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.notEquals"></a><a name="notEquals"></a><span class="ddoc_psymbol">notEquals</span></dt>
+<dt class="d_decl"><a name=".TokenType.notEqual"></a><a name="notEqual"></a><span class="ddoc_psymbol">notEqual</span></dt>
 <dd>!=<p></p>
 
 </dd>
@@ -766,7 +762,7 @@ For performance reasons the lexer contained in this module operates only on
 <dd>+<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.plusEquals"></a><a name="plusEquals"></a><span class="ddoc_psymbol">plusEquals</span></dt>
+<dt class="d_decl"><a name=".TokenType.plusEqual"></a><a name="plusEqual"></a><span class="ddoc_psymbol">plusEqual</span></dt>
 <dd>+=<p></p>
 
 </dd>
@@ -774,7 +770,7 @@ For performance reasons the lexer contained in this module operates only on
 <dd>^^<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.powEquals"></a><a name="powEquals"></a><span class="ddoc_psymbol">powEquals</span></dt>
+<dt class="d_decl"><a name=".TokenType.powEqual"></a><a name="powEqual"></a><span class="ddoc_psymbol">powEqual</span></dt>
 <dd>^^=<p></p>
 
 </dd>
@@ -846,7 +842,7 @@ For performance reasons the lexer contained in this module operates only on
 <dd>^<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.xorEquals"></a><a name="xorEquals"></a><span class="ddoc_psymbol">xorEquals</span></dt>
+<dt class="d_decl"><a name=".TokenType.xorEqual"></a><a name="xorEqual"></a><span class="ddoc_psymbol">xorEqual</span></dt>
 <dd>^=<p></p>
 
 </dd>
@@ -886,10 +882,6 @@ For performance reasons the lexer contained in this module operates only on
 <dd><span class="d_keyword">double</span><p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.dstring_"></a><a name="dstring_"></a><span class="ddoc_psymbol">dstring_</span></dt>
-<dd><span class="d_keyword">dstring</span><p></p>
-
-</dd>
 <dt class="d_decl"><a name=".TokenType.float_"></a><a name="float_"></a><span class="ddoc_psymbol">float_</span></dt>
 <dd><span class="d_keyword">float</span><p></p>
 
@@ -926,10 +918,6 @@ For performance reasons the lexer contained in this module operates only on
 <dd><span class="d_keyword">short</span><p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.string_"></a><a name="string_"></a><span class="ddoc_psymbol">string_</span></dt>
-<dd><span class="d_keyword">string</span><p></p>
-
-</dd>
 <dt class="d_decl"><a name=".TokenType.ubyte_"></a><a name="ubyte_"></a><span class="ddoc_psymbol">ubyte_</span></dt>
 <dd><span class="d_keyword">ubyte</span><p></p>
 
@@ -956,10 +944,6 @@ For performance reasons the lexer contained in this module operates only on
 </dd>
 <dt class="d_decl"><a name=".TokenType.wchar_"></a><a name="wchar_"></a><span class="ddoc_psymbol">wchar_</span></dt>
 <dd><span class="d_keyword">wchar</span><p></p>
-
-</dd>
-<dt class="d_decl"><a name=".TokenType.wstring_"></a><a name="wstring_"></a><span class="ddoc_psymbol">wstring_</span></dt>
-<dd><span class="d_keyword">wstring</span><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.align_"></a><a name="align_"></a><span class="ddoc_psymbol">align_</span></dt>
@@ -1018,8 +1002,20 @@ For performance reasons the lexer contained in this module operates only on
 <dd><span class="d_keyword">_gshared</span><p></p>
 
 </dd>
+<dt class="d_decl"><a name=".TokenType.immutable_"></a><a name="immutable_"></a><span class="ddoc_psymbol">immutable_</span></dt>
+<dd><span class="d_keyword">immutable</span><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.inout_"></a><a name="inout_"></a><span class="ddoc_psymbol">inout_</span></dt>
+<dd><span class="d_keyword">inout</span><p></p>
+
+</dd>
 <dt class="d_decl"><a name=".TokenType.scope_"></a><a name="scope_"></a><span class="ddoc_psymbol">scope_</span></dt>
 <dd><span class="d_keyword">scope</span><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.shared_"></a><a name="shared_"></a><span class="ddoc_psymbol">shared_</span></dt>
+<dd><span class="d_keyword">shared</span><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.static_"></a><a name="static_"></a><span class="ddoc_psymbol">static_</span></dt>
@@ -1262,36 +1258,52 @@ For performance reasons the lexer contained in this module operates only on
 <dd><span class="d_keyword">with</span><p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.date"></a><a name="date"></a><span class="ddoc_psymbol">date</span></dt>
-<dd>__DATE__<p></p>
+<dt class="d_decl"><a name=".TokenType.specialDate"></a><a name="specialDate"></a><span class="ddoc_psymbol">specialDate</span></dt>
+<dd><span class="d_keyword">__DATE__</span><p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.eof"></a><a name="eof"></a><span class="ddoc_psymbol">eof</span></dt>
-<dd>__EOF__<p></p>
+<dt class="d_decl"><a name=".TokenType.specialEof"></a><a name="specialEof"></a><span class="ddoc_psymbol">specialEof</span></dt>
+<dd><span class="d_keyword">__EOF__</span><p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.time"></a><a name="time"></a><span class="ddoc_psymbol">time</span></dt>
-<dd>__TIME__<p></p>
+<dt class="d_decl"><a name=".TokenType.specialTime"></a><a name="specialTime"></a><span class="ddoc_psymbol">specialTime</span></dt>
+<dd><span class="d_keyword">__TIME__</span><p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.timestamp"></a><a name="timestamp"></a><span class="ddoc_psymbol">timestamp</span></dt>
-<dd>__TIMESTAMP__<p></p>
+<dt class="d_decl"><a name=".TokenType.specialTimestamp"></a><a name="specialTimestamp"></a><span class="ddoc_psymbol">specialTimestamp</span></dt>
+<dd><span class="d_keyword">__TIMESTAMP__</span><p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.vendor"></a><a name="vendor"></a><span class="ddoc_psymbol">vendor</span></dt>
-<dd>__VENDOR__<p></p>
+<dt class="d_decl"><a name=".TokenType.specialVendor"></a><a name="specialVendor"></a><span class="ddoc_psymbol">specialVendor</span></dt>
+<dd><span class="d_keyword">__VENDOR__</span><p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.compilerVersion"></a><a name="compilerVersion"></a><span class="ddoc_psymbol">compilerVersion</span></dt>
-<dd>__VERSION__<p></p>
+<dt class="d_decl"><a name=".TokenType.specialVersion"></a><a name="specialVersion"></a><span class="ddoc_psymbol">specialVersion</span></dt>
+<dd><span class="d_keyword">__VERSION__</span><p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.file"></a><a name="file"></a><span class="ddoc_psymbol">file</span></dt>
+<dt class="d_decl"><a name=".TokenType.specialFile"></a><a name="specialFile"></a><span class="ddoc_psymbol">specialFile</span></dt>
 <dd><span class="d_keyword">__FILE__</span><p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.line"></a><a name="line"></a><span class="ddoc_psymbol">line</span></dt>
+<dt class="d_decl"><a name=".TokenType.specialLine"></a><a name="specialLine"></a><span class="ddoc_psymbol">specialLine</span></dt>
 <dd><span class="d_keyword">__LINE__</span><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.specialModule"></a><a name="specialModule"></a><span class="ddoc_psymbol">specialModule</span></dt>
+<dd><span class="d_keyword">__MODULE__</span><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.specialFunction"></a><a name="specialFunction"></a><span class="ddoc_psymbol">specialFunction</span></dt>
+<dd><span class="d_keyword">__FUNCTION__</span><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.specialPrettyFunction"></a><a name="specialPrettyFunction"></a><span class="ddoc_psymbol">specialPrettyFunction</span></dt>
+<dd><span class="d_keyword">__PRETTY_FUNCTION__</span><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.specialTokenSequence"></a><a name="specialTokenSequence"></a><span class="ddoc_psymbol">specialTokenSequence</span></dt>
+<dd>#line 10 "file.d"<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.comment"></a><a name="comment"></a><span class="ddoc_psymbol">comment</span></dt>
@@ -1300,6 +1312,10 @@ For performance reasons the lexer contained in this module operates only on
 </dd>
 <dt class="d_decl"><a name=".TokenType.identifier"></a><a name="identifier"></a><span class="ddoc_psymbol">identifier</span></dt>
 <dd>anything else<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.scriptLine"></a><a name="scriptLine"></a><span class="ddoc_psymbol">scriptLine</span></dt>
+<dd>Line at the beginning of source file that starts from #!<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.traits"></a><a name="traits"></a><span class="ddoc_psymbol">traits</span></dt>
@@ -1316,10 +1332,6 @@ For performance reasons the lexer contained in this module operates only on
 </dd>
 <dt class="d_decl"><a name=".TokenType.whitespace"></a><a name="whitespace"></a><span class="ddoc_psymbol">whitespace</span></dt>
 <dd><a name="whitespace"></a><span class="ddoc_psymbol">whitespace</span><p></p>
-
-</dd>
-<dt class="d_decl"><a name=".TokenType.specialTokenSequence"></a><a name="specialTokenSequence"></a><span class="ddoc_psymbol">specialTokenSequence</span></dt>
-<dd>#line 10 "file.d"<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.doubleLiteral"></a><a name="doubleLiteral"></a><span class="ddoc_psymbol">doubleLiteral</span></dt>
@@ -1362,8 +1374,12 @@ For performance reasons the lexer contained in this module operates only on
 <dd>123uL<p></p>
 
 </dd>
+<dt class="d_decl"><a name=".TokenType.characterLiteral"></a><a name="characterLiteral"></a><span class="ddoc_psymbol">characterLiteral</span></dt>
+<dd>'a'<p></p>
+
+</dd>
 <dt class="d_decl"><a name=".TokenType.dstringLiteral"></a><a name="dstringLiteral"></a><span class="ddoc_psymbol">dstringLiteral</span></dt>
-<dd><span class="d_string">"32-bit character string"d</span><p></p>
+<dd><span class="d_string">"32-bit string"d</span><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.stringLiteral"></a><a name="stringLiteral"></a><span class="ddoc_psymbol">stringLiteral</span></dt>
@@ -1371,7 +1387,7 @@ For performance reasons the lexer contained in this module operates only on
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.wstringLiteral"></a><a name="wstringLiteral"></a><span class="ddoc_psymbol">wstringLiteral</span></dt>
-<dd><span class="d_string">"16-bit character string"w</span><p></p>
+<dd><span class="d_string">"16-bit string"w</span><p></p>
 
 </dd>
 </dl>
