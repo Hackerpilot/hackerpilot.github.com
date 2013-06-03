@@ -1809,23 +1809,43 @@ This module contains a parser for D source code.
 </dd>
 <dt class="d_decl"><a name=".Parser.parseStaticDestructor"></a>StaticDestructor <a name="parseStaticDestructor"></a><span class="ddoc_psymbol">parseStaticDestructor</span>();
 </dt>
-<dd>Parses an StaticDestructor
+<dd>Parses a StaticDestructor
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="staticConstructor"><span>staticConstructor</span></a>:
+     <span style="color: green; font-weight: normal;">'static'</span> <span style="color: green; font-weight: normal;">'~'</span> <span style="color: green; font-weight: normal;">'this'</span> <span style="color: green; font-weight: normal;">'('</span> <span style="color: green; font-weight: normal;">')'</span> <a href="#functionBody"><span style="font-weight: bold">functionBody</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseStaticIfCondition"></a>StaticIfCondition <a name="parseStaticIfCondition"></a><span class="ddoc_psymbol">parseStaticIfCondition</span>();
 </dt>
 <dd>Parses an StaticIfCondition
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="staticIfCondition"><span>staticIfCondition</span></a>:
+     <a href="#'static'"><span style="font-weight: bold">'static'</span></a> <span style="color: green; font-weight: normal;">'if'</span> <span style="color: green; font-weight: normal;">'('</span> <a href="#assignExpression"><span style="font-weight: bold">assignExpression</span></a> <span style="color: green; font-weight: normal;">')'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseStorageClass"></a>StorageClass <a name="parseStorageClass"></a><span class="ddoc_psymbol">parseStorageClass</span>();
 </dt>
 <dd>Parses an StorageClass
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a href="#storageClass"><span style="font-weight: bold">storageClass</span></a>:
+       <a href="#atAttribute"><span style="font-weight: bold">atAttribute</span></a>
+     | <a href="#typeConstructor"><span style="font-weight: bold">typeConstructor</span></a>
+     | <span style="color: green; font-weight: normal;">'abstract'</span>
+     | <span style="color: green; font-weight: normal;">'auto'</span>
+     | <span style="color: green; font-weight: normal;">'deprecated'</span>
+     | <span style="color: green; font-weight: normal;">'enum'</span>
+     | <span style="color: green; font-weight: normal;">'extern'</span>
+     | <span style="color: green; font-weight: normal;">'final'</span>
+     | <span style="color: green; font-weight: normal;">'nothrow'</span>
+     | <span style="color: green; font-weight: normal;">'override'</span>
+     | <span style="color: green; font-weight: normal;">'pure'</span>
+     | <span style="color: green; font-weight: normal;">'__gshared'</span>
+     | <span style="color: green; font-weight: normal;">'scope'</span>
+     | <span style="color: green; font-weight: normal;">'static'</span>
+     | <span style="color: green; font-weight: normal;">'synchronized'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseStructBody"></a>StructBody <a name="parseStructBody"></a><span class="ddoc_psymbol">parseStructBody</span>();
