@@ -357,119 +357,175 @@ This module contains a parser for D source code.
 </dt>
 <dd>Parses an AsmAddExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmAddExp"><span>asmAddExp</span></a>:
+     <a href="#asmMulExp"><span style="font-weight: bold">asmMulExp</span></a> ((<span style="color: green; font-weight: normal;">'+'</span> | <span style="color: green; font-weight: normal;">'-'</span>) <a href="#asmMulExp"><span style="font-weight: bold">asmMulExp</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmAndExp"></a>AsmAndExp <a name="parseAsmAndExp"></a><span class="ddoc_psymbol">parseAsmAndExp</span>();
 </dt>
 <dd>Parses an AsmAndExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmAndExp"><span>asmAndExp</span></a>:
+     <a href="#asmEqualExp"><span style="font-weight: bold">asmEqualExp</span></a> (<span style="color: green; font-weight: normal;">'&amp;'</span> <a href="#asmEqualExp"><span style="font-weight: bold">asmEqualExp</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmBrExp"></a>AsmBrExp <a name="parseAsmBrExp"></a><span class="ddoc_psymbol">parseAsmBrExp</span>();
 </dt>
 <dd>Parses an AsmBrExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmBrExp"><span>asmBrExp</span></a>:
+     <a href="#asmUnaExp"><span style="font-weight: bold">asmUnaExp</span></a>
+     | <a href="#asmBrExp"><span style="font-weight: bold">asmBrExp</span></a> <span style="color: green; font-weight: normal;">'['</span> <a href="#asmExp"><span style="font-weight: bold">asmExp</span></a> <span style="color: green; font-weight: normal;">']'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmEqualExp"></a>AsmEqualExp <a name="parseAsmEqualExp"></a><span class="ddoc_psymbol">parseAsmEqualExp</span>();
 </dt>
 <dd>Parses an AsmEqualExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmEqualExp"><span>asmEqualExp</span></a>:
+     <a href="#asmRelExp"><span style="font-weight: bold">asmRelExp</span></a> (('==' | '!=') <a href="#asmRelExp"><span style="font-weight: bold">asmRelExp</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmExp"></a>AsmExp <a name="parseAsmExp"></a><span class="ddoc_psymbol">parseAsmExp</span>();
 </dt>
 <dd>Parses an AsmExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmExp"><span>asmExp</span></a>:
+     <a href="#asmLogOrExp"><span style="font-weight: bold">asmLogOrExp</span></a> (<span style="color: green; font-weight: normal;">'?'</span> <a href="#asmExp"><span style="font-weight: bold">asmExp</span></a> <span style="color: green; font-weight: normal;">':'</span> <a href="#asmExp"><span style="font-weight: bold">asmExp</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmInstruction"></a>AsmInstruction <a name="parseAsmInstruction"></a><span class="ddoc_psymbol">parseAsmInstruction</span>();
 </dt>
 <dd>Parses an AsmInstruction
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmInstruction"><span>asmInstruction</span></a>:
+     <span style="color: green; font-weight: normal;">Identifier</span>
+     | <span style="color: green; font-weight: normal;">'align'</span> I<a href="#ntegerLiteral"><span style="font-weight: bold">ntegerLiteral</span></a>
+     | <span style="color: green; font-weight: normal;">'align'</span> <span style="color: green; font-weight: normal;">Identifier</span>
+     | <span style="color: green; font-weight: normal;">Identifier</span> <span style="color: green; font-weight: normal;">':'</span> <a href="#asmInstruction"><span style="font-weight: bold">asmInstruction</span></a>
+     | <span style="color: green; font-weight: normal;">Identifier</span> <a href="#asmExp"><span style="font-weight: bold">asmExp</span></a>
+     | <a href="#opcode"><span style="font-weight: bold">opcode</span></a> <a href="#operands"><span style="font-weight: bold">operands</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmLogAndExp"></a>AsmLogAndExp <a name="parseAsmLogAndExp"></a><span class="ddoc_psymbol">parseAsmLogAndExp</span>();
 </dt>
 <dd>Parses an AsmLogAndExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmLogAndExp"><span>asmLogAndExp</span></a>:
+     <a href="#asmOrExp"><span style="font-weight: bold">asmOrExp</span></a> ('&amp;&amp;' <a href="#asmOrExp"><span style="font-weight: bold">asmOrExp</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmLogOrExp"></a>AsmLogOrExp <a name="parseAsmLogOrExp"></a><span class="ddoc_psymbol">parseAsmLogOrExp</span>();
 </dt>
 <dd>Parses an AsmLogOrExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmLogOrExp"><span>asmLogOrExp</span></a>:
+     <a href="#asmLogAndExp"><span style="font-weight: bold">asmLogAndExp</span></a> ('||' <a href="#asmLogAndExp"><span style="font-weight: bold">asmLogAndExp</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmMulExp"></a>AsmMulExp <a name="parseAsmMulExp"></a><span class="ddoc_psymbol">parseAsmMulExp</span>();
 </dt>
 <dd>Parses an AsmMulExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmMulExp"><span>asmMulExp</span></a>:
+     <a href="#asmBrExp"><span style="font-weight: bold">asmBrExp</span></a> ((<span style="color: green; font-weight: normal;">'*'</span> | <span style="color: green; font-weight: normal;">'/'</span> | <span style="color: green; font-weight: normal;">'%'</span>) <a href="#asmBrExp"><span style="font-weight: bold">asmBrExp</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmOrExp"></a>AsmOrExp <a name="parseAsmOrExp"></a><span class="ddoc_psymbol">parseAsmOrExp</span>();
 </dt>
 <dd>Parses an AsmOrExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmOrExp"><span>asmOrExp</span></a>:
+     <a href="#asmXorExp"><span style="font-weight: bold">asmXorExp</span></a> (<span style="color: green; font-weight: normal;">'|'</span> <a href="#asmXorExp"><span style="font-weight: bold">asmXorExp</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmPrimaryExp"></a>AsmPrimaryExp <a name="parseAsmPrimaryExp"></a><span class="ddoc_psymbol">parseAsmPrimaryExp</span>();
 </dt>
 <dd>Parses an AsmPrimaryExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmPrimaryExp"><span>asmPrimaryExp</span></a>:
+       <a href="#IntegerLiteral"><span style="font-weight: bold">IntegerLiteral</span></a>
+     | <a href="#FloatLiteral"><span style="font-weight: bold">FloatLiteral</span></a>
+     | <a href="#register"><span style="font-weight: bold">register</span></a>
+     | <a href="#identifierChain"><span style="font-weight: bold">identifierChain</span></a>
+     | <span style="color: green; font-weight: normal;">'$'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmRelExp"></a>AsmRelExp <a name="parseAsmRelExp"></a><span class="ddoc_psymbol">parseAsmRelExp</span>();
 </dt>
 <dd>Parses an AsmRelExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmRelExp"><span>asmRelExp</span></a>:
+     <a href="#asmShiftExp"><span style="font-weight: bold">asmShiftExp</span></a> ((<span style="color: green; font-weight: normal;">'&lt;'</span> | <span style="color: green; font-weight: normal;">'&lt;='</span> | <span style="color: green; font-weight: normal;">'&gt;'</span> | <span style="color: green; font-weight: normal;">'&gt;='</span>) <a href="#asmShiftExp"><span style="font-weight: bold">asmShiftExp</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmShiftExp"></a>AsmShiftExp <a name="parseAsmShiftExp"></a><span class="ddoc_psymbol">parseAsmShiftExp</span>();
 </dt>
 <dd>Parses an AsmShiftExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmShiftExp"><span>asmShiftExp</span></a>:
+     <a href="#asmAddExp"><span style="font-weight: bold">asmAddExp</span></a> ((<span style="color: green; font-weight: normal;">'&lt;&lt;'</span> | <span style="color: green; font-weight: normal;">'&gt;&gt;'</span> | <span style="color: green; font-weight: normal;">'&gt;&gt;&gt;'</span>) <a href="#asmAddExp"><span style="font-weight: bold">asmAddExp</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmStatement"></a>AsmStatement <a name="parseAsmStatement"></a><span class="ddoc_psymbol">parseAsmStatement</span>();
 </dt>
 <dd>Parses an AsmStatement
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmStatement"><span>asmStatement</span></a>:
+     <a href="#'asm'"><span style="font-weight: bold">'asm'</span></a> <span style="color: green; font-weight: normal;">'{'</span> <a href="#asmInstruction"><span style="font-weight: bold">asmInstruction</span></a>+ <span style="color: green; font-weight: normal;">'}'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmTypePrefix"></a>AsmTypePrefix <a name="parseAsmTypePrefix"></a><span class="ddoc_psymbol">parseAsmTypePrefix</span>();
 </dt>
 <dd>Parses an AsmTypePrefix
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmTypePrefix"><span>asmTypePrefix</span></a>:
+     <span style="color: green; font-weight: normal;">Identifier</span> <span style="color: green; font-weight: normal;">Identifier</span>
+     | <span style="color: green; font-weight: normal;">'byte'</span> <span style="color: green; font-weight: normal;">Identifier</span>
+     | <span style="color: green; font-weight: normal;">'short'</span> <span style="color: green; font-weight: normal;">Identifier</span>
+     | <span style="color: green; font-weight: normal;">'int'</span> <span style="color: green; font-weight: normal;">Identifier</span>
+     | <span style="color: green; font-weight: normal;">'float'</span> <span style="color: green; font-weight: normal;">Identifier</span>
+     | <span style="color: green; font-weight: normal;">'double'</span> <span style="color: green; font-weight: normal;">Identifier</span>
+     | <span style="color: green; font-weight: normal;">'real'</span> <span style="color: green; font-weight: normal;">Identifier</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmUnaExp"></a>AsmUnaExp <a name="parseAsmUnaExp"></a><span class="ddoc_psymbol">parseAsmUnaExp</span>();
 </dt>
 <dd>Parses an AsmUnaExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmUnaExp"><span>asmUnaExp</span></a>:
+     <a href="#asmTypePrefix"><span style="font-weight: bold">asmTypePrefix</span></a> <a href="#asmExp"><span style="font-weight: bold">asmExp</span></a>
+     | <span style="color: green; font-weight: normal;">Identifier</span> <a href="#asmExp"><span style="font-weight: bold">asmExp</span></a>
+     | <span style="color: green; font-weight: normal;">'+'</span> <a href="#asmUnaExp"><span style="font-weight: bold">asmUnaExp</span></a>
+     | <span style="color: green; font-weight: normal;">'-'</span> <a href="#asmUnaExp"><span style="font-weight: bold">asmUnaExp</span></a>
+     | <span style="color: green; font-weight: normal;">'!'</span> <a href="#asmUnaExp"><span style="font-weight: bold">asmUnaExp</span></a>
+     | <span style="color: green; font-weight: normal;">'~'</span> <a href="#asmUnaExp"><span style="font-weight: bold">asmUnaExp</span></a>
+     | <a href="#asmPrimaryExp"><span style="font-weight: bold">asmPrimaryExp</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAsmXorExp"></a>AsmXorExp <a name="parseAsmXorExp"></a><span class="ddoc_psymbol">parseAsmXorExp</span>();
 </dt>
 <dd>Parses an AsmXorExp
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="asmXorExp"><span>asmXorExp</span></a>:
+     <a href="#asmAndExp"><span style="font-weight: bold">asmAndExp</span></a> (<span style="color: green; font-weight: normal;">'^'</span> <a href="#asmAndExp"><span style="font-weight: bold">asmAndExp</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseAssertExpression"></a>AssertExpression <a name="parseAssertExpression"></a><span class="ddoc_psymbol">parseAssertExpression</span>();
@@ -1020,7 +1076,7 @@ This module contains a parser for D source code.
 </dt>
 <dd>Parses a Finally
 <p></p>
-<pre style="font-weight: bold"><a name="finally_"><span>finally_</span></a>:
+<pre style="font-weight: bold"><a name="finally"><span>finally</span></a>:
      <span style="color: green; font-weight: normal;">'finally'</span> <a href="#nonEmptyStatementNoCaseNoDefault"><span style="font-weight: bold">nonEmptyStatementNoCaseNoDefault</span></a>
      ;</pre><p></p>
 
@@ -1563,14 +1619,14 @@ This module contains a parser for D source code.
 <dd>Parses a ParameterAttribute
 <p></p>
 <pre style="font-weight: bold"><a name="parameterAttribute"><span>parameterAttribute</span></a>:
-       <span style="color: green; font-weight: normal;">'auto'</span>
+       <a href="#typeConstructor"><span style="font-weight: bold">typeConstructor</span></a>
      | <span style="color: green; font-weight: normal;">'final'</span>
      | <span style="color: green; font-weight: normal;">'in'</span>
      | <span style="color: green; font-weight: normal;">'lazy'</span>
      | <span style="color: green; font-weight: normal;">'out'</span>
      | <span style="color: green; font-weight: normal;">'ref'</span>
      | <span style="color: green; font-weight: normal;">'scope'</span>
-     | <a href="#typeConstructor"><span style="font-weight: bold">typeConstructor</span></a>
+     | <span style="color: green; font-weight: normal;">'auto'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1579,7 +1635,16 @@ This module contains a parser for D source code.
 <dd>Parses Parameters
 <p></p>
 <pre style="font-weight: bold"><a name="parameters"><span>parameters</span></a>:
-     <span style="color: green; font-weight: normal;">'(') ((<a href="#parameter"><span style="font-weight: bold">parameter</span></a> (<span style="color: green; font-weight: normal;">','</span> <a href="#parameter"><span style="font-weight: bold">parameter</span></a>)*)? (<span style="color: green; font-weight: normal;">','</span> '...')? | '...') <span style="color: green; font-weight: normal;">'</span>'</span>
+     <span style="color: green; font-weight: normal;">'('</span> ((<a href="#parameter"><span style="font-weight: bold">parameter</span></a> (<span style="color: green; font-weight: normal;">','</span> <a href="#parameter"><span style="font-weight: bold">parameter</span></a>)*)? (<span style="color: green; font-weight: normal;">','</span> <span style="color: green; font-weight: normal;">'...'</span>)? | <span style="color: green; font-weight: normal;">'...'</span>) <span style="color: green; font-weight: normal;">')'</span>
+     ;</pre><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".Parser.parsePostblit"></a>Postblit <a name="parsePostblit"></a><span class="ddoc_psymbol">parsePostblit</span>();
+</dt>
+<dd>Parses a Postblit
+<p></p>
+<pre style="font-weight: bold"><a name="parameters"><span>parameters</span></a>:
+     <span style="color: green; font-weight: normal;">'this'</span> <span style="color: green; font-weight: normal;">'('</span> <span style="color: green; font-weight: normal;">'this'</span> <span style="color: green; font-weight: normal;">')'</span> <a href="#functionBody"><span style="font-weight: bold">functionBody</span></a>
      ;</pre><p></p>
 
 </dd>
@@ -1634,17 +1699,16 @@ This module contains a parser for D source code.
 <dd>Parses a PrimaryExpression
 <p></p>
 <pre style="font-weight: bold"><a name="primaryExpression"><span>primaryExpression</span></a>:
-       <a href="#identifierOrTemplateInstance"><span style="font-weight: bold">identifierOrTemplateInstance</span></a>
-     | <span style="color: green; font-weight: normal;">'.'</span> <a href="#identifierOrTemplateInstance"><span style="font-weight: bold">identifierOrTemplateInstance</span></a>
+       <a href="#symbol"><span style="font-weight: bold">symbol</span></a>
      | <a href="#type"><span style="font-weight: bold">type</span></a> <span style="color: green; font-weight: normal;">'.'</span> <span style="color: green; font-weight: normal;">Identifier</span>
      | <a href="#typeofExpression"><span style="font-weight: bold">typeofExpression</span></a>
      | <a href="#typeidExpression"><span style="font-weight: bold">typeidExpression</span></a>
      | <span style="color: green; font-weight: normal;">'$'</span>
      | <span style="color: green; font-weight: normal;">'this'</span>
      | <span style="color: green; font-weight: normal;">'super'</span>
-     | <span style="color: green; font-weight: normal;">'<b>null</b>'</span>
-     | <span style="color: green; font-weight: normal;">'<b>true</b>'</span>
-     | <span style="color: green; font-weight: normal;">'<b>false</b>'</span>
+     | <span style="color: green; font-weight: normal;">'null'</span>
+     | <span style="color: green; font-weight: normal;">'true'</span>
+     | <span style="color: green; font-weight: normal;">'false'</span>
      | <span style="color: green; font-weight: normal;">'__DATE__'</span>
      | <span style="color: green; font-weight: normal;">'__TIME__'</span>
      | <span style="color: green; font-weight: normal;">'__TIMESTAMP__'</span>
@@ -1850,9 +1914,22 @@ This module contains a parser for D source code.
 </dd>
 <dt class="d_decl"><a name=".Parser.parseStructBody"></a>StructBody <a name="parseStructBody"></a><span class="ddoc_psymbol">parseStructBody</span>();
 </dt>
-<dd>Parses an StructBody
+<dd>Parses a StructBody
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="structBody"><span>structBody</span></a>:
+     <span style="color: green; font-weight: normal;">'{'</span> <a href="#structBodyItem"><span style="font-weight: bold">structBodyItem</span></a>* <span style="color: green; font-weight: normal;">'}'</span>
+     ;</pre><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".Parser.parseStructBodyItem"></a>StructBodyItem <a name="parseStructBodyItem"></a><span class="ddoc_psymbol">parseStructBodyItem</span>();
+</dt>
+<dd>Parses a StructBodyItem
+<p></p>
+<pre style="font-weight: bold"><a name="structBodyItem"><span>structBodyItem</span></a>:
+       <a href="#declaration"><span style="font-weight: bold">declaration</span></a>
+     | <a href="#postBlit"><span style="font-weight: bold">postBlit</span></a>
+     | <a href="#invariant"><span style="font-weight: bold">invariant</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseStructDeclaration"></a>StructDeclaration <a name="parseStructDeclaration"></a><span class="ddoc_psymbol">parseStructDeclaration</span>();
@@ -1868,259 +1945,382 @@ This module contains a parser for D source code.
 </dt>
 <dd>Parses an StructInitializer
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="structInitializer"><span>structInitializer</span></a>:
+     <span style="color: green; font-weight: normal;">'{'</span> <a href="#structMemberInitializers"><span style="font-weight: bold">structMemberInitializers</span></a>? <span style="color: green; font-weight: normal;">'}'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseStructMemberInitializer"></a>StructMemberInitializer <a name="parseStructMemberInitializer"></a><span class="ddoc_psymbol">parseStructMemberInitializer</span>();
 </dt>
-<dd>Parses an StructMemberInitializer
+<dd>Parses a StructMemberInitializer
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="structMemberInitializer"><span>structMemberInitializer</span></a>:
+     (<span style="color: green; font-weight: normal;">Identifier</span> <span style="color: green; font-weight: normal;">':'</span>)? <a href="#nonVoidInitializer"><span style="font-weight: bold">nonVoidInitializer</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseStructMemberInitializers"></a>StructMemberInitializers <a name="parseStructMemberInitializers"></a><span class="ddoc_psymbol">parseStructMemberInitializers</span>();
 </dt>
-<dd>Parses an StructMemberInitializers
+<dd>Parses StructMemberInitializers
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="structMemberInitializers"><span>structMemberInitializers</span></a>:
+     <a href="#structMemberInitializer"><span style="font-weight: bold">structMemberInitializer</span></a> (<span style="color: green; font-weight: normal;">','</span> <a href="#structMemberInitializer"><span style="font-weight: bold">structMemberInitializer</span></a>?)*
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseSwitchBody"></a>SwitchBody <a name="parseSwitchBody"></a><span class="ddoc_psymbol">parseSwitchBody</span>();
 </dt>
-<dd>Parses an SwitchBody
+<dd>Parses a SwitchBody
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="switchBody"><span>switchBody</span></a>:
+     <span style="color: green; font-weight: normal;">'{'</span> <a href="#statement"><span style="font-weight: bold">statement</span></a>+ <span style="color: green; font-weight: normal;">'}'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseSwitchStatement"></a>SwitchStatement <a name="parseSwitchStatement"></a><span class="ddoc_psymbol">parseSwitchStatement</span>();
 </dt>
 <dd>Parses an SwitchStatement
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="switchStatement"><span>switchStatement</span></a>:
+     <span style="color: green; font-weight: normal;">'switch'</span> <span style="color: green; font-weight: normal;">'('</span> <a href="#expression"><span style="font-weight: bold">expression</span></a> <span style="color: green; font-weight: normal;">')'</span> <a href="#switchBody"><span style="font-weight: bold">switchBody</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseSymbol"></a>Symbol <a name="parseSymbol"></a><span class="ddoc_psymbol">parseSymbol</span>();
 </dt>
-<dd>Parses an Symbol
+<dd>Parses a Symbol
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="symbol"><span>symbol</span></a>:
+     <span style="color: green; font-weight: normal;">'.'</span>? <a href="#identifierOrTemplateChain"><span style="font-weight: bold">identifierOrTemplateChain</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseSynchronizedStatement"></a>SynchronizedStatement <a name="parseSynchronizedStatement"></a><span class="ddoc_psymbol">parseSynchronizedStatement</span>();
 </dt>
 <dd>Parses an SynchronizedStatement
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="synchronizedStatement"><span>synchronizedStatement</span></a>:
+     <span style="color: green; font-weight: normal;">'synchronized'</span> (<span style="color: green; font-weight: normal;">'('</span> <a href="#expression"><span style="font-weight: bold">expression</span></a> <span style="color: green; font-weight: normal;">')'</span>)? <a href="#nonEmptyStatementNoCaseNoDefault"><span style="font-weight: bold">nonEmptyStatementNoCaseNoDefault</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateAliasParameter"></a>TemplateAliasParameter <a name="parseTemplateAliasParameter"></a><span class="ddoc_psymbol">parseTemplateAliasParameter</span>();
 </dt>
 <dd>Parses an TemplateAliasParameter
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateAliasParameter"><span>templateAliasParameter</span></a>:
+     <span style="color: green; font-weight: normal;">'alias'</span> <a href="#type"><span style="font-weight: bold">type</span></a>? <span style="color: green; font-weight: normal;">Identifier</span> (<span style="color: green; font-weight: normal;">':'</span> (<a href="#type"><span style="font-weight: bold">type</span></a> | <a href="#expression"><span style="font-weight: bold">expression</span></a>))? (<span style="color: green; font-weight: normal;">'='</span> (<a href="#type"><span style="font-weight: bold">type</span></a> | <a href="#expression"><span style="font-weight: bold">expression</span></a>))?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateArgument"></a>TemplateArgument <a name="parseTemplateArgument"></a><span class="ddoc_psymbol">parseTemplateArgument</span>();
 </dt>
-<dd>Parses an TemplateArgument
+<dd>Parses a TemplateArgument
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateArgument"><span>templateArgument</span></a>:
+       <a href="#type"><span style="font-weight: bold">type</span></a>
+     | <a href="#assignExpression"><span style="font-weight: bold">assignExpression</span></a>
+     | <a href="#symbol"><span style="font-weight: bold">symbol</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateArgumentList"></a>TemplateArgumentList <a name="parseTemplateArgumentList"></a><span class="ddoc_psymbol">parseTemplateArgumentList</span>();
 </dt>
-<dd>Parses an TemplateArgumentList
+<dd>Parses a TemplateArgumentList
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateArgumentList"><span>templateArgumentList</span></a>:
+     <a href="#templateArgument"><span style="font-weight: bold">templateArgument</span></a> (<span style="color: green; font-weight: normal;">','</span> <a href="#templateArgument"><span style="font-weight: bold">templateArgument</span></a>?)*
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateArguments"></a>TemplateArguments <a name="parseTemplateArguments"></a><span class="ddoc_psymbol">parseTemplateArguments</span>();
 </dt>
-<dd>Parses an TemplateArguments
+<dd>Parses TemplateArguments
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateArguments"><span>templateArguments</span></a>:
+     <span style="color: green; font-weight: normal;">'!'</span> (<span style="color: green; font-weight: normal;">'('</span> <a href="#templateArgumentList"><span style="font-weight: bold">templateArgumentList</span></a>? <span style="color: green; font-weight: normal;">')'</span> | <a href="#templateSingleArgument"><span style="font-weight: bold">templateSingleArgument</span></a>)
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateDeclaration"></a>TemplateDeclaration <a name="parseTemplateDeclaration"></a><span class="ddoc_psymbol">parseTemplateDeclaration</span>();
 </dt>
 <dd>Parses an TemplateDeclaration
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateDeclaration"><span>templateDeclaration</span></a>:
+     <span style="color: green; font-weight: normal;">'template'</span> <span style="color: green; font-weight: normal;">Identifier</span> <a href="#templateParameters"><span style="font-weight: bold">templateParameters</span></a> <a href="#constraint"><span style="font-weight: bold">constraint</span></a>? <span style="color: green; font-weight: normal;">'{'</span> <a href="#declaration"><span style="font-weight: bold">declaration</span></a>+ <span style="color: green; font-weight: normal;">'}'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateInstance"></a>TemplateInstance <a name="parseTemplateInstance"></a><span class="ddoc_psymbol">parseTemplateInstance</span>();
 </dt>
-<dd>Parses an TemplateInstance
+<dd>Parses a TemplateInstance
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateInstance"><span>templateInstance</span></a>:
+     <span style="color: green; font-weight: normal;">Identifier</span> <a href="#templateArguments"><span style="font-weight: bold">templateArguments</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateMixinStatement"></a>TemplateMixinStatement <a name="parseTemplateMixinStatement"></a><span class="ddoc_psymbol">parseTemplateMixinStatement</span>();
 </dt>
-<dd>Parses an TemplateMixinStatement
+<dd>Parses a TemplateMixinStatement
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateMixinStatement"><span>templateMixinStatement</span></a>:
+     <span style="color: green; font-weight: normal;">'mixin'</span> <a href="#mixinTemplateName"><span style="font-weight: bold">mixinTemplateName</span></a> <a href="#templateArguments"><span style="font-weight: bold">templateArguments</span></a>? <span style="color: green; font-weight: normal;">Identifier</span>? <span style="color: green; font-weight: normal;">';'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateParameter"></a>TemplateParameter <a name="parseTemplateParameter"></a><span class="ddoc_psymbol">parseTemplateParameter</span>();
 </dt>
-<dd>Parses an TemplateParameter
+<dd>Parses a TemplateParameter
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateParameter"><span>templateParameter</span></a>:
+       <a href="#templateTypeParameter"><span style="font-weight: bold">templateTypeParameter</span></a>
+     | <a href="#templateValueParameter"><span style="font-weight: bold">templateValueParameter</span></a>
+     | <a href="#templateAliasParameter"><span style="font-weight: bold">templateAliasParameter</span></a>
+     | <a href="#templateTupleParameter"><span style="font-weight: bold">templateTupleParameter</span></a>
+     | <a href="#templateThisParameter"><span style="font-weight: bold">templateThisParameter</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateParameterList"></a>TemplateParameterList <a name="parseTemplateParameterList"></a><span class="ddoc_psymbol">parseTemplateParameterList</span>();
 </dt>
 <dd>Parses an TemplateParameterList
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateParameterList"><span>templateParameterList</span></a>:
+     <a href="#templateParameter"><span style="font-weight: bold">templateParameter</span></a> (<span style="color: green; font-weight: normal;">','</span> <a href="#templateParameter"><span style="font-weight: bold">templateParameter</span></a>?)*
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateParameters"></a>TemplateParameters <a name="parseTemplateParameters"></a><span class="ddoc_psymbol">parseTemplateParameters</span>();
 </dt>
-<dd>Parses an TemplateParameters
+<dd>Parses TemplateParameters
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateParameters"><span>templateParameters</span></a>:
+     <span style="color: green; font-weight: normal;">'('</span> <a href="#templateParameterList"><span style="font-weight: bold">templateParameterList</span></a>? <span style="color: green; font-weight: normal;">')'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateSingleArgument"></a>TemplateSingleArgument <a name="parseTemplateSingleArgument"></a><span class="ddoc_psymbol">parseTemplateSingleArgument</span>();
 </dt>
 <dd>Parses an TemplateSingleArgument
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateSingleArgument"><span>templateSingleArgument</span></a>:
+       <a href="#basicType"><span style="font-weight: bold">basicType</span></a>
+     | <span style="color: green; font-weight: normal;">Identifier</span>
+     | <span style="color: green; font-weight: normal;">CharacterLiteral</span>
+     | <span style="color: green; font-weight: normal;">StringLiteral</span>
+     | <span style="color: green; font-weight: normal;">IntegerLiteral</span>
+     | <span style="color: green; font-weight: normal;">FloatLiteral</span>
+     | <span style="color: green; font-weight: normal;">'true'</span>
+     | <span style="color: green; font-weight: normal;">'false'</span>
+     | <span style="color: green; font-weight: normal;">'null'</span>
+     | <span style="color: green; font-weight: normal;">'this'</span>
+     | <span style="color: green; font-weight: normal;">'_DATE__'</span>
+     | <span style="color: green; font-weight: normal;">'_TIME__'</span>
+     | <span style="color: green; font-weight: normal;">'_TIMESTAMP__'</span>
+     | <span style="color: green; font-weight: normal;">'_VENDOR__'</span>
+     | <span style="color: green; font-weight: normal;">'_VERSION__'</span>
+     | <span style="color: green; font-weight: normal;">'_FILE__'</span>
+     | <span style="color: green; font-weight: normal;">'_LINE__'</span>
+     | <span style="color: green; font-weight: normal;">'_MODULE__'</span>
+     | <span style="color: green; font-weight: normal;">'_FUNCTION__'</span>
+     | <span style="color: green; font-weight: normal;">'_PRETTY_FUNCTION__'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateThisParameter"></a>TemplateThisParameter <a name="parseTemplateThisParameter"></a><span class="ddoc_psymbol">parseTemplateThisParameter</span>();
 </dt>
 <dd>Parses an TemplateThisParameter
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateThisParameter"><span>templateThisParameter</span></a>:
+     <span style="color: green; font-weight: normal;">'this'</span> <a href="#templateTypeParameter"><span style="font-weight: bold">templateTypeParameter</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateTupleParameter"></a>TemplateTupleParameter <a name="parseTemplateTupleParameter"></a><span class="ddoc_psymbol">parseTemplateTupleParameter</span>();
 </dt>
 <dd>Parses an TemplateTupleParameter
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateTupleParameter"><span>templateTupleParameter</span></a>:
+     <span style="color: green; font-weight: normal;">Identifier</span> '...'
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateTypeParameter"></a>TemplateTypeParameter <a name="parseTemplateTypeParameter"></a><span class="ddoc_psymbol">parseTemplateTypeParameter</span>();
 </dt>
-<dd>Parses an TemplateTypeParameter
+<dd>Parses a TemplateTypeParameter
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateTypeParameter"><span>templateTypeParameter</span></a>:
+     <span style="color: green; font-weight: normal;">Identifier</span> (<span style="color: green; font-weight: normal;">':'</span> <a href="#type"><span style="font-weight: bold">type</span></a>)? (<span style="color: green; font-weight: normal;">'='</span> <a href="#type"><span style="font-weight: bold">type</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateValueParameter"></a>TemplateValueParameter <a name="parseTemplateValueParameter"></a><span class="ddoc_psymbol">parseTemplateValueParameter</span>();
 </dt>
-<dd>Parses an TemplateValueParameter
+<dd>Parses a TemplateValueParameter
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateValueParameter"><span>templateValueParameter</span></a>:
+     <a href="#type"><span style="font-weight: bold">type</span></a> <span style="color: green; font-weight: normal;">Identifier</span> (<span style="color: green; font-weight: normal;">':'</span> <a href="#expression"><span style="font-weight: bold">expression</span></a>)? <a href="#templateValueParameterDefault"><span style="font-weight: bold">templateValueParameterDefault</span></a>?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTemplateValueParameterDefault"></a>TemplateValueParameterDefault <a name="parseTemplateValueParameterDefault"></a><span class="ddoc_psymbol">parseTemplateValueParameterDefault</span>();
 </dt>
-<dd>Parses an TemplateValueParameterDefault
+<dd>Parses a TemplateValueParameterDefault
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="templateValueParameterDefault"><span>templateValueParameterDefault</span></a>:
+     <span style="color: green; font-weight: normal;">'='</span> ('_FILE__' | '_MODULE__' | '_LINE__' | '_FUNCTION__' | '_PRETTY_FUNCTION__' | <a href="#assignExpression"><span style="font-weight: bold">assignExpression</span></a>)
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTernaryExpression"></a>TernaryExpression <a name="parseTernaryExpression"></a><span class="ddoc_psymbol">parseTernaryExpression</span>();
 </dt>
-<dd>Parses an TernaryExpression
+<dd>Parses a TernaryExpression
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="ternaryExpression"><span>ternaryExpression</span></a>:
+     <a href="#orOrExpression"><span style="font-weight: bold">orOrExpression</span></a> (<span style="color: green; font-weight: normal;">'?'</span> <a href="#expression"><span style="font-weight: bold">expression</span></a> <span style="color: green; font-weight: normal;">':'</span> <a href="#ternaryExpression"><span style="font-weight: bold">ternaryExpression</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseThrowStatement"></a>ThrowStatement <a name="parseThrowStatement"></a><span class="ddoc_psymbol">parseThrowStatement</span>();
 </dt>
-<dd>Parses an ThrowStatement
+<dd>Parses a ThrowStatement
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="throwStatement"><span>throwStatement</span></a>:
+     <span style="color: green; font-weight: normal;">'throw'</span> <a href="#expression"><span style="font-weight: bold">expression</span></a> <span style="color: green; font-weight: normal;">';'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTraitsArgument"></a>TraitsArgument <a name="parseTraitsArgument"></a><span class="ddoc_psymbol">parseTraitsArgument</span>();
 </dt>
 <dd>Parses an TraitsArgument
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="traitsArgument"><span>traitsArgument</span></a>:
+     <a href="#assignExpression"><span style="font-weight: bold">assignExpression</span></a>
+     | <a href="#type"><span style="font-weight: bold">type</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTraitsExpression"></a>TraitsExpression <a name="parseTraitsExpression"></a><span class="ddoc_psymbol">parseTraitsExpression</span>();
 </dt>
 <dd>Parses an TraitsExpression
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="traitsExpression"><span>traitsExpression</span></a>:
+     <span style="color: green; font-weight: normal;">'_traits'</span> <span style="color: green; font-weight: normal;">'('</span> <span style="color: green; font-weight: normal;">Identifier</span> <span style="color: green; font-weight: normal;">','</span> <a href="#traitsArgument"><span style="font-weight: bold">traitsArgument</span></a> (<span style="color: green; font-weight: normal;">','</span> <a href="#traitsArgument"><span style="font-weight: bold">traitsArgument</span></a>)* <span style="color: green; font-weight: normal;">')'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTryStatement"></a>TryStatement <a name="parseTryStatement"></a><span class="ddoc_psymbol">parseTryStatement</span>();
 </dt>
-<dd>Parses an TryStatement
+<dd>Parses a TryStatement
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="tryStatement"><span>tryStatement</span></a>:
+     <span style="color: green; font-weight: normal;">'try'</span> <a href="#nonEmptyStatementNoCaseNoDefault"><span style="font-weight: bold">nonEmptyStatementNoCaseNoDefault</span></a> (<a href="#catches"><span style="font-weight: bold">catches</span></a> | <a href="#catches"><span style="font-weight: bold">catches</span></a> <a href="#finally"><span style="font-weight: bold">finally</span></a> | <a href="#finally"><span style="font-weight: bold">finally</span></a>)
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseType"></a>Type <a name="parseType"></a><span class="ddoc_psymbol">parseType</span>();
 </dt>
-<dd>Parses an Type
+<dd>Parses a Type
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="type"><span>type</span></a>:
+     <a href="#typeConstructors"><span style="font-weight: bold">typeConstructors</span></a>? <a href="#type2"><span style="font-weight: bold">type2</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseType2"></a>Type2 <a name="parseType2"></a><span class="ddoc_psymbol">parseType2</span>();
 </dt>
-<dd>Parses an Type2
+<dd>Parses a Type2
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="type2"><span>type2</span></a>:
+       <a href="#type3"><span style="font-weight: bold">type3</span></a> <a href="#typeSuffix"><span style="font-weight: bold">typeSuffix</span></a>?
+     | <a href="#type2"><span style="font-weight: bold">type2</span></a> <a href="#typeSuffix"><span style="font-weight: bold">typeSuffix</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseType3"></a>Type3 <a name="parseType3"></a><span class="ddoc_psymbol">parseType3</span>();
 </dt>
-<dd>Parses an Type3
+<dd>Parses a Type3
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="type3"><span>type3</span></a>:
+       <a href="#basicType"><span style="font-weight: bold">basicType</span></a>
+     | <a href="#symbol"><span style="font-weight: bold">symbol</span></a>
+     | <a href="#typeofExpression"><span style="font-weight: bold">typeofExpression</span></a> (<span style="color: green; font-weight: normal;">'.'</span> <a href="#identifierOrTemplateChain"><span style="font-weight: bold">identifierOrTemplateChain</span></a>)?
+     | <a href="#typeConstructor"><span style="font-weight: bold">typeConstructor</span></a> <span style="color: green; font-weight: normal;">'('</span> <a href="#type"><span style="font-weight: bold">type</span></a> <span style="color: green; font-weight: normal;">')'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTypeConstructor"></a>TypeConstructor <a name="parseTypeConstructor"></a><span class="ddoc_psymbol">parseTypeConstructor</span>();
 </dt>
-<dd>Parses an TypeConstructor
+<dd>Parses a TypeConstructor
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="typeConstructor"><span>typeConstructor</span></a>:
+       <span style="color: green; font-weight: normal;">'const'</span>
+     | <span style="color: green; font-weight: normal;">'immutable'</span>
+     | <span style="color: green; font-weight: normal;">'inout'</span>
+     | <span style="color: green; font-weight: normal;">'shared'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTypeConstructors"></a>TypeConstructors <a name="parseTypeConstructors"></a><span class="ddoc_psymbol">parseTypeConstructors</span>();
 </dt>
-<dd>Parses an TypeConstructors
+<dd>Parses TypeConstructors
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="typeConstructors"><span>typeConstructors</span></a>:
+     <a href="#typeConstructor"><span style="font-weight: bold">typeConstructor</span></a>+
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTypeSpecialization"></a>TypeSpecialization <a name="parseTypeSpecialization"></a><span class="ddoc_psymbol">parseTypeSpecialization</span>();
 </dt>
-<dd>Parses an TypeSpecialization
+<dd>Parses a TypeSpecialization
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="typeSpecialization"><span>typeSpecialization</span></a>:
+       <a href="#type"><span style="font-weight: bold">type</span></a>
+     | <span style="color: green; font-weight: normal;">'struct'</span>
+     | <span style="color: green; font-weight: normal;">'union'</span>
+     | <span style="color: green; font-weight: normal;">'class'</span>
+     | <span style="color: green; font-weight: normal;">'interface'</span>
+     | <span style="color: green; font-weight: normal;">'enum'</span>
+     | <span style="color: green; font-weight: normal;">'function'</span>
+     | <span style="color: green; font-weight: normal;">'delegate'</span>
+     | <span style="color: green; font-weight: normal;">'super'</span>
+     | <span style="color: green; font-weight: normal;">'const'</span>
+     | <span style="color: green; font-weight: normal;">'immutable'</span>
+     | <span style="color: green; font-weight: normal;">'inout'</span>
+     | <span style="color: green; font-weight: normal;">'shared'</span>
+     | <span style="color: green; font-weight: normal;">'return'</span>
+     | <a href="#'__parameters'"><span style="font-weight: bold">'__parameters'</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTypeSuffix"></a>TypeSuffix <a name="parseTypeSuffix"></a><span class="ddoc_psymbol">parseTypeSuffix</span>();
 </dt>
-<dd>Parses an TypeSuffix
+<dd>Parses a TypeSuffix
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="typeSuffix"><span>typeSuffix</span></a>:
+       <span style="color: green; font-weight: normal;">'*'</span>
+     | <span style="color: green; font-weight: normal;">'['</span> (<a href="#type"><span style="font-weight: bold">type</span></a> | <a href="#assignExpression"><span style="font-weight: bold">assignExpression</span></a>)? <span style="color: green; font-weight: normal;">']'</span>
+     | (<span style="color: green; font-weight: normal;">'delegate'</span> | <span style="color: green; font-weight: normal;">'function'</span>) <a href="#parameters"><span style="font-weight: bold">parameters</span></a> <a href="#memberFunctionAttribute"><span style="font-weight: bold">memberFunctionAttribute</span></a>*
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTypeidExpression"></a>TypeidExpression <a name="parseTypeidExpression"></a><span class="ddoc_psymbol">parseTypeidExpression</span>();
 </dt>
-<dd>Parses an TypeidExpression
+<dd>Parses a TypeidExpression
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="typeidExpression"><span>typeidExpression</span></a>:
+     <span style="color: green; font-weight: normal;">'typeid'</span> <span style="color: green; font-weight: normal;">'('</span>(<a href="#type"><span style="font-weight: bold">type</span></a> | <a href="#expression"><span style="font-weight: bold">expression</span></a>) <span style="color: green; font-weight: normal;">')'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseTypeofExpression"></a>TypeofExpression <a name="parseTypeofExpression"></a><span class="ddoc_psymbol">parseTypeofExpression</span>();
 </dt>
-<dd>Parses an TypeofExpression
+<dd>Parses a TypeofExpression
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="typeofExpression"><span>typeofExpression</span></a>:
+     <span style="color: green; font-weight: normal;">'typeof'</span> <span style="color: green; font-weight: normal;">'('</span>(<a href="#expression"><span style="font-weight: bold">expression</span></a> | <span style="color: green; font-weight: normal;">'return'</span>) <span style="color: green; font-weight: normal;">')'</span>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseUnaryExpression"></a>UnaryExpression <a name="parseUnaryExpression"></a><span class="ddoc_psymbol">parseUnaryExpression</span>();
@@ -2152,7 +2352,9 @@ This module contains a parser for D source code.
 </dt>
 <dd>Parses an UnionDeclaration
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="unionDeclaration"><span>unionDeclaration</span></a>:
+     '<a href="#union"><span style="font-weight: bold">union</span></a>' <span style="color: green; font-weight: normal;">Identifier</span> ((<a href="#templateParameters"><span style="font-weight: bold">templateParameters</span></a> <a href="#constraint"><span style="font-weight: bold">constraint</span></a>? <a href="#structBody"><span style="font-weight: bold">structBody</span></a>)? | (<a href="#structBody"><span style="font-weight: bold">structBody</span></a> | <span style="color: green; font-weight: normal;">';'</span>))
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseUnittest"></a>Unittest <a name="parseUnittest"></a><span class="ddoc_psymbol">parseUnittest</span>();
@@ -2168,7 +2370,10 @@ This module contains a parser for D source code.
 </dt>
 <dd>Parses a VariableDeclaration
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="variableDeclaration"><span>variableDeclaration</span></a>:
+       <a href="#storageClass"><span style="font-weight: bold">storageClass</span></a>? <a href="#type"><span style="font-weight: bold">type</span></a> <a href="#declarator"><span style="font-weight: bold">declarator</span></a> (<span style="color: green; font-weight: normal;">','</span> <a href="#declarator"><span style="font-weight: bold">declarator</span></a>)* <span style="color: green; font-weight: normal;">';'</span>
+     | <a href="#autoDeclaration"><span style="font-weight: bold">autoDeclaration</span></a>
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.parseVersionCondition"></a>VersionCondition <a name="parseVersionCondition"></a><span class="ddoc_psymbol">parseVersionCondition</span>();
@@ -2211,7 +2416,9 @@ This module contains a parser for D source code.
 </dt>
 <dd>Parses an XorExpression
 <p></p>
-<pre style="font-weight: bold"></pre><p></p>
+<pre style="font-weight: bold"><a name="xorExpression"><span>xorExpression</span></a>:
+     <a href="#andExpression"><span style="font-weight: bold">andExpression</span></a> (<span style="color: green; font-weight: normal;">'^'</span> <a href="#andExpression"><span style="font-weight: bold">andExpression</span></a>)?
+     ;</pre><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Parser.expect"></a>const(Token)* <a name="expect"></a><span class="ddoc_psymbol">expect</span>(TokenType <i>type</i>);

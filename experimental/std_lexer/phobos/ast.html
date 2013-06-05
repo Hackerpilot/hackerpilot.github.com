@@ -784,6 +784,10 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Postblit <i>postblit</i>);
+</dt>
+<dd><p></p>
+</dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(PostIncDecExpression <i>postIncDecExpression</i>);
 </dt>
 <dd><p></p>
@@ -877,6 +881,10 @@ classes<p></p>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StructBody <i>structBody</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(StructBodyItem <i>structBodyItem</i>);
 </dt>
 <dd><p></p>
 </dd>
@@ -3146,6 +3154,15 @@ classes<p></p>
 </dd>
 </dl>
 </dd>
+<dt class="d_decl"><a name=".Postblit"></a>class <a name="Postblit"></a><span class="ddoc_psymbol">Postblit</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Postblit.functionBody"></a>FunctionBody <a name="functionBody"></a><span class="ddoc_psymbol">functionBody</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
 <dt class="d_decl"><a name=".PostIncDecExpression"></a>class <a name="PostIncDecExpression"></a><span class="ddoc_psymbol">PostIncDecExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
@@ -3407,7 +3424,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".StructBody"></a>class <a name="StructBody"></a><span class="ddoc_psymbol">StructBody</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".StructBody.declarations"></a>Declaration[] <a name="declarations"></a><span class="ddoc_psymbol">declarations</span>;
+<dl><dt class="d_decl"><a name=".StructBody.structBodyItems"></a>StructBodyItem[] <a name="structBodyItems"></a><span class="ddoc_psymbol">structBodyItems</span>;
 </dt>
 <dd><p></p>
 </dd>
