@@ -302,8 +302,8 @@ This module contains a parser for D source code.
 <dd>Parses an AndExpression
 <p></p>
 <pre style="font-weight: bold"><a name="andExpression"><span>andExpression</span></a>:
-     <a href="#cmpExpression"><span style="font-weight: bold">cmpExpression</span></a>
-     <a href="#andExpression"><span style="font-weight: bold">andExpression</span></a> <span style="color: green; font-weight: normal;">'&amp;'</span> <a href="#cmpExpression"><span style="font-weight: bold">cmpExpression</span></a>
+       <a href="#cmpExpression"><span style="font-weight: bold">cmpExpression</span></a>
+     | <a href="#andExpression"><span style="font-weight: bold">andExpression</span></a> <span style="color: green; font-weight: normal;">'&amp;'</span> <a href="#cmpExpression"><span style="font-weight: bold">cmpExpression</span></a>
      ;</pre><p></p>
 
 </dd>
@@ -1703,6 +1703,15 @@ This module contains a parser for D source code.
      | <a href="#type"><span style="font-weight: bold">type</span></a> <span style="color: green; font-weight: normal;">'.'</span> <span style="color: green; font-weight: normal;">Identifier</span>
      | <a href="#typeofExpression"><span style="font-weight: bold">typeofExpression</span></a>
      | <a href="#typeidExpression"><span style="font-weight: bold">typeidExpression</span></a>
+     | <a href="#arrayLiteral"><span style="font-weight: bold">arrayLiteral</span></a>
+     | <a href="#assocArrayLiteral"><span style="font-weight: bold">assocArrayLiteral</span></a>
+     | <span style="color: green; font-weight: normal;">'('</span> <a href="#expression"><span style="font-weight: bold">expression</span></a> <span style="color: green; font-weight: normal;">')'</span>
+     | <a href="#isExpression"><span style="font-weight: bold">isExpression</span></a>
+     | <a href="#lambdaExpression"><span style="font-weight: bold">lambdaExpression</span></a>
+     | <a href="#functionLiteralExpression"><span style="font-weight: bold">functionLiteralExpression</span></a>
+     | <a href="#traitsExpression"><span style="font-weight: bold">traitsExpression</span></a>
+     | <a href="#mixinExpression"><span style="font-weight: bold">mixinExpression</span></a>
+     | <a href="#importExpression"><span style="font-weight: bold">importExpression</span></a>
      | <span style="color: green; font-weight: normal;">'$'</span>
      | <span style="color: green; font-weight: normal;">'this'</span>
      | <span style="color: green; font-weight: normal;">'super'</span>
@@ -1719,19 +1728,10 @@ This module contains a parser for D source code.
      | <span style="color: green; font-weight: normal;">'__MODULE__'</span>
      | <span style="color: green; font-weight: normal;">'__FUNCTION__'</span>
      | <span style="color: green; font-weight: normal;">'__PRETTY_FUNCTION__'</span>
-     | <a href="#IntegerLiteral"><span style="font-weight: bold">IntegerLiteral</span></a>
-     | <a href="#FloatLiteral"><span style="font-weight: bold">FloatLiteral</span></a>
-     | <a href="#StringLiteral"><span style="font-weight: bold">StringLiteral</span></a>
-     | <a href="#CharacterLiteral"><span style="font-weight: bold">CharacterLiteral</span></a>
-     | <a href="#arrayLiteral"><span style="font-weight: bold">arrayLiteral</span></a>
-     | <a href="#assocArrayLiteral"><span style="font-weight: bold">assocArrayLiteral</span></a>
-     | <span style="color: green; font-weight: normal;">'('</span> <a href="#expression"><span style="font-weight: bold">expression</span></a> <span style="color: green; font-weight: normal;">')'</span>
-     | <a href="#isExpression"><span style="font-weight: bold">isExpression</span></a>
-     | <a href="#lambdaExpression"><span style="font-weight: bold">lambdaExpression</span></a>
-     | <a href="#functionLiteralExpression"><span style="font-weight: bold">functionLiteralExpression</span></a>
-     | <a href="#traitsExpression"><span style="font-weight: bold">traitsExpression</span></a>
-     | <a href="#mixinExpression"><span style="font-weight: bold">mixinExpression</span></a>
-     | <a href="#importExpression"><span style="font-weight: bold">importExpression</span></a>
+     | <span style="color: green; font-weight: normal;">IntegerLiteral</span>
+     | <span style="color: green; font-weight: normal;">FloatLiteral</span>
+     | <span style="color: green; font-weight: normal;">StringLiteral</span>
+     | <span style="color: green; font-weight: normal;">CharacterLiteral</span>
      ;</pre><p></p>
 
 </dd>
@@ -2290,7 +2290,7 @@ This module contains a parser for D source code.
      | <span style="color: green; font-weight: normal;">'inout'</span>
      | <span style="color: green; font-weight: normal;">'shared'</span>
      | <span style="color: green; font-weight: normal;">'return'</span>
-     | <a href="#'__parameters'"><span style="font-weight: bold">'__parameters'</span></a>
+     | <span style="color: green; font-weight: normal;">'__parameters'</span>
      ;</pre><p></p>
 
 </dd>
@@ -2417,7 +2417,8 @@ This module contains a parser for D source code.
 <dd>Parses an XorExpression
 <p></p>
 <pre style="font-weight: bold"><a name="xorExpression"><span>xorExpression</span></a>:
-     <a href="#andExpression"><span style="font-weight: bold">andExpression</span></a> (<span style="color: green; font-weight: normal;">'^'</span> <a href="#andExpression"><span style="font-weight: bold">andExpression</span></a>)?
+       <a href="#andExpression"><span style="font-weight: bold">andExpression</span></a>
+     | <a href="#xorExpression"><span style="font-weight: bold">xorExpression</span></a> <span style="color: green; font-weight: normal;">'^'</span> <a href="#andExpression"><span style="font-weight: bold">andExpression</span></a>
      ;</pre><p></p>
 
 </dd>
