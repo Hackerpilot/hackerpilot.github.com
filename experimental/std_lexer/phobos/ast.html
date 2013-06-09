@@ -744,10 +744,6 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(NonEmptyStatementNoCaseNoDefault <i>nonEmptyStatementNoCaseNoDefault</i>);
-</dt>
-<dd><p></p>
-</dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(NonVoidInitializer <i>nonVoidInitializer</i>);
 </dt>
 <dd><p></p>
@@ -1009,10 +1005,6 @@ classes<p></p>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Type2 <i>type2</i>);
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Type3 <i>type3</i>);
 </dt>
 <dd><p></p>
 </dd>
@@ -1786,7 +1778,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".Catch.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+<dt class="d_decl"><a name=".Catch.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -1816,7 +1808,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ClassDeclaration.superClasses"></a>IdentifierList <a name="superClasses"></a><span class="ddoc_psymbol">superClasses</span>;
+<dt class="d_decl"><a name=".ClassDeclaration.baseClassList"></a>BaseClassList <a name="baseClassList"></a><span class="ddoc_psymbol">baseClassList</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -1892,11 +1884,11 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ConditionalStatement.trueStatement"></a>NonEmptyStatementNoCaseNoDefault <a name="trueStatement"></a><span class="ddoc_psymbol">trueStatement</span>;
+<dt class="d_decl"><a name=".ConditionalStatement.trueStatement"></a>StatementNoCaseNoDefault <a name="trueStatement"></a><span class="ddoc_psymbol">trueStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ConditionalStatement.falseStatement"></a>NonEmptyStatementNoCaseNoDefault <a name="falseStatement"></a><span class="ddoc_psymbol">falseStatement</span>;
+<dt class="d_decl"><a name=".ConditionalStatement.falseStatement"></a>StatementNoCaseNoDefault <a name="falseStatement"></a><span class="ddoc_psymbol">falseStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2225,7 +2217,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".Finally"></a>class <a name="Finally"></a><span class="ddoc_psymbol">Finally</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".Finally.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+<dl><dt class="d_decl"><a name=".Finally.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2250,7 +2242,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ForStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+<dt class="d_decl"><a name=".ForStatement.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2271,7 +2263,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ForeachRangeStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+<dt class="d_decl"><a name=".ForeachRangeStatement.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2292,7 +2284,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ForeachStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+<dt class="d_decl"><a name=".ForeachStatement.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2476,7 +2468,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".IdentifierOrTemplateChain"></a>class <a name="IdentifierOrTemplateChain"></a><span class="ddoc_psymbol">IdentifierOrTemplateChain</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".IdentifierOrTemplateChain.identifiers"></a>IdentifierOrTemplateInstance[] <a name="identifiers"></a><span class="ddoc_psymbol">identifiers</span>;
+<dl><dt class="d_decl"><a name=".IdentifierOrTemplateChain.identifierOrTemplateInstances"></a>IdentifierOrTemplateInstance[] <a name="identifierOrTemplateInstances"></a><span class="ddoc_psymbol">identifierOrTemplateInstances</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2506,11 +2498,11 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".IfStatement.thenStatement"></a>NonEmptyStatementNoCaseNoDefault <a name="thenStatement"></a><span class="ddoc_psymbol">thenStatement</span>;
+<dt class="d_decl"><a name=".IfStatement.thenStatement"></a>StatementNoCaseNoDefault <a name="thenStatement"></a><span class="ddoc_psymbol">thenStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".IfStatement.elseStatement"></a>NonEmptyStatementNoCaseNoDefault <a name="elseStatement"></a><span class="ddoc_psymbol">elseStatement</span>;
+<dt class="d_decl"><a name=".IfStatement.elseStatement"></a>StatementNoCaseNoDefault <a name="elseStatement"></a><span class="ddoc_psymbol">elseStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2527,16 +2519,20 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
+<dt class="d_decl"><a name=".ImportBind.hasRight"></a>bool <a name="hasRight"></a><span class="ddoc_psymbol">hasRight</span>;
+</dt>
+<dd><p></p>
+</dd>
 </dl>
 </dd>
 <dt class="d_decl"><a name=".ImportBindings"></a>class <a name="ImportBindings"></a><span class="ddoc_psymbol">ImportBindings</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".ImportBindings.bind"></a>SingleImport <a name="bind"></a><span class="ddoc_psymbol">bind</span>;
+<dl><dt class="d_decl"><a name=".ImportBindings.singleImport"></a>SingleImport <a name="singleImport"></a><span class="ddoc_psymbol">singleImport</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ImportBindings.ImportBinds"></a>ImportBind[] <a name="ImportBinds"></a><span class="ddoc_psymbol">ImportBinds</span>;
+<dt class="d_decl"><a name=".ImportBindings.importBinds"></a>ImportBind[] <a name="importBinds"></a><span class="ddoc_psymbol">importBinds</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2545,11 +2541,11 @@ classes<p></p>
 <dt class="d_decl"><a name=".ImportDeclaration"></a>class <a name="ImportDeclaration"></a><span class="ddoc_psymbol">ImportDeclaration</span>: std.d.ast.Declaration;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".ImportDeclaration.isStatic"></a>bool <a name="isStatic"></a><span class="ddoc_psymbol">isStatic</span>;
+<dl><dt class="d_decl"><a name=".ImportDeclaration.singleImports"></a>SingleImport[] <a name="singleImports"></a><span class="ddoc_psymbol">singleImports</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ImportDeclaration.importList"></a>ImportList <a name="importList"></a><span class="ddoc_psymbol">importList</span>;
+<dt class="d_decl"><a name=".ImportDeclaration.importBindings"></a>ImportBindings <a name="importBindings"></a><span class="ddoc_psymbol">importBindings</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2610,7 +2606,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".Initialize"></a>class <a name="Initialize"></a><span class="ddoc_psymbol">Initialize</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".Initialize.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+<dl><dt class="d_decl"><a name=".Initialize.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2640,7 +2636,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".InterfaceDeclaration.identifierList"></a>IdentifierList <a name="identifierList"></a><span class="ddoc_psymbol">identifierList</span>;
+<dt class="d_decl"><a name=".InterfaceDeclaration.baseClassList"></a>BaseClassList <a name="baseClassList"></a><span class="ddoc_psymbol">baseClassList</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2743,7 +2739,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".LastCatch"></a>class <a name="LastCatch"></a><span class="ddoc_psymbol">LastCatch</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".LastCatch.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+<dl><dt class="d_decl"><a name=".LastCatch.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2894,7 +2890,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".NonEmptyStatement"></a>class <a name="NonEmptyStatement"></a><span class="ddoc_psymbol">NonEmptyStatement</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".NonEmptyStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+<dl><dt class="d_decl"><a name=".NonEmptyStatement.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2912,122 +2908,122 @@ classes<p></p>
 </dd>
 </dl>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault"></a>class <a name="NonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">NonEmptyStatementNoCaseNoDefault</span>: std.d.ast.ASTNode;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault"></a>class <a name="StatementNoCaseNoDefault"></a><span class="ddoc_psymbol">StatementNoCaseNoDefault</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.labeledStatement"></a>LabeledStatement <a name="labeledStatement"></a><span class="ddoc_psymbol">labeledStatement</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.blockStatement"></a>BlockStatement <a name="blockStatement"></a><span class="ddoc_psymbol">blockStatement</span>;
+<dl><dt class="d_decl"><a name=".StatementNoCaseNoDefault.labeledStatement"></a>LabeledStatement <a name="labeledStatement"></a><span class="ddoc_psymbol">labeledStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.assignStatement"></a>AssignStatement <a name="assignStatement"></a><span class="ddoc_psymbol">assignStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.blockStatement"></a>BlockStatement <a name="blockStatement"></a><span class="ddoc_psymbol">blockStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.ifStatement"></a>IfStatement <a name="ifStatement"></a><span class="ddoc_psymbol">ifStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.assignStatement"></a>AssignStatement <a name="assignStatement"></a><span class="ddoc_psymbol">assignStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.whileStatement"></a>WhileStatement <a name="whileStatement"></a><span class="ddoc_psymbol">whileStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.ifStatement"></a>IfStatement <a name="ifStatement"></a><span class="ddoc_psymbol">ifStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.doStatement"></a>DoStatement <a name="doStatement"></a><span class="ddoc_psymbol">doStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.whileStatement"></a>WhileStatement <a name="whileStatement"></a><span class="ddoc_psymbol">whileStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.forStatement"></a>ForStatement <a name="forStatement"></a><span class="ddoc_psymbol">forStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.doStatement"></a>DoStatement <a name="doStatement"></a><span class="ddoc_psymbol">doStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.foreachStatement"></a>ForeachStatement <a name="foreachStatement"></a><span class="ddoc_psymbol">foreachStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.forStatement"></a>ForStatement <a name="forStatement"></a><span class="ddoc_psymbol">forStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.switchStatement"></a>SwitchStatement <a name="switchStatement"></a><span class="ddoc_psymbol">switchStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.foreachStatement"></a>ForeachStatement <a name="foreachStatement"></a><span class="ddoc_psymbol">foreachStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.finalSwitchStatement"></a>FinalSwitchStatement <a name="finalSwitchStatement"></a><span class="ddoc_psymbol">finalSwitchStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.switchStatement"></a>SwitchStatement <a name="switchStatement"></a><span class="ddoc_psymbol">switchStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.continueStatement"></a>ContinueStatement <a name="continueStatement"></a><span class="ddoc_psymbol">continueStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.finalSwitchStatement"></a>FinalSwitchStatement <a name="finalSwitchStatement"></a><span class="ddoc_psymbol">finalSwitchStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.breakStatement"></a>BreakStatement <a name="breakStatement"></a><span class="ddoc_psymbol">breakStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.continueStatement"></a>ContinueStatement <a name="continueStatement"></a><span class="ddoc_psymbol">continueStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.returnStatement"></a>ReturnStatement <a name="returnStatement"></a><span class="ddoc_psymbol">returnStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.breakStatement"></a>BreakStatement <a name="breakStatement"></a><span class="ddoc_psymbol">breakStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.gotoStatement"></a>GotoStatement <a name="gotoStatement"></a><span class="ddoc_psymbol">gotoStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.returnStatement"></a>ReturnStatement <a name="returnStatement"></a><span class="ddoc_psymbol">returnStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.withStatement"></a>WithStatement <a name="withStatement"></a><span class="ddoc_psymbol">withStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.gotoStatement"></a>GotoStatement <a name="gotoStatement"></a><span class="ddoc_psymbol">gotoStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.synchronizedStatement"></a>SynchronizedStatement <a name="synchronizedStatement"></a><span class="ddoc_psymbol">synchronizedStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.withStatement"></a>WithStatement <a name="withStatement"></a><span class="ddoc_psymbol">withStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.tryStatement"></a>TryStatement <a name="tryStatement"></a><span class="ddoc_psymbol">tryStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.synchronizedStatement"></a>SynchronizedStatement <a name="synchronizedStatement"></a><span class="ddoc_psymbol">synchronizedStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.throwStatement"></a>ThrowStatement <a name="throwStatement"></a><span class="ddoc_psymbol">throwStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.tryStatement"></a>TryStatement <a name="tryStatement"></a><span class="ddoc_psymbol">tryStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.scopeGuardStatement"></a>ScopeGuardStatement <a name="scopeGuardStatement"></a><span class="ddoc_psymbol">scopeGuardStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.throwStatement"></a>ThrowStatement <a name="throwStatement"></a><span class="ddoc_psymbol">throwStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.asmStatement"></a>AsmStatement <a name="asmStatement"></a><span class="ddoc_psymbol">asmStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.scopeGuardStatement"></a>ScopeGuardStatement <a name="scopeGuardStatement"></a><span class="ddoc_psymbol">scopeGuardStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.foreachRangeStatement"></a>ForeachRangeStatement <a name="foreachRangeStatement"></a><span class="ddoc_psymbol">foreachRangeStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.asmStatement"></a>AsmStatement <a name="asmStatement"></a><span class="ddoc_psymbol">asmStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.conditionalStatement"></a>ConditionalStatement <a name="conditionalStatement"></a><span class="ddoc_psymbol">conditionalStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.foreachRangeStatement"></a>ForeachRangeStatement <a name="foreachRangeStatement"></a><span class="ddoc_psymbol">foreachRangeStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.staticAssertStatement"></a>StaticAssertStatement <a name="staticAssertStatement"></a><span class="ddoc_psymbol">staticAssertStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.conditionalStatement"></a>ConditionalStatement <a name="conditionalStatement"></a><span class="ddoc_psymbol">conditionalStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.assertStatement"></a>AssertStatement <a name="assertStatement"></a><span class="ddoc_psymbol">assertStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.staticAssertStatement"></a>StaticAssertStatement <a name="staticAssertStatement"></a><span class="ddoc_psymbol">staticAssertStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.templateMixinStatement"></a>TemplateMixinStatement <a name="templateMixinStatement"></a><span class="ddoc_psymbol">templateMixinStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.assertStatement"></a>AssertStatement <a name="assertStatement"></a><span class="ddoc_psymbol">assertStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.versionSpecification"></a>VersionSpecification <a name="versionSpecification"></a><span class="ddoc_psymbol">versionSpecification</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.templateMixinStatement"></a>TemplateMixinStatement <a name="templateMixinStatement"></a><span class="ddoc_psymbol">templateMixinStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.debugSpecification"></a>DebugSpecification <a name="debugSpecification"></a><span class="ddoc_psymbol">debugSpecification</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.versionSpecification"></a>VersionSpecification <a name="versionSpecification"></a><span class="ddoc_psymbol">versionSpecification</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.functionCallStatement"></a>FunctionCallStatement <a name="functionCallStatement"></a><span class="ddoc_psymbol">functionCallStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.debugSpecification"></a>DebugSpecification <a name="debugSpecification"></a><span class="ddoc_psymbol">debugSpecification</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatementNoCaseNoDefault.deleteStatement"></a>DeleteStatement <a name="deleteStatement"></a><span class="ddoc_psymbol">deleteStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.functionCallStatement"></a>FunctionCallStatement <a name="functionCallStatement"></a><span class="ddoc_psymbol">functionCallStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.deleteStatement"></a>DeleteStatement <a name="deleteStatement"></a><span class="ddoc_psymbol">deleteStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3274,7 +3270,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ScopeGuardStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+<dt class="d_decl"><a name=".ScopeGuardStatement.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3318,11 +3314,11 @@ classes<p></p>
 <dt class="d_decl"><a name=".SingleImport"></a>class <a name="SingleImport"></a><span class="ddoc_psymbol">SingleImport</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".SingleImport.rename"></a>Token <a name="rename"></a><span class="ddoc_psymbol">rename</span>;
+<dl><dt class="d_decl"><a name=".SingleImport.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".SingleImport.import_"></a>IdentifierChain <a name="import_"></a><span class="ddoc_psymbol">import_</span>;
+<dt class="d_decl"><a name=".SingleImport.identifierChain"></a>IdentifierChain <a name="identifierChain"></a><span class="ddoc_psymbol">identifierChain</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3344,16 +3340,19 @@ classes<p></p>
 <dt class="d_decl"><a name=".Statement"></a>class <a name="Statement"></a><span class="ddoc_psymbol">Statement</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".Statement.nonEmptyStatement"></a>NonEmptyStatement <a name="nonEmptyStatement"></a><span class="ddoc_psymbol">nonEmptyStatement</span>;
+<dl><dt class="d_decl"><a name=".Statement.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
 </dt>
 <dd><p></p>
 </dd>
-</dl>
-</dd>
-<dt class="d_decl"><a name=".StatementNoCaseNoDefault"></a>class <a name="StatementNoCaseNoDefault"></a><span class="ddoc_psymbol">StatementNoCaseNoDefault</span>: std.d.ast.ASTNode;
+<dt class="d_decl"><a name=".Statement.caseStatement"></a>CaseStatement <a name="caseStatement"></a><span class="ddoc_psymbol">caseStatement</span>;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".StatementNoCaseNoDefault.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+</dd>
+<dt class="d_decl"><a name=".Statement.caseRangeStatement"></a>CaseRangeStatement <a name="caseRangeStatement"></a><span class="ddoc_psymbol">caseRangeStatement</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Statement.defaultStatement"></a>DefaultStatement <a name="defaultStatement"></a><span class="ddoc_psymbol">defaultStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3528,7 +3527,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".SynchronizedStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+<dt class="d_decl"><a name=".SynchronizedStatement.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3833,7 +3832,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".TryStatement"></a>class <a name="TryStatement"></a><span class="ddoc_psymbol">TryStatement</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".TryStatement.nonEmptyStatementNoCaseNoDefault"></a>NonEmptyStatementNoCaseNoDefault <a name="nonEmptyStatementNoCaseNoDefault"></a><span class="ddoc_psymbol">nonEmptyStatementNoCaseNoDefault</span>;
+<dl><dt class="d_decl"><a name=".TryStatement.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3854,6 +3853,10 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
+<dt class="d_decl"><a name=".Type.typeSuffixes"></a>TypeSuffix[] <a name="typeSuffixes"></a><span class="ddoc_psymbol">typeSuffixes</span>;
+</dt>
+<dd><p></p>
+</dd>
 <dt class="d_decl"><a name=".Type.type2"></a>Type2 <a name="type2"></a><span class="ddoc_psymbol">type2</span>;
 </dt>
 <dd><p></p>
@@ -3863,44 +3866,27 @@ classes<p></p>
 <dt class="d_decl"><a name=".Type2"></a>class <a name="Type2"></a><span class="ddoc_psymbol">Type2</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".Type2.type2"></a>Type2 <a name="type2"></a><span class="ddoc_psymbol">type2</span>;
+<dl><dt class="d_decl"><a name=".Type2.basicType"></a>BasicType <a name="basicType"></a><span class="ddoc_psymbol">basicType</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".Type2.type3"></a>Type3 <a name="type3"></a><span class="ddoc_psymbol">type3</span>;
+<dt class="d_decl"><a name=".Type2.symbol"></a>Symbol <a name="symbol"></a><span class="ddoc_psymbol">symbol</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".Type2.typeSuffix"></a>TypeSuffix <a name="typeSuffix"></a><span class="ddoc_psymbol">typeSuffix</span>;
+<dt class="d_decl"><a name=".Type2.typeofExpression"></a>TypeofExpression <a name="typeofExpression"></a><span class="ddoc_psymbol">typeofExpression</span>;
 </dt>
 <dd><p></p>
 </dd>
-</dl>
-</dd>
-<dt class="d_decl"><a name=".Type3"></a>class <a name="Type3"></a><span class="ddoc_psymbol">Type3</span>: std.d.ast.ASTNode;
-</dt>
-<dd><p></p>
-<dl><dt class="d_decl"><a name=".Type3.builtinType"></a>BasicType <a name="builtinType"></a><span class="ddoc_psymbol">builtinType</span>;
+<dt class="d_decl"><a name=".Type2.identifierOrTemplateChain"></a>IdentifierOrTemplateChain <a name="identifierOrTemplateChain"></a><span class="ddoc_psymbol">identifierOrTemplateChain</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".Type3.symbol"></a>Symbol <a name="symbol"></a><span class="ddoc_psymbol">symbol</span>;
+<dt class="d_decl"><a name=".Type2.typeConstructor"></a>TypeConstructor <a name="typeConstructor"></a><span class="ddoc_psymbol">typeConstructor</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".Type3.typeofExpression"></a>TypeofExpression <a name="typeofExpression"></a><span class="ddoc_psymbol">typeofExpression</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".Type3.identifierOrTemplateChain"></a>IdentifierOrTemplateChain <a name="identifierOrTemplateChain"></a><span class="ddoc_psymbol">identifierOrTemplateChain</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".Type3.typeConstructor"></a>TypeConstructor <a name="typeConstructor"></a><span class="ddoc_psymbol">typeConstructor</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".Type3.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
+<dt class="d_decl"><a name=".Type2.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3953,6 +3939,10 @@ classes<p></p>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".TypeSuffix.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TypeSuffix.parameters"></a>Parameters <a name="parameters"></a><span class="ddoc_psymbol">parameters</span>;
 </dt>
 <dd><p></p>
 </dd>
