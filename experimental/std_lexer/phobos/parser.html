@@ -243,7 +243,7 @@ The grammar format used in the documentation of this module generally follows
  </ul>
 <p></p>
 
- The grammar for D starts with the <a href="#module">module</a> rule.
+ The grammar for D starts with the <a href="#.module">module</a> rule.
 
 <p></p>
 <b>Examples:</b><br><pre class="d_code"><span class="d_keyword">import</span> std.d.lexer;
@@ -294,8 +294,8 @@ void main()
 <dd>Parses an AddExpression.
 <p></p>
 <pre class="d_code"><a name=".addExpression"></a> <b>addExpression</b>:
-       <a href="#mulExpression"><b>mulExpression</b></a>
-     | <a href="#addExpression"><b>addExpression</b></a> (<span class="d_string">'+'</span> | <span class="d_string">'-'</span> | <span class="d_string">'~'</span>) <a href="#mulExpression"><b>mulExpression</b></a>
+       <a href="#.mulExpression"><b>mulExpression</b></a>
+     | <a href="#.addExpression"><b>addExpression</b></a> (<span class="d_string">'+'</span> | <span class="d_string">'-'</span> | <span class="d_string">'~'</span>) <a href="#.mulExpression"><b>mulExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -304,7 +304,7 @@ void main()
 <dd>Parses an AliasDeclaration.
 <p></p>
 <pre class="d_code"><a name=".aliasDeclaration"></a> <b>aliasDeclaration</b>:
-     <span class="d_string">'alias'</span> (<a href="#aliasInitializer"><b>aliasInitializer</b></a> (<span class="d_string">','</span> <a href="#aliasInitializer"><b>aliasInitializer</b></a>)* | <a href="#type"><b>type</b></a> <a href="#declarator"><b>declarator</b></a>) <span class="d_string">';'</span>
+     <span class="d_string">'alias'</span> (<a href="#.aliasInitializer"><b>aliasInitializer</b></a> (<span class="d_string">','</span> <a href="#.aliasInitializer"><b>aliasInitializer</b></a>)* | <a href="#.type"><b>type</b></a> <a href="#.declarator"><b>declarator</b></a>) <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -312,7 +312,7 @@ void main()
 </dt>
 <dd>Parses an AliasInitializer
  <pre class="d_code"><a name=".aliasInitializer"></a> <b>aliasInitializer</b>:
-     <span class="d_string">Identifier</span> <span class="d_string">'='</span> <a href="#type"><b>type</b></a>
+     <span class="d_string">Identifier</span> <span class="d_string">'='</span> <a href="#.type"><b>type</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -336,8 +336,8 @@ void main()
 </dt>
 <dd>Parses an AndAndExpression
  <pre class="d_code"><a name=".andAndExpression"></a> <b>andAndExpression</b>:
-       <a href="#orExpression"><b>orExpression</b></a>
-     | <a href="#andAndExpression"><b>andAndExpression</b></a> <span class="d_string">'&amp;&amp;'</span> <a href="#orExpression"><b>orExpression</b></a>
+       <a href="#.orExpression"><b>orExpression</b></a>
+     | <a href="#.andAndExpression"><b>andAndExpression</b></a> <span class="d_string">'&amp;&amp;'</span> <a href="#.orExpression"><b>orExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -346,8 +346,8 @@ void main()
 <dd>Parses an AndExpression
 <p></p>
 <pre class="d_code"><a name=".andExpression"></a> <b>andExpression</b>:
-       <a href="#cmpExpression"><b>cmpExpression</b></a>
-     | <a href="#andExpression"><b>andExpression</b></a> <span class="d_string">'&amp;'</span> <a href="#cmpExpression"><b>cmpExpression</b></a>
+       <a href="#.cmpExpression"><b>cmpExpression</b></a>
+     | <a href="#.andExpression"><b>andExpression</b></a> <span class="d_string">'&amp;'</span> <a href="#.cmpExpression"><b>cmpExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -356,7 +356,7 @@ void main()
 <dd>Parses an ArgumentList
 <p></p>
 <pre class="d_code"><a name=".argumentList"></a> <b>argumentList</b>:
-     <a href="#assignExpression"><b>assignExpression</b></a> (<span class="d_string">','</span> <a href="#assignExpression"><b>assignExpression</b></a>?)*
+     <a href="#.assignExpression"><b>assignExpression</b></a> (<span class="d_string">','</span> <a href="#.assignExpression"><b>assignExpression</b></a>?)*
      ;</pre><p></p>
 
 </dd>
@@ -365,7 +365,7 @@ void main()
 <dd>Parses Arguments
 <p></p>
 <pre class="d_code"><a name=".arguments"></a> <b>arguments</b>:
-     <span class="d_string">'('</span> <a href="#argumentList"><b>argumentList</b></a>? <span class="d_string">')'</span>
+     <span class="d_string">'('</span> <a href="#.argumentList"><b>argumentList</b></a>? <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -375,7 +375,7 @@ void main()
 <p></p>
 <pre class="d_code"><a name=".arrayInitializer"></a> <b>arrayInitializer</b>:
        <span class="d_string">'['</span> <span class="d_string">']'</span>
-     | <span class="d_string">'['</span> <a href="#arrayMemberInitialization"><b>arrayMemberInitialization</b></a> (<span class="d_string">','</span> <a href="#arrayMemberInitialization"><b>arrayMemberInitialization</b></a>)* <span class="d_string">']'</span>
+     | <span class="d_string">'['</span> <a href="#.arrayMemberInitialization"><b>arrayMemberInitialization</b></a> (<span class="d_string">','</span> <a href="#.arrayMemberInitialization"><b>arrayMemberInitialization</b></a>)* <span class="d_string">']'</span>
      ;</pre><p></p>
 
 </dd>
@@ -384,7 +384,7 @@ void main()
 <dd>Parses an ArrayLiteral
 <p></p>
 <pre class="d_code"><a name=".arrayLiteral"></a> <b>arrayLiteral</b>:
-     <span class="d_string">'['</span> <a href="#argumentList"><b>argumentList</b></a> <span class="d_string">']'</span>
+     <span class="d_string">'['</span> <a href="#.argumentList"><b>argumentList</b></a> <span class="d_string">']'</span>
      ;</pre><p></p>
 
 </dd>
@@ -393,7 +393,7 @@ void main()
 <dd>Parses an ArrayMemberInitialization
 <p></p>
 <pre class="d_code"><a name=".arrayMemberInitialization"></a> <b>arrayMemberInitialization</b>:
-     (<a href="#assignExpression"><b>assignExpression</b></a> <span class="d_string">':'</span>)? <a href="#nonVoidInitializer"><b>nonVoidInitializer</b></a>
+     (<a href="#.assignExpression"><b>assignExpression</b></a> <span class="d_string">':'</span>)? <a href="#.nonVoidInitializer"><b>nonVoidInitializer</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -402,8 +402,8 @@ void main()
 <dd>Parses an AsmAddExp
 <p></p>
 <pre class="d_code"><a name=".asmAddExp"></a> <b>asmAddExp</b>:
-       <a href="#asmMulExp"><b>asmMulExp</b></a>
-     | <a href="#asmAddExp"><b>asmAddExp</b></a> (<span class="d_string">'+'</span> | <span class="d_string">'-'</span>) <a href="#asmMulExp"><b>asmMulExp</b></a>
+       <a href="#.asmMulExp"><b>asmMulExp</b></a>
+     | <a href="#.asmAddExp"><b>asmAddExp</b></a> (<span class="d_string">'+'</span> | <span class="d_string">'-'</span>) <a href="#.asmMulExp"><b>asmMulExp</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -412,7 +412,7 @@ void main()
 <dd>Parses an AsmAndExp
 <p></p>
 <pre class="d_code"><a name=".asmAndExp"></a> <b>asmAndExp</b>:
-     <a href="#asmEqualExp"><b>asmEqualExp</b></a> (<span class="d_string">'&amp;'</span> <a href="#asmEqualExp"><b>asmEqualExp</b></a>)?
+     <a href="#.asmEqualExp"><b>asmEqualExp</b></a> (<span class="d_string">'&amp;'</span> <a href="#.asmEqualExp"><b>asmEqualExp</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -421,8 +421,8 @@ void main()
 <dd>Parses an AsmBrExp
 <p></p>
 <pre class="d_code"><a name=".asmBrExp"></a> <b>asmBrExp</b>:
-       <a href="#asmUnaExp"><b>asmUnaExp</b></a>
-     | <a href="#asmBrExp"><b>asmBrExp</b></a> <span class="d_string">'['</span> <a href="#asmExp"><b>asmExp</b></a> <span class="d_string">']'</span>
+       <a href="#.asmUnaExp"><b>asmUnaExp</b></a>
+     | <a href="#.asmBrExp"><b>asmBrExp</b></a> <span class="d_string">'['</span> <a href="#.asmExp"><b>asmExp</b></a> <span class="d_string">']'</span>
      ;</pre><p></p>
 
 </dd>
@@ -431,7 +431,7 @@ void main()
 <dd>Parses an AsmEqualExp
 <p></p>
 <pre class="d_code"><a name=".asmEqualExp"></a> <b>asmEqualExp</b>:
-     <a href="#asmRelExp"><b>asmRelExp</b></a> (('==' | '!=') <a href="#asmRelExp"><b>asmRelExp</b></a>)?
+     <a href="#.asmRelExp"><b>asmRelExp</b></a> (('==' | '!=') <a href="#.asmRelExp"><b>asmRelExp</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -440,7 +440,7 @@ void main()
 <dd>Parses an AsmExp
 <p></p>
 <pre class="d_code"><a name=".asmExp"></a> <b>asmExp</b>:
-     <a href="#asmLogOrExp"><b>asmLogOrExp</b></a> (<span class="d_string">'?'</span> <a href="#asmExp"><b>asmExp</b></a> <span class="d_string">':'</span> <a href="#asmExp"><b>asmExp</b></a>)?
+     <a href="#.asmLogOrExp"><b>asmLogOrExp</b></a> (<span class="d_string">'?'</span> <a href="#.asmExp"><b>asmExp</b></a> <span class="d_string">':'</span> <a href="#.asmExp"><b>asmExp</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -450,11 +450,11 @@ void main()
 <p></p>
 <pre class="d_code"><a name=".asmInstruction"></a> <b>asmInstruction</b>:
      <span class="d_string">Identifier</span>
-     | <span class="d_string">'align'</span> I<a href="#ntegerLiteral"><b>ntegerLiteral</b></a>
+     | <span class="d_string">'align'</span> I<a href="#.ntegerLiteral"><b>ntegerLiteral</b></a>
      | <span class="d_string">'align'</span> <span class="d_string">Identifier</span>
-     | <span class="d_string">Identifier</span> <span class="d_string">':'</span> <a href="#asmInstruction"><b>asmInstruction</b></a>
-     | <span class="d_string">Identifier</span> <a href="#asmExp"><b>asmExp</b></a>
-     | <a href="#opcode"><b>opcode</b></a> <a href="#operands"><b>operands</b></a>
+     | <span class="d_string">Identifier</span> <span class="d_string">':'</span> <a href="#.asmInstruction"><b>asmInstruction</b></a>
+     | <span class="d_string">Identifier</span> <a href="#.asmExp"><b>asmExp</b></a>
+     | <a href="#.opcode"><b>opcode</b></a> <a href="#.operands"><b>operands</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -463,7 +463,7 @@ void main()
 <dd>Parses an AsmLogAndExp
 <p></p>
 <pre class="d_code"><a name=".asmLogAndExp"></a> <b>asmLogAndExp</b>:
-     <a href="#asmOrExp"><b>asmOrExp</b></a> ('&amp;&amp;' <a href="#asmOrExp"><b>asmOrExp</b></a>)?
+     <a href="#.asmOrExp"><b>asmOrExp</b></a> ('&amp;&amp;' <a href="#.asmOrExp"><b>asmOrExp</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -472,7 +472,7 @@ void main()
 <dd>Parses an AsmLogOrExp
 <p></p>
 <pre class="d_code"><a name=".asmLogOrExp"></a> <b>asmLogOrExp</b>:
-     <a href="#asmLogAndExp"><b>asmLogAndExp</b></a> ('||' <a href="#asmLogAndExp"><b>asmLogAndExp</b></a>)?
+     <a href="#.asmLogAndExp"><b>asmLogAndExp</b></a> ('||' <a href="#.asmLogAndExp"><b>asmLogAndExp</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -481,7 +481,7 @@ void main()
 <dd>Parses an AsmMulExp
 <p></p>
 <pre class="d_code"><a name=".asmMulExp"></a> <b>asmMulExp</b>:
-     <a href="#asmBrExp"><b>asmBrExp</b></a> ((<span class="d_string">'*'</span> | <span class="d_string">'/'</span> | <span class="d_string">'%'</span>) <a href="#asmBrExp"><b>asmBrExp</b></a>)?
+     <a href="#.asmBrExp"><b>asmBrExp</b></a> ((<span class="d_string">'*'</span> | <span class="d_string">'/'</span> | <span class="d_string">'%'</span>) <a href="#.asmBrExp"><b>asmBrExp</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -490,7 +490,7 @@ void main()
 <dd>Parses an AsmOrExp
 <p></p>
 <pre class="d_code"><a name=".asmOrExp"></a> <b>asmOrExp</b>:
-     <a href="#asmXorExp"><b>asmXorExp</b></a> (<span class="d_string">'|'</span> <a href="#asmXorExp"><b>asmXorExp</b></a>)?
+     <a href="#.asmXorExp"><b>asmXorExp</b></a> (<span class="d_string">'|'</span> <a href="#.asmXorExp"><b>asmXorExp</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -499,10 +499,10 @@ void main()
 <dd>Parses an AsmPrimaryExp
 <p></p>
 <pre class="d_code"><a name=".asmPrimaryExp"></a> <b>asmPrimaryExp</b>:
-       <a href="#IntegerLiteral"><b>IntegerLiteral</b></a>
-     | <a href="#FloatLiteral"><b>FloatLiteral</b></a>
-     | <a href="#register"><b>register</b></a>
-     | <a href="#identifierChain"><b>identifierChain</b></a>
+       <a href="#.IntegerLiteral"><b>IntegerLiteral</b></a>
+     | <a href="#.FloatLiteral"><b>FloatLiteral</b></a>
+     | <a href="#.register"><b>register</b></a>
+     | <a href="#.identifierChain"><b>identifierChain</b></a>
      | <span class="d_string">'$'</span>
      ;</pre><p></p>
 
@@ -512,7 +512,7 @@ void main()
 <dd>Parses an AsmRelExp
 <p></p>
 <pre class="d_code"><a name=".asmRelExp"></a> <b>asmRelExp</b>:
-     <a href="#asmShiftExp"><b>asmShiftExp</b></a> ((<span class="d_string">'&lt;'</span> | <span class="d_string">'&lt;='</span> | <span class="d_string">'&gt;'</span> | <span class="d_string">'&gt;='</span>) <a href="#asmShiftExp"><b>asmShiftExp</b></a>)?
+     <a href="#.asmShiftExp"><b>asmShiftExp</b></a> ((<span class="d_string">'&lt;'</span> | <span class="d_string">'&lt;='</span> | <span class="d_string">'&gt;'</span> | <span class="d_string">'&gt;='</span>) <a href="#.asmShiftExp"><b>asmShiftExp</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -521,7 +521,7 @@ void main()
 <dd>Parses an AsmShiftExp
 <p></p>
 <pre class="d_code"><a name=".asmShiftExp"></a> <b>asmShiftExp</b>:
-     <a href="#asmAddExp"><b>asmAddExp</b></a> ((<span class="d_string">'&lt;&lt;'</span> | <span class="d_string">'&gt;&gt;'</span> | <span class="d_string">'&gt;&gt;&gt;'</span>) <a href="#asmAddExp"><b>asmAddExp</b></a>)?
+     <a href="#.asmAddExp"><b>asmAddExp</b></a> ((<span class="d_string">'&lt;&lt;'</span> | <span class="d_string">'&gt;&gt;'</span> | <span class="d_string">'&gt;&gt;&gt;'</span>) <a href="#.asmAddExp"><b>asmAddExp</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -530,7 +530,7 @@ void main()
 <dd>Parses an AsmStatement
 <p></p>
 <pre class="d_code"><a name=".asmStatement"></a> <b>asmStatement</b>:
-     <span class="d_string">'asm'</span> <span class="d_string">'{'</span> <a href="#asmInstruction"><b>asmInstruction</b></a>+ <span class="d_string">'}'</span>
+     <span class="d_string">'asm'</span> <span class="d_string">'{'</span> <a href="#.asmInstruction"><b>asmInstruction</b></a>+ <span class="d_string">'}'</span>
      ;</pre><p></p>
 
 </dd>
@@ -554,13 +554,13 @@ void main()
 <dd>Parses an AsmUnaExp
 <p></p>
 <pre class="d_code"><a name=".asmUnaExp"></a> <b>asmUnaExp</b>:
-       <a href="#asmTypePrefix"><b>asmTypePrefix</b></a> <a href="#asmExp"><b>asmExp</b></a>
-     | <span class="d_string">Identifier</span> <a href="#asmExp"><b>asmExp</b></a>
-     | <span class="d_string">'+'</span> <a href="#asmUnaExp"><b>asmUnaExp</b></a>
-     | <span class="d_string">'-'</span> <a href="#asmUnaExp"><b>asmUnaExp</b></a>
-     | <span class="d_string">'!'</span> <a href="#asmUnaExp"><b>asmUnaExp</b></a>
-     | <span class="d_string">'~'</span> <a href="#asmUnaExp"><b>asmUnaExp</b></a>
-     | <a href="#asmPrimaryExp"><b>asmPrimaryExp</b></a>
+       <a href="#.asmTypePrefix"><b>asmTypePrefix</b></a> <a href="#.asmExp"><b>asmExp</b></a>
+     | <span class="d_string">Identifier</span> <a href="#.asmExp"><b>asmExp</b></a>
+     | <span class="d_string">'+'</span> <a href="#.asmUnaExp"><b>asmUnaExp</b></a>
+     | <span class="d_string">'-'</span> <a href="#.asmUnaExp"><b>asmUnaExp</b></a>
+     | <span class="d_string">'!'</span> <a href="#.asmUnaExp"><b>asmUnaExp</b></a>
+     | <span class="d_string">'~'</span> <a href="#.asmUnaExp"><b>asmUnaExp</b></a>
+     | <a href="#.asmPrimaryExp"><b>asmPrimaryExp</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -569,7 +569,7 @@ void main()
 <dd>Parses an AsmXorExp
 <p></p>
 <pre class="d_code"><a name=".asmXorExp"></a> <b>asmXorExp</b>:
-     <a href="#asmAndExp"><b>asmAndExp</b></a> (<span class="d_string">'^'</span> <a href="#asmAndExp"><b>asmAndExp</b></a>)?
+     <a href="#.asmAndExp"><b>asmAndExp</b></a> (<span class="d_string">'^'</span> <a href="#.asmAndExp"><b>asmAndExp</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -578,7 +578,7 @@ void main()
 <dd>Parses an AssertExpression
 <p></p>
 <pre class="d_code"><a name=".assertExpression"></a> <b>assertExpression</b>:
-     <span class="d_string">'assert'</span> <span class="d_string">'('</span> <a href="#assignExpression"><b>assignExpression</b></a> (<span class="d_string">','</span> <a href="#assignExpression"><b>assignExpression</b></a>)? <span class="d_string">')'</span>
+     <span class="d_string">'assert'</span> <span class="d_string">'('</span> <a href="#.assignExpression"><b>assignExpression</b></a> (<span class="d_string">','</span> <a href="#.assignExpression"><b>assignExpression</b></a>)? <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -587,7 +587,7 @@ void main()
 <dd>Parses an AssignExpression
 <p></p>
 <pre class="d_code"><a name=".assignExpression"></a> <b>assignExpression</b>:
-     <a href="#ternaryExpression"><b>ternaryExpression</b></a> (<a href="#assignOperator"><b>assignOperator</b></a> <a href="#assignExpression"><b>assignExpression</b></a>)?
+     <a href="#.ternaryExpression"><b>ternaryExpression</b></a> (<a href="#.assignOperator"><b>assignOperator</b></a> <a href="#.assignExpression"><b>assignExpression</b></a>)?
      ;
 <a name=".assignOperator"></a> <b>assignOperator</b>:
        <span class="d_string">'='</span>
@@ -612,7 +612,7 @@ void main()
 <dd>Parses an AssocArrayLiteral
 <p></p>
 <pre class="d_code"><a name=".assocArrayLiteral"></a> <b>assocArrayLiteral</b>:
-     <span class="d_string">'['</span> <a href="#keyValuePairs"><b>keyValuePairs</b></a> <span class="d_string">']'</span>
+     <span class="d_string">'['</span> <a href="#.keyValuePairs"><b>keyValuePairs</b></a> <span class="d_string">']'</span>
      ;</pre><p></p>
 
 </dd>
@@ -621,7 +621,7 @@ void main()
 <dd>Parses an AtAttribute
 <p></p>
 <pre class="d_code"><a name=".atAttribute"></a> <b>atAttribute</b>:
-     <span class="d_string">'@'</span> (<span class="d_string">Identifier</span> | <span class="d_string">'('</span> <a href="#argumentList"><b>argumentList</b></a> <span class="d_string">')'</span> | <a href="#functionCallExpression"><b>functionCallExpression</b></a>)
+     <span class="d_string">'@'</span> (<span class="d_string">Identifier</span> | <span class="d_string">'('</span> <a href="#.argumentList"><b>argumentList</b></a> <span class="d_string">')'</span> | <a href="#.functionCallExpression"><b>functionCallExpression</b></a>)
      ;</pre><p></p>
 
 </dd>
@@ -630,11 +630,11 @@ void main()
 <dd>Parses an Attribute
 <p></p>
 <pre class="d_code"><a name=".attribute"></a> <b>attribute</b>:
-       <a href="#linkageAttribute"><b>linkageAttribute</b></a>
-     | <a href="#alignAttribute"><b>alignAttribute</b></a>
-     | <a href="#pragmaExpression"><b>pragmaExpression</b></a>
-     | <a href="#deprecated"><b>deprecated</b></a>
-     | <a href="#atAttribute"><b>atAttribute</b></a>
+       <a href="#.linkageAttribute"><b>linkageAttribute</b></a>
+     | <a href="#.alignAttribute"><b>alignAttribute</b></a>
+     | <a href="#.pragmaExpression"><b>pragmaExpression</b></a>
+     | <a href="#.deprecated"><b>deprecated</b></a>
+     | <a href="#.atAttribute"><b>atAttribute</b></a>
      | <span class="d_string">'private'</span>
      | <span class="d_string">'package'</span>
      | <span class="d_string">'protected'</span>
@@ -664,7 +664,7 @@ void main()
 <dd>Parses an AttributedDeclaration
 <p></p>
 <pre class="d_code"><a name=".attributedDeclaration"></a> <b>attributedDeclaration</b>:
-     <a href="#attribute"><b>attribute</b></a> (<span class="d_string">':'</span> | <a href="#declaration"><b>declaration</b></a> | <span class="d_string">'{'</span> <a href="#declaration"><b>declaration</b></a>* <span class="d_string">'}'</span>)
+     <a href="#.attribute"><b>attribute</b></a> (<span class="d_string">':'</span> | <a href="#.declaration"><b>declaration</b></a> | <span class="d_string">'{'</span> <a href="#.declaration"><b>declaration</b></a>* <span class="d_string">'}'</span>)
      ;</pre><p></p>
 
 </dd>
@@ -673,7 +673,7 @@ void main()
 <dd>Parses an AutoDeclaration
 <p></p>
 <pre class="d_code"><a name=".autoDeclaration"></a> <b>autoDeclaration</b>:
-     <a href="#storageClass"><b>storageClass</b></a> <span class="d_string">Identifier</span> <span class="d_string">'='</span> <a href="#initializer"><b>initializer</b></a> (<span class="d_string">','</span> <span class="d_string">Identifier</span> <span class="d_string">'='</span> <a href="#initializer"><b>initializer</b></a>)* <span class="d_string">';'</span>
+     <a href="#.storageClass"><b>storageClass</b></a> <span class="d_string">Identifier</span> <span class="d_string">'='</span> <a href="#.initializer"><b>initializer</b></a> (<span class="d_string">','</span> <span class="d_string">Identifier</span> <span class="d_string">'='</span> <a href="#.initializer"><b>initializer</b></a>)* <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -682,7 +682,7 @@ void main()
 <dd>Parses a BlockStatement
 <p></p>
 <pre class="d_code"><a name=".blockStatement"></a> <b>blockStatement</b>:
-     <span class="d_string">'{'</span> <a href="#declarationsAndStatements"><b>declarationsAndStatements</b></a>? <span class="d_string">'}'</span>
+     <span class="d_string">'{'</span> <a href="#.declarationsAndStatements"><b>declarationsAndStatements</b></a>? <span class="d_string">'}'</span>
      ;</pre><p></p>
 
 </dd>
@@ -691,7 +691,7 @@ void main()
 <dd>Parses a BodyStatement
 <p></p>
 <pre class="d_code"><a name=".bodyStatement"></a> <b>bodyStatement</b>:
-     <span class="d_string">'body'</span> <a href="#blockStatement"><b>blockStatement</b></a>
+     <span class="d_string">'body'</span> <a href="#.blockStatement"><b>blockStatement</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -709,7 +709,7 @@ void main()
 <dd>Parses a BaseClass
 <p></p>
 <pre class="d_code"><a name=".baseClass"></a> <b>baseClass</b>:
-     (<a href="#typeofExpression"><b>typeofExpression</b></a> <span class="d_string">'.'</span>)? <a href="#identifierOrTemplateChain"><b>identifierOrTemplateChain</b></a>
+     (<a href="#.typeofExpression"><b>typeofExpression</b></a> <span class="d_string">'.'</span>)? <a href="#.identifierOrTemplateChain"><b>identifierOrTemplateChain</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -718,7 +718,7 @@ void main()
 <dd>Parses a BaseClassList
 <p></p>
 <pre class="d_code"><a name=".baseClassList"></a> <b>baseClassList</b>:
-     <a href="#baseClass"><b>baseClass</b></a> (<span class="d_string">','</span> <a href="#baseClass"><b>baseClass</b></a>)*
+     <a href="#.baseClass"><b>baseClass</b></a> (<span class="d_string">','</span> <a href="#.baseClass"><b>baseClass</b></a>)*
      ;</pre><p></p>
 
 </dd>
@@ -757,7 +757,7 @@ void main()
 <dd>Parses a CaseRangeStatement
 <p></p>
 <pre class="d_code"><a name=".caseRangeStatement"></a> <b>caseRangeStatement</b>:
-     <span class="d_string">'case'</span> <a href="#assignExpression"><b>assignExpression</b></a> <span class="d_string">':'</span> <span class="d_string">'...'</span> <span class="d_string">'case'</span> <a href="#assignExpression"><b>assignExpression</b></a> <span class="d_string">':'</span> <a href="#declarationsAndStatements"><b>declarationsAndStatements</b></a>
+     <span class="d_string">'case'</span> <a href="#.assignExpression"><b>assignExpression</b></a> <span class="d_string">':'</span> <span class="d_string">'...'</span> <span class="d_string">'case'</span> <a href="#.assignExpression"><b>assignExpression</b></a> <span class="d_string">':'</span> <a href="#.declarationsAndStatements"><b>declarationsAndStatements</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -766,7 +766,7 @@ void main()
 <dd>Parses an CaseStatement
 <p></p>
 <pre class="d_code"><a name=".caseStatement"></a> <b>caseStatement</b>:
-     <span class="d_string">'case'</span> <a href="#<i>argumentList</i>"><b><i>argumentList</i></b></a> <span class="d_string">':'</span> <a href="#declarationsAndStatements"><b>declarationsAndStatements</b></a>
+     <span class="d_string">'case'</span> <a href="#.<i>argumentList</i>"><b><i>argumentList</i></b></a> <span class="d_string">':'</span> <a href="#.declarationsAndStatements"><b>declarationsAndStatements</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -775,7 +775,7 @@ void main()
 <dd>Parses a CastExpression
 <p></p>
 <pre class="d_code"><a name=".castExpression"></a> <b>castExpression</b>:
-     <span class="d_string">'cast'</span> <span class="d_string">'('</span> (<a href="#type"><b>type</b></a> | <a href="#castQualifier"><b>castQualifier</b></a>)? <span class="d_string">')'</span> <a href="#unaryExpression"><b>unaryExpression</b></a>
+     <span class="d_string">'cast'</span> <span class="d_string">'('</span> (<a href="#.type"><b>type</b></a> | <a href="#.castQualifier"><b>castQualifier</b></a>)? <span class="d_string">')'</span> <a href="#.unaryExpression"><b>unaryExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -800,7 +800,7 @@ void main()
 <dd>Parses a Catch
 <p></p>
 <pre class="d_code"><a name=".catch"></a> <b>catch</b>:
-     <span class="d_string">'catch'</span> <span class="d_string">'('</span> <a href="#type"><b>type</b></a> <span class="d_string">Identifier</span>? <span class="d_string">')'</span> <a href="#nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a>
+     <span class="d_string">'catch'</span> <span class="d_string">'('</span> <a href="#.type"><b>type</b></a> <span class="d_string">Identifier</span>? <span class="d_string">')'</span> <a href="#.nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -809,8 +809,8 @@ void main()
 <dd>Parses a Catches
 <p></p>
 <pre class="d_code"><a name=".catches"></a> <b>catches</b>:
-       <a href="#catch"><b>catch</b></a>+
-     | <a href="#catch"><b>catch</b></a>* <a href="#lastCatch"><b>lastCatch</b></a>
+       <a href="#.catch"><b>catch</b></a>+
+     | <a href="#.catch"><b>catch</b></a>* <a href="#.lastCatch"><b>lastCatch</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -819,7 +819,7 @@ void main()
 <dd>Parses a ClassBody
 <p></p>
 <pre class="d_code"><a name=".classBody"></a> <b>classBody</b>:
-     <span class="d_string">'{'</span> <a href="#declarationOrInvariant"><b>declarationOrInvariant</b></a>* <span class="d_string">'}'</span>
+     <span class="d_string">'{'</span> <a href="#.declarationOrInvariant"><b>declarationOrInvariant</b></a>* <span class="d_string">'}'</span>
      ;</pre><p></p>
 
 </dd>
@@ -828,7 +828,7 @@ void main()
 <dd>Parses a ClassDeclaration
 <p></p>
 <pre class="d_code"><a name=".classDeclaration"></a> <b>classDeclaration</b>:
-     <span class="d_string">'class'</span> <span class="d_string">Identifier</span> (<a href="#templateParameters"><b>templateParameters</b></a> <a href="#constraint"><b>constraint</b></a>?)? (<span class="d_string">':'</span> <a href="#baseClassList"><b>baseClassList</b></a>)? <a href="#classBody"><b>classBody</b></a>
+     <span class="d_string">'class'</span> <span class="d_string">Identifier</span> (<a href="#.templateParameters"><b>templateParameters</b></a> <a href="#.constraint"><b>constraint</b></a>?)? (<span class="d_string">':'</span> <a href="#.baseClassList"><b>baseClassList</b></a>)? <a href="#.classBody"><b>classBody</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -837,11 +837,11 @@ void main()
 <dd>Parses a CmpExpression
 <p></p>
 <pre class="d_code"><a name=".cmpExpression"></a> <b>cmpExpression</b>:
-       <a href="#shiftExpression"><b>shiftExpression</b></a>
-     | <a href="#equalExpression"><b>equalExpression</b></a>
-     | <a href="#identityExpression"><b>identityExpression</b></a>
-     | <a href="#relExpression"><b>relExpression</b></a>
-     | <a href="#inExpression"><b>inExpression</b></a>
+       <a href="#.shiftExpression"><b>shiftExpression</b></a>
+     | <a href="#.equalExpression"><b>equalExpression</b></a>
+     | <a href="#.identityExpression"><b>identityExpression</b></a>
+     | <a href="#.relExpression"><b>relExpression</b></a>
+     | <a href="#.inExpression"><b>inExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -850,9 +850,9 @@ void main()
 <dd>Parses a CompileCondition
 <p></p>
 <pre class="d_code"><a name=".compileCondition"></a> <b>compileCondition</b>:
-       <a href="#versionCondition"><b>versionCondition</b></a>
-     | <a href="#debugCondition"><b>debugCondition</b></a>
-     | <a href="#staticIfCondition"><b>staticIfCondition</b></a>
+       <a href="#.versionCondition"><b>versionCondition</b></a>
+     | <a href="#.debugCondition"><b>debugCondition</b></a>
+     | <a href="#.staticIfCondition"><b>staticIfCondition</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -861,7 +861,7 @@ void main()
 <dd>Parses a ConditionalDeclaration
 <p></p>
 <pre class="d_code"><a name=".conditionalDeclaration"></a> <b>conditionalDeclaration</b>:
-     <a href="#compileCondition"><b>compileCondition</b></a> (<a href="#declaration"><b>declaration</b></a> | <span class="d_string">'{'</span> <a href="#declaration"><b>declaration</b></a>* <span class="d_string">'}'</span>) (<span class="d_string">'else'</span> (<a href="#declaration"><b>declaration</b></a> | <span class="d_string">'{'</span> <a href="#declaration"><b>declaration</b></a>* <span class="d_string">'}'</span>))?
+     <a href="#.compileCondition"><b>compileCondition</b></a> (<a href="#.declaration"><b>declaration</b></a> | <span class="d_string">'{'</span> <a href="#.declaration"><b>declaration</b></a>* <span class="d_string">'}'</span>) (<span class="d_string">'else'</span> (<a href="#.declaration"><b>declaration</b></a> | <span class="d_string">'{'</span> <a href="#.declaration"><b>declaration</b></a>* <span class="d_string">'}'</span>))?
      ;</pre><p></p>
 
 </dd>
@@ -870,7 +870,7 @@ void main()
 <dd>Parses an ConditionalStatement
 <p></p>
 <pre class="d_code"><a name=".conditionalStatement"></a> <b>conditionalStatement</b>:
-     <a href="#compileCondition"><b>compileCondition</b></a> <a href="#statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a> (<span class="d_string">'else'</span> <a href="#statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>)?
+     <a href="#.compileCondition"><b>compileCondition</b></a> <a href="#.statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a> (<span class="d_string">'else'</span> <a href="#.statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -879,7 +879,7 @@ void main()
 <dd>Parses a Constraint
 <p></p>
 <pre class="d_code"><a name=".constraint"></a> <b>constraint</b>:
-     <span class="d_string">'if'</span> <span class="d_string">'('</span> <a href="#expression"><b>expression</b></a> <span class="d_string">')'</span>
+     <span class="d_string">'if'</span> <span class="d_string">'('</span> <a href="#.expression"><b>expression</b></a> <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -888,8 +888,8 @@ void main()
 <dd>Parses a Constructor
 <p></p>
 <pre class="d_code"><a name=".constructor"></a> <b>constructor</b>:
-       <span class="d_string">'this'</span> <a href="#templateParameters"><b>templateParameters</b></a> <a href="#parameters"><b>parameters</b></a> <a href="#memberFunctionAttribute"><b>memberFunctionAttribute</b></a>* <a href="#constraint"><b>constraint</b></a>? <a href="#functionBody"><b>functionBody</b></a>
-     | <span class="d_string">'this'</span> <a href="#parameters"><b>parameters</b></a> <a href="#memberFunctionAttribute"><b>memberFunctionAttribute</b></a>* (<a href="#functionBody"><b>functionBody</b></a> | <span class="d_string">';'</span>)
+       <span class="d_string">'this'</span> <a href="#.templateParameters"><b>templateParameters</b></a> <a href="#.parameters"><b>parameters</b></a> <a href="#.memberFunctionAttribute"><b>memberFunctionAttribute</b></a>* <a href="#.constraint"><b>constraint</b></a>? <a href="#.functionBody"><b>functionBody</b></a>
+     | <span class="d_string">'this'</span> <a href="#.parameters"><b>parameters</b></a> <a href="#.memberFunctionAttribute"><b>memberFunctionAttribute</b></a>* (<a href="#.functionBody"><b>functionBody</b></a> | <span class="d_string">';'</span>)
      ;</pre><p></p>
 
 </dd>
@@ -925,30 +925,30 @@ void main()
 <dd>Parses a Declaration
 <p></p>
 <pre class="d_code"><a name=".declaration"></a> <b>declaration</b>:
-       <a href="#aliasDeclaration"><b>aliasDeclaration</b></a>
-     | <a href="#aliasThisDeclaration"><b>aliasThisDeclaration</b></a>
-     | <a href="#attributedDeclaration"><b>attributedDeclaration</b></a>
-     | <a href="#classDeclaration"><b>classDeclaration</b></a>
-     | <a href="#conditionalDeclaration"><b>conditionalDeclaration</b></a>
-     | <a href="#constructor"><b>constructor</b></a>
-     | <a href="#destructor"><b>destructor</b></a>
-     | <a href="#enumDeclaration"><b>enumDeclaration</b></a>
-     | <a href="#functionDeclaration"><b>functionDeclaration</b></a>
-     | <a href="#importDeclaration"><b>importDeclaration</b></a>
-     | <a href="#interfaceDeclaration"><b>interfaceDeclaration</b></a>
-     | <a href="#mixinDeclaration"><b>mixinDeclaration</b></a>
-     | <a href="#pragmaDeclaration"><b>pragmaDeclaration</b></a>
-     | <a href="#sharedStaticConstructor"><b>sharedStaticConstructor</b></a>
-     | <a href="#sharedStaticDestructor"><b>sharedStaticDestructor</b></a>
-     | <a href="#staticAssertDeclaration"><b>staticAssertDeclaration</b></a>
-     | <a href="#staticConstructor"><b>staticConstructor</b></a>
-     | <a href="#staticDestructor"><b>staticDestructor</b></a>
-     | <a href="#structDeclaration"><b>structDeclaration</b></a>
-     | <a href="#templateDeclaration"><b>templateDeclaration</b></a>
-     | <a href="#unionDeclaration"><b>unionDeclaration</b></a>
-     | <a href="#unittest"><b>unittest</b></a>
-     | <a href="#variableDeclaration"><b>variableDeclaration</b></a>
-     | <span class="d_string">'{'</span> <a href="#declaration"><b>declaration</b></a>+ <span class="d_string">'}'</span>
+       <a href="#.aliasDeclaration"><b>aliasDeclaration</b></a>
+     | <a href="#.aliasThisDeclaration"><b>aliasThisDeclaration</b></a>
+     | <a href="#.attributedDeclaration"><b>attributedDeclaration</b></a>
+     | <a href="#.classDeclaration"><b>classDeclaration</b></a>
+     | <a href="#.conditionalDeclaration"><b>conditionalDeclaration</b></a>
+     | <a href="#.constructor"><b>constructor</b></a>
+     | <a href="#.destructor"><b>destructor</b></a>
+     | <a href="#.enumDeclaration"><b>enumDeclaration</b></a>
+     | <a href="#.functionDeclaration"><b>functionDeclaration</b></a>
+     | <a href="#.importDeclaration"><b>importDeclaration</b></a>
+     | <a href="#.interfaceDeclaration"><b>interfaceDeclaration</b></a>
+     | <a href="#.mixinDeclaration"><b>mixinDeclaration</b></a>
+     | <a href="#.pragmaDeclaration"><b>pragmaDeclaration</b></a>
+     | <a href="#.sharedStaticConstructor"><b>sharedStaticConstructor</b></a>
+     | <a href="#.sharedStaticDestructor"><b>sharedStaticDestructor</b></a>
+     | <a href="#.staticAssertDeclaration"><b>staticAssertDeclaration</b></a>
+     | <a href="#.staticConstructor"><b>staticConstructor</b></a>
+     | <a href="#.staticDestructor"><b>staticDestructor</b></a>
+     | <a href="#.structDeclaration"><b>structDeclaration</b></a>
+     | <a href="#.templateDeclaration"><b>templateDeclaration</b></a>
+     | <a href="#.unionDeclaration"><b>unionDeclaration</b></a>
+     | <a href="#.unittest"><b>unittest</b></a>
+     | <a href="#.variableDeclaration"><b>variableDeclaration</b></a>
+     | <span class="d_string">'{'</span> <a href="#.declaration"><b>declaration</b></a>+ <span class="d_string">'}'</span>
      ;</pre><p></p>
 
 </dd>
@@ -957,11 +957,11 @@ void main()
 <dd>Parses DeclarationsAndStatements
 <p></p>
 <pre class="d_code"><a name=".declarationsAndStatements"></a> <b>declarationsAndStatements</b>:
-     <a href="#declarationOrStatement"><b>declarationOrStatement</b></a>+
+     <a href="#.declarationOrStatement"><b>declarationOrStatement</b></a>+
      ;
- <a name=".declarationOrStatement"></a> <b>declarationOrStatement</b>:
-       <a href="#declaration"><b>declaration</b></a>
-     | <a href="#statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
+<a name=".declarationOrStatement"></a> <b>declarationOrStatement</b>:
+       <a href="#.declaration"><b>declaration</b></a>
+     | <a href="#.statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -970,8 +970,8 @@ void main()
 <dd>Parses a DeclarationOrInvariant
 <p></p>
 <pre class="d_code"><a name=".declarationOrInvariant"></a> <b>declarationOrInvariant</b>:
-       <a href="#declaration"><b>declaration</b></a>
-     | <a href="#invariant"><b>invariant</b></a>
+       <a href="#.declaration"><b>declaration</b></a>
+     | <a href="#.invariant"><b>invariant</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -980,8 +980,8 @@ void main()
 <dd>Parses a DeclarationOrStatement
 <p></p>
 <pre class="d_code"><a name=".declarationOrStatement"></a> <b>declarationOrStatement</b>:
-       <a href="#declaration"><b>declaration</b></a>
-     | <a href="#statement"><b>statement</b></a>
+       <a href="#.declaration"><b>declaration</b></a>
+     | <a href="#.statement"><b>statement</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -990,7 +990,7 @@ void main()
 <dd>Parses a Declarator
 <p></p>
 <pre class="d_code"><a name=".declarator"></a> <b>declarator</b>:
-     <span class="d_string">Identifier</span> (<span class="d_string">'='</span> <a href="#initializer"><b>initializer</b></a>)?
+     <span class="d_string">Identifier</span> (<span class="d_string">'='</span> <a href="#.initializer"><b>initializer</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -999,7 +999,7 @@ void main()
 <dd>Parses a DefaultStatement
 <p></p>
 <pre class="d_code"><a name=".defaultStatement"></a> <b>defaultStatement</b>:
-     <span class="d_string">'default'</span> <span class="d_string">':'</span> <a href="#declarationsAndStatements"><b>declarationsAndStatements</b></a>
+     <span class="d_string">'default'</span> <span class="d_string">':'</span> <a href="#.declarationsAndStatements"><b>declarationsAndStatements</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1008,7 +1008,7 @@ void main()
 <dd>Parses a DeleteExpression
 <p></p>
 <pre class="d_code"><a name=".deleteExpression"></a> <b>deleteExpression</b>:
-     <span class="d_string">'delete'</span> <a href="#unaryExpression"><b>unaryExpression</b></a>
+     <span class="d_string">'delete'</span> <a href="#.unaryExpression"><b>unaryExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1017,7 +1017,7 @@ void main()
 <dd>Parses a Deprecated attribute
 <p></p>
 <pre class="d_code"><a name=".deprecated"></a> <b>deprecated</b>:
-     <span class="d_string">'deprecated'</span> (<span class="d_string">'('</span> <a href="#assignExpression"><b>assignExpression</b></a> <span class="d_string">')'</span>)?
+     <span class="d_string">'deprecated'</span> (<span class="d_string">'('</span> <a href="#.assignExpression"><b>assignExpression</b></a> <span class="d_string">')'</span>)?
      ;</pre><p></p>
 
 </dd>
@@ -1026,7 +1026,7 @@ void main()
 <dd>Parses a Destructor
 <p></p>
 <pre class="d_code"><a name=".destructor"></a> <b>destructor</b>:
-     <span class="d_string">'~'</span> <span class="d_string">'this'</span> <span class="d_string">'('</span> <span class="d_string">')'</span> <a href="#functionBody"><b>functionBody</b></a>
+     <span class="d_string">'~'</span> <span class="d_string">'this'</span> <span class="d_string">'('</span> <span class="d_string">')'</span> <a href="#.functionBody"><b>functionBody</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1035,7 +1035,7 @@ void main()
 <dd>Parses a DoStatement
 <p></p>
 <pre class="d_code"><a name=".doStatement"></a> <b>doStatement</b>:
-     <span class="d_string">'do'</span> <a href="#nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a> <span class="d_string">'while'</span> <span class="d_string">'('</span> <a href="#expression"><b>expression</b></a> <span class="d_string">')'</span> <span class="d_string">';'</span>
+     <span class="d_string">'do'</span> <a href="#.nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a> <span class="d_string">'while'</span> <span class="d_string">'('</span> <a href="#.expression"><b>expression</b></a> <span class="d_string">')'</span> <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1045,7 +1045,7 @@ void main()
 <p></p>
 <pre class="d_code"><a name=".enumBody"></a> <b>enumBody</b>:
        <span class="d_string">';'</span>
-     | <span class="d_string">'{'</span> <a href="#enumMember"><b>enumMember</b></a> (<span class="d_string">','</span> <a href="#enumMember"><b>enumMember</b></a>?)* <span class="d_string">'}'</span>
+     | <span class="d_string">'{'</span> <a href="#.enumMember"><b>enumMember</b></a> (<span class="d_string">','</span> <a href="#.enumMember"><b>enumMember</b></a>?)* <span class="d_string">'}'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1054,7 +1054,7 @@ void main()
 <dd>Parses an EnumDeclaration
 <p></p>
 <pre class="d_code"><a name=".enumDeclaration"></a> <b>enumDeclaration</b>:
-     <span class="d_string">'enum'</span> <span class="d_string">Identifier</span>? (<span class="d_string">':'</span> <a href="#type"><b>type</b></a>)? <a href="#enumBody"><b>enumBody</b></a>
+     <span class="d_string">'enum'</span> <span class="d_string">Identifier</span>? (<span class="d_string">':'</span> <a href="#.type"><b>type</b></a>)? <a href="#.enumBody"><b>enumBody</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1064,7 +1064,7 @@ void main()
 <p></p>
 <pre class="d_code"><a name=".enumMember"></a> <b>enumMember</b>:
        <span class="d_string">Identifier</span>
-     | (<span class="d_string">Identifier</span> | <a href="#type"><b>type</b></a>) <span class="d_string">'='</span> <a href="#assignExpression"><b>assignExpression</b></a>
+     | (<span class="d_string">Identifier</span> | <a href="#.type"><b>type</b></a>) <span class="d_string">'='</span> <a href="#.assignExpression"><b>assignExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1073,7 +1073,7 @@ void main()
 <dd>Parses an EqualExpression
 <p></p>
 <pre class="d_code"><a name=".equalExpression"></a> <b>equalExpression</b>:
-     <a href="#shiftExpression"><b>shiftExpression</b></a> (<span class="d_string">'=='</span> | <span class="d_string">'!='</span>) <a href="#shiftExpression"><b>shiftExpression</b></a>
+     <a href="#.shiftExpression"><b>shiftExpression</b></a> (<span class="d_string">'=='</span> | <span class="d_string">'!='</span>) <a href="#.shiftExpression"><b>shiftExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1082,7 +1082,7 @@ void main()
 <dd>Parses an Expression
 <p></p>
 <pre class="d_code"><a name=".expression"></a> <b>expression</b>:
-     <a href="#assignExpression"><b>assignExpression</b></a> (<span class="d_string">','</span> <a href="#assignExpression"><b>assignExpression</b></a>)*
+     <a href="#.assignExpression"><b>assignExpression</b></a> (<span class="d_string">','</span> <a href="#.assignExpression"><b>assignExpression</b></a>)*
      ;</pre><p></p>
 
 </dd>
@@ -1091,7 +1091,7 @@ void main()
 <dd>Parses an ExpressionStatement
 <p></p>
 <pre class="d_code"><a name=".expressionStatement"></a> <b>expressionStatement</b>:
-     <a href="#<i>expression</i>"><b><i>expression</i></b></a> <span class="d_string">';'</span>
+     <a href="#.<i>expression</i>"><b><i>expression</i></b></a> <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1100,7 +1100,7 @@ void main()
 <dd>Parses a FinalSwitchStatement
 <p></p>
 <pre class="d_code"><a name=".finalSwitchStatement"></a> <b>finalSwitchStatement</b>:
-     <span class="d_string">'final'</span> <a href="#switchStatement"><b>switchStatement</b></a>
+     <span class="d_string">'final'</span> <a href="#.switchStatement"><b>switchStatement</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1109,7 +1109,7 @@ void main()
 <dd>Parses a Finally
 <p></p>
 <pre class="d_code"><a name=".finally"></a> <b>finally</b>:
-     <span class="d_string">'finally'</span> <a href="#statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
+     <span class="d_string">'finally'</span> <a href="#.statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1118,7 +1118,7 @@ void main()
 <dd>Parses a ForStatement
 <p></p>
 <pre class="d_code"><a name=".forStatement"></a> <b>forStatement</b>:
-     <span class="d_string">'for'</span> <span class="d_string">'('</span> <a href="#declarationOrStatement"><b>declarationOrStatement</b></a> <a href="#expression"><b>expression</b></a>? <span class="d_string">';'</span> <a href="#expression"><b>expression</b></a>? <span class="d_string">')'</span> <a href="#statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
+     <span class="d_string">'for'</span> <span class="d_string">'('</span> <a href="#.declarationOrStatement"><b>declarationOrStatement</b></a> <a href="#.expression"><b>expression</b></a>? <span class="d_string">';'</span> <a href="#.expression"><b>expression</b></a>? <span class="d_string">')'</span> <a href="#.statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1127,8 +1127,8 @@ void main()
 <dd>Parses a ForeachStatement
 <p></p>
 <pre class="d_code"><a name=".foreachStatement"></a> <b>foreachStatement</b>:
-       (<span class="d_string">'foreach'</span> | <span class="d_string">'foreach_reverse'</span>) <span class="d_string">'('</span> <a href="#foreachTypeList"><b>foreachTypeList</b></a> <span class="d_string">';'</span> <a href="#expression"><b>expression</b></a> <span class="d_string">')'</span> <a href="#nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a>
-     | (<span class="d_string">'foreach'</span> | <span class="d_string">'foreach_reverse'</span>) <span class="d_string">'('</span> <a href="#foreachType"><b>foreachType</b></a> <span class="d_string">';'</span> <a href="#expression"><b>expression</b></a> <span class="d_string">'..'</span> <a href="#expression"><b>expression</b></a> <span class="d_string">')'</span> <a href="#nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a>
+       (<span class="d_string">'foreach'</span> | <span class="d_string">'foreach_reverse'</span>) <span class="d_string">'('</span> <a href="#.foreachTypeList"><b>foreachTypeList</b></a> <span class="d_string">';'</span> <a href="#.expression"><b>expression</b></a> <span class="d_string">')'</span> <a href="#.nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a>
+     | (<span class="d_string">'foreach'</span> | <span class="d_string">'foreach_reverse'</span>) <span class="d_string">'('</span> <a href="#.foreachType"><b>foreachType</b></a> <span class="d_string">';'</span> <a href="#.expression"><b>expression</b></a> <span class="d_string">'..'</span> <a href="#.expression"><b>expression</b></a> <span class="d_string">')'</span> <a href="#.nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1137,7 +1137,7 @@ void main()
 <dd>Parses a ForeachType
 <p></p>
 <pre class="d_code"><a name=".foreachType"></a> <b>foreachType</b>:
-     <a href="#typeConstructors"><b>typeConstructors</b></a>? <a href="#type"><b>type</b></a>? <span class="d_string">Identifier</span>
+     <a href="#.typeConstructors"><b>typeConstructors</b></a>? <a href="#.type"><b>type</b></a>? <span class="d_string">Identifier</span>
      ;</pre><p></p>
 
 </dd>
@@ -1146,7 +1146,7 @@ void main()
 <dd>Parses a ForeachTypeList
 <p></p>
 <pre class="d_code"><a name=".foreachTypeList"></a> <b>foreachTypeList</b>:
-     <a href="#foreachType"><b>foreachType</b></a> (<span class="d_string">','</span> <a href="#foreachType"><b>foreachType</b></a>)*
+     <a href="#.foreachType"><b>foreachType</b></a> (<span class="d_string">','</span> <a href="#.foreachType"><b>foreachType</b></a>)*
      ;</pre><p></p>
 
 </dd>
@@ -1155,7 +1155,7 @@ void main()
 <dd>Parses a FunctionAttribute
 <p></p>
 <pre class="d_code"><a name=".functionAttribute"></a> <b>functionAttribute</b>:
-       <a href="#atAttribute"><b>atAttribute</b></a>
+       <a href="#.atAttribute"><b>atAttribute</b></a>
      | <span class="d_string">'pure'</span>
      | <span class="d_string">'nothrow'</span>
      ;</pre><p></p>
@@ -1166,8 +1166,8 @@ void main()
 <dd>Parses a FunctionBody
 <p></p>
 <pre class="d_code"><a name=".functionBody"></a> <b>functionBody</b>:
-       <a href="#blockStatement"><b>blockStatement</b></a>
-     | (<a href="#inStatement"><b>inStatement</b></a> | <a href="#outStatement"><b>outStatement</b></a> | <a href="#outStatement"><b>outStatement</b></a> <a href="#inStatement"><b>inStatement</b></a> | <a href="#inStatement"><b>inStatement</b></a> <a href="#outStatement"><b>outStatement</b></a>)? <a href="#bodyStatement"><b>bodyStatement</b></a>
+       <a href="#.blockStatement"><b>blockStatement</b></a>
+     | (<a href="#.inStatement"><b>inStatement</b></a> | <a href="#.outStatement"><b>outStatement</b></a> | <a href="#.outStatement"><b>outStatement</b></a> <a href="#.inStatement"><b>inStatement</b></a> | <a href="#.inStatement"><b>inStatement</b></a> <a href="#.outStatement"><b>outStatement</b></a>)? <a href="#.bodyStatement"><b>bodyStatement</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1176,7 +1176,7 @@ void main()
 <dd>Parses a FunctionCallExpression
 <p></p>
 <pre class="d_code"><a name=".functionCallExpression"></a> <b>functionCallExpression</b>:
-     <a href="#unaryExpression"><b>unaryExpression</b></a> <a href="#templateArguments"><b>templateArguments</b></a>? <a href="#arguments"><b>arguments</b></a>
+     <a href="#.unaryExpression"><b>unaryExpression</b></a> <a href="#.templateArguments"><b>templateArguments</b></a>? <a href="#.arguments"><b>arguments</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1185,7 +1185,7 @@ void main()
 <dd>Parses a FunctionCallStatement
 <p></p>
 <pre class="d_code"><a name=".functionCallStatement"></a> <b>functionCallStatement</b>:
-     <a href="#functionCallExpression"><b>functionCallExpression</b></a> <span class="d_string">';'</span>
+     <a href="#.functionCallExpression"><b>functionCallExpression</b></a> <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1194,8 +1194,8 @@ void main()
 <dd>Parses a FunctionDeclaration
 <p></p>
 <pre class="d_code"><a name=".functionDeclaration"></a> <b>functionDeclaration</b>:
-       <a href="#memberFunctionAttribute"><b>memberFunctionAttribute</b></a>* (<a href="#<i>type</i>"><b><i>type</i></b></a> | <span class="d_string">'auto'</span> <span class="d_string">'ref'</span>? | <span class="d_string">'ref'</span> <span class="d_string">'auto'</span>?) <span class="d_string">Identifier</span> <a href="#templateParameters"><b>templateParameters</b></a> <a href="#parameters"><b>parameters</b></a> <a href="#memberFunctionAttribute"><b>memberFunctionAttribute</b></a>* <a href="#constraint"><b>constraint</b></a>? <a href="#functionBody"><b>functionBody</b></a>
-     | <a href="#memberFunctionAttribute"><b>memberFunctionAttribute</b></a>* (<a href="#<i>type</i>"><b><i>type</i></b></a> | <span class="d_string">'auto'</span> <span class="d_string">'ref'</span>? | <span class="d_string">'ref'</span> <span class="d_string">'auto'</span>?) <span class="d_string">Identifier</span> <a href="#parameters"><b>parameters</b></a> <a href="#memberFunctionAttribute"><b>memberFunctionAttribute</b></a>* (<a href="#functionBody"><b>functionBody</b></a> | <span class="d_string">';'</span>)
+       <a href="#.memberFunctionAttribute"><b>memberFunctionAttribute</b></a>* (<a href="#.<i>type</i>"><b><i>type</i></b></a> | <span class="d_string">'auto'</span> <span class="d_string">'ref'</span>? | <span class="d_string">'ref'</span> <span class="d_string">'auto'</span>?) <span class="d_string">Identifier</span> <a href="#.templateParameters"><b>templateParameters</b></a> <a href="#.parameters"><b>parameters</b></a> <a href="#.memberFunctionAttribute"><b>memberFunctionAttribute</b></a>* <a href="#.constraint"><b>constraint</b></a>? <a href="#.functionBody"><b>functionBody</b></a>
+     | <a href="#.memberFunctionAttribute"><b>memberFunctionAttribute</b></a>* (<a href="#.<i>type</i>"><b><i>type</i></b></a> | <span class="d_string">'auto'</span> <span class="d_string">'ref'</span>? | <span class="d_string">'ref'</span> <span class="d_string">'auto'</span>?) <span class="d_string">Identifier</span> <a href="#.parameters"><b>parameters</b></a> <a href="#.memberFunctionAttribute"><b>memberFunctionAttribute</b></a>* (<a href="#.functionBody"><b>functionBody</b></a> | <span class="d_string">';'</span>)
      ;</pre><p></p>
 
 </dd>
@@ -1204,7 +1204,7 @@ void main()
 <dd>Parses a FunctionLiteralExpression
 <p></p>
 <pre class="d_code"><a name=".functionLiteralExpression"></a> <b>functionLiteralExpression</b>:
-     ((<span class="d_string">'function'</span> | <span class="d_string">'delegate'</span>) <a href="#type"><b>type</b></a>?)? (<a href="#parameters"><b>parameters</b></a> <a href="#functionAttribute"><b>functionAttribute</b></a>*)? <a href="#functionBody"><b>functionBody</b></a>
+     ((<span class="d_string">'function'</span> | <span class="d_string">'delegate'</span>) <a href="#.type"><b>type</b></a>?)? (<a href="#.parameters"><b>parameters</b></a> <a href="#.functionAttribute"><b>functionAttribute</b></a>*)? <a href="#.functionBody"><b>functionBody</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1213,7 +1213,7 @@ void main()
 <dd>Parses a GotoStatement
 <p></p>
 <pre class="d_code"><a name=".gotoStatement"></a> <b>gotoStatement</b>:
-     <span class="d_string">'goto'</span> (<span class="d_string">Identifier</span> | <span class="d_string">'default'</span> | <span class="d_string">'case'</span> <a href="#expression"><b>expression</b></a>?) <span class="d_string">';'</span>
+     <span class="d_string">'goto'</span> (<span class="d_string">Identifier</span> | <span class="d_string">'default'</span> | <span class="d_string">'case'</span> <a href="#.expression"><b>expression</b></a>?) <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1240,7 +1240,7 @@ void main()
 <dd>Parses an IdentifierOrTemplateChain
 <p></p>
 <pre class="d_code"><a name=".identifierOrTemplateChain"></a> <b>identifierOrTemplateChain</b>:
-     <a href="#identifierOrTemplateInstance"><b>identifierOrTemplateInstance</b></a> (<span class="d_string">'.'</span> <a href="#identifierOrTemplateInstance"><b>identifierOrTemplateInstance</b></a>)*
+     <a href="#.identifierOrTemplateInstance"><b>identifierOrTemplateInstance</b></a> (<span class="d_string">'.'</span> <a href="#.identifierOrTemplateInstance"><b>identifierOrTemplateInstance</b></a>)*
      ;</pre><p></p>
 
 </dd>
@@ -1250,7 +1250,7 @@ void main()
 <p></p>
 <pre class="d_code"><a name=".identifierOrTemplateInstance"></a> <b>identifierOrTemplateInstance</b>:
        <span class="d_string">Identifier</span>
-     | <a href="#templateInstance"><b>templateInstance</b></a>
+     | <a href="#.templateInstance"><b>templateInstance</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1259,7 +1259,7 @@ void main()
 <dd>Parses an IdentityExpression
 <p></p>
 <pre class="d_code"><a name=".identityExpression"></a> <b>identityExpression</b>:
-     <a href="#shiftExpression"><b>shiftExpression</b></a> (<span class="d_string">'is'</span> | <span class="d_string">'!'</span> <span class="d_string">'is'</span>) <a href="#shiftExpression"><b>shiftExpression</b></a>
+     <a href="#.shiftExpression"><b>shiftExpression</b></a> (<span class="d_string">'is'</span> | <span class="d_string">'!'</span> <span class="d_string">'is'</span>) <a href="#.shiftExpression"><b>shiftExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1268,7 +1268,7 @@ void main()
 <dd>Parses an IfStatement
 <p></p>
 <pre class="d_code"><a name=".ifStatement"></a> <b>ifStatement</b>:
-     <span class="d_string">'if'</span> <span class="d_string">'('</span> <a href="#expression"><b>expression</b></a> <span class="d_string">')'</span> <a href="#statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a> (<span class="d_string">'else'</span> <a href="#statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>)?
+     <span class="d_string">'if'</span> <span class="d_string">'('</span> <a href="#.expression"><b>expression</b></a> <span class="d_string">')'</span> <a href="#.statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a> (<span class="d_string">'else'</span> <a href="#.statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -1286,7 +1286,7 @@ void main()
 <dd>Parses ImportBindings
 <p></p>
 <pre class="d_code"><a name=".importBindings"></a> <b>importBindings</b>:
-     <a href="#<i>singleImport</i>"><b><i>singleImport</i></b></a> <span class="d_string">':'</span> <a href="#importBind"><b>importBind</b></a> (<span class="d_string">','</span> <a href="#importBind"><b>importBind</b></a>)*
+     <a href="#.<i>singleImport</i>"><b><i>singleImport</i></b></a> <span class="d_string">':'</span> <a href="#.importBind"><b>importBind</b></a> (<span class="d_string">','</span> <a href="#.importBind"><b>importBind</b></a>)*
      ;</pre><p></p>
 
 </dd>
@@ -1295,8 +1295,8 @@ void main()
 <dd>Parses an ImportDeclaration
 <p></p>
 <pre class="d_code"><a name=".importDeclaration"></a> <b>importDeclaration</b>:
-       <span class="d_string">'import'</span> <a href="#singleImport"><b>singleImport</b></a> (<span class="d_string">','</span> <a href="#singleImport"><b>singleImport</b></a>)* (<span class="d_string">','</span> <a href="#importBindings"><b>importBindings</b></a>)? <span class="d_string">';'</span>
-     | <span class="d_string">'import'</span> <a href="#importBindings"><b>importBindings</b></a> <span class="d_string">';'</span>
+       <span class="d_string">'import'</span> <a href="#.singleImport"><b>singleImport</b></a> (<span class="d_string">','</span> <a href="#.singleImport"><b>singleImport</b></a>)* (<span class="d_string">','</span> <a href="#.importBindings"><b>importBindings</b></a>)? <span class="d_string">';'</span>
+     | <span class="d_string">'import'</span> <a href="#.importBindings"><b>importBindings</b></a> <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1305,7 +1305,7 @@ void main()
 <dd>Parses an ImportExpression
 <p></p>
 <pre class="d_code"><a name=".importExpression"></a> <b>importExpression</b>:
-     <span class="d_string">'import'</span> <span class="d_string">'('</span> <a href="#assignExpression"><b>assignExpression</b></a> <span class="d_string">')'</span>
+     <span class="d_string">'import'</span> <span class="d_string">'('</span> <a href="#.assignExpression"><b>assignExpression</b></a> <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1314,7 +1314,7 @@ void main()
 <dd>Parses an IndexExpression
 <p></p>
 <pre class="d_code"><a name=".indexExpression"></a> <b>indexExpression</b>:
-     <a href="#<i>unaryExpression</i>"><b><i>unaryExpression</i></b></a> <span class="d_string">'['</span> <a href="#argumentList"><b>argumentList</b></a> <span class="d_string">']'</span>
+     <a href="#.<i>unaryExpression</i>"><b><i>unaryExpression</i></b></a> <span class="d_string">'['</span> <a href="#.argumentList"><b>argumentList</b></a> <span class="d_string">']'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1323,7 +1323,7 @@ void main()
 <dd>Parses an InExpression
 <p></p>
 <pre class="d_code"><a name=".inExpression"></a> <b>inExpression</b>:
-     <a href="#shiftExpression"><b>shiftExpression</b></a> (<span class="d_string">'in'</span> | <span class="d_string">'!'</span> <span class="d_string">'in'</span>) <a href="#shiftExpression"><b>shiftExpression</b></a>
+     <a href="#.shiftExpression"><b>shiftExpression</b></a> (<span class="d_string">'in'</span> | <span class="d_string">'!'</span> <span class="d_string">'in'</span>) <a href="#.shiftExpression"><b>shiftExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1332,7 +1332,7 @@ void main()
 <dd>Parses an InStatement
 <p></p>
 <pre class="d_code"><a name=".inStatement"></a> <b>inStatement</b>:
-     <span class="d_string">'in'</span> <a href="#blockStatement"><b>blockStatement</b></a>
+     <span class="d_string">'in'</span> <a href="#.blockStatement"><b>blockStatement</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1342,7 +1342,7 @@ void main()
 <p></p>
 <pre class="d_code"><a name=".initialize"></a> <b>initialize</b>:
        <span class="d_string">';'</span>
-     | <a href="#statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
+     | <a href="#.statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1352,7 +1352,7 @@ void main()
 <p></p>
 <pre class="d_code"><a name=".initializer"></a> <b>initializer</b>:
        <span class="d_string">'void'</span>
-     | <a href="#nonVoidInitializer"><b>nonVoidInitializer</b></a>
+     | <a href="#.nonVoidInitializer"><b>nonVoidInitializer</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1361,7 +1361,7 @@ void main()
 <dd>Parses an InterfaceDeclaration
 <p></p>
 <pre class="d_code"><a name=".interfaceDeclaration"></a> <b>interfaceDeclaration</b>:
-     <span class="d_string">'interface'</span> <span class="d_string">Identifier</span> (<a href="#templateParameters"><b>templateParameters</b></a> <a href="#constraint"><b>constraint</b></a>?)? (<span class="d_string">':'</span> <a href="#baseClassList"><b>baseClassList</b></a>)? <a href="#structBody"><b>structBody</b></a>
+     <span class="d_string">'interface'</span> <span class="d_string">Identifier</span> (<a href="#.templateParameters"><b>templateParameters</b></a> <a href="#.constraint"><b>constraint</b></a>?)? (<span class="d_string">':'</span> <a href="#.baseClassList"><b>baseClassList</b></a>)? <a href="#.structBody"><b>structBody</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1370,7 +1370,7 @@ void main()
 <dd>Parses an Invariant
 <p></p>
 <pre class="d_code"><a name=".invariant"></a> <b>invariant</b>:
-     <span class="d_string">'invariant'</span> (<span class="d_string">'('</span> <span class="d_string">')'</span>)? <a href="#blockStatement"><b>blockStatement</b></a>
+     <span class="d_string">'invariant'</span> (<span class="d_string">'('</span> <span class="d_string">')'</span>)? <a href="#.blockStatement"><b>blockStatement</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1379,7 +1379,7 @@ void main()
 <dd>Parses an IsExpression
 <p></p>
 <pre class="d_code"><a name=".isExpression"></a> <b>isExpression</b>:
-     <span class="d_string">'is'</span> <span class="d_string">'('</span> <a href="#type"><b>type</b></a> <span class="d_string">Identifier</span>? ((<span class="d_string">':'</span> | <span class="d_string">'=='</span>) <a href="#typeSpecialization"><b>typeSpecialization</b></a> (<span class="d_string">','</span> <a href="#templateParameterList"><b>templateParameterList</b></a>)?)? <span class="d_string">')'</span>
+     <span class="d_string">'is'</span> <span class="d_string">'('</span> <a href="#.type"><b>type</b></a> <span class="d_string">Identifier</span>? ((<span class="d_string">':'</span> | <span class="d_string">'=='</span>) <a href="#.typeSpecialization"><b>typeSpecialization</b></a> (<span class="d_string">','</span> <a href="#.templateParameterList"><b>templateParameterList</b></a>)?)? <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1388,7 +1388,7 @@ void main()
 <dd>Parses a KeyValuePair
 <p></p>
 <pre class="d_code"><a name=".keyValuePair"></a> <b>keyValuePair</b>:
-     <a href="#assignExpression"><b>assignExpression</b></a> <span class="d_string">':'</span> <a href="#assignExpression"><b>assignExpression</b></a>
+     <a href="#.assignExpression"><b>assignExpression</b></a> <span class="d_string">':'</span> <a href="#.assignExpression"><b>assignExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1397,7 +1397,7 @@ void main()
 <dd>Parses KeyValuePairs
 <p></p>
 <pre class="d_code"><a name=".keyValuePairs"></a> <b>keyValuePairs</b>:
-     <a href="#keyValuePair"><b>keyValuePair</b></a> (<span class="d_string">','</span> <a href="#keyValuePair"><b>keyValuePair</b></a>)*
+     <a href="#.keyValuePair"><b>keyValuePair</b></a> (<span class="d_string">','</span> <a href="#.keyValuePair"><b>keyValuePair</b></a>)*
      ;</pre><p></p>
 
 </dd>
@@ -1406,7 +1406,7 @@ void main()
 <dd>Parses a LabeledStatement
 <p></p>
 <pre class="d_code"><a name=".labeledStatement"></a> <b>labeledStatement</b>:
-     <span class="d_string">Identifier</span> <span class="d_string">':'</span> <a href="#statement"><b>statement</b></a>
+     <span class="d_string">Identifier</span> <span class="d_string">':'</span> <a href="#.statement"><b>statement</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1415,7 +1415,7 @@ void main()
 <dd>Parses a LambdaExpression
 <p></p>
 <pre class="d_code"><a name=".lambdaExpression"></a> <b>lambdaExpression</b>:
-     (<span class="d_string">Identifier</span> | <a href="#parameters"><b>parameters</b></a> <a href="#functionAttribute"><b>functionAttribute</b></a>* ) <span class="d_string">'=&gt;'</span> <a href="#assignExpression"><b>assignExpression</b></a>
+     (<span class="d_string">Identifier</span> | <a href="#.parameters"><b>parameters</b></a> <a href="#.functionAttribute"><b>functionAttribute</b></a>* ) <span class="d_string">'=&gt;'</span> <a href="#.assignExpression"><b>assignExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1424,7 +1424,7 @@ void main()
 <dd>Parses a LastCatch
 <p></p>
 <pre class="d_code"><a name=".lastCatch"></a> <b>lastCatch</b>:
-     <span class="d_string">'catch'</span> <a href="#nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a>
+     <span class="d_string">'catch'</span> <a href="#.nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1442,7 +1442,7 @@ void main()
 <dd>Parses a MemberFunctionAttribute
 <p></p>
 <pre class="d_code"><a name=".memberFunctionAttribute"></a> <b>memberFunctionAttribute</b>:
-       <a href="#functionAttribute"><b>functionAttribute</b></a>
+       <a href="#.functionAttribute"><b>functionAttribute</b></a>
      | <span class="d_string">'immutable'</span>
      | <span class="d_string">'inout'</span>
      | <span class="d_string">'shared'</span>
@@ -1455,7 +1455,7 @@ void main()
 <dd>Parses a MixinDeclaration
 <p></p>
 <pre class="d_code"><a name=".mixinDeclaration"></a> <b>mixinDeclaration</b>:
-     <a href="#mixinExpression"><b>mixinExpression</b></a> <span class="d_string">';'</span>
+     <a href="#.mixinExpression"><b>mixinExpression</b></a> <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1464,7 +1464,7 @@ void main()
 <dd>Parses a MixinExpression
 <p></p>
 <pre class="d_code"><a name=".mixinExpression"></a> <b>mixinExpression</b>:
-     <span class="d_string">'mixin'</span> <span class="d_string">'('</span> <a href="#assignExpression"><b>assignExpression</b></a> <span class="d_string">')'</span>
+     <span class="d_string">'mixin'</span> <span class="d_string">'('</span> <a href="#.assignExpression"><b>assignExpression</b></a> <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1473,7 +1473,7 @@ void main()
 <dd>Parses a MixinTemplateName
 <p></p>
 <pre class="d_code"><a name=".mixinTemplateName"></a> <b>mixinTemplateName</b>:
-     (<a href="#typeofExpression"><b>typeofExpression</b></a>? <span class="d_string">'.'</span>)? <a href="#identifierOrTemplateChain"><b>identifierOrTemplateChain</b></a>
+     (<a href="#.typeofExpression"><b>typeofExpression</b></a>? <span class="d_string">'.'</span>)? <a href="#.identifierOrTemplateChain"><b>identifierOrTemplateChain</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1482,7 +1482,7 @@ void main()
 <dd>Parses a Module
 <p></p>
 <pre class="d_code"><a name=".module"></a> <b>module</b>:
-     <a href="#moduleDeclaration"><b>moduleDeclaration</b></a>? <a href="#declaration"><b>declaration</b></a>*
+     <a href="#.moduleDeclaration"><b>moduleDeclaration</b></a>? <a href="#.declaration"><b>declaration</b></a>*
      ;</pre><p></p>
 
 </dd>
@@ -1491,7 +1491,7 @@ void main()
 <dd>Parses a ModuleDeclaration
 <p></p>
 <pre class="d_code"><a name=".moduleDeclaration"></a> <b>moduleDeclaration</b>:
-     <span class="d_string">'module'</span> <a href="#identifierChain"><b>identifierChain</b></a> <span class="d_string">';'</span>
+     <span class="d_string">'module'</span> <a href="#.identifierChain"><b>identifierChain</b></a> <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1499,8 +1499,8 @@ void main()
 </dt>
 <dd>Parses a MulExpression
  <pre class="d_code"><a name=".mulExpression"></a> <b>mulExpression</b>:
-       <a href="#unaryExpression"><b>unaryExpression</b></a>
-     | <a href="#mulExpression"><b>mulExpression</b></a> (<span class="d_string">'*'</span> | <span class="d_string">'/'</span> | <span class="d_string">'%'</span>) <a href="#unaryExpression"><b>unaryExpression</b></a>
+       <a href="#.unaryExpression"><b>unaryExpression</b></a>
+     | <a href="#.mulExpression"><b>mulExpression</b></a> (<span class="d_string">'*'</span> | <span class="d_string">'/'</span> | <span class="d_string">'%'</span>) <a href="#.unaryExpression"><b>unaryExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1509,7 +1509,7 @@ void main()
 <dd>Parses a NewAnonClassExpression
 <p></p>
 <pre class="d_code"><a name=".newAnonClassExpression"></a> <b>newAnonClassExpression</b>:
-     <span class="d_string">'new'</span> <a href="#arguments"><b>arguments</b></a>? <span class="d_string">'class'</span> <a href="#arguments"><b>arguments</b></a>? <a href="#baseClassList"><b>baseClassList</b></a>? <a href="#classBody"><b>classBody</b></a>
+     <span class="d_string">'new'</span> <a href="#.arguments"><b>arguments</b></a>? <span class="d_string">'class'</span> <a href="#.arguments"><b>arguments</b></a>? <a href="#.baseClassList"><b>baseClassList</b></a>? <a href="#.classBody"><b>classBody</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1518,8 +1518,8 @@ void main()
 <dd>Parses a NewExpression
 <p></p>
 <pre class="d_code"><a name=".newExpression"></a> <b>newExpression</b>:
-       <span class="d_string">'new'</span> <a href="#type"><b>type</b></a> (<span class="d_string">'['</span> <a href="#assignExpression"><b>assignExpression</b></a> <span class="d_string">']'</span> | <a href="#arguments"><b>arguments</b></a>)?
-     | <a href="#newAnonClassExpression"><b>newAnonClassExpression</b></a>
+       <span class="d_string">'new'</span> <a href="#.type"><b>type</b></a> (<span class="d_string">'['</span> <a href="#.assignExpression"><b>assignExpression</b></a> <span class="d_string">']'</span> | <a href="#.arguments"><b>arguments</b></a>)?
+     | <a href="#.newAnonClassExpression"><b>newAnonClassExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1528,31 +1528,31 @@ void main()
 <dd>Parses a StatementNoCaseNoDefault
 <p></p>
 <pre class="d_code"><a name=".statementNoCaseNoDefault"></a> <b>statementNoCaseNoDefault</b>:
-       <a href="#labeledStatement"><b>labeledStatement</b></a>
-     | <a href="#blockStatement"><b>blockStatement</b></a>
-     | <a href="#ifStatement"><b>ifStatement</b></a>
-     | <a href="#whileStatement"><b>whileStatement</b></a>
-     | <a href="#doStatement"><b>doStatement</b></a>
-     | <a href="#forStatement"><b>forStatement</b></a>
-     | <a href="#foreachStatement"><b>foreachStatement</b></a>
-     | <a href="#switchStatement"><b>switchStatement</b></a>
-     | <a href="#finalSwitchStatement"><b>finalSwitchStatement</b></a>
-     | <a href="#continueStatement"><b>continueStatement</b></a>
-     | <a href="#breakStatement"><b>breakStatement</b></a>
-     | <a href="#returnStatement"><b>returnStatement</b></a>
-     | <a href="#gotoStatement"><b>gotoStatement</b></a>
-     | <a href="#withStatement"><b>withStatement</b></a>
-     | <a href="#synchronizedStatement"><b>synchronizedStatement</b></a>
-     | <a href="#tryStatement"><b>tryStatement</b></a>
-     | <a href="#throwStatement"><b>throwStatement</b></a>
-     | <a href="#scopeGuardStatement"><b>scopeGuardStatement</b></a>
-     | <a href="#asmStatement"><b>asmStatement</b></a>
-     | <a href="#foreachRangeStatement"><b>foreachRangeStatement</b></a>
-     | <a href="#conditionalStatement"><b>conditionalStatement</b></a>
-     | <a href="#staticAssertStatement"><b>staticAssertStatement</b></a>
-     | <a href="#versionSpecification"><b>versionSpecification</b></a>
-     | <a href="#debugSpecification"><b>debugSpecification</b></a>
-     | <a href="#expressionStatement"><b>expressionStatement</b></a>
+       <a href="#.labeledStatement"><b>labeledStatement</b></a>
+     | <a href="#.blockStatement"><b>blockStatement</b></a>
+     | <a href="#.ifStatement"><b>ifStatement</b></a>
+     | <a href="#.whileStatement"><b>whileStatement</b></a>
+     | <a href="#.doStatement"><b>doStatement</b></a>
+     | <a href="#.forStatement"><b>forStatement</b></a>
+     | <a href="#.foreachStatement"><b>foreachStatement</b></a>
+     | <a href="#.switchStatement"><b>switchStatement</b></a>
+     | <a href="#.finalSwitchStatement"><b>finalSwitchStatement</b></a>
+     | <a href="#.continueStatement"><b>continueStatement</b></a>
+     | <a href="#.breakStatement"><b>breakStatement</b></a>
+     | <a href="#.returnStatement"><b>returnStatement</b></a>
+     | <a href="#.gotoStatement"><b>gotoStatement</b></a>
+     | <a href="#.withStatement"><b>withStatement</b></a>
+     | <a href="#.synchronizedStatement"><b>synchronizedStatement</b></a>
+     | <a href="#.tryStatement"><b>tryStatement</b></a>
+     | <a href="#.throwStatement"><b>throwStatement</b></a>
+     | <a href="#.scopeGuardStatement"><b>scopeGuardStatement</b></a>
+     | <a href="#.asmStatement"><b>asmStatement</b></a>
+     | <a href="#.foreachRangeStatement"><b>foreachRangeStatement</b></a>
+     | <a href="#.conditionalStatement"><b>conditionalStatement</b></a>
+     | <a href="#.staticAssertStatement"><b>staticAssertStatement</b></a>
+     | <a href="#.versionSpecification"><b>versionSpecification</b></a>
+     | <a href="#.debugSpecification"><b>debugSpecification</b></a>
+     | <a href="#.expressionStatement"><b>expressionStatement</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1561,9 +1561,9 @@ void main()
 <dd>Parses a NonVoidInitializer
 <p></p>
 <pre class="d_code"><a name=".nonVoidInitializer"></a> <b>nonVoidInitializer</b>:
-       <a href="#assignExpression"><b>assignExpression</b></a>
-     | <a href="#arrayInitializer"><b>arrayInitializer</b></a>
-     | <a href="#structInitializer"><b>structInitializer</b></a>
+       <a href="#.assignExpression"><b>assignExpression</b></a>
+     | <a href="#.arrayInitializer"><b>arrayInitializer</b></a>
+     | <a href="#.structInitializer"><b>structInitializer</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1572,7 +1572,7 @@ void main()
 <dd>Parses Operands
 <p></p>
 <pre class="d_code"><a name=".operands"></a> <b>operands</b>:
-     <a href="#asmExp"><b>asmExp</b></a>+
+     <a href="#.asmExp"><b>asmExp</b></a>+
      ;</pre><p></p>
 
 </dd>
@@ -1581,8 +1581,8 @@ void main()
 <dd>Parses an OrExpression
 <p></p>
 <pre class="d_code"><a name=".orExpression"></a> <b>orExpression</b>:
-       <a href="#xorExpression"><b>xorExpression</b></a>
-     | <a href="#orExpression"><b>orExpression</b></a> <span class="d_string">'|'</span> <a href="#xorExpression"><b>xorExpression</b></a>
+       <a href="#.xorExpression"><b>xorExpression</b></a>
+     | <a href="#.orExpression"><b>orExpression</b></a> <span class="d_string">'|'</span> <a href="#.xorExpression"><b>xorExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1591,8 +1591,8 @@ void main()
 <dd>Parses an OrOrExpression
 <p></p>
 <pre class="d_code"><a name=".orOrExpression"></a> <b>orOrExpression</b>:
-       <a href="#andAndExpression"><b>andAndExpression</b></a>
-     | <a href="#orOrExpression"><b>orOrExpression</b></a> <span class="d_string">'||'</span> <a href="#andAndExpression"><b>andAndExpression</b></a>
+       <a href="#.andAndExpression"><b>andAndExpression</b></a>
+     | <a href="#.orOrExpression"><b>orOrExpression</b></a> <span class="d_string">'||'</span> <a href="#.andAndExpression"><b>andAndExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1601,7 +1601,7 @@ void main()
 <dd>Parses an OutStatement
 <p></p>
 <pre class="d_code"><a name=".outStatement"></a> <b>outStatement</b>:
-     <span class="d_string">'out'</span> (<span class="d_string">'('</span> <span class="d_string">Identifier</span> <span class="d_string">')'</span>)? <a href="#blockStatement"><b>blockStatement</b></a>
+     <span class="d_string">'out'</span> (<span class="d_string">'('</span> <span class="d_string">Identifier</span> <span class="d_string">')'</span>)? <a href="#.blockStatement"><b>blockStatement</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1610,7 +1610,7 @@ void main()
 <dd>Parses a Parameter
 <p></p>
 <pre class="d_code"><a name=".parameter"></a> <b>parameter</b>:
-     <a href="#parameterAttribute"><b>parameterAttribute</b></a>* <a href="#type"><b>type</b></a> (<span class="d_string">Identifier</span>? <span class="d_string">'...'</span> | (<span class="d_string">Identifier</span> (<span class="d_string">'='</span> <a href="#assignExpression"><b>assignExpression</b></a>)?))?
+     <a href="#.parameterAttribute"><b>parameterAttribute</b></a>* <a href="#.type"><b>type</b></a> (<span class="d_string">Identifier</span>? <span class="d_string">'...'</span> | (<span class="d_string">Identifier</span> (<span class="d_string">'='</span> <a href="#.assignExpression"><b>assignExpression</b></a>)?))?
      ;</pre><p></p>
 
 </dd>
@@ -1619,7 +1619,7 @@ void main()
 <dd>Parses a ParameterAttribute
 <p></p>
 <pre class="d_code"><a name=".parameterAttribute"></a> <b>parameterAttribute</b>:
-       <a href="#typeConstructor"><b>typeConstructor</b></a>
+       <a href="#.typeConstructor"><b>typeConstructor</b></a>
      | <span class="d_string">'final'</span>
      | <span class="d_string">'in'</span>
      | <span class="d_string">'lazy'</span>
@@ -1635,7 +1635,7 @@ void main()
 <dd>Parses Parameters
 <p></p>
 <pre class="d_code"><a name=".parameters"></a> <b>parameters</b>:
-       <span class="d_string">'('</span> <a href="#parameter"><b>parameter</b></a> (<span class="d_string">','</span> <a href="#parameter"><b>parameter</b></a>)* (<span class="d_string">','</span> <span class="d_string">'...'</span>)? <span class="d_string">')'</span>
+       <span class="d_string">'('</span> <a href="#.parameter"><b>parameter</b></a> (<span class="d_string">','</span> <a href="#.parameter"><b>parameter</b></a>)* (<span class="d_string">','</span> <span class="d_string">'...'</span>)? <span class="d_string">')'</span>
      | <span class="d_string">'('</span> <span class="d_string">'...'</span> <span class="d_string">')'</span>
      | <span class="d_string">'('</span> <span class="d_string">')'</span>
      ;</pre><p></p>
@@ -1646,7 +1646,7 @@ void main()
 <dd>Parses a Postblit
 <p></p>
 <pre class="d_code"><a name=".parameters"></a> <b>parameters</b>:
-     <span class="d_string">'this'</span> <span class="d_string">'('</span> <span class="d_string">'this'</span> <span class="d_string">')'</span> <a href="#functionBody"><b>functionBody</b></a>
+     <span class="d_string">'this'</span> <span class="d_string">'('</span> <span class="d_string">'this'</span> <span class="d_string">')'</span> <a href="#.functionBody"><b>functionBody</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1655,7 +1655,7 @@ void main()
 <dd>Parses a PostIncDecExpression
 <p></p>
 <pre class="d_code"><a name=".postIncDecExpression"></a> <b>postIncDecExpression</b>:
-     <a href="#unaryExpression"><b>unaryExpression</b></a> (<span class="d_string">'++'</span> | <span class="d_string">'--'</span>)
+     <a href="#.unaryExpression"><b>unaryExpression</b></a> (<span class="d_string">'++'</span> | <span class="d_string">'--'</span>)
      ;</pre><p></p>
 
 </dd>
@@ -1664,8 +1664,8 @@ void main()
 <dd>Parses a PowExpression
 <p></p>
 <pre class="d_code"><a name=".powExpression"></a> <b>powExpression</b>:
-       <a href="#unaryExpression"><b>unaryExpression</b></a>
-     | <a href="#powExpression"><b>powExpression</b></a> <span class="d_string">'^^'</span> <a href="#unaryExpression"><b>unaryExpression</b></a>
+       <a href="#.unaryExpression"><b>unaryExpression</b></a>
+     | <a href="#.powExpression"><b>powExpression</b></a> <span class="d_string">'^^'</span> <a href="#.unaryExpression"><b>unaryExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1674,7 +1674,7 @@ void main()
 <dd>Parses a PragmaDeclaration
 <p></p>
 <pre class="d_code"><a name=".pragmaDeclaration"></a> <b>pragmaDeclaration</b>:
-     <a href="#pragmaExpression"><b>pragmaExpression</b></a> <span class="d_string">';'</span>
+     <a href="#.pragmaExpression"><b>pragmaExpression</b></a> <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1683,7 +1683,7 @@ void main()
 <dd>Parses a PragmaExpression
 <p></p>
 <pre class="d_code"><a name=".pragmaExpression"></a> <b>pragmaExpression</b>:
-     <a href="#'pragma'"><b>'pragma'</b></a> <span class="d_string">'('</span> <span class="d_string">Identifier</span> (<span class="d_string">','</span> <a href="#argumentList"><b>argumentList</b></a>)? <span class="d_string">')'</span>
+     <a href="#.'pragma'"><b>'pragma'</b></a> <span class="d_string">'('</span> <span class="d_string">Identifier</span> (<span class="d_string">','</span> <a href="#.argumentList"><b>argumentList</b></a>)? <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1692,7 +1692,7 @@ void main()
 <dd>Parses a PreIncDecExpression
 <p></p>
 <pre class="d_code"><a name=".preIncDecExpression"></a> <b>preIncDecExpression</b>:
-     (<span class="d_string">'++'</span> | <span class="d_string">'--'</span>) <a href="#unaryExpression"><b>unaryExpression</b></a>
+     (<span class="d_string">'++'</span> | <span class="d_string">'--'</span>) <a href="#.unaryExpression"><b>unaryExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1701,20 +1701,20 @@ void main()
 <dd>Parses a PrimaryExpression
 <p></p>
 <pre class="d_code"><a name=".primaryExpression"></a> <b>primaryExpression</b>:
-       <a href="#identifierOrTemplateInstance"><b>identifierOrTemplateInstance</b></a>
-     | <a href="#basicType"><b>basicType</b></a> <span class="d_string">'.'</span> <span class="d_string">Identifier</span>
-     | <a href="#typeofExpression"><b>typeofExpression</b></a>
-     | <a href="#typeidExpression"><b>typeidExpression</b></a>
-     | <a href="#vector"><b>vector</b></a>
-     | <a href="#arrayLiteral"><b>arrayLiteral</b></a>
-     | <a href="#assocArrayLiteral"><b>assocArrayLiteral</b></a>
-     | <span class="d_string">'('</span> <a href="#expression"><b>expression</b></a> <span class="d_string">')'</span>
-     | <a href="#isExpression"><b>isExpression</b></a>
-     | <a href="#lambdaExpression"><b>lambdaExpression</b></a>
-     | <a href="#functionLiteralExpression"><b>functionLiteralExpression</b></a>
-     | <a href="#traitsExpression"><b>traitsExpression</b></a>
-     | <a href="#mixinExpression"><b>mixinExpression</b></a>
-     | <a href="#importExpression"><b>importExpression</b></a>
+       <a href="#.identifierOrTemplateInstance"><b>identifierOrTemplateInstance</b></a>
+     | <a href="#.basicType"><b>basicType</b></a> <span class="d_string">'.'</span> <span class="d_string">Identifier</span>
+     | <a href="#.typeofExpression"><b>typeofExpression</b></a>
+     | <a href="#.typeidExpression"><b>typeidExpression</b></a>
+     | <a href="#.vector"><b>vector</b></a>
+     | <a href="#.arrayLiteral"><b>arrayLiteral</b></a>
+     | <a href="#.assocArrayLiteral"><b>assocArrayLiteral</b></a>
+     | <span class="d_string">'('</span> <a href="#.expression"><b>expression</b></a> <span class="d_string">')'</span>
+     | <a href="#.isExpression"><b>isExpression</b></a>
+     | <a href="#.lambdaExpression"><b>lambdaExpression</b></a>
+     | <a href="#.functionLiteralExpression"><b>functionLiteralExpression</b></a>
+     | <a href="#.traitsExpression"><b>traitsExpression</b></a>
+     | <a href="#.mixinExpression"><b>mixinExpression</b></a>
+     | <a href="#.importExpression"><b>importExpression</b></a>
      | <span class="d_string">'$'</span>
      | <span class="d_string">'this'</span>
      | <span class="d_string">'super'</span>
@@ -1744,7 +1744,7 @@ void main()
 <p></p>
 <pre class="d_code"><a name=".register"></a> <b>register</b>:
      <span class="d_string">Identifier</span>
-     | <span class="d_string">Identifier</span> <span class="d_string">'('</span> <a href="#IntegerLiteral"><b>IntegerLiteral</b></a> <span class="d_string">')'</span>
+     | <span class="d_string">Identifier</span> <span class="d_string">'('</span> <a href="#.IntegerLiteral"><b>IntegerLiteral</b></a> <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1753,8 +1753,8 @@ void main()
 <dd>Parses a RelExpression
 <p></p>
 <pre class="d_code"><a name=".relExpression"></a> <b>relExpression</b>:
-     <a href="#shiftExpression"><b>shiftExpression</b></a>
-     | <a href="#relExpression"><b>relExpression</b></a> <a href="#relOperator"><b>relOperator</b></a> <a href="#shiftExpression"><b>shiftExpression</b></a>
+     <a href="#.shiftExpression"><b>shiftExpression</b></a>
+     | <a href="#.relExpression"><b>relExpression</b></a> <a href="#.relOperator"><b>relOperator</b></a> <a href="#.shiftExpression"><b>shiftExpression</b></a>
      ;
 <a name=".relOperator"></a> <b>relOperator</b>:
        <span class="d_string">'&lt;'</span>
@@ -1777,7 +1777,7 @@ void main()
 <dd>Parses a ReturnStatement
 <p></p>
 <pre class="d_code"><a name=".returnStatement"></a> <b>returnStatement</b>:
-     <span class="d_string">'return'</span> <a href="#expression"><b>expression</b></a>? <span class="d_string">';'</span>
+     <span class="d_string">'return'</span> <a href="#.expression"><b>expression</b></a>? <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1786,7 +1786,7 @@ void main()
 <dd>Parses a ScopeGuardStatement
 <p></p>
 <pre class="d_code"><a name=".scopeGuardStatement"></a> <b>scopeGuardStatement</b>:
-     <span class="d_string">'scope'</span> <span class="d_string">'('</span> <span class="d_string">Identifier</span> <span class="d_string">')'</span> <a href="#statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
+     <span class="d_string">'scope'</span> <span class="d_string">'('</span> <span class="d_string">Identifier</span> <span class="d_string">')'</span> <a href="#.statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1795,7 +1795,7 @@ void main()
 <dd>Parses a SharedStaticConstructor
 <p></p>
 <pre class="d_code"><a name=".sharedStaticConstructor"></a> <b>sharedStaticConstructor</b>:
-     <span class="d_string">'shared'</span> <span class="d_string">'static'</span> <span class="d_string">'this'</span> <span class="d_string">'('</span> <span class="d_string">')'</span> <a href="#functionBody"><b>functionBody</b></a>
+     <span class="d_string">'shared'</span> <span class="d_string">'static'</span> <span class="d_string">'this'</span> <span class="d_string">'('</span> <span class="d_string">')'</span> <a href="#.functionBody"><b>functionBody</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1804,7 +1804,7 @@ void main()
 <dd>Parses a SharedStaticDestructor
 <p></p>
 <pre class="d_code"><a name=".sharedStaticDestructor"></a> <b>sharedStaticDestructor</b>:
-     <span class="d_string">'shared'</span> <span class="d_string">'static'</span> <span class="d_string">'~'</span> <span class="d_string">'this'</span> <span class="d_string">'('</span> <span class="d_string">')'</span> <a href="#functionBody"><b>functionBody</b></a>
+     <span class="d_string">'shared'</span> <span class="d_string">'static'</span> <span class="d_string">'~'</span> <span class="d_string">'this'</span> <span class="d_string">'('</span> <span class="d_string">')'</span> <a href="#.functionBody"><b>functionBody</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1813,8 +1813,8 @@ void main()
 <dd>Parses a ShiftExpression
 <p></p>
 <pre class="d_code"><a name=".shiftExpression"></a> <b>shiftExpression</b>:
-       <a href="#addExpression"><b>addExpression</b></a>
-     | <a href="#shiftExpression"><b>shiftExpression</b></a> (<span class="d_string">'&lt;&lt;'</span> | <span class="d_string">'&gt;&gt;'</span> | <span class="d_string">'&gt;&gt;&gt;'</span>) <a href="#addExpression"><b>addExpression</b></a>
+       <a href="#.addExpression"><b>addExpression</b></a>
+     | <a href="#.shiftExpression"><b>shiftExpression</b></a> (<span class="d_string">'&lt;&lt;'</span> | <span class="d_string">'&gt;&gt;'</span> | <span class="d_string">'&gt;&gt;&gt;'</span>) <a href="#.addExpression"><b>addExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1823,7 +1823,7 @@ void main()
 <dd>Parses a SingleImport
 <p></p>
 <pre class="d_code"><a name=".singleImport"></a> <b>singleImport</b>:
-     (<span class="d_string">Identifier</span> <span class="d_string">'='</span>)? <a href="#identifierChain"><b>identifierChain</b></a>
+     (<span class="d_string">Identifier</span> <span class="d_string">'='</span>)? <a href="#.identifierChain"><b>identifierChain</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1832,7 +1832,7 @@ void main()
 <dd>Parses a SliceExpression
 <p></p>
 <pre class="d_code"><a name=".sliceExpression"></a> <b>sliceExpression</b>:
-     <a href="#unaryExpression"><b>unaryExpression</b></a> <span class="d_string">'['</span> <a href="#assignExpression"><b>assignExpression</b></a> <span class="d_string">'..'</span> <a href="#assignExpression"><b>assignExpression</b></a> <span class="d_string">']'</span>
+     <a href="#.unaryExpression"><b>unaryExpression</b></a> <span class="d_string">'['</span> <a href="#.assignExpression"><b>assignExpression</b></a> <span class="d_string">'..'</span> <a href="#.assignExpression"><b>assignExpression</b></a> <span class="d_string">']'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1841,10 +1841,10 @@ void main()
 <dd>Parses a Statement
 <p></p>
 <pre class="d_code"><a name=".statement"></a> <b>statement</b>:
-       <a href="#statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
-     | <a href="#caseStatement"><b>caseStatement</b></a>
-     | <a href="#caseRangeStatement"><b>caseRangeStatement</b></a>
-     | <a href="#defaultStatement"><b>defaultStatement</b></a>
+       <a href="#.statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
+     | <a href="#.caseStatement"><b>caseStatement</b></a>
+     | <a href="#.caseRangeStatement"><b>caseRangeStatement</b></a>
+     | <a href="#.defaultStatement"><b>defaultStatement</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1853,7 +1853,7 @@ void main()
 <dd>Parses a StaticAssertDeclaration
 <p></p>
 <pre class="d_code"><a name=".staticAssertDeclaration"></a> <b>staticAssertDeclaration</b>:
-     <a href="#staticAssertStatement"><b>staticAssertStatement</b></a>
+     <a href="#.staticAssertStatement"><b>staticAssertStatement</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1862,7 +1862,7 @@ void main()
 <dd>Parses a StaticAssertStatement
 <p></p>
 <pre class="d_code"><a name=".staticAssertStatement"></a> <b>staticAssertStatement</b>:
-     <span class="d_string">'static'</span> <a href="#assertExpression"><b>assertExpression</b></a> <span class="d_string">';'</span>
+     <span class="d_string">'static'</span> <a href="#.assertExpression"><b>assertExpression</b></a> <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1871,7 +1871,7 @@ void main()
 <dd>Parses a StaticConstructor
 <p></p>
 <pre class="d_code"><a name=".staticConstructor"></a> <b>staticConstructor</b>:
-     <span class="d_string">'static'</span> <span class="d_string">'this'</span> <span class="d_string">'('</span> <span class="d_string">')'</span> <a href="#functionBody"><b>functionBody</b></a>
+     <span class="d_string">'static'</span> <span class="d_string">'this'</span> <span class="d_string">'('</span> <span class="d_string">')'</span> <a href="#.functionBody"><b>functionBody</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1880,7 +1880,7 @@ void main()
 <dd>Parses a StaticDestructor
 <p></p>
 <pre class="d_code"><a name=".staticConstructor"></a> <b>staticConstructor</b>:
-     <span class="d_string">'static'</span> <span class="d_string">'~'</span> <span class="d_string">'this'</span> <span class="d_string">'('</span> <span class="d_string">')'</span> <a href="#functionBody"><b>functionBody</b></a>
+     <span class="d_string">'static'</span> <span class="d_string">'~'</span> <span class="d_string">'this'</span> <span class="d_string">'('</span> <span class="d_string">')'</span> <a href="#.functionBody"><b>functionBody</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1889,7 +1889,7 @@ void main()
 <dd>Parses an StaticIfCondition
 <p></p>
 <pre class="d_code"><a name=".staticIfCondition"></a> <b>staticIfCondition</b>:
-     <span class="d_string">'static'</span> <span class="d_string">'if'</span> <span class="d_string">'('</span> <a href="#assignExpression"><b>assignExpression</b></a> <span class="d_string">')'</span>
+     <span class="d_string">'static'</span> <span class="d_string">'if'</span> <span class="d_string">'('</span> <a href="#.assignExpression"><b>assignExpression</b></a> <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1897,9 +1897,9 @@ void main()
 </dt>
 <dd>Parses an StorageClass
 <p></p>
-<pre class="d_code"><a href="#storageClass"><b>storageClass</b></a>:
-       <a href="#atAttribute"><b>atAttribute</b></a>
-     | <a href="#typeConstructor"><b>typeConstructor</b></a>
+<pre class="d_code"><a href="#.storageClass"><b>storageClass</b></a>:
+       <a href="#.atAttribute"><b>atAttribute</b></a>
+     | <a href="#.typeConstructor"><b>typeConstructor</b></a>
      | <span class="d_string">'abstract'</span>
      | <span class="d_string">'auto'</span>
      | <span class="d_string">'deprecated'</span>
@@ -1921,7 +1921,7 @@ void main()
 <dd>Parses a StructBody
 <p></p>
 <pre class="d_code"><a name=".structBody"></a> <b>structBody</b>:
-     <span class="d_string">'{'</span> <a href="#structBodyItem"><b>structBodyItem</b></a>* <span class="d_string">'}'</span>
+     <span class="d_string">'{'</span> <a href="#.structBodyItem"><b>structBodyItem</b></a>* <span class="d_string">'}'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1930,9 +1930,9 @@ void main()
 <dd>Parses a StructBodyItem
 <p></p>
 <pre class="d_code"><a name=".structBodyItem"></a> <b>structBodyItem</b>:
-       <a href="#declaration"><b>declaration</b></a>
-     | <a href="#postBlit"><b>postBlit</b></a>
-     | <a href="#invariant"><b>invariant</b></a>
+       <a href="#.declaration"><b>declaration</b></a>
+     | <a href="#.postBlit"><b>postBlit</b></a>
+     | <a href="#.invariant"><b>invariant</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1941,7 +1941,7 @@ void main()
 <dd>Parses a StructDeclaration
 <p></p>
 <pre class="d_code"><a name=".structDeclaration"></a> <b>structDeclaration</b>:
-     <span class="d_string">'struct'</span> <span class="d_string">Identifier</span> (<a href="#templateParameters"><b>templateParameters</b></a> <a href="#constraint"><b>constraint</b></a>? <a href="#structBody"><b>structBody</b></a> | (<a href="#structBody"><b>structBody</b></a> | <span class="d_string">';'</span>))
+     <span class="d_string">'struct'</span> <span class="d_string">Identifier</span> (<a href="#.templateParameters"><b>templateParameters</b></a> <a href="#.constraint"><b>constraint</b></a>? <a href="#.structBody"><b>structBody</b></a> | (<a href="#.structBody"><b>structBody</b></a> | <span class="d_string">';'</span>))
      ;</pre><p></p>
 
 </dd>
@@ -1950,7 +1950,7 @@ void main()
 <dd>Parses an StructInitializer
 <p></p>
 <pre class="d_code"><a name=".structInitializer"></a> <b>structInitializer</b>:
-     <span class="d_string">'{'</span> <a href="#structMemberInitializers"><b>structMemberInitializers</b></a>? <span class="d_string">'}'</span>
+     <span class="d_string">'{'</span> <a href="#.structMemberInitializers"><b>structMemberInitializers</b></a>? <span class="d_string">'}'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1959,7 +1959,7 @@ void main()
 <dd>Parses a StructMemberInitializer
 <p></p>
 <pre class="d_code"><a name=".structMemberInitializer"></a> <b>structMemberInitializer</b>:
-     (<span class="d_string">Identifier</span> <span class="d_string">':'</span>)? <a href="#nonVoidInitializer"><b>nonVoidInitializer</b></a>
+     (<span class="d_string">Identifier</span> <span class="d_string">':'</span>)? <a href="#.nonVoidInitializer"><b>nonVoidInitializer</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1968,7 +1968,7 @@ void main()
 <dd>Parses StructMemberInitializers
 <p></p>
 <pre class="d_code"><a name=".structMemberInitializers"></a> <b>structMemberInitializers</b>:
-     <a href="#structMemberInitializer"><b>structMemberInitializer</b></a> (<span class="d_string">','</span> <a href="#structMemberInitializer"><b>structMemberInitializer</b></a>?)*
+     <a href="#.structMemberInitializer"><b>structMemberInitializer</b></a> (<span class="d_string">','</span> <a href="#.structMemberInitializer"><b>structMemberInitializer</b></a>?)*
      ;</pre><p></p>
 
 </dd>
@@ -1977,7 +1977,7 @@ void main()
 <dd>Parses a SwitchBody
 <p></p>
 <pre class="d_code"><a name=".switchBody"></a> <b>switchBody</b>:
-     <span class="d_string">'{'</span> <a href="#statement"><b>statement</b></a>+ <span class="d_string">'}'</span>
+     <span class="d_string">'{'</span> <a href="#.statement"><b>statement</b></a>+ <span class="d_string">'}'</span>
      ;</pre><p></p>
 
 </dd>
@@ -1986,7 +1986,7 @@ void main()
 <dd>Parses a SwitchStatement
 <p></p>
 <pre class="d_code"><a name=".switchStatement"></a> <b>switchStatement</b>:
-     <span class="d_string">'switch'</span> <span class="d_string">'('</span> <a href="#expression"><b>expression</b></a> <span class="d_string">')'</span> <a href="#switchBody"><b>switchBody</b></a>
+     <span class="d_string">'switch'</span> <span class="d_string">'('</span> <a href="#.expression"><b>expression</b></a> <span class="d_string">')'</span> <a href="#.switchBody"><b>switchBody</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -1995,7 +1995,7 @@ void main()
 <dd>Parses a Symbol
 <p></p>
 <pre class="d_code"><a name=".symbol"></a> <b>symbol</b>:
-     <span class="d_string">'.'</span>? <a href="#identifierOrTemplateChain"><b>identifierOrTemplateChain</b></a>
+     <span class="d_string">'.'</span>? <a href="#.identifierOrTemplateChain"><b>identifierOrTemplateChain</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -2004,7 +2004,7 @@ void main()
 <dd>Parses a SynchronizedStatement
 <p></p>
 <pre class="d_code"><a name=".synchronizedStatement"></a> <b>synchronizedStatement</b>:
-     <span class="d_string">'synchronized'</span> (<span class="d_string">'('</span> <a href="#expression"><b>expression</b></a> <span class="d_string">')'</span>)? <a href="#nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a>
+     <span class="d_string">'synchronized'</span> (<span class="d_string">'('</span> <a href="#.expression"><b>expression</b></a> <span class="d_string">')'</span>)? <a href="#.nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -2013,7 +2013,7 @@ void main()
 <dd>Parses a TemplateAliasParameter
 <p></p>
 <pre class="d_code"><a name=".templateAliasParameter"></a> <b>templateAliasParameter</b>:
-     <span class="d_string">'alias'</span> <a href="#type"><b>type</b></a>? <span class="d_string">Identifier</span> (<span class="d_string">':'</span> (<a href="#type"><b>type</b></a> | <a href="#expression"><b>expression</b></a>))? (<span class="d_string">'='</span> (<a href="#type"><b>type</b></a> | <a href="#expression"><b>expression</b></a>))?
+     <span class="d_string">'alias'</span> <a href="#.type"><b>type</b></a>? <span class="d_string">Identifier</span> (<span class="d_string">':'</span> (<a href="#.type"><b>type</b></a> | <a href="#.expression"><b>expression</b></a>))? (<span class="d_string">'='</span> (<a href="#.type"><b>type</b></a> | <a href="#.expression"><b>expression</b></a>))?
      ;</pre><p></p>
 
 </dd>
@@ -2022,8 +2022,8 @@ void main()
 <dd>Parses a TemplateArgument
 <p></p>
 <pre class="d_code"><a name=".templateArgument"></a> <b>templateArgument</b>:
-       <a href="#type"><b>type</b></a>
-     | <a href="#assignExpression"><b>assignExpression</b></a>
+       <a href="#.type"><b>type</b></a>
+     | <a href="#.assignExpression"><b>assignExpression</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -2032,7 +2032,7 @@ void main()
 <dd>Parses a TemplateArgumentList
 <p></p>
 <pre class="d_code"><a name=".templateArgumentList"></a> <b>templateArgumentList</b>:
-     <a href="#templateArgument"><b>templateArgument</b></a> (<span class="d_string">','</span> <a href="#templateArgument"><b>templateArgument</b></a>?)*
+     <a href="#.templateArgument"><b>templateArgument</b></a> (<span class="d_string">','</span> <a href="#.templateArgument"><b>templateArgument</b></a>?)*
      ;</pre><p></p>
 
 </dd>
@@ -2041,7 +2041,7 @@ void main()
 <dd>Parses TemplateArguments
 <p></p>
 <pre class="d_code"><a name=".templateArguments"></a> <b>templateArguments</b>:
-     <span class="d_string">'!'</span> (<span class="d_string">'('</span> <a href="#templateArgumentList"><b>templateArgumentList</b></a>? <span class="d_string">')'</span> | <a href="#templateSingleArgument"><b>templateSingleArgument</b></a>)
+     <span class="d_string">'!'</span> (<span class="d_string">'('</span> <a href="#.templateArgumentList"><b>templateArgumentList</b></a>? <span class="d_string">')'</span> | <a href="#.templateSingleArgument"><b>templateSingleArgument</b></a>)
      ;</pre><p></p>
 
 </dd>
@@ -2050,7 +2050,7 @@ void main()
 <dd>Parses a TemplateDeclaration
 <p></p>
 <pre class="d_code"><a name=".templateDeclaration"></a> <b>templateDeclaration</b>:
-     <span class="d_string">'template'</span> <span class="d_string">Identifier</span> <a href="#templateParameters"><b>templateParameters</b></a> <a href="#constraint"><b>constraint</b></a>? <span class="d_string">'{'</span> <a href="#declaration"><b>declaration</b></a>+ <span class="d_string">'}'</span>
+     <span class="d_string">'template'</span> <span class="d_string">Identifier</span> <a href="#.templateParameters"><b>templateParameters</b></a> <a href="#.constraint"><b>constraint</b></a>? <span class="d_string">'{'</span> <a href="#.declaration"><b>declaration</b></a>+ <span class="d_string">'}'</span>
      ;</pre><p></p>
 
 </dd>
@@ -2059,7 +2059,7 @@ void main()
 <dd>Parses a TemplateInstance
 <p></p>
 <pre class="d_code"><a name=".templateInstance"></a> <b>templateInstance</b>:
-     <span class="d_string">Identifier</span> <a href="#templateArguments"><b>templateArguments</b></a>
+     <span class="d_string">Identifier</span> <a href="#.templateArguments"><b>templateArguments</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -2068,7 +2068,7 @@ void main()
 <dd>Parses a TemplateMixinStatement
 <p></p>
 <pre class="d_code"><a name=".templateMixinStatement"></a> <b>templateMixinStatement</b>:
-     <span class="d_string">'mixin'</span> <a href="#mixinTemplateName"><b>mixinTemplateName</b></a> <a href="#templateArguments"><b>templateArguments</b></a>? <span class="d_string">Identifier</span>? <span class="d_string">';'</span>
+     <span class="d_string">'mixin'</span> <a href="#.mixinTemplateName"><b>mixinTemplateName</b></a> <a href="#.templateArguments"><b>templateArguments</b></a>? <span class="d_string">Identifier</span>? <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -2077,11 +2077,11 @@ void main()
 <dd>Parses a TemplateParameter
 <p></p>
 <pre class="d_code"><a name=".templateParameter"></a> <b>templateParameter</b>:
-       <a href="#templateTypeParameter"><b>templateTypeParameter</b></a>
-     | <a href="#templateValueParameter"><b>templateValueParameter</b></a>
-     | <a href="#templateAliasParameter"><b>templateAliasParameter</b></a>
-     | <a href="#templateTupleParameter"><b>templateTupleParameter</b></a>
-     | <a href="#templateThisParameter"><b>templateThisParameter</b></a>
+       <a href="#.templateTypeParameter"><b>templateTypeParameter</b></a>
+     | <a href="#.templateValueParameter"><b>templateValueParameter</b></a>
+     | <a href="#.templateAliasParameter"><b>templateAliasParameter</b></a>
+     | <a href="#.templateTupleParameter"><b>templateTupleParameter</b></a>
+     | <a href="#.templateThisParameter"><b>templateThisParameter</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -2090,7 +2090,7 @@ void main()
 <dd>Parses an TemplateParameterList
 <p></p>
 <pre class="d_code"><a name=".templateParameterList"></a> <b>templateParameterList</b>:
-     <a href="#templateParameter"><b>templateParameter</b></a> (<span class="d_string">','</span> <a href="#templateParameter"><b>templateParameter</b></a>?)*
+     <a href="#.templateParameter"><b>templateParameter</b></a> (<span class="d_string">','</span> <a href="#.templateParameter"><b>templateParameter</b></a>?)*
      ;</pre><p></p>
 
 </dd>
@@ -2099,7 +2099,7 @@ void main()
 <dd>Parses TemplateParameters
 <p></p>
 <pre class="d_code"><a name=".templateParameters"></a> <b>templateParameters</b>:
-     <span class="d_string">'('</span> <a href="#templateParameterList"><b>templateParameterList</b></a>? <span class="d_string">')'</span>
+     <span class="d_string">'('</span> <a href="#.templateParameterList"><b>templateParameterList</b></a>? <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -2108,7 +2108,7 @@ void main()
 <dd>Parses a TemplateSingleArgument
 <p></p>
 <pre class="d_code"><a name=".templateSingleArgument"></a> <b>templateSingleArgument</b>:
-       <a href="#builtinType"><b>builtinType</b></a>
+       <a href="#.builtinType"><b>builtinType</b></a>
      | <span class="d_string">Identifier</span>
      | <span class="d_string">CharacterLiteral</span>
      | <span class="d_string">StringLiteral</span>
@@ -2118,16 +2118,16 @@ void main()
      | <span class="d_string">'false'</span>
      | <span class="d_string">'null'</span>
      | <span class="d_string">'this'</span>
-     | <span class="d_string">'_DATE__'</span>
-     | <span class="d_string">'_TIME__'</span>
-     | <span class="d_string">'_TIMESTAMP__'</span>
-     | <span class="d_string">'_VENDOR__'</span>
-     | <span class="d_string">'_VERSION__'</span>
-     | <span class="d_string">'_FILE__'</span>
-     | <span class="d_string">'_LINE__'</span>
-     | <span class="d_string">'_MODULE__'</span>
-     | <span class="d_string">'_FUNCTION__'</span>
-     | <span class="d_string">'_PRETTY_FUNCTION__'</span>
+     | <span class="d_string">'__DATE__'</span>
+     | <span class="d_string">'__TIME__'</span>
+     | <span class="d_string">'__TIMESTAMP__'</span>
+     | <span class="d_string">'__VENDOR__'</span>
+     | <span class="d_string">'__VERSION__'</span>
+     | <span class="d_string">'__FILE__'</span>
+     | <span class="d_string">'__LINE__'</span>
+     | <span class="d_string">'__MODULE__'</span>
+     | <span class="d_string">'__FUNCTION__'</span>
+     | <span class="d_string">'__PRETTY_FUNCTION__'</span>
      ;</pre><p></p>
 
 </dd>
@@ -2136,7 +2136,7 @@ void main()
 <dd>Parses a TemplateThisParameter
 <p></p>
 <pre class="d_code"><a name=".templateThisParameter"></a> <b>templateThisParameter</b>:
-     <span class="d_string">'this'</span> <a href="#templateTypeParameter"><b>templateTypeParameter</b></a>
+     <span class="d_string">'this'</span> <a href="#.templateTypeParameter"><b>templateTypeParameter</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -2154,7 +2154,7 @@ void main()
 <dd>Parses a TemplateTypeParameter
 <p></p>
 <pre class="d_code"><a name=".templateTypeParameter"></a> <b>templateTypeParameter</b>:
-     <span class="d_string">Identifier</span> (<span class="d_string">':'</span> <a href="#type"><b>type</b></a>)? (<span class="d_string">'='</span> <a href="#type"><b>type</b></a>)?
+     <span class="d_string">Identifier</span> (<span class="d_string">':'</span> <a href="#.type"><b>type</b></a>)? (<span class="d_string">'='</span> <a href="#.type"><b>type</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -2163,7 +2163,7 @@ void main()
 <dd>Parses a TemplateValueParameter
 <p></p>
 <pre class="d_code"><a name=".templateValueParameter"></a> <b>templateValueParameter</b>:
-     <a href="#type"><b>type</b></a> <span class="d_string">Identifier</span> (<span class="d_string">':'</span> <a href="#expression"><b>expression</b></a>)? <a href="#templateValueParameterDefault"><b>templateValueParameterDefault</b></a>?
+     <a href="#.type"><b>type</b></a> <span class="d_string">Identifier</span> (<span class="d_string">':'</span> <a href="#.expression"><b>expression</b></a>)? <a href="#.templateValueParameterDefault"><b>templateValueParameterDefault</b></a>?
      ;</pre><p></p>
 
 </dd>
@@ -2172,7 +2172,7 @@ void main()
 <dd>Parses a TemplateValueParameterDefault
 <p></p>
 <pre class="d_code"><a name=".templateValueParameterDefault"></a> <b>templateValueParameterDefault</b>:
-     <span class="d_string">'='</span> ('_FILE__' | '_MODULE__' | '_LINE__' | '_FUNCTION__' | '_PRETTY_FUNCTION__' | <a href="#assignExpression"><b>assignExpression</b></a>)
+     <span class="d_string">'='</span> (<span class="d_string">'__FILE__'</span> | <span class="d_string">'__MODULE__'</span> | <span class="d_string">'__LINE__'</span> | <span class="d_string">'__FUNCTION__'</span> | <span class="d_string">'__PRETTY_FUNCTION__'</span> | <a href="#.assignExpression"><b>assignExpression</b></a>)
      ;</pre><p></p>
 
 </dd>
@@ -2181,7 +2181,7 @@ void main()
 <dd>Parses a TernaryExpression
 <p></p>
 <pre class="d_code"><a name=".ternaryExpression"></a> <b>ternaryExpression</b>:
-     <a href="#orOrExpression"><b>orOrExpression</b></a> (<span class="d_string">'?'</span> <a href="#expression"><b>expression</b></a> <span class="d_string">':'</span> <a href="#ternaryExpression"><b>ternaryExpression</b></a>)?
+     <a href="#.orOrExpression"><b>orOrExpression</b></a> (<span class="d_string">'?'</span> <a href="#.expression"><b>expression</b></a> <span class="d_string">':'</span> <a href="#.ternaryExpression"><b>ternaryExpression</b></a>)?
      ;</pre><p></p>
 
 </dd>
@@ -2190,7 +2190,7 @@ void main()
 <dd>Parses a ThrowStatement
 <p></p>
 <pre class="d_code"><a name=".throwStatement"></a> <b>throwStatement</b>:
-     <span class="d_string">'throw'</span> <a href="#expression"><b>expression</b></a> <span class="d_string">';'</span>
+     <span class="d_string">'throw'</span> <a href="#.expression"><b>expression</b></a> <span class="d_string">';'</span>
      ;</pre><p></p>
 
 </dd>
@@ -2199,7 +2199,7 @@ void main()
 <dd>Parses an TraitsExpression
 <p></p>
 <pre class="d_code"><a name=".traitsExpression"></a> <b>traitsExpression</b>:
-     <span class="d_string">'_traits'</span> <span class="d_string">'('</span> <span class="d_string">Identifier</span> (<span class="d_string">','</span> <a href="#TemplateArgumentList"><b>TemplateArgumentList</b></a>) <span class="d_string">')'</span>
+     <span class="d_string">'__traits'</span> <span class="d_string">'('</span> <span class="d_string">Identifier</span> <span class="d_string">','</span> <a href="#.TemplateArgumentList"><b>TemplateArgumentList</b></a> <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -2208,7 +2208,7 @@ void main()
 <dd>Parses a TryStatement
 <p></p>
 <pre class="d_code"><a name=".tryStatement"></a> <b>tryStatement</b>:
-     <span class="d_string">'try'</span> <a href="#nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a> (<a href="#catches"><b>catches</b></a> | <a href="#catches"><b>catches</b></a> <a href="#finally"><b>finally</b></a> | <a href="#finally"><b>finally</b></a>)
+     <span class="d_string">'try'</span> <a href="#.nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a> (<a href="#.catches"><b>catches</b></a> | <a href="#.catches"><b>catches</b></a> <a href="#.finally"><b>finally</b></a> | <a href="#.finally"><b>finally</b></a>)
      ;</pre><p></p>
 
 </dd>
@@ -2217,7 +2217,7 @@ void main()
 <dd>Parses a Type
 <p></p>
 <pre class="d_code"><a name=".type"></a> <b>type</b>:
-     <a href="#typeConstructors"><b>typeConstructors</b></a>? <a href="#type2"><b>type2</b></a> <a href="#typeSuffix"><b>typeSuffix</b></a>*
+     <a href="#.typeConstructors"><b>typeConstructors</b></a>? <a href="#.type2"><b>type2</b></a> <a href="#.typeSuffix"><b>typeSuffix</b></a>*
      ;</pre><p></p>
 
 </dd>
@@ -2226,10 +2226,10 @@ void main()
 <dd>Parses a Type2
 <p></p>
 <pre class="d_code"><a name=".type2"></a> <b>type2</b>:
-       <a href="#builtinType"><b>builtinType</b></a>
-     | <a href="#symbol"><b>symbol</b></a>
-     | <a href="#typeofExpression"><b>typeofExpression</b></a> (<span class="d_string">'.'</span> <a href="#identifierOrTemplateChain"><b>identifierOrTemplateChain</b></a>)?
-     | <a href="#typeConstructor"><b>typeConstructor</b></a> <span class="d_string">'('</span> <a href="#type"><b>type</b></a> <span class="d_string">')'</span>
+       <a href="#.builtinType"><b>builtinType</b></a>
+     | <a href="#.symbol"><b>symbol</b></a>
+     | <a href="#.typeofExpression"><b>typeofExpression</b></a> (<span class="d_string">'.'</span> <a href="#.identifierOrTemplateChain"><b>identifierOrTemplateChain</b></a>)?
+     | <a href="#.typeConstructor"><b>typeConstructor</b></a> <span class="d_string">'('</span> <a href="#.type"><b>type</b></a> <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -2251,7 +2251,7 @@ void main()
 <dd>Parses TypeConstructors
 <p></p>
 <pre class="d_code"><a name=".typeConstructors"></a> <b>typeConstructors</b>:
-     <a href="#typeConstructor"><b>typeConstructor</b></a>+
+     <a href="#.typeConstructor"><b>typeConstructor</b></a>+
      ;</pre><p></p>
 
 </dd>
@@ -2260,7 +2260,7 @@ void main()
 <dd>Parses a TypeSpecialization
 <p></p>
 <pre class="d_code"><a name=".typeSpecialization"></a> <b>typeSpecialization</b>:
-       <a href="#type"><b>type</b></a>
+       <a href="#.type"><b>type</b></a>
      | <span class="d_string">'struct'</span>
      | <span class="d_string">'union'</span>
      | <span class="d_string">'class'</span>
@@ -2284,8 +2284,8 @@ void main()
 <p></p>
 <pre class="d_code"><a name=".typeSuffix"></a> <b>typeSuffix</b>:
        <span class="d_string">'*'</span>
-     | <span class="d_string">'['</span> (<a href="#type"><b>type</b></a> | <a href="#assignExpression"><b>assignExpression</b></a>)? <span class="d_string">']'</span>
-     | (<span class="d_string">'delegate'</span> | <span class="d_string">'function'</span>) <a href="#parameters"><b>parameters</b></a> <a href="#memberFunctionAttribute"><b>memberFunctionAttribute</b></a>*
+     | <span class="d_string">'['</span> (<a href="#.type"><b>type</b></a> | <a href="#.assignExpression"><b>assignExpression</b></a>)? <span class="d_string">']'</span>
+     | (<span class="d_string">'delegate'</span> | <span class="d_string">'function'</span>) <a href="#.parameters"><b>parameters</b></a> <a href="#.memberFunctionAttribute"><b>memberFunctionAttribute</b></a>*
      ;</pre><p></p>
 
 </dd>
@@ -2294,7 +2294,7 @@ void main()
 <dd>Parses a TypeidExpression
 <p></p>
 <pre class="d_code"><a name=".typeidExpression"></a> <b>typeidExpression</b>:
-     <span class="d_string">'typeid'</span> <span class="d_string">'('</span>(<a href="#type"><b>type</b></a> | <a href="#expression"><b>expression</b></a>) <span class="d_string">')'</span>
+     <span class="d_string">'typeid'</span> <span class="d_string">'('</span> (<a href="#.type"><b>type</b></a> | <a href="#.expression"><b>expression</b></a>) <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -2303,7 +2303,7 @@ void main()
 <dd>Parses a TypeofExpression
 <p></p>
 <pre class="d_code"><a name=".typeofExpression"></a> <b>typeofExpression</b>:
-     <span class="d_string">'typeof'</span> <span class="d_string">'('</span>(<a href="#expression"><b>expression</b></a> | <span class="d_string">'return'</span>) <span class="d_string">')'</span>
+     <span class="d_string">'typeof'</span> <span class="d_string">'('</span> (<a href="#.expression"><b>expression</b></a> | <span class="d_string">'return'</span>) <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -2312,25 +2312,25 @@ void main()
 <dd>Parses a UnaryExpression
 <p></p>
 <pre class="d_code"><a name=".unaryExpression"></a> <b>unaryExpression</b>:
-       <a href="#primaryExpression"><b>primaryExpression</b></a>
-     | <span class="d_string">'&amp;'</span> <a href="#unaryExpression"><b>unaryExpression</b></a>
-     | <span class="d_string">'!'</span> <a href="#unaryExpression"><b>unaryExpression</b></a>
-     | <span class="d_string">'*'</span> <a href="#unaryExpression"><b>unaryExpression</b></a>
-     | <span class="d_string">'+'</span> <a href="#unaryExpression"><b>unaryExpression</b></a>
-     | <span class="d_string">'-'</span> <a href="#unaryExpression"><b>unaryExpression</b></a>
-     | <span class="d_string">'~'</span> <a href="#unaryExpression"><b>unaryExpression</b></a>
-     | <span class="d_string">'++'</span> <a href="#unaryExpression"><b>unaryExpression</b></a>
-     | <span class="d_string">'--'</span> <a href="#unaryExpression"><b>unaryExpression</b></a>
-     | <a href="#newExpression"><b>newExpression</b></a>
-     | <a href="#deleteExpression"><b>deleteExpression</b></a>
-     | <a href="#castExpression"><b>castExpression</b></a>
-     | <a href="#assertExpression"><b>assertExpression</b></a>
-     | <a href="#functionCallExpression"><b>functionCallExpression</b></a>
-     | <a href="#sliceExpression"><b>sliceExpression</b></a>
-     | <a href="#indexExpression"><b>indexExpression</b></a>
-     | <a href="#unaryExpression"><b>unaryExpression</b></a> <span class="d_string">'.'</span> <a href="#identifierOrTemplateInstance"><b>identifierOrTemplateInstance</b></a>
-     | <a href="#unaryExpression"><b>unaryExpression</b></a> <span class="d_string">'--'</span>
-     | <a href="#unaryExpression"><b>unaryExpression</b></a> <span class="d_string">'++'</span>
+       <a href="#.primaryExpression"><b>primaryExpression</b></a>
+     | <span class="d_string">'&amp;'</span> <a href="#.unaryExpression"><b>unaryExpression</b></a>
+     | <span class="d_string">'!'</span> <a href="#.unaryExpression"><b>unaryExpression</b></a>
+     | <span class="d_string">'*'</span> <a href="#.unaryExpression"><b>unaryExpression</b></a>
+     | <span class="d_string">'+'</span> <a href="#.unaryExpression"><b>unaryExpression</b></a>
+     | <span class="d_string">'-'</span> <a href="#.unaryExpression"><b>unaryExpression</b></a>
+     | <span class="d_string">'~'</span> <a href="#.unaryExpression"><b>unaryExpression</b></a>
+     | <span class="d_string">'++'</span> <a href="#.unaryExpression"><b>unaryExpression</b></a>
+     | <span class="d_string">'--'</span> <a href="#.unaryExpression"><b>unaryExpression</b></a>
+     | <a href="#.newExpression"><b>newExpression</b></a>
+     | <a href="#.deleteExpression"><b>deleteExpression</b></a>
+     | <a href="#.castExpression"><b>castExpression</b></a>
+     | <a href="#.assertExpression"><b>assertExpression</b></a>
+     | <a href="#.functionCallExpression"><b>functionCallExpression</b></a>
+     | <a href="#.sliceExpression"><b>sliceExpression</b></a>
+     | <a href="#.indexExpression"><b>indexExpression</b></a>
+     | <a href="#.unaryExpression"><b>unaryExpression</b></a> <span class="d_string">'.'</span> <a href="#.identifierOrTemplateInstance"><b>identifierOrTemplateInstance</b></a>
+     | <a href="#.unaryExpression"><b>unaryExpression</b></a> <span class="d_string">'--'</span>
+     | <a href="#.unaryExpression"><b>unaryExpression</b></a> <span class="d_string">'++'</span>
      ;</pre><p></p>
 
 </dd>
@@ -2339,9 +2339,9 @@ void main()
 <dd>Parses an UnionDeclaration
 <p></p>
 <pre class="d_code"><a name=".unionDeclaration"></a> <b>unionDeclaration</b>:
-       <span class="d_string">'union'</span> <span class="d_string">Identifier</span> <a href="#templateParameters"><b>templateParameters</b></a> <a href="#constraint"><b>constraint</b></a>? <a href="#structBody"><b>structBody</b></a>
-     | <span class="d_string">'union'</span> <span class="d_string">Identifier</span> (<a href="#structBody"><b>structBody</b></a> | <span class="d_string">';'</span>)
-     | <span class="d_string">'union'</span> <a href="#structBody"><b>structBody</b></a>
+       <span class="d_string">'union'</span> <span class="d_string">Identifier</span> <a href="#.templateParameters"><b>templateParameters</b></a> <a href="#.constraint"><b>constraint</b></a>? <a href="#.structBody"><b>structBody</b></a>
+     | <span class="d_string">'union'</span> <span class="d_string">Identifier</span> (<a href="#.structBody"><b>structBody</b></a> | <span class="d_string">';'</span>)
+     | <span class="d_string">'union'</span> <a href="#.structBody"><b>structBody</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -2350,7 +2350,7 @@ void main()
 <dd>Parses a Unittest
 <p></p>
 <pre class="d_code"><a name=".unittest"></a> <b>unittest</b>:
-     <span class="d_string">'unittest'</span> <a href="#blockStatement"><b>blockStatement</b></a>
+     <span class="d_string">'unittest'</span> <a href="#.blockStatement"><b>blockStatement</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -2359,8 +2359,8 @@ void main()
 <dd>Parses a VariableDeclaration
 <p></p>
 <pre class="d_code"><a name=".variableDeclaration"></a> <b>variableDeclaration</b>:
-       <a href="#type"><b>type</b></a> <a href="#declarator"><b>declarator</b></a> (<span class="d_string">','</span> <a href="#declarator"><b>declarator</b></a>)* <span class="d_string">';'</span>
-     | <a href="#autoDeclaration"><b>autoDeclaration</b></a>
+       <a href="#.type"><b>type</b></a> <a href="#.declarator"><b>declarator</b></a> (<span class="d_string">','</span> <a href="#.declarator"><b>declarator</b></a>)* <span class="d_string">';'</span>
+     | <a href="#.autoDeclaration"><b>autoDeclaration</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -2369,7 +2369,7 @@ void main()
 <dd>Parses a Vector
 <p></p>
 <pre class="d_code"><a name=".vector"></a> <b>vector</b>:
-     <span class="d_string">'_vector'</span> <span class="d_string">'('</span> <a href="#type"><b>type</b></a> <span class="d_string">')'</span>
+     <span class="d_string">'__vector'</span> <span class="d_string">'('</span> <a href="#.type"><b>type</b></a> <span class="d_string">')'</span>
      ;</pre><p></p>
 
 </dd>
@@ -2396,7 +2396,7 @@ void main()
 <dd>Parses a WhileStatement
 <p></p>
 <pre class="d_code"><a name=".whileStatement"></a> <b>whileStatement</b>:
-     <span class="d_string">'while'</span> <span class="d_string">'('</span> <a href="#expression"><b>expression</b></a> <span class="d_string">')'</span> <a href="#statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
+     <span class="d_string">'while'</span> <span class="d_string">'('</span> <a href="#.expression"><b>expression</b></a> <span class="d_string">')'</span> <a href="#.statementNoCaseNoDefault"><b>statementNoCaseNoDefault</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -2405,7 +2405,7 @@ void main()
 <dd>Parses a WithStatement
 <p></p>
 <pre class="d_code"><a name=".withStatement"></a> <b>withStatement</b>:
-     <span class="d_string">'with'</span> <span class="d_string">'('</span> <a href="#expression"><b>expression</b></a> <span class="d_string">')'</span> <a href="#nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a>
+     <span class="d_string">'with'</span> <span class="d_string">'('</span> <a href="#.expression"><b>expression</b></a> <span class="d_string">')'</span> <a href="#.nonEmptyStatementNoCaseNoDefault"><b>nonEmptyStatementNoCaseNoDefault</b></a>
      ;</pre><p></p>
 
 </dd>
@@ -2414,8 +2414,8 @@ void main()
 <dd>Parses an XorExpression
 <p></p>
 <pre class="d_code"><a name=".xorExpression"></a> <b>xorExpression</b>:
-       <a href="#andExpression"><b>andExpression</b></a>
-     | <a href="#xorExpression"><b>xorExpression</b></a> <span class="d_string">'^'</span> <a href="#andExpression"><b>andExpression</b></a>
+       <a href="#.andExpression"><b>andExpression</b></a>
+     | <a href="#.xorExpression"><b>xorExpression</b></a> <span class="d_string">'^'</span> <a href="#.andExpression"><b>andExpression</b></a>
      ;</pre><p></p>
 
 </dd>
