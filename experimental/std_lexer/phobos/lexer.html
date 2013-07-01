@@ -327,14 +327,15 @@ html  { background-color: #fdf6e3; color: #002b36; }
 </dt>
 <dd>Represents a D token<p></p>
 
-<dl><dt class="d_decl"><a name=".Token.type"></a>TokenType <a name="type"></a><span class="ddoc_psymbol">type</span>;
-</dt>
-<dd>The token <a name="type"></a><span class="ddoc_psymbol">type</span>.<p></p>
-
-</dd>
-<dt class="d_decl"><a name=".Token.value"></a>string <a name="value"></a><span class="ddoc_psymbol">value</span>;
+<dl><dt class="d_decl"><a name=".Token.value"></a>string <a name="value"></a><span class="ddoc_psymbol">value</span>;
 </dt>
 <dd>The representation of the token in the original source code.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".Token.startIndex"></a>size_t <a name="startIndex"></a><span class="ddoc_psymbol">startIndex</span>;
+</dt>
+<dd>The index of the start of the token in the original source.
+ (measured in ASCII characters or UTF-8 code units)<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Token.line"></a>uint <a name="line"></a><span class="ddoc_psymbol">line</span>;
@@ -342,16 +343,15 @@ html  { background-color: #fdf6e3; color: #002b36; }
 <dd>The number of the <a name="line"></a><span class="ddoc_psymbol">line</span> the token is on.<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".Token.column"></a>uint <a name="column"></a><span class="ddoc_psymbol">column</span>;
+<dt class="d_decl"><a name=".Token.column"></a>ushort <a name="column"></a><span class="ddoc_psymbol">column</span>;
 </dt>
 <dd>The <a name="column"></a><span class="ddoc_psymbol">column</span> number of the start of the token in the original source.
  (measured in ASCII characters or UTF-8 code units)<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".Token.startIndex"></a>size_t <a name="startIndex"></a><span class="ddoc_psymbol">startIndex</span>;
+<dt class="d_decl"><a name=".Token.type"></a>TokenType <a name="type"></a><span class="ddoc_psymbol">type</span>;
 </dt>
-<dd>The index of the start of the token in the original source.
- (measured in ASCII characters or UTF-8 code units)<p></p>
+<dd>The token <a name="type"></a><span class="ddoc_psymbol">type</span>.<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".Token.opEquals"></a>const bool <a name="opEquals"></a><span class="ddoc_psymbol">opEquals</span>(ref const(Token) <i>other</i>);
@@ -594,7 +594,11 @@ html  { background-color: #fdf6e3; color: #002b36; }
 </dt>
 <dd>Listing of all the tokens in the D language.<p></p>
 
-<dl><dt class="d_decl"><a name=".TokenType.assign"></a><a name="assign"></a><span class="ddoc_psymbol">assign</span></dt>
+<dl><dt class="d_decl"><a name=".TokenType.invalid"></a><a name="invalid"></a><span class="ddoc_psymbol">invalid</span></dt>
+<dd>Not a valid token<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.assign"></a><a name="assign"></a><span class="ddoc_psymbol">assign</span></dt>
 <dd>=<p></p>
 
 </dd>
@@ -699,7 +703,7 @@ html  { background-color: #fdf6e3; color: #002b36; }
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.logicAnd"></a><a name="logicAnd"></a><span class="ddoc_psymbol">logicAnd</span></dt>
-<dd>&amp;&amp;<p></p>
+<dd>&amp;&<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.logicOr"></a><a name="logicOr"></a><span class="ddoc_psymbol">logicOr</span></dt>
@@ -791,7 +795,7 @@ html  { background-color: #fdf6e3; color: #002b36; }
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.shiftLeft"></a><a name="shiftLeft"></a><span class="ddoc_psymbol">shiftLeft</span></dt>
-<dd>&lt;&lt;<p></p>
+<dd>&lt;<<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.shiftLeftEqual"></a><a name="shiftLeftEqual"></a><span class="ddoc_psymbol">shiftLeftEqual</span></dt>
@@ -884,10 +888,6 @@ html  { background-color: #fdf6e3; color: #002b36; }
 </dd>
 <dt class="d_decl"><a name=".TokenType.float_"></a><a name="float_"></a><span class="ddoc_psymbol">float_</span></dt>
 <dd><span class="d_keyword">float</span><p></p>
-
-</dd>
-<dt class="d_decl"><a name=".TokenType.function_"></a><a name="function_"></a><span class="ddoc_psymbol">function_</span></dt>
-<dd><span class="d_keyword">function</span><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.idouble_"></a><a name="idouble_"></a><span class="ddoc_psymbol">idouble_</span></dt>
@@ -1076,6 +1076,10 @@ html  { background-color: #fdf6e3; color: #002b36; }
 </dd>
 <dt class="d_decl"><a name=".TokenType.delegate_"></a><a name="delegate_"></a><span class="ddoc_psymbol">delegate_</span></dt>
 <dd><span class="d_keyword">delegate</span><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.function_"></a><a name="function_"></a><span class="ddoc_psymbol">function_</span></dt>
+<dd><span class="d_keyword">function</span><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.delete_"></a><a name="delete_"></a><span class="ddoc_psymbol">delete_</span></dt>

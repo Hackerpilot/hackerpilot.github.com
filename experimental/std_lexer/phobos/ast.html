@@ -237,8 +237,7 @@ This module defines an Abstract Syntax Tree for the D language
 <dl><dt class="d_decl"><a name=".ASTVisitor"></a>abstract class <a name="ASTVisitor"></a><span class="ddoc_psymbol">ASTVisitor</span>;
 </dt>
 <dd>Implements the <a href="http://en.wikipedia.org/wiki/Visitor_pattern">Visitor Pattern</a>
- for the various AST ///
-classes<p></p>
+ for the various AST classes<p></p>
 
 <dl><dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AddExpression <i>addExpression</i>);
 </dt>
@@ -360,15 +359,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AssertStatement <i>assertStatement</i>);
-</dt>
-<dd><p></p>
-</dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AssignExpression <i>assignExpression</i>);
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(AssignStatement <i>assignStatement</i>);
 </dt>
 <dd><p></p>
 </dd>
@@ -409,10 +400,6 @@ classes<p></p>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(BaseClassList <i>baseClassList</i>);
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(BasicType <i>builtinType</i>);
 </dt>
 <dd><p></p>
 </dd>
@@ -500,10 +487,6 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(DeclaratorSuffix <i>declaratorSuffix</i>);
-</dt>
-<dd><p></p>
-</dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(DefaultStatement <i>defaultStatement</i>);
 </dt>
 <dd><p></p>
@@ -548,6 +531,10 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ExpressionStatement <i>expressionStatement</i>);
+</dt>
+<dd><p></p>
+</dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(FinalSwitchStatement <i>finalSwitchStatement</i>);
 </dt>
 <dd><p></p>
@@ -557,10 +544,6 @@ classes<p></p>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ForStatement <i>forStatement</i>);
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ForeachRangeStatement <i>foreachRangeStatement</i>);
 </dt>
 <dd><p></p>
 </dd>
@@ -740,10 +723,6 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(NonEmptyStatement <i>nonEmptyStatement</i>);
-</dt>
-<dd><p></p>
-</dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(NonVoidInitializer <i>nonVoidInitializer</i>);
 </dt>
 <dd><p></p>
@@ -769,10 +748,6 @@ classes<p></p>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Parameter <i>parameter</i>);
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(ParameterAttribute <i>parameterAttribute</i>);
 </dt>
 <dd><p></p>
 </dd>
@@ -988,10 +963,6 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TraitsArgument <i>traitsArgument</i>);
-</dt>
-<dd><p></p>
-</dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TraitsExpression <i>traitsExpression</i>);
 </dt>
 <dd><p></p>
@@ -1005,14 +976,6 @@ classes<p></p>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Type2 <i>type2</i>);
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TypeConstructor <i>typeConstructor</i>);
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(TypeConstructors <i>typeConstructors</i>);
 </dt>
 <dd><p></p>
 </dd>
@@ -1045,6 +1008,10 @@ classes<p></p>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(VariableDeclaration <i>variableDeclaration</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ASTVisitor.visit"></a>void <a name="visit"></a><span class="ddoc_psymbol">visit</span>(Vector <i>vector</i>);
 </dt>
 <dd><p></p>
 </dd>
@@ -1087,7 +1054,7 @@ classes<p></p>
 </dd>
 </dl>
 </dd>
-<dt class="d_decl"><a name=".AliasDeclaration"></a>class <a name="AliasDeclaration"></a><span class="ddoc_psymbol">AliasDeclaration</span>: std.d.ast.Declaration;
+<dt class="d_decl"><a name=".AliasDeclaration"></a>class <a name="AliasDeclaration"></a><span class="ddoc_psymbol">AliasDeclaration</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
 <dl><dt class="d_decl"><a name=".AliasDeclaration.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
@@ -1098,7 +1065,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".AliasDeclaration.initializations"></a>AliasInitializer[] <a name="initializations"></a><span class="ddoc_psymbol">initializations</span>;
+<dt class="d_decl"><a name=".AliasDeclaration.initializers"></a>AliasInitializer[] <a name="initializers"></a><span class="ddoc_psymbol">initializers</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -1117,7 +1084,7 @@ classes<p></p>
 </dd>
 </dl>
 </dd>
-<dt class="d_decl"><a name=".AliasThisDeclaration"></a>class <a name="AliasThisDeclaration"></a><span class="ddoc_psymbol">AliasThisDeclaration</span>: std.d.ast.Declaration;
+<dt class="d_decl"><a name=".AliasThisDeclaration"></a>class <a name="AliasThisDeclaration"></a><span class="ddoc_psymbol">AliasThisDeclaration</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
 <dl><dt class="d_decl"><a name=".AliasThisDeclaration.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
@@ -1151,11 +1118,11 @@ classes<p></p>
 <dt class="d_decl"><a name=".AndExpression"></a>class <a name="AndExpression"></a><span class="ddoc_psymbol">AndExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".AndExpression.andExpression"></a>AndExpression <a name="andExpression"></a><span class="ddoc_psymbol">andExpression</span>;
+<dl><dt class="d_decl"><a name=".AndExpression.left"></a>AndExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".AndExpression.shiftExpression"></a>ShiftExpression <a name="shiftExpression"></a><span class="ddoc_psymbol">shiftExpression</span>;
+<dt class="d_decl"><a name=".AndExpression.right"></a>CmpExpression <a name="right"></a><span class="ddoc_psymbol">right</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -1164,7 +1131,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".ArgumentList"></a>class <a name="ArgumentList"></a><span class="ddoc_psymbol">ArgumentList</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".ArgumentList.arguments"></a>AssignExpression[] <a name="arguments"></a><span class="ddoc_psymbol">arguments</span>;
+<dl><dt class="d_decl"><a name=".ArgumentList.items"></a>AssignExpression[] <a name="items"></a><span class="ddoc_psymbol">items</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -1213,11 +1180,11 @@ classes<p></p>
 <dt class="d_decl"><a name=".AsmAddExp"></a>class <a name="AsmAddExp"></a><span class="ddoc_psymbol">AsmAddExp</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".AsmAddExp.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+<dl><dt class="d_decl"><a name=".AsmAddExp.operator"></a>TokenType <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".AsmAddExp.left"></a>AsmMulExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
+<dt class="d_decl"><a name=".AsmAddExp.left"></a>AsmAddExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -1341,15 +1308,15 @@ classes<p></p>
 <dt class="d_decl"><a name=".AsmMulExp"></a>class <a name="AsmMulExp"></a><span class="ddoc_psymbol">AsmMulExp</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".AsmMulExp.left"></a>AsmBrExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
+<dl><dt class="d_decl"><a name=".AsmMulExp.operator"></a>TokenType <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".AsmMulExp.left"></a>AsmMulExp <a name="left"></a><span class="ddoc_psymbol">left</span>;
 </dt>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".AsmMulExp.right"></a>AsmBrExp <a name="right"></a><span class="ddoc_psymbol">right</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".AsmMulExp.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -1492,15 +1459,6 @@ classes<p></p>
 </dd>
 </dl>
 </dd>
-<dt class="d_decl"><a name=".AssertStatement"></a>class <a name="AssertStatement"></a><span class="ddoc_psymbol">AssertStatement</span>: std.d.ast.ASTNode;
-</dt>
-<dd><p></p>
-<dl><dt class="d_decl"><a name=".AssertStatement.assertExpression"></a>AssertExpression <a name="assertExpression"></a><span class="ddoc_psymbol">assertExpression</span>;
-</dt>
-<dd><p></p>
-</dd>
-</dl>
-</dd>
 <dt class="d_decl"><a name=".AssignExpression"></a>class <a name="AssignExpression"></a><span class="ddoc_psymbol">AssignExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
@@ -1513,31 +1471,6 @@ classes<p></p>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".AssignExpression.operator"></a>TokenType <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
-</dt>
-<dd><p></p>
-</dd>
-</dl>
-</dd>
-<dt class="d_decl"><a name=".AssignStatement"></a>class <a name="AssignStatement"></a><span class="ddoc_psymbol">AssignStatement</span>: std.d.ast.ASTNode;
-</dt>
-<dd><p></p>
-<dl><dt class="d_decl"><a name=".AssignStatement.preIncDecExpression"></a>PreIncDecExpression <a name="preIncDecExpression"></a><span class="ddoc_psymbol">preIncDecExpression</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".AssignStatement.postIncDecExpression"></a>PostIncDecExpression <a name="postIncDecExpression"></a><span class="ddoc_psymbol">postIncDecExpression</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".AssignStatement.unaryExpressions"></a>UnaryExpression[] <a name="unaryExpressions"></a><span class="ddoc_psymbol">unaryExpressions</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".AssignStatement.assignExpressions"></a>AssignExpression[] <a name="assignExpressions"></a><span class="ddoc_psymbol">assignExpressions</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".AssignStatement.assignOperators"></a>TokenType[] <a name="assignOperators"></a><span class="ddoc_psymbol">assignOperators</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -1576,7 +1509,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".AttributedDeclaration.declarations"></a>Declaration[] <a name="declarations"></a><span class="ddoc_psymbol">declarations</span>;
+<dt class="d_decl"><a name=".AttributedDeclaration.declaration"></a>Declaration <a name="declaration"></a><span class="ddoc_psymbol">declaration</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -1675,16 +1608,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".BaseClassList"></a>class <a name="BaseClassList"></a><span class="ddoc_psymbol">BaseClassList</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".BaseClassList.baseClasses"></a>BaseClass[] <a name="baseClasses"></a><span class="ddoc_psymbol">baseClasses</span>;
-</dt>
-<dd><p></p>
-</dd>
-</dl>
-</dd>
-<dt class="d_decl"><a name=".BasicType"></a>class <a name="BasicType"></a><span class="ddoc_psymbol">BasicType</span>: std.d.ast.ASTNode;
-</dt>
-<dd><p></p>
-<dl><dt class="d_decl"><a name=".BasicType.type"></a>TokenType <a name="type"></a><span class="ddoc_psymbol">type</span>;
+<dl><dt class="d_decl"><a name=".BaseClassList.items"></a>BaseClass[] <a name="items"></a><span class="ddoc_psymbol">items</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -1914,6 +1838,18 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
+<dt class="d_decl"><a name=".Constructor.constraint"></a>Constraint <a name="constraint"></a><span class="ddoc_psymbol">constraint</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Constructor.memberFunctionAttributes"></a>MemberFunctionAttribute[] <a name="memberFunctionAttributes"></a><span class="ddoc_psymbol">memberFunctionAttributes</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Constructor.templateParameters"></a>TemplateParameters <a name="templateParameters"></a><span class="ddoc_psymbol">templateParameters</span>;
+</dt>
+<dd><p></p>
+</dd>
 </dl>
 </dd>
 <dt class="d_decl"><a name=".ContinueStatement"></a>class <a name="ContinueStatement"></a><span class="ddoc_psymbol">ContinueStatement</span>: std.d.ast.ASTNode;
@@ -2046,12 +1982,20 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
+<dt class="d_decl"><a name=".Declaration.versionSpecification"></a>VersionSpecification <a name="versionSpecification"></a><span class="ddoc_psymbol">versionSpecification</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".Declaration.declarations"></a>Declaration[] <a name="declarations"></a><span class="ddoc_psymbol">declarations</span>;
+</dt>
+<dd><p></p>
+</dd>
 </dl>
 </dd>
 <dt class="d_decl"><a name=".DeclarationsAndStatements"></a>class <a name="DeclarationsAndStatements"></a><span class="ddoc_psymbol">DeclarationsAndStatements</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".DeclarationsAndStatements.declarationsAndStatements"></a>ASTNode[] <a name="declarationsAndStatements"></a><span class="ddoc_psymbol">declarationsAndStatements</span>;
+<dl><dt class="d_decl"><a name=".DeclarationsAndStatements.declarationsAndStatements"></a>DeclarationOrStatement[] <a name="declarationsAndStatements"></a><span class="ddoc_psymbol">declarationsAndStatements</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2060,6 +2004,28 @@ classes<p></p>
 <dt class="d_decl"><a name=".DeclarationOrInvariant"></a>class <a name="DeclarationOrInvariant"></a><span class="ddoc_psymbol">DeclarationOrInvariant</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
+<dl><dt class="d_decl"><a name=".DeclarationOrInvariant.declaration"></a>Declaration <a name="declaration"></a><span class="ddoc_psymbol">declaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".DeclarationOrInvariant.invariant_"></a>Invariant <a name="invariant_"></a><span class="ddoc_psymbol">invariant_</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".DeclarationOrStatement"></a>class <a name="DeclarationOrStatement"></a><span class="ddoc_psymbol">DeclarationOrStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".DeclarationOrStatement.declaration"></a>Declaration <a name="declaration"></a><span class="ddoc_psymbol">declaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".DeclarationOrStatement.statement"></a>StatementNoCaseNoDefault <a name="statement"></a><span class="ddoc_psymbol">statement</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
 </dd>
 <dt class="d_decl"><a name=".Declarator"></a>class <a name="Declarator"></a><span class="ddoc_psymbol">Declarator</span>: std.d.ast.ASTNode;
 </dt>
@@ -2068,24 +2034,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".Declarator.declaratorSuffix"></a>DeclaratorSuffix <a name="declaratorSuffix"></a><span class="ddoc_psymbol">declaratorSuffix</span>;
-</dt>
-<dd><p></p>
-</dd>
 <dt class="d_decl"><a name=".Declarator.initializer"></a>Initializer <a name="initializer"></a><span class="ddoc_psymbol">initializer</span>;
-</dt>
-<dd><p></p>
-</dd>
-</dl>
-</dd>
-<dt class="d_decl"><a name=".DeclaratorSuffix"></a>class <a name="DeclaratorSuffix"></a><span class="ddoc_psymbol">DeclaratorSuffix</span>: std.d.ast.ASTNode;
-</dt>
-<dd><p></p>
-<dl><dt class="d_decl"><a name=".DeclaratorSuffix.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".DeclaratorSuffix.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2195,11 +2144,33 @@ classes<p></p>
 <dt class="d_decl"><a name=".EqualExpression"></a>class <a name="EqualExpression"></a><span class="ddoc_psymbol">EqualExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
+<dl><dt class="d_decl"><a name=".EqualExpression.operator"></a>TokenType <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".EqualExpression.left"></a>ShiftExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".EqualExpression.right"></a>ShiftExpression <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
 </dd>
 <dt class="d_decl"><a name=".Expression"></a>class <a name="Expression"></a><span class="ddoc_psymbol">Expression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".Expression.assignExpressions"></a>AssignExpression[] <a name="assignExpressions"></a><span class="ddoc_psymbol">assignExpressions</span>;
+<dl><dt class="d_decl"><a name=".Expression.items"></a>AssignExpression[] <a name="items"></a><span class="ddoc_psymbol">items</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".ExpressionStatement"></a>class <a name="ExpressionStatement"></a><span class="ddoc_psymbol">ExpressionStatement</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".ExpressionStatement.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2226,11 +2197,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".ForStatement"></a>class <a name="ForStatement"></a><span class="ddoc_psymbol">ForStatement</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".ForStatement.initializationDeclaration"></a>Declaration <a name="initializationDeclaration"></a><span class="ddoc_psymbol">initializationDeclaration</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".ForStatement.initializationStatement"></a>Statement <a name="initializationStatement"></a><span class="ddoc_psymbol">initializationStatement</span>;
+<dl><dt class="d_decl"><a name=".ForStatement.declarationOrStatement"></a>DeclarationOrStatement <a name="declarationOrStatement"></a><span class="ddoc_psymbol">declarationOrStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2248,31 +2215,10 @@ classes<p></p>
 </dd>
 </dl>
 </dd>
-<dt class="d_decl"><a name=".ForeachRangeStatement"></a>class <a name="ForeachRangeStatement"></a><span class="ddoc_psymbol">ForeachRangeStatement</span>: std.d.ast.ASTNode;
-</dt>
-<dd><p></p>
-<dl><dt class="d_decl"><a name=".ForeachRangeStatement.foreachType"></a>ForeachType <a name="foreachType"></a><span class="ddoc_psymbol">foreachType</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".ForeachRangeStatement.lower"></a>Expression <a name="lower"></a><span class="ddoc_psymbol">lower</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".ForeachRangeStatement.higher"></a>Expression <a name="higher"></a><span class="ddoc_psymbol">higher</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".ForeachRangeStatement.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
-</dt>
-<dd><p></p>
-</dd>
-</dl>
-</dd>
 <dt class="d_decl"><a name=".ForeachStatement"></a>class <a name="ForeachStatement"></a><span class="ddoc_psymbol">ForeachStatement</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".ForeachStatement.foreachType"></a>Token <a name="foreachType"></a><span class="ddoc_psymbol">foreachType</span>;
+<dl><dt class="d_decl"><a name=".ForeachStatement.foreachType"></a>TokenType <a name="foreachType"></a><span class="ddoc_psymbol">foreachType</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2280,7 +2226,11 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ForeachStatement.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+<dt class="d_decl"><a name=".ForeachStatement.low"></a>Expression <a name="low"></a><span class="ddoc_psymbol">low</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".ForeachStatement.high"></a>Expression <a name="high"></a><span class="ddoc_psymbol">high</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2293,7 +2243,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".ForeachType"></a>class <a name="ForeachType"></a><span class="ddoc_psymbol">ForeachType</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".ForeachType.isRef"></a>bool <a name="isRef"></a><span class="ddoc_psymbol">isRef</span>;
+<dl><dt class="d_decl"><a name=".ForeachType.typeConstructors"></a>TokenType[] <a name="typeConstructors"></a><span class="ddoc_psymbol">typeConstructors</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2310,7 +2260,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".ForeachTypeList"></a>class <a name="ForeachTypeList"></a><span class="ddoc_psymbol">ForeachTypeList</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".ForeachTypeList.foreachTypes"></a>ForeachType[] <a name="foreachTypes"></a><span class="ddoc_psymbol">foreachTypes</span>;
+<dl><dt class="d_decl"><a name=".ForeachTypeList.items"></a>ForeachType[] <a name="items"></a><span class="ddoc_psymbol">items</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2319,7 +2269,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".FunctionAttribute"></a>class <a name="FunctionAttribute"></a><span class="ddoc_psymbol">FunctionAttribute</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".FunctionAttribute.pureOrNothrow"></a>Token <a name="pureOrNothrow"></a><span class="ddoc_psymbol">pureOrNothrow</span>;
+<dl><dt class="d_decl"><a name=".FunctionAttribute.token"></a>Token <a name="token"></a><span class="ddoc_psymbol">token</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2376,10 +2326,18 @@ classes<p></p>
 </dd>
 </dl>
 </dd>
-<dt class="d_decl"><a name=".FunctionDeclaration"></a>class <a name="FunctionDeclaration"></a><span class="ddoc_psymbol">FunctionDeclaration</span>: std.d.ast.Declaration;
+<dt class="d_decl"><a name=".FunctionDeclaration"></a>class <a name="FunctionDeclaration"></a><span class="ddoc_psymbol">FunctionDeclaration</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".FunctionDeclaration.returnType"></a>Type <a name="returnType"></a><span class="ddoc_psymbol">returnType</span>;
+<dl><dt class="d_decl"><a name=".FunctionDeclaration.hasAuto"></a>bool <a name="hasAuto"></a><span class="ddoc_psymbol">hasAuto</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionDeclaration.hasRef"></a>bool <a name="hasRef"></a><span class="ddoc_psymbol">hasRef</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".FunctionDeclaration.returnType"></a>Type <a name="returnType"></a><span class="ddoc_psymbol">returnType</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2403,12 +2361,16 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
+<dt class="d_decl"><a name=".FunctionDeclaration.memberFunctionAttributes"></a>MemberFunctionAttribute[] <a name="memberFunctionAttributes"></a><span class="ddoc_psymbol">memberFunctionAttributes</span>;
+</dt>
+<dd><p></p>
+</dd>
 </dl>
 </dd>
 <dt class="d_decl"><a name=".FunctionLiteralExpression"></a>class <a name="FunctionLiteralExpression"></a><span class="ddoc_psymbol">FunctionLiteralExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".FunctionLiteralExpression.functionOrDelegate"></a>Token <a name="functionOrDelegate"></a><span class="ddoc_psymbol">functionOrDelegate</span>;
+<dl><dt class="d_decl"><a name=".FunctionLiteralExpression.functionOrDelegate"></a>TokenType <a name="functionOrDelegate"></a><span class="ddoc_psymbol">functionOrDelegate</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2437,11 +2399,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".GotoStatement.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".GotoStatement.isDefault"></a>bool <a name="isDefault"></a><span class="ddoc_psymbol">isDefault</span>;
+<dt class="d_decl"><a name=".GotoStatement.token"></a>Token <a name="token"></a><span class="ddoc_psymbol">token</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2490,6 +2448,19 @@ classes<p></p>
 <dt class="d_decl"><a name=".IdentityExpression"></a>class <a name="IdentityExpression"></a><span class="ddoc_psymbol">IdentityExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
+<dl><dt class="d_decl"><a name=".IdentityExpression.negated"></a>bool <a name="negated"></a><span class="ddoc_psymbol">negated</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".IdentityExpression.left"></a>ShiftExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".IdentityExpression.right"></a>ShiftExpression <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
 </dd>
 <dt class="d_decl"><a name=".IfStatement"></a>class <a name="IfStatement"></a><span class="ddoc_psymbol">IfStatement</span>: std.d.ast.ASTNode;
 </dt>
@@ -2538,7 +2509,7 @@ classes<p></p>
 </dd>
 </dl>
 </dd>
-<dt class="d_decl"><a name=".ImportDeclaration"></a>class <a name="ImportDeclaration"></a><span class="ddoc_psymbol">ImportDeclaration</span>: std.d.ast.Declaration;
+<dt class="d_decl"><a name=".ImportDeclaration"></a>class <a name="ImportDeclaration"></a><span class="ddoc_psymbol">ImportDeclaration</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
 <dl><dt class="d_decl"><a name=".ImportDeclaration.singleImports"></a>SingleImport[] <a name="singleImports"></a><span class="ddoc_psymbol">singleImports</span>;
@@ -2678,7 +2649,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".IsExpression.equalsOrColon"></a>Token <a name="equalsOrColon"></a><span class="ddoc_psymbol">equalsOrColon</span>;
+<dt class="d_decl"><a name=".IsExpression.equalsOrColon"></a>TokenType <a name="equalsOrColon"></a><span class="ddoc_psymbol">equalsOrColon</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2687,7 +2658,11 @@ classes<p></p>
 <dt class="d_decl"><a name=".KeyValuePair"></a>class <a name="KeyValuePair"></a><span class="ddoc_psymbol">KeyValuePair</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".KeyValuePair.keyValuePairs"></a>KeyValuePair[] <a name="keyValuePairs"></a><span class="ddoc_psymbol">keyValuePairs</span>;
+<dl><dt class="d_decl"><a name=".KeyValuePair.key"></a>AssignExpression <a name="key"></a><span class="ddoc_psymbol">key</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".KeyValuePair.value"></a>AssignExpression <a name="value"></a><span class="ddoc_psymbol">value</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2696,11 +2671,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".KeyValuePairs"></a>class <a name="KeyValuePairs"></a><span class="ddoc_psymbol">KeyValuePairs</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".KeyValuePairs.key"></a>AssignExpression <a name="key"></a><span class="ddoc_psymbol">key</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".KeyValuePairs.value"></a>AssignExpression <a name="value"></a><span class="ddoc_psymbol">value</span>;
+<dl><dt class="d_decl"><a name=".KeyValuePairs.keyValuePairs"></a>KeyValuePair[] <a name="keyValuePairs"></a><span class="ddoc_psymbol">keyValuePairs</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2722,7 +2693,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".LambdaExpression.paramaters"></a>Parameters <a name="paramaters"></a><span class="ddoc_psymbol">paramaters</span>;
+<dt class="d_decl"><a name=".LambdaExpression.parameters"></a>Parameters <a name="parameters"></a><span class="ddoc_psymbol">parameters</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2761,11 +2732,11 @@ classes<p></p>
 <dt class="d_decl"><a name=".MemberFunctionAttribute"></a>class <a name="MemberFunctionAttribute"></a><span class="ddoc_psymbol">MemberFunctionAttribute</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".MemberFunctionAttribute.token"></a>Token <a name="token"></a><span class="ddoc_psymbol">token</span>;
+<dl><dt class="d_decl"><a name=".MemberFunctionAttribute.tokenType"></a>TokenType <a name="tokenType"></a><span class="ddoc_psymbol">tokenType</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".MemberFunctionAttribute.functionAttribute"></a>FunctionAttribute <a name="functionAttribute"></a><span class="ddoc_psymbol">functionAttribute</span>;
+<dt class="d_decl"><a name=".MemberFunctionAttribute.atAttribute"></a>AtAttribute <a name="atAttribute"></a><span class="ddoc_psymbol">atAttribute</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2831,11 +2802,11 @@ classes<p></p>
 <dt class="d_decl"><a name=".MulExpression"></a>class <a name="MulExpression"></a><span class="ddoc_psymbol">MulExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".MulExpression.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+<dl><dt class="d_decl"><a name=".MulExpression.operator"></a>TokenType <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".MulExpression.left"></a>UnaryExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
+<dt class="d_decl"><a name=".MulExpression.left"></a>MulExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2856,7 +2827,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".NewAnonClassExpression.identifierList"></a>IdentifierList <a name="identifierList"></a><span class="ddoc_psymbol">identifierList</span>;
+<dt class="d_decl"><a name=".NewAnonClassExpression.baseClassList"></a>BaseClassList <a name="baseClassList"></a><span class="ddoc_psymbol">baseClassList</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2887,27 +2858,6 @@ classes<p></p>
 </dd>
 </dl>
 </dd>
-<dt class="d_decl"><a name=".NonEmptyStatement"></a>class <a name="NonEmptyStatement"></a><span class="ddoc_psymbol">NonEmptyStatement</span>: std.d.ast.ASTNode;
-</dt>
-<dd><p></p>
-<dl><dt class="d_decl"><a name=".NonEmptyStatement.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".NonEmptyStatement.caseStatement"></a>CaseStatement <a name="caseStatement"></a><span class="ddoc_psymbol">caseStatement</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".NonEmptyStatement.caseRangeStatement"></a>CaseRangeStatement <a name="caseRangeStatement"></a><span class="ddoc_psymbol">caseRangeStatement</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".NonEmptyStatement.defaultStatement"></a>DefaultStatement <a name="defaultStatement"></a><span class="ddoc_psymbol">defaultStatement</span>;
-</dt>
-<dd><p></p>
-</dd>
-</dl>
-</dd>
 <dt class="d_decl"><a name=".StatementNoCaseNoDefault"></a>class <a name="StatementNoCaseNoDefault"></a><span class="ddoc_psymbol">StatementNoCaseNoDefault</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
@@ -2916,10 +2866,6 @@ classes<p></p>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".StatementNoCaseNoDefault.blockStatement"></a>BlockStatement <a name="blockStatement"></a><span class="ddoc_psymbol">blockStatement</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".StatementNoCaseNoDefault.assignStatement"></a>AssignStatement <a name="assignStatement"></a><span class="ddoc_psymbol">assignStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -2991,19 +2937,11 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".StatementNoCaseNoDefault.foreachRangeStatement"></a>ForeachRangeStatement <a name="foreachRangeStatement"></a><span class="ddoc_psymbol">foreachRangeStatement</span>;
-</dt>
-<dd><p></p>
-</dd>
 <dt class="d_decl"><a name=".StatementNoCaseNoDefault.conditionalStatement"></a>ConditionalStatement <a name="conditionalStatement"></a><span class="ddoc_psymbol">conditionalStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".StatementNoCaseNoDefault.staticAssertStatement"></a>StaticAssertStatement <a name="staticAssertStatement"></a><span class="ddoc_psymbol">staticAssertStatement</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".StatementNoCaseNoDefault.assertStatement"></a>AssertStatement <a name="assertStatement"></a><span class="ddoc_psymbol">assertStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3023,7 +2961,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".StatementNoCaseNoDefault.deleteStatement"></a>DeleteStatement <a name="deleteStatement"></a><span class="ddoc_psymbol">deleteStatement</span>;
+<dt class="d_decl"><a name=".StatementNoCaseNoDefault.expressionStatement"></a>ExpressionStatement <a name="expressionStatement"></a><span class="ddoc_psymbol">expressionStatement</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3067,11 +3005,11 @@ classes<p></p>
 <dt class="d_decl"><a name=".OrExpression"></a>class <a name="OrExpression"></a><span class="ddoc_psymbol">OrExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".OrExpression.xorExpression"></a>XorExpression <a name="xorExpression"></a><span class="ddoc_psymbol">xorExpression</span>;
+<dl><dt class="d_decl"><a name=".OrExpression.left"></a>OrExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".OrExpression.orExpression"></a>OrExpression <a name="orExpression"></a><span class="ddoc_psymbol">orExpression</span>;
+<dt class="d_decl"><a name=".OrExpression.right"></a>XorExpression <a name="right"></a><span class="ddoc_psymbol">right</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3080,11 +3018,11 @@ classes<p></p>
 <dt class="d_decl"><a name=".OrOrExpression"></a>class <a name="OrOrExpression"></a><span class="ddoc_psymbol">OrOrExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".OrOrExpression.orOrExpression"></a>OrOrExpression <a name="orOrExpression"></a><span class="ddoc_psymbol">orOrExpression</span>;
+<dl><dt class="d_decl"><a name=".OrOrExpression.left"></a>OrOrExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".OrOrExpression.andAndExpression"></a>AndAndExpression <a name="andAndExpression"></a><span class="ddoc_psymbol">andAndExpression</span>;
+<dt class="d_decl"><a name=".OrOrExpression.right"></a>AndAndExpression <a name="right"></a><span class="ddoc_psymbol">right</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3106,7 +3044,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".Parameter"></a>class <a name="Parameter"></a><span class="ddoc_psymbol">Parameter</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".Parameter.paramaterAttributes"></a>ParameterAttribute[] <a name="paramaterAttributes"></a><span class="ddoc_psymbol">paramaterAttributes</span>;
+<dl><dt class="d_decl"><a name=".Parameter.parameterAttributes"></a>TokenType[] <a name="parameterAttributes"></a><span class="ddoc_psymbol">parameterAttributes</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3122,16 +3060,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-</dl>
-</dd>
-<dt class="d_decl"><a name=".ParameterAttribute"></a>class <a name="ParameterAttribute"></a><span class="ddoc_psymbol">ParameterAttribute</span>: std.d.ast.ASTNode;
-</dt>
-<dd><p></p>
-<dl><dt class="d_decl"><a name=".ParameterAttribute.attribute"></a>Token <a name="attribute"></a><span class="ddoc_psymbol">attribute</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".ParameterAttribute.typeConstructor"></a>TypeConstructor <a name="typeConstructor"></a><span class="ddoc_psymbol">typeConstructor</span>;
+<dt class="d_decl"><a name=".Parameter.default_"></a>AssignExpression <a name="default_"></a><span class="ddoc_psymbol">default_</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3140,7 +3069,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".Parameters"></a>class <a name="Parameters"></a><span class="ddoc_psymbol">Parameters</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".Parameters.paramaters"></a>Parameter[] <a name="paramaters"></a><span class="ddoc_psymbol">paramaters</span>;
+<dl><dt class="d_decl"><a name=".Parameters.parameters"></a>Parameter[] <a name="parameters"></a><span class="ddoc_psymbol">parameters</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3175,11 +3104,11 @@ classes<p></p>
 <dt class="d_decl"><a name=".PowExpression"></a>class <a name="PowExpression"></a><span class="ddoc_psymbol">PowExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".PowExpression.unaryExpression"></a>UnaryExpression <a name="unaryExpression"></a><span class="ddoc_psymbol">unaryExpression</span>;
+<dl><dt class="d_decl"><a name=".PowExpression.left"></a>PowExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".PowExpression.powExpression"></a>PowExpression <a name="powExpression"></a><span class="ddoc_psymbol">powExpression</span>;
+<dt class="d_decl"><a name=".PowExpression.right"></a>UnaryExpression <a name="right"></a><span class="ddoc_psymbol">right</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3227,7 +3156,59 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".PrimaryExpression.hasDot"></a>bool <a name="hasDot"></a><span class="ddoc_psymbol">hasDot</span>;
+<dt class="d_decl"><a name=".PrimaryExpression.identifierOrTemplateInstance"></a>IdentifierOrTemplateInstance <a name="identifierOrTemplateInstance"></a><span class="ddoc_psymbol">identifierOrTemplateInstance</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.basicType"></a>TokenType <a name="basicType"></a><span class="ddoc_psymbol">basicType</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.typeofExpression"></a>TypeofExpression <a name="typeofExpression"></a><span class="ddoc_psymbol">typeofExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.typeidExpression"></a>TypeidExpression <a name="typeidExpression"></a><span class="ddoc_psymbol">typeidExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.arrayLiteral"></a>ArrayLiteral <a name="arrayLiteral"></a><span class="ddoc_psymbol">arrayLiteral</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.assocArrayLiteral"></a>AssocArrayLiteral <a name="assocArrayLiteral"></a><span class="ddoc_psymbol">assocArrayLiteral</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.expression"></a>Expression <a name="expression"></a><span class="ddoc_psymbol">expression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.isExpression"></a>IsExpression <a name="isExpression"></a><span class="ddoc_psymbol">isExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.lambdaExpression"></a>LambdaExpression <a name="lambdaExpression"></a><span class="ddoc_psymbol">lambdaExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.functionLiteralExpression"></a>FunctionLiteralExpression <a name="functionLiteralExpression"></a><span class="ddoc_psymbol">functionLiteralExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.traitsExpression"></a>TraitsExpression <a name="traitsExpression"></a><span class="ddoc_psymbol">traitsExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.mixinExpression"></a>MixinExpression <a name="mixinExpression"></a><span class="ddoc_psymbol">mixinExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.importExpression"></a>ImportExpression <a name="importExpression"></a><span class="ddoc_psymbol">importExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".PrimaryExpression.vector"></a>Vector <a name="vector"></a><span class="ddoc_psymbol">vector</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3240,7 +3221,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".Register.integerLiteral"></a>Token <a name="integerLiteral"></a><span class="ddoc_psymbol">integerLiteral</span>;
+<dt class="d_decl"><a name=".Register.intLiteral"></a>Token <a name="intLiteral"></a><span class="ddoc_psymbol">intLiteral</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3253,6 +3234,19 @@ classes<p></p>
 <dt class="d_decl"><a name=".RelExpression"></a>class <a name="RelExpression"></a><span class="ddoc_psymbol">RelExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
+<dl><dt class="d_decl"><a name=".RelExpression.operator"></a>TokenType <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".RelExpression.left"></a>RelExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".RelExpression.right"></a>ShiftExpression <a name="right"></a><span class="ddoc_psymbol">right</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
 </dd>
 <dt class="d_decl"><a name=".ReturnStatement"></a>class <a name="ReturnStatement"></a><span class="ddoc_psymbol">ReturnStatement</span>: std.d.ast.ASTNode;
 </dt>
@@ -3297,15 +3291,15 @@ classes<p></p>
 <dt class="d_decl"><a name=".ShiftExpression"></a>class <a name="ShiftExpression"></a><span class="ddoc_psymbol">ShiftExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".ShiftExpression.addExpression"></a>AddExpression <a name="addExpression"></a><span class="ddoc_psymbol">addExpression</span>;
+<dl><dt class="d_decl"><a name=".ShiftExpression.operator"></a>TokenType <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ShiftExpression.shiftExpression"></a>ShiftExpression <a name="shiftExpression"></a><span class="ddoc_psymbol">shiftExpression</span>;
+<dt class="d_decl"><a name=".ShiftExpression.left"></a>ShiftExpression <a name="left"></a><span class="ddoc_psymbol">left</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".ShiftExpression.operator"></a>Token <a name="operator"></a><span class="ddoc_psymbol">operator</span>;
+<dt class="d_decl"><a name=".ShiftExpression.right"></a>AddExpression <a name="right"></a><span class="ddoc_psymbol">right</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3327,7 +3321,11 @@ classes<p></p>
 <dt class="d_decl"><a name=".SliceExpression"></a>class <a name="SliceExpression"></a><span class="ddoc_psymbol">SliceExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".SliceExpression.lower"></a>AssignExpression <a name="lower"></a><span class="ddoc_psymbol">lower</span>;
+<dl><dt class="d_decl"><a name=".SliceExpression.unaryExpression"></a>UnaryExpression <a name="unaryExpression"></a><span class="ddoc_psymbol">unaryExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".SliceExpression.lower"></a>AssignExpression <a name="lower"></a><span class="ddoc_psymbol">lower</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3370,7 +3368,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".StaticAssertStatement"></a>class <a name="StaticAssertStatement"></a><span class="ddoc_psymbol">StaticAssertStatement</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".StaticAssertStatement.assertStatement"></a>AssertStatement <a name="assertStatement"></a><span class="ddoc_psymbol">assertStatement</span>;
+<dl><dt class="d_decl"><a name=".StaticAssertStatement.assertExpression"></a>AssertExpression <a name="assertExpression"></a><span class="ddoc_psymbol">assertExpression</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3410,11 +3408,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".StorageClass.typeConstructor"></a>TypeConstructor <a name="typeConstructor"></a><span class="ddoc_psymbol">typeConstructor</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".StorageClass.storageClass"></a>Token <a name="storageClass"></a><span class="ddoc_psymbol">storageClass</span>;
+<dt class="d_decl"><a name=".StorageClass.token"></a>Token <a name="token"></a><span class="ddoc_psymbol">token</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3432,7 +3426,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".StructDeclaration"></a>class <a name="StructDeclaration"></a><span class="ddoc_psymbol">StructDeclaration</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".StructDeclaration.identifier"></a>Token <a name="identifier"></a><span class="ddoc_psymbol">identifier</span>;
+<dl><dt class="d_decl"><a name=".StructDeclaration.name"></a>Token <a name="name"></a><span class="ddoc_psymbol">name</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3582,7 +3576,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".TemplateArgumentList"></a>class <a name="TemplateArgumentList"></a><span class="ddoc_psymbol">TemplateArgumentList</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".TemplateArgumentList.templateArguments"></a>TemplateArgument[] <a name="templateArguments"></a><span class="ddoc_psymbol">templateArguments</span>;
+<dl><dt class="d_decl"><a name=".TemplateArgumentList.items"></a>TemplateArgument[] <a name="items"></a><span class="ddoc_psymbol">items</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3680,7 +3674,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".TemplateParameterList"></a>class <a name="TemplateParameterList"></a><span class="ddoc_psymbol">TemplateParameterList</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".TemplateParameterList.templateParameters"></a>TemplateParameter[] <a name="templateParameters"></a><span class="ddoc_psymbol">templateParameters</span>;
+<dl><dt class="d_decl"><a name=".TemplateParameterList.items"></a>TemplateParameter[] <a name="items"></a><span class="ddoc_psymbol">items</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3699,10 +3693,6 @@ classes<p></p>
 </dt>
 <dd><p></p>
 <dl><dt class="d_decl"><a name=".TemplateSingleArgument.token"></a>Token <a name="token"></a><span class="ddoc_psymbol">token</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".TemplateSingleArgument.builtinType"></a>BasicType <a name="builtinType"></a><span class="ddoc_psymbol">builtinType</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3803,19 +3793,6 @@ classes<p></p>
 </dd>
 </dl>
 </dd>
-<dt class="d_decl"><a name=".TraitsArgument"></a>class <a name="TraitsArgument"></a><span class="ddoc_psymbol">TraitsArgument</span>: std.d.ast.ASTNode;
-</dt>
-<dd><p></p>
-<dl><dt class="d_decl"><a name=".TraitsArgument.assignExpression"></a>AssignExpression <a name="assignExpression"></a><span class="ddoc_psymbol">assignExpression</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".TraitsArgument.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
-</dt>
-<dd><p></p>
-</dd>
-</dl>
-</dd>
 <dt class="d_decl"><a name=".TraitsExpression"></a>class <a name="TraitsExpression"></a><span class="ddoc_psymbol">TraitsExpression</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
@@ -3823,7 +3800,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".TraitsExpression.traitsArguments"></a>TraitsArgument[] <a name="traitsArguments"></a><span class="ddoc_psymbol">traitsArguments</span>;
+<dt class="d_decl"><a name=".TraitsExpression.templateArgumentList"></a>TemplateArgumentList <a name="templateArgumentList"></a><span class="ddoc_psymbol">templateArgumentList</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3849,7 +3826,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".Type"></a>class <a name="Type"></a><span class="ddoc_psymbol">Type</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".Type.typeConstructors"></a>TypeConstructors <a name="typeConstructors"></a><span class="ddoc_psymbol">typeConstructors</span>;
+<dl><dt class="d_decl"><a name=".Type.typeConstructors"></a>TokenType[] <a name="typeConstructors"></a><span class="ddoc_psymbol">typeConstructors</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3866,7 +3843,7 @@ classes<p></p>
 <dt class="d_decl"><a name=".Type2"></a>class <a name="Type2"></a><span class="ddoc_psymbol">Type2</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
-<dl><dt class="d_decl"><a name=".Type2.basicType"></a>BasicType <a name="basicType"></a><span class="ddoc_psymbol">basicType</span>;
+<dl><dt class="d_decl"><a name=".Type2.basicType"></a>Token <a name="basicType"></a><span class="ddoc_psymbol">basicType</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3882,29 +3859,11 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".Type2.typeConstructor"></a>TypeConstructor <a name="typeConstructor"></a><span class="ddoc_psymbol">typeConstructor</span>;
+<dt class="d_decl"><a name=".Type2.typeConstructor"></a>TokenType <a name="typeConstructor"></a><span class="ddoc_psymbol">typeConstructor</span>;
 </dt>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".Type2.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
-</dt>
-<dd><p></p>
-</dd>
-</dl>
-</dd>
-<dt class="d_decl"><a name=".TypeConstructor"></a>class <a name="TypeConstructor"></a><span class="ddoc_psymbol">TypeConstructor</span>: std.d.ast.ASTNode;
-</dt>
-<dd><p></p>
-<dl><dt class="d_decl"><a name=".TypeConstructor.typeConstructor"></a>Token <a name="typeConstructor"></a><span class="ddoc_psymbol">typeConstructor</span>;
-</dt>
-<dd><p></p>
-</dd>
-</dl>
-</dd>
-<dt class="d_decl"><a name=".TypeConstructors"></a>class <a name="TypeConstructors"></a><span class="ddoc_psymbol">TypeConstructors</span>: std.d.ast.ASTNode;
-</dt>
-<dd><p></p>
-<dl><dt class="d_decl"><a name=".TypeConstructors.typeConstructors"></a>TypeConstructor[] <a name="typeConstructors"></a><span class="ddoc_psymbol">typeConstructors</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3931,6 +3890,10 @@ classes<p></p>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".TypeSuffix.star"></a>bool <a name="star"></a><span class="ddoc_psymbol">star</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".TypeSuffix.array"></a>bool <a name="array"></a><span class="ddoc_psymbol">array</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -3985,19 +3948,15 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".UnaryExpression.unaryExpression"></a>UnaryExpression <a name="unaryExpression"></a><span class="ddoc_psymbol">unaryExpression</span>;
-</dt>
-<dd><p></p>
-</dd>
 <dt class="d_decl"><a name=".UnaryExpression.prefix"></a>Token <a name="prefix"></a><span class="ddoc_psymbol">prefix</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".UnaryExpression.preIncDecExpression"></a>PreIncDecExpression <a name="preIncDecExpression"></a><span class="ddoc_psymbol">preIncDecExpression</span>;
+<dt class="d_decl"><a name=".UnaryExpression.suffix"></a>Token <a name="suffix"></a><span class="ddoc_psymbol">suffix</span>;
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".UnaryExpression.postIncDecExpression"></a>PostIncDecExpression <a name="postIncDecExpression"></a><span class="ddoc_psymbol">postIncDecExpression</span>;
+<dt class="d_decl"><a name=".UnaryExpression.unaryExpression"></a>UnaryExpression <a name="unaryExpression"></a><span class="ddoc_psymbol">unaryExpression</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -4021,19 +3980,19 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".UnaryExpression.low"></a>AssignExpression <a name="low"></a><span class="ddoc_psymbol">low</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".UnaryExpression.high"></a>AssignExpression <a name="high"></a><span class="ddoc_psymbol">high</span>;
-</dt>
-<dd><p></p>
-</dd>
 <dt class="d_decl"><a name=".UnaryExpression.identifierOrTemplateInstance"></a>IdentifierOrTemplateInstance <a name="identifierOrTemplateInstance"></a><span class="ddoc_psymbol">identifierOrTemplateInstance</span>;
 </dt>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".UnaryExpression.assertExpression"></a>AssertExpression <a name="assertExpression"></a><span class="ddoc_psymbol">assertExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.sliceExpression"></a>SliceExpression <a name="sliceExpression"></a><span class="ddoc_psymbol">sliceExpression</span>;
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".UnaryExpression.indexExpression"></a>IndexExpression <a name="indexExpression"></a><span class="ddoc_psymbol">indexExpression</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -4069,7 +4028,7 @@ classes<p></p>
 </dd>
 </dl>
 </dd>
-<dt class="d_decl"><a name=".VariableDeclaration"></a>class <a name="VariableDeclaration"></a><span class="ddoc_psymbol">VariableDeclaration</span>: std.d.ast.Declaration;
+<dt class="d_decl"><a name=".VariableDeclaration"></a>class <a name="VariableDeclaration"></a><span class="ddoc_psymbol">VariableDeclaration</span>: std.d.ast.ASTNode;
 </dt>
 <dd><p></p>
 <dl><dt class="d_decl"><a name=".VariableDeclaration.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
@@ -4085,6 +4044,15 @@ classes<p></p>
 <dd><p></p>
 </dd>
 <dt class="d_decl"><a name=".VariableDeclaration.autoDeclaration"></a>AutoDeclaration <a name="autoDeclaration"></a><span class="ddoc_psymbol">autoDeclaration</span>;
+</dt>
+<dd><p></p>
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Vector"></a>class <a name="Vector"></a><span class="ddoc_psymbol">Vector</span>: std.d.ast.ASTNode;
+</dt>
+<dd><p></p>
+<dl><dt class="d_decl"><a name=".Vector.type"></a>Type <a name="type"></a><span class="ddoc_psymbol">type</span>;
 </dt>
 <dd><p></p>
 </dd>
@@ -4128,11 +4096,7 @@ classes<p></p>
 </dt>
 <dd><p></p>
 </dd>
-<dt class="d_decl"><a name=".WithStatement.symbol"></a>Symbol <a name="symbol"></a><span class="ddoc_psymbol">symbol</span>;
-</dt>
-<dd><p></p>
-</dd>
-<dt class="d_decl"><a name=".WithStatement.templateInstance"></a>TemplateInstance <a name="templateInstance"></a><span class="ddoc_psymbol">templateInstance</span>;
+<dt class="d_decl"><a name=".WithStatement.statementNoCaseNoDefault"></a>StatementNoCaseNoDefault <a name="statementNoCaseNoDefault"></a><span class="ddoc_psymbol">statementNoCaseNoDefault</span>;
 </dt>
 <dd><p></p>
 </dd>
