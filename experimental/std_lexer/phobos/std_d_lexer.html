@@ -428,7 +428,8 @@ b.startIndex = 20;
 LexerConfig c;
 <span class="d_keyword">auto</span> tokens = source.byToken(c).array();
 <span class="d_keyword">assert</span> (tokens.length == 3);
-<span class="d_keyword">assert</span> (tokens.assumeSorted().lowerBound(3)[$ - 1] == <span class="d_string">"b"</span>);
+<span class="d_keyword">assert</span> (tokens.assumeSorted().lowerBound(3)[1] == <span class="d_string">"b"</span>);
+<span class="d_keyword">assert</span> (!(tokens[1] &lt; 2));
 </pre>
 <p></p>
 </dd>
@@ -444,11 +445,11 @@ LexerConfig c;
 
 </dd>
 <dt class="d_decl"><a name=".IterationStyle.includeComments"></a><a name="includeComments"></a><span class="ddoc_psymbol">includeComments</span></dt>
-<dd>Includes comments<p></p>
+<dd>Include comment tokens<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".IterationStyle.includeWhitespace"></a><a name="includeWhitespace"></a><span class="ddoc_psymbol">includeWhitespace</span></dt>
-<dd>Includes whitespace<p></p>
+<dd>Include whitespace tokens<p></p>
 
 </dd>
 <dt class="d_decl"><a name=".IterationStyle.includeSpecialTokens"></a><a name="includeSpecialTokens"></a><span class="ddoc_psymbol">includeSpecialTokens</span></dt>
@@ -460,7 +461,7 @@ LexerConfig c;
 
 </dd>
 <dt class="d_decl"><a name=".IterationStyle.everything"></a><a name="everything"></a><span class="ddoc_psymbol">everything</span></dt>
-<dd>Include everything<p></p>
+<dd>Include everything. Equivalent to <span class="d_inlinecode">includeComments | includeWhitespace | ignoreEOF</span><p></p>
 
 </dd>
 </dl>
@@ -534,7 +535,7 @@ LexerConfig c;
 <dt class="d_decl"><a name=".LexerConfig.fileName"></a>string <a name="fileName"></a><span class="ddoc_psymbol">fileName</span>;
 </dt>
 <dd>Name used when creating error messages that are sent to errorFunc. This
- is needed because the lexer operates on any forwarad range of ASCII
+ is needed because the lexer operates on any forward range of ASCII
  characters or UTF-8 code units and does not know what to call its input
  source. Defaults to the empty string.<p></p>
 
@@ -554,8 +555,8 @@ LexerConfig c;
 <dt class="d_decl"><a name=".LexerConfig.errorFunc"></a>void delegate(string, size_t, uint, ushort, string) <a name="errorFunc"></a><span class="ddoc_psymbol">errorFunc</span>;
 </dt>
 <dd>This function is called when an error is encountered during lexing.
- and error messsage. If this field is not set, the lexer will throw
- an exception including the line, column, and error message.
+ If this field is not set, the lexer will throw an exception including the
+ line, column, and error message.
 <p></p>
 <table cellspacing=0 cellpadding=5 class=book><caption>Error Function Parameters:</caption> <tr><td valign=top>string</td> <td valign=top>File name</td></tr>
  <tr><td valign=top>size_t</td> <td valign=top>Code unit index</td></tr>
@@ -673,7 +674,7 @@ The lexing process is able to handle a forward range of code units by using
 <dt class="d_decl"><a name=".isMisc"></a>pure nothrow bool <a name="isMisc"></a><span class="ddoc_psymbol">isMisc</span>(const TokenType <i>t</i>);
 <br><a name=".isMisc"></a>pure nothrow bool <a name="isMisc"></a><span class="ddoc_psymbol">isMisc</span>(ref const Token <i>t</i>);
 </dt>
-<dd><b>Returns:</b><br><b>true</b> if the token is whitespace, a commemnt, a special token
+<dd><b>Returns:</b><br><b>true</b> if the token is whitespace, a comment, a special token
      sequence, or an identifier<p></p>
 
 </dd>
@@ -697,7 +698,7 @@ The lexing process is able to handle a forward range of code units by using
 <dd>&amp;<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.bitAndEqual"></a><a name="bitAndEqual"></a><span class="ddoc_psymbol">bitAndEqual</span></dt>
+<dt class="d_decl"><a name=".TokenType.bitAndAssign"></a><a name="bitAndAssign"></a><span class="ddoc_psymbol">bitAndAssign</span></dt>
 <dd>&amp;=<p></p>
 
 </dd>
@@ -705,11 +706,11 @@ The lexing process is able to handle a forward range of code units by using
 <dd>|<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.bitOrEqual"></a><a name="bitOrEqual"></a><span class="ddoc_psymbol">bitOrEqual</span></dt>
+<dt class="d_decl"><a name=".TokenType.bitOrAssign"></a><a name="bitOrAssign"></a><span class="ddoc_psymbol">bitOrAssign</span></dt>
 <dd>|=<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.catEqual"></a><a name="catEqual"></a><span class="ddoc_psymbol">catEqual</span></dt>
+<dt class="d_decl"><a name=".TokenType.catAssign"></a><a name="catAssign"></a><span class="ddoc_psymbol">catAssign</span></dt>
 <dd>~=<p></p>
 
 </dd>
@@ -729,7 +730,7 @@ The lexing process is able to handle a forward range of code units by using
 <dd>/<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.divEqual"></a><a name="divEqual"></a><span class="ddoc_psymbol">divEqual</span></dt>
+<dt class="d_decl"><a name=".TokenType.divAssign"></a><a name="divAssign"></a><span class="ddoc_psymbol">divAssign</span></dt>
 <dd>/=<p></p>
 
 </dd>
@@ -805,7 +806,7 @@ The lexing process is able to handle a forward range of code units by using
 <dd>-<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.minusEqual"></a><a name="minusEqual"></a><span class="ddoc_psymbol">minusEqual</span></dt>
+<dt class="d_decl"><a name=".TokenType.minusAssign"></a><a name="minusAssign"></a><span class="ddoc_psymbol">minusAssign</span></dt>
 <dd>-=<p></p>
 
 </dd>
@@ -813,11 +814,11 @@ The lexing process is able to handle a forward range of code units by using
 <dd>%<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.modEqual"></a><a name="modEqual"></a><span class="ddoc_psymbol">modEqual</span></dt>
+<dt class="d_decl"><a name=".TokenType.modAssign"></a><a name="modAssign"></a><span class="ddoc_psymbol">modAssign</span></dt>
 <dd>%=<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.mulEqual"></a><a name="mulEqual"></a><span class="ddoc_psymbol">mulEqual</span></dt>
+<dt class="d_decl"><a name=".TokenType.mulAssign"></a><a name="mulAssign"></a><span class="ddoc_psymbol">mulAssign</span></dt>
 <dd>*=<p></p>
 
 </dd>
@@ -853,7 +854,7 @@ The lexing process is able to handle a forward range of code units by using
 <dd>+<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.plusEqual"></a><a name="plusEqual"></a><span class="ddoc_psymbol">plusEqual</span></dt>
+<dt class="d_decl"><a name=".TokenType.plusAssign"></a><a name="plusAssign"></a><span class="ddoc_psymbol">plusAssign</span></dt>
 <dd>+=<p></p>
 
 </dd>
@@ -861,7 +862,7 @@ The lexing process is able to handle a forward range of code units by using
 <dd>^^<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.powEqual"></a><a name="powEqual"></a><span class="ddoc_psymbol">powEqual</span></dt>
+<dt class="d_decl"><a name=".TokenType.powAssign"></a><a name="powAssign"></a><span class="ddoc_psymbol">powAssign</span></dt>
 <dd>^^=<p></p>
 
 </dd>
@@ -885,7 +886,7 @@ The lexing process is able to handle a forward range of code units by using
 <dd>&lt;&lt;<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.shiftLeftEqual"></a><a name="shiftLeftEqual"></a><span class="ddoc_psymbol">shiftLeftEqual</span></dt>
+<dt class="d_decl"><a name=".TokenType.shiftLeftAssign"></a><a name="shiftLeftAssign"></a><span class="ddoc_psymbol">shiftLeftAssign</span></dt>
 <dd>&lt;&lt;=<p></p>
 
 </dd>
@@ -893,7 +894,7 @@ The lexing process is able to handle a forward range of code units by using
 <dd>&gt;&gt;<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.shiftRightEqual"></a><a name="shiftRightEqual"></a><span class="ddoc_psymbol">shiftRightEqual</span></dt>
+<dt class="d_decl"><a name=".TokenType.shiftRightAssign"></a><a name="shiftRightAssign"></a><span class="ddoc_psymbol">shiftRightAssign</span></dt>
 <dd>&gt;&gt;=<p></p>
 
 </dd>
@@ -921,7 +922,7 @@ The lexing process is able to handle a forward range of code units by using
 <dd>&gt;&gt;&gt;<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.unsignedShiftRightEqual"></a><a name="unsignedShiftRightEqual"></a><span class="ddoc_psymbol">unsignedShiftRightEqual</span></dt>
+<dt class="d_decl"><a name=".TokenType.unsignedShiftRightAssign"></a><a name="unsignedShiftRightAssign"></a><span class="ddoc_psymbol">unsignedShiftRightAssign</span></dt>
 <dd>&gt;&gt;&gt;=<p></p>
 
 </dd>
@@ -933,7 +934,7 @@ The lexing process is able to handle a forward range of code units by using
 <dd>^<p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.xorEqual"></a><a name="xorEqual"></a><span class="ddoc_psymbol">xorEqual</span></dt>
+<dt class="d_decl"><a name=".TokenType.xorAssign"></a><a name="xorAssign"></a><span class="ddoc_psymbol">xorAssign</span></dt>
 <dd>^=<p></p>
 
 </dd>
@@ -1109,6 +1110,18 @@ The lexing process is able to handle a forward range of code units by using
 <dd><span class="d_keyword">static</span><p></p>
 
 </dd>
+<dt class="d_decl"><a name=".TokenType.override_"></a><a name="override_"></a><span class="ddoc_psymbol">override_</span></dt>
+<dd><span class="d_keyword">override</span><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.pure_"></a><a name="pure_"></a><span class="ddoc_psymbol">pure_</span></dt>
+<dd><span class="d_keyword">pure</span><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.ref_"></a><a name="ref_"></a><span class="ddoc_psymbol">ref_</span></dt>
+<dd><span class="d_keyword">ref</span><p></p>
+
+</dd>
 <dt class="d_decl"><a name=".TokenType.synchronized_"></a><a name="synchronized_"></a><span class="ddoc_psymbol">synchronized_</span></dt>
 <dd><span class="d_keyword">synchronized</span><p></p>
 
@@ -1265,18 +1278,6 @@ The lexing process is able to handle a forward range of code units by using
 <dd><span class="d_keyword">out</span><p></p>
 
 </dd>
-<dt class="d_decl"><a name=".TokenType.override_"></a><a name="override_"></a><span class="ddoc_psymbol">override_</span></dt>
-<dd><span class="d_keyword">override</span><p></p>
-
-</dd>
-<dt class="d_decl"><a name=".TokenType.pure_"></a><a name="pure_"></a><span class="ddoc_psymbol">pure_</span></dt>
-<dd><span class="d_keyword">pure</span><p></p>
-
-</dd>
-<dt class="d_decl"><a name=".TokenType.ref_"></a><a name="ref_"></a><span class="ddoc_psymbol">ref_</span></dt>
-<dd><span class="d_keyword">ref</span><p></p>
-
-</dd>
 <dt class="d_decl"><a name=".TokenType.return_"></a><a name="return_"></a><span class="ddoc_psymbol">return_</span></dt>
 <dd><span class="d_keyword">return</span><p></p>
 
@@ -1345,6 +1346,18 @@ The lexing process is able to handle a forward range of code units by using
 <dd><span class="d_keyword">while</span><p></p>
 
 </dd>
+<dt class="d_decl"><a name=".TokenType.traits"></a><a name="traits"></a><span class="ddoc_psymbol">traits</span></dt>
+<dd><span class="d_keyword">__traits</span><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.parameters"></a><a name="parameters"></a><span class="ddoc_psymbol">parameters</span></dt>
+<dd><span class="d_keyword">__parameters</span><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenType.vector"></a><a name="vector"></a><span class="ddoc_psymbol">vector</span></dt>
+<dd><span class="d_keyword">__vector</span><p></p>
+
+</dd>
 <dt class="d_decl"><a name=".TokenType.with_"></a><a name="with_"></a><span class="ddoc_psymbol">with_</span></dt>
 <dd><span class="d_keyword">with</span><p></p>
 
@@ -1407,18 +1420,6 @@ The lexing process is able to handle a forward range of code units by using
 </dd>
 <dt class="d_decl"><a name=".TokenType.scriptLine"></a><a name="scriptLine"></a><span class="ddoc_psymbol">scriptLine</span></dt>
 <dd>Line at the beginning of source file that starts from #!<p></p>
-
-</dd>
-<dt class="d_decl"><a name=".TokenType.traits"></a><a name="traits"></a><span class="ddoc_psymbol">traits</span></dt>
-<dd><span class="d_keyword">__traits</span><p></p>
-
-</dd>
-<dt class="d_decl"><a name=".TokenType.parameters"></a><a name="parameters"></a><span class="ddoc_psymbol">parameters</span></dt>
-<dd><span class="d_keyword">__parameters</span><p></p>
-
-</dd>
-<dt class="d_decl"><a name=".TokenType.vector"></a><a name="vector"></a><span class="ddoc_psymbol">vector</span></dt>
-<dd><span class="d_keyword">__vector</span><p></p>
 
 </dd>
 <dt class="d_decl"><a name=".TokenType.whitespace"></a><a name="whitespace"></a><span class="ddoc_psymbol">whitespace</span></dt>
