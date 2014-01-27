@@ -1,6 +1,751 @@
-<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html lang='en-US'>
+
+<!--
+	Copyright (c) 1999-2010 by Digital Mars
+	All Rights Reserved Written by Walter Bright
+	http://www.digitalmars.com
+  -->
+
 <head>
-<body>
-This page has moved to <a href="std_d_lexer.html">std_d_lexer.html</a>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" >
+<title>stdx.lexer - D Programming Language - Digital Mars</title>
+<link rel="stylesheet" type="text/css" href="../css/codemirror.css" />
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script src="/js/codemirror-compressed.js"></script>
+<script src="/js/run.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+function listanchors()
+{
+    if (typeof inhibitQuickIndex !== 'undefined') return;
+    var a = document.getElementById("quickindex");
+    if (!a) return;
+    var newText = "";
+    var hash = new Array;
+    var n = 0;
+    var values = new Array;
+    // List all anchors.
+    for (var i = 0; i < document.anchors.length; i++)
+    {
+        var a = document.anchors[i];
+        var text = a.name;
+        // ignore anchors from DDOC_PSYMBOL
+        if (text[0] != '.') continue;
+        if (hash[text] > 0) continue;
+        hash[text] = 1;
+        values[n++] = a.name
+    }
+
+    // we won't display the qualifying names to save space, so sort by last name
+    var lastName = function(a){
+        var li = a.lastIndexOf('.');
+        return a.slice(li + 1);
+    }
+    values.sort(function(a,b){
+        return function(aa, bb){
+            return aa == bb ? 0 : (aa < bb ? -1 : 1);
+        }(lastName(a), lastName(b));
+    });
+
+    for(var i = 0; i < values.length; i++) {
+        var a = values[i];
+        var text = lastName(a);
+        newText += ' \x3Ca href="\x23' + a +
+            '"\x3E\x3Cspan class="d_psymbol"\x3E' + text + '\x3C/span\x3E\x3C/a\x3E';
+    }
+    if (newText != "") newText = "\x3Cp\x3E\x3Cb\x3EJump to:\x3C/b\x3E" + newText + "\x3C/p\x3E";
+    var a = document.getElementById("quickindex");
+    a.innerHTML = newText;
+}
+jQuery(document).ready(listanchors);
+</script>
+
+</head>
+
+<body class='hyphenate'>
+
+<div id="top">
+	<div id="search-box">
+		<form method="get" action="http://google.com/search">
+			<img src="/images/search-left.gif" width="11" height="22" alt=""><input id="q" name="q"><input type="image" id="search-submit" name="submit" src="/images/search-button.gif">
+			<input type="hidden" id="domains" name="domains" value="dlang.org">
+			<input type="hidden" id="sourceid" name="sourceid" value="google-search">
+			<div id="search-dropdown">
+				<select id="sitesearch" name="sitesearch" size="1">
+					<option value="dlang.org">Entire D  Site</option>
+					<option value="dlang.org/phobos">Library Reference</option>
+					<option value="www.digitalmars.com/d/archives">Newsgroup Archives</option>
+				</select>
+			</div>
+		</form>
+	</div>
+	<div id="header">
+		<a href="/"><img id="logo" width="125" height="95" border="0" alt="D Logo" src="/images/dlogo.png"></a>
+		<a id="d-language" href="/">D Programming Language </a>
+	</div>
+</div>
+
+<div id="navigation">
+    
+<div class="navblock">
+<form method="get" action="http://www.google.com/search">
+<div id="searchbox">
+<input name="q" size="10" value="RTL Search" onFocus='if(this.value == "RTL Search"){this.value="";}'>
+<input type="hidden" name="domains" value="www.digitalmars.com">
+<input type="hidden" name="sitesearch" value="dlang.org/phobos">
+<input type="hidden" name="sourceid" value="google-search">
+<input type="submit" name="submit" value="Go">
+</div>
+</form>
+<div id="toctop">
+    <ul><li><a href="../index.html" title="D Programming Language">D</a></li>
+	<li><a href="../spec.html" title="D Language Specification">Language</a></li>
+	<li><a href="../phobos/index.html" title="D Runtime Library">Phobos </a></li>
+	<li><a href="../phobos-prerelease/index.html" title="D Runtime Library (prerelease)">Phobos (prerelease)</a></li>
+	<li><a href="../comparison.html" title="Language Comparisons">Comparisons</a></li>
+    </ul>
+</div>
+</div>
+    
+<div class="navblock">
+    <ul><li><a href="object.html" title="root of object hierarchy">object</a></li>
+    </ul>
+    <h2><a href="index.html#std" title="D standard modules">std</a></h2>
+    <ul><li><a href="std_algorithm.html" title="General-purpose algorithms">std.algorithm</a></li>
+	<li><a href="std_array.html" title="Array functions">std.array</a></li>
+	<li><a href="std_ascii.html" title="Functions which operate on ASCII characters">std.ascii</a></li>
+	<li><a href="std_base64.html" title="Encode/decode base64 format">std.base64</a></li>
+	<li><a href="std_bigint.html" title="Arbitrary-precision ('bignum') arithmetic">std.bigint</a></li>
+	<li><a href="std_bitmanip.html" title="Bit-level manipulation">std.bitmanip</a></li>
+	<li><a href="std_compiler.html" title="Information about the D compiler implementation">std.compiler</a></li>
+	<li><a href="std_complex.html" title="Complex numbers">std.complex</a></li>
+	<li><a href="std_concurrency.html" title="Message Passing">std.concurrency</a></li>
+	<li><a href="std_container.html" title="Containers">std.container</a></li>
+	<li><a href="std_conv.html" title="Conversion of strings to integers">std.conv</a></li>
+	<li><a href="std_csv.html" title="CSV file parser">std.csv</a></li>
+	<li><a href="std_datetime.html" title="Date and time-related types and functions">std.datetime</a></li>
+	<li><a href="std_encoding.html" title="Character and string encoding">std.encoding</a></li>
+	<li><a href="std_exception.html" title="Exceptions and error handling">std.exception</a></li>
+	<li><a href="std_file.html" title="Basic file operations">std.file</a></li>
+	<li><a href="std_format.html" title="Formatted conversions of values to strings">std.format</a></li>
+	<li><a href="std_functional.html" title="functional">std.functional</a></li>
+	<li><a href="std_getopt.html" title="Command line options">std.getopt</a></li>
+	<li><a href="std_json.html" title="JSON reader">std.json</a></li>
+	<li><a href="std_math.html" title="the usual math functions">std.math</a></li>
+	<li><a href="std_mathspecial.html" title="mathematical special functions">std.mathspecial</a></li>
+	<li><a href="std_metastrings.html" title="Metaprogramming with strings">std.metastrings</a></li>
+	<li><a href="std_mmfile.html" title="Memory mapped files">std.mmfile</a></li>
+	<li><a href="std_numeric.html" title="Numeric algorithms">std.numeric</a></li>
+	<li><a href="std_outbuffer.html" title="Assemble data into an array of bytes">std.outbuffer</a></li>
+	<li><a href="std_parallelism.html" title="High-level primitives for SMP parallelism">std.parallelism</a></li>
+	<li><a href="std_path.html" title="Manipulate file names, path names, etc.">std.path</a></li>
+	<li><a href="std_process.html" title="Create/destroy processes">std.process</a></li>
+	<li><a href="std_random.html" title="Random number generation">std.random</a></li>
+	<li><a href="std_range.html" title="Ranges">std.range</a></li>
+	<li><a href="std_regex.html" title="regular expressions">std.regex</a></li>
+	<li><a href="std_signals.html" title="Signals">std.signals</a></li>
+	<li><a href="std_socket.html" title="Sockets">std.socket</a></li>
+	<li><a href="std_socketstream.html" title="Stream for a blocking, connected Socket">std.socketstream</a></li>
+	<li><a href="std_stdio.html" title="Standard I/O">std.stdio</a></li>
+	<li><a href="std_cstream.html" title="Stream I/O">std.cstream</a></li>
+	<li><a href="std_stream.html" title="Stream I/O">std.stream</a></li>
+	<li><a href="std_string.html" title="Basic string operations">std.string</a></li>
+	<li><a href="std_system.html" title="Inquire about the CPU, operating system">std.system</a></li>
+	<li><a href="std_traits.html" title="Type traits">std.traits</a></li>
+	<li><a href="std_typecons.html" title="Type constructors">std.typecons</a></li>
+	<li><a href="std_typetuple.html" title="Type tuples">std.typetuple</a></li>
+	<li><a href="std_uni.html" title="Unicode classification">std.uni</a></li>
+	<li><a href="std_uri.html" title="Encode and decode Uniform Resource Identifiers (URIs)">std.uri</a></li>
+	<li><a href="std_utf.html" title="Encode and decode utf character encodings">std.utf</a></li>
+	<li><a href="std_uuid.html" title="Generate and use UUIDs">std.uuid</a></li>
+	<li><a href="std_variant.html" title="Stores all types in a uniform, dynamically-checked representation">std.variant</a></li>
+	<li><a href="std_xml.html" title="XML file processing">std.xml</a></li>
+	<li><a href="std_zip.html" title="Read/write zip archives">std.zip</a></li>
+	<li><a href="std_zlib.html" title="Compression / Decompression of data">std.zlib</a></li>
+	<li><a href="std_net_curl.html" title="High level curl wrapper">std.net.curl</a></li>
+	<li><a href="std_net_isemail.html" title="Validate e-mail addresses">std.net.isemail</a></li>
+	<li><a href="std_digest_crc.html" title="CRC digest functions">std.digest.crc</a></li>
+	<li><a href="std_digest_digest.html" title="API for digest functions">std.digest.digest</a></li>
+	<li><a href="std_digest_md.html" title="MD digest functions">std.digest.md</a></li>
+	<li><a href="std_digest_ripemd.html" title="RIPEMD digest functions">std.digest.ripemd</a></li>
+	<li><a href="std_digest_sha.html" title="SHA digest functions">std.digest.sha</a></li>
+	<li><a href="std_windows_charset.html" title="Conversion to/from Windows character sets">std.windows.charset</a></li>
+    </ul>
+    <h2><a href="index.html#etc" title="D etc modules">etc</a></h2>
+    <ul><li><a href="etc_c_curl.html" title="Interface to libcurl library">etc.c.curl</a></li>
+	<li><a href="etc_c_sqlite3.html" title="Interface to sqlite3 library">etc.c.sqlite3</a></li>
+	<li><a href="etc_c_zlib.html" title="Interface to zlib library">etc.c.zlib</a></li>
+    </ul>
+    <h2><a href="index.html#core" title="D core modules">core</a></h2>
+    <ul><li><a href="core_atomic.html" title="Atomic operations">core.atomic</a></li>
+	<li><a href="core_bitop.html" title="Bitwise operations">core.bitop</a></li>
+	<li><a href="core_cpuid.html" title="CPU identification">core.cpuid</a></li>
+	<li><a href="core_demangle.html" title="D symbol mangling">core.demangle</a></li>
+	<li><a href="core_exception.html" title="Root of exception hierarchy">core.exception</a></li>
+	<li><a href="core_memory.html" title="Interface to memory management">core.memory</a></li>
+	<li><a href="core_runtime.html" title="Interface to D runtime library internals">core.runtime</a></li>
+	<li><a href="core_simd.html" title="Builtin SIMD intrinsics">core.simd</a></li>
+	<li><a href="core_thread.html" title="Thread management">core.thread</a></li>
+	<li><a href="core_time.html" title="Core time functionality">core.time</a></li>
+	<li><a href="core_vararg.html" title="Variable function arguments">core.vararg</a></li>
+	<li><a href="core_sync_barrier.html" title="Synchronizing progress of a group of threads">core.sync.barrier</a></li>
+	<li><a href="core_sync_condition.html" title="Synchronized condition checking">core.sync.condition</a></li>
+	<li><a href="core_sync_config.html" title="Stuff for core.sync">core.sync.config</a></li>
+	<li><a href="core_sync_exception.html" title="SyncException">core.sync.exception</a></li>
+	<li><a href="core_sync_mutex.html" title="Mutexes">core.sync.mutex</a></li>
+	<li><a href="core_sync_rwmutex.html" title="R/W mutually exclusive access">core.sync.rwmutex</a></li>
+	<li><a href="core_sync_semaphore.html" title="Semaphores">core.sync.semaphore</a></li>
+    </ul>
+</div>
+</div><!--/navigation-->
+<div id="content">
+    
+<div id="tools">
+	<!--span id="lastupdate">Last update </span-->
+	<span class="tip">
+		<a href="https://github.com/D-Programming-Language/phobos/edit/master/lexer.d" class="button">Improve this page</a>
+		<span>
+			Quickly fork, edit online, and submit a pull request for this page.
+			Requires a signed-in GitHub account. This works well for small changes.
+			If you'd like to make larger changes you may want to consider using
+			local clone.
+		</span>
+	</span>
+	<span class="tip">
+		<a href="http://wiki.dlang.org/DocComments/" class="button">Page wiki</a>
+		<span>
+			View or edit the community-maintained wiki page associated with this page.
+		</span>
+	</span>
+</div>
+    <h1>stdx.lexer</h1>
+    <div id=quickindex class=quickindex></div>
+    <!-- Generated by Ddoc from lexer.d -->
+<h2>Summary</h2>
+ This module contains a range-based lexer generator.
+<p></p>
+<h2>Overview</h2>
+ The lexer generator consists of a template mixin, <a href="#Lexer"><span class="d_inlinecode">Lexer</span></a>, along with
+ several helper templates for generating such things as token identifiers.
+<p></p>
+
+ To write a lexer using this API:
+ <ol>    <li>Create the string array costants for your language.
+         <ul>            <li><a href="#.StringConstants">String Constants</a></li>
+         </ul></li>
+     <li>Create aliases for the various token and token identifier types
+         specific to your language.
+         <ul>            <li><a href="#TokenIdType"><span class="d_inlinecode">TokenIdType</span></a></li>
+             <li><a href="#tokenStringRepresentation"><span class="d_inlinecode">tokenStringRepresentation</span></a></li>
+             <li><a href="#TokenStructure"><span class="d_inlinecode">TokenStructure</span></a></li>
+             <li><a href="#TokenId"><span class="d_inlinecode">TokenId</span></a></li>
+         </ul></li>
+     <li>Create a struct that mixes in the Lexer template mixin and
+         implements the necessary functions.
+         <ul>            <li><a href="#Lexer"><span class="d_inlinecode">Lexer</span></a></li>
+         </ul></li>
+ </ol>
+<p></p>
+<b>Examples:</b><br><ul><li>A lexer for D is available <a href="https://github.com/Hackerpilot/Dscanner/blob/master/stdx/d/lexer.d">here</a>.</li>
+ <li>A lexer for Lua is available <a href="https://github.com/Hackerpilot/lexer-demo/blob/master/lualexer.d">here</a>.</li>
+ </ul>
+ <a name=".StringConstants"></a> <h2>String Constants</h2>
+ <dl><dt><b>staticTokens</b></dt>
+ <dd>A listing of the tokens whose exact value never changes and which cannot
+     possibly be a token handled by the default token lexing function. The
+     most common example of this kind of token is an operator such as
+     <span class="d_string">"*"</span>, or <span class="d_string">"-"</span> in a programming language.</dd>
+ <dt><b>dynamicTokens</b></dt>
+ <dd>A listing of tokens whose value is variable, such as whitespace,
+     identifiers, number literals, and string literals.</dd>
+ <dt><b>possibleDefaultTokens</b></dt>
+ <dd>A listing of tokens that could posibly be one of the tokens handled by
+     the default token handling function. An common example of this is
+     a keyword such as <span class="d_string">"for"</span>, which looks like the beginning of
+     the identifier <span class="d_string">"fortunate"</span>. isSeparating is called to
+     determine if the character after the <span class="d_string">'r'</span> separates the
+     identifier, indicating that the token is <span class="d_string">"for"</span>, or if lexing
+     should be turned over to the defaultTokenFunction.</dd>
+ <dt><b>tokenHandlers</b></dt>
+ <dd>A mapping of prefixes to custom token handling function names. The
+     generated lexer will search for the even-index elements of this array,
+     and then call the function whose name is the element immedately after the
+     even-indexed element. This is used for lexing complex tokens whose prefix
+     is fixed.</dd>
+ </dl>
+<p></p>
+
+ Here are some example constants for a simple calculator lexer:
+<pre class="d_code"><span class="d_comment">// There are a near infinite number of valid number literals, so numbers are
+</span><span class="d_comment">// dynamic tokens.
+</span><span class="d_keyword">enum</span> string[] dynamicTokens = [<span class="d_string">"numberLiteral"</span>, <span class="d_string">"whitespace"</span>];
+
+<span class="d_comment">// The operators are always the same, and cannot start a numberLiteral, so
+</span><span class="d_comment">// they are staticTokens
+</span><span class="d_keyword">enum</span> string[] staticTokens = [<span class="d_string">"-"</span>, <span class="d_string">"+"</span>, <span class="d_string">"*"</span>, <span class="d_string">"/"</span>];
+
+<span class="d_comment">// In this simple example there are no keywords or other tokens that could
+</span><span class="d_comment">// look like dynamic tokens, so this is blank.
+</span><span class="d_keyword">enum</span> string[] possibleDefaultTokens = [];
+
+<span class="d_comment">// If any whitespace character or digit is encountered, pass lexing over to
+</span><span class="d_comment">// our custom handler functions. These will be demonstrated in an example
+</span><span class="d_comment">// later on.
+</span><span class="d_keyword">enum</span> string[] tokenHandlers = [
+    <span class="d_string">"0"</span>, <span class="d_string">"lexNumber"</span>,
+    <span class="d_string">"1"</span>, <span class="d_string">"lexNumber"</span>,
+    <span class="d_string">"2"</span>, <span class="d_string">"lexNumber"</span>,
+    <span class="d_string">"3"</span>, <span class="d_string">"lexNumber"</span>,
+    <span class="d_string">"4"</span>, <span class="d_string">"lexNumber"</span>,
+    <span class="d_string">"5"</span>, <span class="d_string">"lexNumber"</span>,
+    <span class="d_string">"6"</span>, <span class="d_string">"lexNumber"</span>,
+    <span class="d_string">"7"</span>, <span class="d_string">"lexNumber"</span>,
+    <span class="d_string">"8"</span>, <span class="d_string">"lexNumber"</span>,
+    <span class="d_string">"9"</span>, <span class="d_string">"lexNumber"</span>,
+    <span class="d_string">" "</span>, <span class="d_string">"lexWhitespace"</span>,
+    <span class="d_string">"\n"</span>, <span class="d_string">"lexWhitespace"</span>,
+    <span class="d_string">"\t"</span>, <span class="d_string">"lexWhitespace"</span>,
+    <span class="d_string">"\r"</span>, <span class="d_string">"lexWhitespace"</span>
+];
+</pre>
+
+<p></p>
+<b>License:</b><br><a href="http://www.boost.org/LICENSE_1_0.txt Boost">License 1.0</a>
+<p></p>
+<b>Authors:</b><br>Brian Schott, with ideas shamelessly stolen from Andrei Alexandrescu
+<p></p>
+<b>Source:</b><br>
+<a href="https://github.com/D-Programming-Language/phobos/blob/master/std/lexer.d">std/lexer.d</a><p></p>
+
+<dl><dt class="d_decl"><a name=".TokenIdType"></a>template <a name="TokenIdType"></a><span class="ddoc_psymbol">TokenIdType</span>(alias staticTokens, alias dynamicTokens, alias possibleDefaultTokens)</dt>
+<dd>Template for determining the type used for a token type. Selects the smallest
+ unsigned integral type that is able to hold the value
+ staticTokens.length + dynamicTokens.length. For example if there are 20
+ static tokens, 30 dynamic tokens, and 10 possible default tokens, this
+ template will alias itself to ubyte, as 20 + 30 + 10 &lt; <span class="d_keyword">ubyte</span>.max.
+<p></p>
+<b>Examples:</b><br><pre class="d_code"><span class="d_comment">// In our calculator example this means that IdType is an alias for ubyte.
+</span><span class="d_keyword">alias</span> IdType = <span class="d_psymbol">TokenIdType</span>!(staticTokens, dynamicTokens, possibleDefaultTokens);
+</pre>
+<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".tokenStringRepresentation"></a>@property string <a name="tokenStringRepresentation"></a><span class="ddoc_psymbol">tokenStringRepresentation</span>(IdType, alias staticTokens, alias dynamicTokens, alias possibleDefaultTokens)(IdType <i>type</i>);
+</dt>
+<dd>Looks up the string representation of the given token type. This is the
+ opposite of the function of the TokenId template.
+<p></p>
+<b>Parameters:</b><table class=parms><tr><td valign=top>IdType type</td>
+<td valign=top>the token type identifier</td></tr>
+</table><p></p>
+<b>Examples:</b><br><pre class="d_code"><span class="d_keyword">alias</span> str = <span class="d_psymbol">tokenStringRepresentation</span>(IdType, staticTokens, dynamicTokens, possibleDefaultTokens);
+<span class="d_keyword">assert</span> (str(tok!<span class="d_string">"*"</span>) == <span class="d_string">"*"</span>);
+</pre>
+<p></p>
+<b>See Also:</b><br><a href="#TokenId"><span class="d_inlinecode">TokenId</span></a><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenId"></a>template <a name="TokenId"></a><span class="ddoc_psymbol">TokenId</span>(IdType, alias staticTokens, alias dynamicTokens, alias possibleDefaultTokens, string symbol)</dt>
+<dd>Generates the token type identifier for the given symbol. There are two
+ special cases:
+ <ul>    <li>If symbol is "", then the token identifier will be 0</li>
+     <li>If symbol is "\0", then the token identifier will be the maximum
+         valid token type identifier</li>
+ </ul>
+ In all cases this template will alias itself to a constant of type IdType.
+ This template will fail at compile time if <span class="d_param">symbol</span> is not one of
+ the staticTokens, dynamicTokens, or possibleDefaultTokens.
+<p></p>
+<b>Examples:</b><br><pre class="d_code"><span class="d_keyword">template</span> tok(string symbol)
+{
+    <span class="d_keyword">alias</span> tok = <span class="d_psymbol">TokenId</span>!(IdType, staticTokens, dynamicTokens,
+        possibleDefaultTokens, symbol);
+}
+<span class="d_comment">// num and plus are of type ubyte.
+</span>IdType plus = tok!<span class="d_string">"+"</span>;
+IdType num = tok!<span class="d_string">"numberLiteral"</span>;
+</pre>
+<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".TokenStructure"></a>struct <a name="TokenStructure"></a><span class="ddoc_psymbol">TokenStructure</span>(IdType, string extraFields = "");
+</dt>
+<dd>The token that is returned by the lexer.
+<p></p>
+<b>Parameters:</b><table class=parms><tr><td valign=top>IdType</td>
+<td valign=top>The D type of the "type" token type field.</td></tr>
+<tr><td valign=top>extraFields</td>
+<td valign=top>A string containing D code for any extra fields that should
+         be included in the token structure body. This string is passed
+         directly to a mixin statement.</td></tr>
+</table><p></p>
+<b>Examples:</b><br><pre class="d_code"><span class="d_comment">// No extra struct fields are desired in this example, so leave it blank.
+</span><span class="d_keyword">alias</span> Token = <span class="d_psymbol">TokenStructure</span>!(IdType, <span class="d_string">""</span>);
+Token minusToken = Token(tok!<span class="d_string">"-"</span>);
+</pre>
+<p></p>
+
+<dl><dt class="d_decl"><a name=".opEquals"></a>const pure nothrow @safe bool <a name="opEquals"></a><span class="ddoc_psymbol">opEquals</span>(IdType <i>type</i>);
+</dt>
+<dd>== overload for the the token <i>type</i>.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".this"></a> this(IdType <i>type</i>);
+</dt>
+<dd>Constructs a token from a token <i>type</i>.
+<p></p>
+<b>Parameters:</b><table class=parms><tr><td valign=top>IdType <i>type</i></td>
+<td valign=top>the token <i>type</i></td></tr>
+</table><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".this"></a> this(IdType <i>type</i>, string <i>text</i>, size_t <i>line</i>, size_t <i>column</i>, size_t <i>index</i>);
+</dt>
+<dd>Constructs a token.
+<p></p>
+<b>Parameters:</b><table class=parms><tr><td valign=top>IdType <i>type</i></td>
+<td valign=top>the token <i>type</i></td></tr>
+<tr><td valign=top>string <i>text</i></td>
+<td valign=top>the <i>text</i> of the token, which may be <b>null</b></td></tr>
+<tr><td valign=top>size_t <i>line</i></td>
+<td valign=top>the <i>line</i> number at which this token occurs</td></tr>
+<tr><td valign=top>size_t <i>column</i></td>
+<td valign=top>the <i>column</i> nmuber at which this token occurs</td></tr>
+<tr><td valign=top>size_t <i>index</i></td>
+<td valign=top>the byte offset from the beginning of the input at which this
+         token occurs</td></tr>
+</table><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".text"></a>string <a name="text"></a><span class="ddoc_psymbol">text</span>;
+</dt>
+<dd>The <a name="text"></a><span class="ddoc_psymbol">text</span> of the token.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".line"></a>size_t <a name="line"></a><span class="ddoc_psymbol">line</span>;
+</dt>
+<dd>The <a name="line"></a><span class="ddoc_psymbol">line</span> number at which this token occurs.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".column"></a>size_t <a name="column"></a><span class="ddoc_psymbol">column</span>;
+</dt>
+<dd>The Column nmuber at which this token occurs.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".index"></a>size_t <a name="index"></a><span class="ddoc_psymbol">index</span>;
+</dt>
+<dd>The byte offset from the beginning of the input at which this token
+ occurs.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".type"></a>IdType <a name="type"></a><span class="ddoc_psymbol">type</span>;
+</dt>
+<dd>The token <a name="type"></a><span class="ddoc_psymbol">type</span>.<p></p>
+
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".Lexer"></a>template <a name="Lexer"></a><span class="ddoc_psymbol">Lexer</span>(IDType, Token, alias defaultTokenFunction, alias tokenSeparatingFunction, alias staticTokens, alias dynamicTokens, alias tokenHandlers, alias possibleDefaultTokens)</dt>
+<dd>The implementation of the lexer is contained within this mixin template.
+ To use it, this template should be mixed in to a struct that represents the
+ lexer for your language. This struct should implement the following methods:
+ <ul>    <li>popFront, which should call this mixin's popFront() and
+         additionally perform any token filtering or shuffling you deem
+         necessary. For example, you can implement popFront to skip comment or
+          tokens.</li>
+     <li>A function that serves as the default token lexing function. For
+         most languages this will be the identifier lexing function.</li>
+     <li>A function that is able to determine if an identifier/keyword has
+         come to an end. This function must retorn <span class="d_keyword">bool</span> and take
+         a single <span class="d_keyword">size_t</span> argument representing the number of
+         bytes to skip over before looking for a separating character.</li>
+     <li>Any functions referred to in the tokenHandlers template paramater.
+         These functions must be marked <span class="d_keyword">pure nothrow</span>, take no
+         arguments, and return a token</li>
+     <li>A constructor that initializes the range field as well as calls
+         popFront() exactly once (to initialize the front field).</li>
+ </ul>
+<p></p>
+<b>Examples:</b><br><pre class="d_code"><span class="d_keyword">struct</span> CalculatorLexer
+{
+    <span class="d_keyword">mixin</span> <span class="d_psymbol">Lexer</span>!(IdType, Token, defaultTokenFunction, isSeparating,
+        staticTokens, dynamicTokens, tokenHandlers, possibleDefaultTokens);
+
+    <span class="d_keyword">this</span> (<span class="d_keyword">ubyte</span>[] bytes)
+    {
+        <span class="d_keyword">this</span>.range = LexerRange(bytes);
+        popFront();
+    }
+
+    <span class="d_keyword">void</span> popFront() <span class="d_keyword">pure</span>
+    {
+        _popFront();
+    }
+
+    Token lexNumber() <span class="d_keyword">pure</span> <span class="d_keyword">nothrow</span> @safe
+    {
+        ...
+    }
+
+    Token lexWhitespace() <span class="d_keyword">pure</span> <span class="d_keyword">nothrow</span> @safe
+    {
+        ...
+    }
+
+    Token defaultTokenFunction() <span class="d_keyword">pure</span> <span class="d_keyword">nothrow</span> @safe
+    {
+        <span class="d_comment">// There is no default token in the example calculator language, so
+</span>        <span class="d_comment">// this is always an error.
+</span>        range.popFront();
+        <span class="d_keyword">return</span> Token(tok!<span class="d_string">""</span>);
+    }
+
+    <span class="d_keyword">bool</span> isSeparating(size_t offset) <span class="d_keyword">pure</span> <span class="d_keyword">nothrow</span> @safe
+    {
+        <span class="d_comment">// For this example language, always return true.
+</span>        <span class="d_keyword">return</span> <span class="d_keyword">true</span>;
+    }
+}
+</pre>
+<p></p>
+
+<dl><dt class="d_decl"><a name=".front"></a>const pure nothrow @property const(Token) <a name="front"></a><span class="ddoc_psymbol">front</span>();
+</dt>
+<dd>Implements the range primitive <a name="front"></a><span class="ddoc_psymbol">front</span>().<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".empty"></a>const pure nothrow @property bool <a name="empty"></a><span class="ddoc_psymbol">empty</span>();
+</dt>
+<dd>Implements the range primitive <a name="empty"></a><span class="ddoc_psymbol">empty</span>().<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".range"></a>LexerRange <a name="range"></a><span class="ddoc_psymbol">range</span>;
+</dt>
+<dd>The lexer input.<p></p>
+
+</dd>
+<dt class="d_decl"><a name="._front"></a>Token <a name="_front"></a><span class="ddoc_psymbol">_front</span>;
+</dt>
+<dd>The token that is currently at the front of the range.<p></p>
+
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".LexerRange"></a>struct <a name="LexerRange"></a><span class="ddoc_psymbol">LexerRange</span>;
+</dt>
+<dd>Range structure that wraps the lexer's input.<p></p>
+
+<dl><dt class="d_decl"><a name=".LexerRange.this"></a>pure nothrow @safe  this(const(ubyte)[] <i>bytes</i>, size_t <i>index</i> = 0, size_t <i>column</i> = 1, size_t <i>line</i> = 1);
+</dt>
+<dd><b>Parameters:</b><table class=parms><tr><td valign=top>const(ubyte)[] <i>bytes</i></td>
+<td valign=top>the lexer input</td></tr>
+<tr><td valign=top>size_t <i>index</i></td>
+<td valign=top>the initial offset from the beginning of <span class="d_param"><i>bytes</i></span></td></tr>
+<tr><td valign=top>size_t <i>column</i></td>
+<td valign=top>the initial <i>column</i> number</td></tr>
+<tr><td valign=top>size_t <i>line</i></td>
+<td valign=top>the initial <i>line</i> number</td></tr>
+</table><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.mark"></a>const pure nothrow @safe size_t <a name="mark"></a><span class="ddoc_psymbol">mark</span>();
+</dt>
+<dd><b>Returns:</b><br>a <a name="mark"></a><span class="ddoc_psymbol">mark</span> at the current position that can then be used with slice.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.seek"></a>pure nothrow @safe void <a name="seek"></a><span class="ddoc_psymbol">seek</span>(size_t <i>m</i>);
+</dt>
+<dd>Sets the range to the given position
+<p></p>
+<b>Parameters:</b><table class=parms><tr><td valign=top>size_t <i>m</i></td>
+<td valign=top>the position to <a name="seek"></a><span class="ddoc_psymbol">seek</span> to</td></tr>
+</table><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.slice"></a>const pure nothrow @safe const(ubyte)[] <a name="slice"></a><span class="ddoc_psymbol">slice</span>(size_t <i>m</i>);
+</dt>
+<dd>Returs a <a name="slice"></a><span class="ddoc_psymbol">slice</span> of the input byte array betwene the given mark and the
+ current position.
+ Params <i>m</i> = the beginning index of the <a name="slice"></a><span class="ddoc_psymbol">slice</span> to return<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.empty"></a>const pure nothrow @safe bool <a name="empty"></a><span class="ddoc_psymbol">empty</span>();
+</dt>
+<dd>Implements the range primitive empty.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.front"></a>const pure nothrow @safe ubyte <a name="front"></a><span class="ddoc_psymbol">front</span>();
+</dt>
+<dd>Implements the range primitive front.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.peek"></a>const pure nothrow @safe const(ubyte)[] <a name="peek"></a><span class="ddoc_psymbol">peek</span>(size_t <i>p</i>);
+</dt>
+<dd><b>Returns:</b><br>the current item as well as the items <span class="d_param"><i>p</i></span> items ahead.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.peekAt"></a>const pure nothrow @safe ubyte <a name="peekAt"></a><span class="ddoc_psymbol">peekAt</span>(size_t <i>offset</i>);
+</dt>
+<dd><p></p>
+</dd>
+<dt class="d_decl"><a name=".LexerRange.canPeek"></a>const pure nothrow @safe bool <a name="canPeek"></a><span class="ddoc_psymbol">canPeek</span>(size_t <i>p</i>);
+</dt>
+<dd><b>Returns:</b><br><b>true</b> if it is possible to peek <span class="d_param"><i>p</i></span> bytes ahead.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.popFront"></a>pure nothrow @safe void <a name="popFront"></a><span class="ddoc_psymbol">popFront</span>();
+</dt>
+<dd>Implements the range primitive popFront.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.popFrontN"></a>pure nothrow @safe void <a name="popFrontN"></a><span class="ddoc_psymbol">popFrontN</span>(size_t <i>n</i>);
+</dt>
+<dd>Implements the algorithm popFrontN more efficiently.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.incrementLine"></a>pure nothrow @safe void <a name="incrementLine"></a><span class="ddoc_psymbol">incrementLine</span>();
+</dt>
+<dd>Increments the range's line number and resets the column counter.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.bytes"></a>const(ubyte)[] <a name="bytes"></a><span class="ddoc_psymbol">bytes</span>;
+</dt>
+<dd>The input bytes.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.index"></a>size_t <a name="index"></a><span class="ddoc_psymbol">index</span>;
+</dt>
+<dd>The range's current position.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.column"></a>size_t <a name="column"></a><span class="ddoc_psymbol">column</span>;
+</dt>
+<dd>The current column number.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".LexerRange.line"></a>size_t <a name="line"></a><span class="ddoc_psymbol">line</span>;
+</dt>
+<dd>The current line number.<p></p>
+
+</dd>
+</dl>
+</dd>
+<dt class="d_decl"><a name=".StringCache"></a>struct <a name="StringCache"></a><span class="ddoc_psymbol">StringCache</span>;
+</dt>
+<dd>The string cache implements a map/set for strings. Placing a string in the
+ cache returns an identifier that can be used to instantly access the stored
+ string. It is then possible to simply compare these indexes instead of
+ performing full string comparisons when comparing the string content of
+ dynamic tokens. The string cache also handles its own memory, so that mutable
+ ubyte[] to lexers can still have immutable string fields in their tokens.
+ Because the string cache also performs de-duplication it is possible to
+ drastically reduce the memory usage of a lexer.<p></p>
+
+<dl><dt class="d_decl"><a name=".StringCache.this"></a> this(size_t <i>bucketCount</i>);
+</dt>
+<dd><b>Parameters:</b><table class=parms><tr><td valign=top>size_t <i>bucketCount</i></td>
+<td valign=top>the initial number of buckets.</td></tr>
+</table><p></p>
+
+</dd>
+<dt class="d_decl"><a name=".StringCache.cacheGet"></a>pure nothrow @safe string <a name="cacheGet"></a><span class="ddoc_psymbol">cacheGet</span>(const(ubyte[]) <i>bytes</i>);
+</dt>
+<dd>Equivalent to calling cache() and get().
+<pre class="d_code">StringCache cache;
+<span class="d_keyword">ubyte</span>[] str = ['a', 'b', 'c'];
+string s = cache.get(cache.cache(str));
+<span class="d_keyword">assert</span>(s == <span class="d_string">"abc"</span>);
+</pre>
+<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".StringCache.cacheGet"></a>pure nothrow @safe string <a name="cacheGet"></a><span class="ddoc_psymbol">cacheGet</span>(const(ubyte[]) <i>bytes</i>, uint <i>hash</i>);
+</dt>
+<dd>Equivalent to calling cache() and get().<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".StringCache.cache"></a>pure nothrow @safe size_t <a name="cache"></a><span class="ddoc_psymbol">cache</span>(const(ubyte)[] <i>bytes</i>);
+</dt>
+<dd>Caches a string.
+<p></p>
+<b>Parameters:</b><table class=parms><tr><td valign=top>const(ubyte)[] <i>bytes</i></td>
+<td valign=top>the string to <a name="cache"></a><span class="ddoc_psymbol">cache</span></td></tr>
+</table><p></p>
+<b>Returns:</b><br>A key that can be used to retrieve the cached string
+<p></p>
+<b>Examples:</b><br><pre class="d_code">StringCache <span class="d_psymbol">cache</span>;
+<span class="d_keyword">ubyte</span>[] <span class="d_param">bytes</span> = ['a', 'b', 'c'];
+size_t first = <span class="d_psymbol">cache</span>.<span class="d_psymbol">cache</span>(<span class="d_param">bytes</span>);
+size_t second = <span class="d_psymbol">cache</span>.<span class="d_psymbol">cache</span>(<span class="d_param">bytes</span>);
+<span class="d_keyword">assert</span> (first == second);
+</pre>
+<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".StringCache.cache"></a>pure nothrow @safe size_t <a name="cache"></a><span class="ddoc_psymbol">cache</span>(const(ubyte)[] <i>bytes</i>, uint <i>hash</i>);
+</dt>
+<dd>Caches a string as above, but uses the given has code instead of
+ calculating one itself. Use this alongside hashStep() can reduce the
+ amount of work necessary when lexing dynamic tokens.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".StringCache.get"></a>const pure nothrow @safe string <a name="get"></a><span class="ddoc_psymbol">get</span>(size_t <i>index</i>);
+</dt>
+<dd>Gets a cached string based on its key.
+<p></p>
+<b>Parameters:</b><table class=parms><tr><td valign=top>size_t <i>index</i></td>
+<td valign=top>the key</td></tr>
+</table><p></p>
+<b>Returns:</b><br>the cached string<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".StringCache.hashStep"></a>static pure nothrow @safe uint <a name="hashStep"></a><span class="ddoc_psymbol">hashStep</span>(ubyte <i>b</i>, uint <i>h</i>);
+</dt>
+<dd>Incremental hashing.
+<p></p>
+<b>Parameters:</b><table class=parms><tr><td valign=top>ubyte <i>b</i></td>
+<td valign=top>the byte to add to the hash</td></tr>
+<tr><td valign=top>uint <i>h</i></td>
+<td valign=top>the hash that has been calculated so far</td></tr>
+</table><p></p>
+<b>Returns:</b><br>the new hash code for the string.<p></p>
+
+</dd>
+<dt class="d_decl"><a name=".StringCache.defaultBucketCount"></a>static int <a name="defaultBucketCount"></a><span class="ddoc_psymbol">defaultBucketCount</span>;
+</dt>
+<dd>The default bucket count for the string cache.<p></p>
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+    
+<br><br>
+<br><br>
+<!-- Google ad -->
+<script type="text/javascript"><!--
+/**/google_ad_client = "pub-5628673096434613";
+/**/google_ad_width = 728;
+/**/google_ad_height = 90;
+/**/google_ad_format = "728x90_as";
+/**/google_ad_channel ="6203743411";
+/**/google_page_url = document.location;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div><!--/content-->
+
+
+<div id="copyright">
+Brian Schott 2013
+ |
+Page generated by <a href="http://www.digitalmars.com/d/2.0/ddoc.html">Ddoc</a>.
+</div>
+
 </body>
 </html>
